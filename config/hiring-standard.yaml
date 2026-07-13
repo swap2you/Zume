@@ -1,0 +1,28 @@
+role:
+  title: Senior SDET
+  minimum_overall_experience_years: 8
+  hands_on_required: true
+mandatory:
+  java: {weight: 15, minimum_percent: 60}
+  selenium: {weight: 20, minimum_percent: 65}
+  testng_cucumber: {weight: 10}
+  rest_assured: {weight: 15, programmatic_required: true}
+  sql_oracle: {weight: 10, minimum_percent: 60}
+  framework: {weight: 10}
+  cicd: {weight: 10}
+  ownership: {weight: 10}
+good_to_have:
+  - Appium
+  - BrowserStack
+  - Android and iOS
+  - JMeter
+  - BlazeMeter
+  - SQL Server
+  - Ant
+  - Selenium Grid
+automatic_reject_signals:
+  - overall experience below minimum
+  - Java explicitly basic
+  - API experience limited to Postman without automation
+  - no independent coding evidence
+  - no framework ownership evidence

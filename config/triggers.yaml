@@ -1,0 +1,5 @@
+triggers:
+  filter_resume: "Filter Resume – Automation Hiring"
+  interview_prep: "Interview Prep – Automation Hiring"
+  schedule_interview: "Schedule Interview – Automation Hiring"
+  interview_feedback: "Interview Feedback – Automation Hiring"

@@ -1,0 +1,20 @@
+brand:
+  name: Zume
+  primary: "17365D"
+  secondary: "2F75B5"
+  accent: "1F7A8C"
+  success: "548235"
+  warning: "BF8F00"
+  danger: "C00000"
+layout:
+  font: Aptos
+  heading_font: Aptos Display
+  body_size_pt: 10.5
+  margins_inches: 0.75
+  header: "ZUME | AUTOMATION HIRING"
+  footer: "Private hiring operations material"
+accessibility:
+  short_paragraphs: true
+  use_color_plus_text_labels: true
+  avoid_dense_full-page_tables: true
+  repeat_table_headers: true

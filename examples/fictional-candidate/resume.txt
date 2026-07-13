@@ -1,0 +1,4 @@
+Aarav Mehta
+Senior Automation Engineer — 9.2 years
+Skills: Java, Selenium 4, TestNG, Cucumber, REST Assured, Oracle SQL, Maven, Git, Jenkins, Appium, BrowserStack.
+Experience: Built and maintained Java Selenium Page Object frameworks, implemented API chaining with REST Assured, validated payments in Oracle, integrated suites with Jenkins, mentored two engineers.

@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Real candidate data and generated output
+General Docs/
+candidates/**
+!candidates/.gitkeep
+input/**
+!input/.gitkeep
+output/**
+!output/.gitkeep
+data/*.db
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Allow repository documentation/templates
+!docs/*.docx
+!templates/*.docx
+
+# Office temporary files
+~$*.docx

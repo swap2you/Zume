@@ -1,0 +1,311 @@
+scoring_dimensions:
+  approach_before_coding: 2
+  independent_implementation: 3
+  explanation: 2
+  modification_debugging: 2
+  code_quality_cleanup: 1
+
+areas:
+  java:
+    label: Java
+    exercises:
+      - id: java_duplicate_frequency
+        title: Duplicate frequency
+        task: >
+          Count duplicate words in a sentence using a Map and print only the words
+          whose count is greater than 1.
+        expected_answer: >
+          Split the sentence, populate a HashMap<String,Integer> with merge or
+          getOrDefault, then iterate entries and print keys with value > 1.
+        reference_solution: |
+          Map<String, Integer> counts = new HashMap<>();
+          for (String word : sentence.split("\\s+")) {
+              counts.merge(word, 1, Integer::sum);
+          }
+          counts.forEach((w, c) -> { if (c > 1) System.out.println(w + "=" + c); });
+        follow_up: Make it case-insensitive and ignore punctuation.
+        red_flags:
+          - Cannot explain how merge/getOrDefault works.
+          - Iterates the map with index-based logic.
+          - Unable to adapt to case-insensitive comparison.
+      - id: java_preserve_order
+        title: Preserve order
+        task: Remove duplicates from a list while preserving insertion order.
+        expected_answer: >
+          Use a LinkedHashSet (or a seen-set plus result list). Explain that
+          HashSet does not guarantee order while LinkedHashSet keeps insertion
+          order with O(1) membership checks.
+        reference_solution: |
+          List<String> unique = new ArrayList<>(new LinkedHashSet<>(items));
+        follow_up: Explain HashSet versus LinkedHashSet and the complexity of each.
+        red_flags:
+          - Sorts the list to remove duplicates, losing order.
+          - Cannot state the complexity of set membership.
+      - id: java_json_extraction
+        title: JSON extraction
+        task: Extract the IDs of failed records from a nested JSON payload.
+        expected_answer: >
+          Parse the payload (Jackson/Gson or JsonPath), walk the nested array,
+          filter status == FAILED and collect ids; handle missing keys defensively.
+        reference_solution: |
+          List<String> failedIds = JsonPath.read(json,
+              "$.records[?(@.status == 'FAILED')].id");
+        follow_up: Handle a missing status field and malformed input.
+        red_flags:
+          - String-splits raw JSON instead of parsing it.
+          - No handling for a missing status field when asked.
+  selenium:
+    label: Selenium
+    exercises:
+      - id: selenium_third_result
+        title: Google third result
+        task: >
+          Search "automation testing", click the third organic result, and print
+          the resulting page title.
+        expected_answer: >
+          Explicit wait for results, collect organic result locators into a list,
+          index the third, click, handle possible new tab via window handles, and
+          return the title from a method rather than printing inline.
+        reference_solution: |
+          wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(RESULTS));
+          driver.findElements(RESULTS).get(2).click();
+          return driver.getTitle();
+        follow_up: Handle DOM refresh or a new tab and return the title from a method.
+        red_flags:
+          - Thread.sleep instead of explicit waits.
+          - Brittle absolute XPath for result selection.
+      - id: selenium_dynamic_table
+        title: Dynamic table
+        task: Find a row in a dynamic table by business ID and return its status column.
+        expected_answer: >
+          Locate the row by ID text with a relative XPath, then read the status
+          cell relative to that row; avoid fixed row/column indexes by resolving
+          the column from the header text.
+        reference_solution: |
+          String xpath = "//tr[td[normalize-space()='" + businessId + "']]";
+          WebElement row = wait.until(
+              ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+          return row.findElement(By.xpath("./td[" + statusCol + "]")).getText();
+        follow_up: Remove the hard-coded column index.
+        red_flags:
+          - Iterates every row and cell with nested loops when a locator suffices.
+          - Cannot make the column lookup dynamic.
+      - id: selenium_page_object
+        title: Page Object
+        task: >
+          Build a login Page Object with explicit waits and an error-message
+          accessor.
+        expected_answer: >
+          Fields via By locators, constructor receives WebDriver, explicit waits
+          wrapped in helper methods, login() returns the next page object, and
+          errorMessage() waits for visibility.
+        reference_solution: |
+          public class LoginPage {
+              private final WebDriver driver;
+              private final WebDriverWait wait;
+              private static final By USER = By.id("user");
+              private static final By PASS = By.id("pass");
+              private static final By SUBMIT = By.cssSelector("button[type=submit]");
+              private static final By ERROR = By.cssSelector(".error");
+              public HomePage login(String u, String p) { /* type, click, return */ }
+              public String errorMessage() {
+                  return wait.until(ExpectedConditions
+                      .visibilityOfElementLocated(ERROR)).getText();
+              }
+          }
+        follow_up: Make it parallel-safe and add screenshot-on-failure.
+        red_flags:
+          - Static WebDriver shared across tests.
+          - Assertions inside the page object.
+  rest_assured:
+    label: REST Assured
+    exercises:
+      - id: rest_create_retrieve
+        title: Create and retrieve
+        task: >
+          POST a new resource, validate 201, extract the ID, GET it by ID and
+          validate the fields.
+        expected_answer: >
+          Use given/when/then with a JSON body, extract id via jsonPath, chain a
+          GET with the extracted id and assert body fields; reuse a
+          RequestSpecification for base URI and headers.
+        reference_solution: |
+          String id = given().spec(spec).body(payload)
+              .when().post("/items")
+              .then().statusCode(201).extract().jsonPath().getString("id");
+          given().spec(spec)
+              .when().get("/items/{id}", id)
+              .then().statusCode(200).body("name", equalTo("widget"));
+        follow_up: Add a reusable RequestSpecification.
+        red_flags:
+          - Describes Postman steps instead of code.
+          - Hard-codes the created ID instead of extracting it.
+      - id: rest_negative_auth
+        title: Negative authorization
+        task: Validate missing, invalid and expired bearer-token scenarios.
+        expected_answer: >
+          Three cases asserting 401 (and 403 where applicable) with distinct
+          setups: no Authorization header, malformed token, expired token; assert
+          error body as well as status.
+        reference_solution: |
+          given().spec(spec).when().get("/secure").then().statusCode(401);
+          given().spec(spec).header("Authorization", "Bearer bad")
+              .when().get("/secure").then().statusCode(401);
+        follow_up: Add a role/scope authorization case expecting 403.
+        red_flags:
+          - Only checks status code and cannot explain 401 versus 403.
+      - id: rest_async_status
+        title: Asynchronous status
+        task: POST returns 202; poll the status endpoint until COMPLETED.
+        expected_answer: >
+          Poll with a bounded loop or Awaitility, delay between attempts, stop on
+          COMPLETED, fail fast on FAILED, and enforce an overall timeout.
+        reference_solution: |
+          Awaitility.await().atMost(60, SECONDS).pollInterval(2, SECONDS)
+              .until(() -> getStatus(id), anyOf(is("COMPLETED"), is("FAILED")));
+          assertThat(getStatus(id), is("COMPLETED"));
+        follow_up: Handle a terminal FAILED status and timeout explicitly.
+        red_flags:
+          - Unbounded while loop with no timeout.
+          - Fixed long sleep instead of polling.
+  sql_oracle:
+    label: SQL / Oracle
+    exercises:
+      - id: sql_missing_child
+        title: Missing or failed child
+        task: >
+          Return completed parent records that have no successful child/feed row.
+        expected_answer: >
+          LEFT JOIN parent to child on the key filtered to successful child rows,
+          keep rows where the child key is NULL; explain why INNER JOIN would drop
+          the rows being searched for.
+        reference_solution: |
+          SELECT p.id
+          FROM parent p
+          LEFT JOIN child c
+            ON c.parent_id = p.id AND c.status = 'SUCCESS'
+          WHERE p.status = 'COMPLETED' AND c.id IS NULL;
+        follow_up: Explain why LEFT JOIN is required.
+        red_flags:
+          - Uses INNER JOIN and cannot see why results vanish.
+          - Puts the child status filter in WHERE, defeating the outer join.
+      - id: sql_duplicates
+        title: Duplicates
+        task: Find duplicate rows by business key and date.
+        expected_answer: >
+          GROUP BY business key and date with HAVING COUNT(*) > 1; for the newest
+          group, order by date descending or use window functions.
+        reference_solution: |
+          SELECT business_key, txn_date, COUNT(*)
+          FROM txns
+          GROUP BY business_key, txn_date
+          HAVING COUNT(*) > 1;
+        follow_up: Return only the newest duplicate group.
+        red_flags:
+          - DISTINCT confusion; cannot explain HAVING versus WHERE.
+      - id: sql_latest_record
+        title: Latest record
+        task: Return the latest record per account using ROW_NUMBER.
+        expected_answer: >
+          ROW_NUMBER() OVER (PARTITION BY account ORDER BY created_at DESC) and
+          filter rn = 1 in an outer query; explain ROW_NUMBER vs RANK vs
+          DENSE_RANK tie behavior.
+        reference_solution: |
+          SELECT * FROM (
+            SELECT t.*, ROW_NUMBER() OVER (
+              PARTITION BY account_id ORDER BY created_at DESC) rn
+            FROM txns t
+          ) WHERE rn = 1;
+        follow_up: Explain ROW_NUMBER, RANK and DENSE_RANK.
+        red_flags:
+          - MAX(date) join with duplicate ties unhandled.
+          - Cannot describe partition versus order clauses.
+  appium:
+    label: Appium
+    optional: true
+    exercises:
+      - id: appium_native_login
+        title: Native login
+        task: Launch the app, log in, and validate the home screen.
+        expected_answer: >
+          Driver capabilities per platform, explicit waits on accessibility IDs,
+          login flow encapsulated in a screen object, home-screen assertion.
+        reference_solution: |
+          driver.findElement(AppiumBy.accessibilityId("user")).sendKeys(u);
+          driver.findElement(AppiumBy.accessibilityId("pass")).sendKeys(p);
+          driver.findElement(AppiumBy.accessibilityId("login")).click();
+        follow_up: Handle a permission prompt and screenshot on failure.
+        red_flags:
+          - Coordinate taps instead of locators.
+      - id: appium_hybrid_context
+        title: Hybrid context
+        task: Switch from native context to WEBVIEW and back.
+        expected_answer: >
+          Enumerate driver.getContextHandles(), wait until the WEBVIEW context
+          appears, switch, act, switch back to NATIVE_APP.
+        reference_solution: |
+          wait.until(d -> driver.getContextHandles().stream()
+              .anyMatch(c -> c.contains("WEBVIEW")));
+          driver.context(webviewContext);
+        follow_up: Wait for the context instead of a fixed sleep.
+        red_flags:
+          - Fixed Thread.sleep before switching.
+      - id: appium_cross_platform
+        title: Cross-platform locators
+        task: Design an Android/iOS locator strategy for shared tests.
+        expected_answer: >
+          Prefer accessibility IDs shared across platforms; fall back to resource
+          ID (Android) and iOS predicate/class chain; isolate platform locators
+          behind a strategy or annotations.
+        reference_solution: |
+          @AndroidFindBy(id = "com.app:id/login")
+          @iOSXCUITFindBy(accessibility = "login")
+          private WebElement loginButton;
+        follow_up: Explain accessibility ID, resource ID, predicate and XPath tradeoffs.
+        red_flags:
+          - XPath-only strategy with no fallback reasoning.
+  framework_ci:
+    label: Framework / CI
+    exercises:
+      - id: framework_design
+        title: Framework design
+        task: >
+          Design a UI/API/DB framework with configuration, reporting and test
+          data management.
+        expected_answer: >
+          Layered design: config (env-aware), driver/client factories, page and
+          service objects, data providers, assertions, reporting (Extent/Allure),
+          logging, and CI hooks; explain dependency flow and ownership.
+        reference_solution: |
+          config/ -> factories/ -> pages/ + services/ + db/ -> tests/
+          reporting via listener; data via TestNG DataProvider or external YAML.
+        follow_up: Add ThreadLocal-based parallel execution.
+        red_flags:
+          - Names folders but cannot explain responsibilities or wiring.
+      - id: framework_ci_fail
+        title: Local pass, CI fail
+        task: Diagnose a pipeline failure that only happens in CI.
+        expected_answer: >
+          Compare environment (browser/driver versions, headless, resolution,
+          network, credentials, parallelism, timing), read CI logs and artifacts,
+          reproduce with the CI flags locally, isolate first failing layer.
+        reference_solution: |
+          1) read CI log + screenshot artifacts  2) pin versions
+          3) run headless locally with CI resolution  4) check secrets/env vars
+          5) isolate test order/parallel interference
+        follow_up: Prioritize the checks and identify the evidence required.
+        red_flags:
+          - Immediately blames flakiness with no diagnostic sequence.
+      - id: framework_unstable_suite
+        title: Unstable suite
+        task: Stabilize a 400-test suite with a 65% pass rate.
+        expected_answer: >
+          Quarantine and tag failures, classify root causes (locator, data, env,
+          timing), fix top clusters first, add retry only for known-transient
+          cases, track pass-rate metrics weekly.
+        reference_solution: |
+          classify -> quarantine -> fix clusters -> gate new flakiness ->
+          report trend metrics
+        follow_up: Create a 30-day plan with metrics.
+        red_flags:
+          - Blanket retries as the primary fix.
