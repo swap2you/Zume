@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 from pathlib import Path
 from typing import Optional
 
@@ -12,6 +13,7 @@ from rich.console import Console
 
 from zume import candidate as cand
 from zume import config as cfg
+from zume import exercises as ex_lib
 from zume import feedback as fb
 from zume import interview as iv
 from zume import scheduling as sched
@@ -126,7 +128,10 @@ def run_filter_resume(input_path: Optional[Path], text_file: Optional[Path],
                                      f"Profile Screening Feedback - {profile.name}",
                                      "06-communications/Recruiter_Feedback.md")
 
-    console.print(f"Decision: {result.decision.value} (score {result.score_percent:g}%)")
+    console.print(f"Decision: {result.decision.value} "
+                  f"(resume evidence coverage {result.score_percent:g}%; "
+                  f"experience gate {result.experience_state.value})")
+    console.print("Note: coverage measures resume evidence only, not competency.")
     console.print(f"Candidate folder: {folder}")
     return folder
 
@@ -139,7 +144,8 @@ def _load_screening(folder: Path) -> ScreeningResult:
     return ScreeningResult.model_validate_json(path.read_text(encoding="utf-8"))
 
 
-def run_interview_prep(candidate_ref: str) -> Path:
+def run_interview_prep(candidate_ref: str, override: bool = False,
+                       override_reason: str | None = None) -> Path:
     root = _root()
     folder = cand.resolve_candidate(root, candidate_ref)
     candidate = cand.load_candidate(folder)
@@ -147,25 +153,61 @@ def run_interview_prep(candidate_ref: str) -> Path:
     theme = cfg.load_theme(root)
     library = cfg.load_exercise_library(root)
 
-    kit = iv.build_kit(library, result)
+    # Phase 5 — workflow gate: never silently prep a rejected candidate.
+    if result.decision == Decision.DO_NOT_PROCEED:
+        if not override:
+            console.print(
+                "[red]Blocked:[/] screening decision is 'Do Not Proceed'. Interview prep "
+                "is not generated for rejected candidates. Re-run with --override and "
+                "--override-reason \"<reason>\" to intentionally proceed anyway.")
+            raise typer.Exit(code=2)
+        if not override_reason or not override_reason.strip():
+            raise typer.BadParameter("--override requires a non-empty --override-reason.")
+
+    effective_reason = override_reason.strip() if (override and override_reason) else ""
+    if effective_reason:
+        cand.record_status(candidate, "INTERVIEW_PREP_OVERRIDE",
+                           f"Interview prep generated over a Do-Not-Proceed decision. "
+                           f"Reason: {effective_reason}")
+        if effective_reason not in candidate.override_reasons:
+            candidate.override_reasons.append(effective_reason)
+
+    # Rotation-aware exercise selection from persisted usage + candidate history.
+    exercises_by_area = ex_lib.load_exercises(library)
+    with Storage(root) as storage:
+        cid = storage.upsert_candidate(candidate)
+        usage = storage.get_exercise_usage()
+        history = storage.get_candidate_exercise_history(cid)
+    selector = ex_lib.ExerciseSelector(exercises_by_area, usage=usage, candidate_history=history)
+    kit = iv.build_kit(library, result, override_reason=effective_reason, selector=selector)
+
     prep_dir = folder / "03-interview-prep"
     artifacts = [
         prep_dir / "Candidate_Focus_Sheet.docx",
         prep_dir / "Full_Interview_Guide.docx",
         prep_dir / "Scorecard.docx",
         prep_dir / "Exercise_Pack.docx",
+        prep_dir / "Candidate_Exercise_Sheet.docx",
     ]
     iv.generate_focus_sheet(theme, kit, result, artifacts[0])
     iv.generate_interview_guide(theme, kit, library, artifacts[1])
     iv.generate_scorecard(theme, kit, artifacts[2])
     iv.generate_exercise_pack(theme, kit, artifacts[3])
+    iv.generate_candidate_exercise_sheet(theme, kit, artifacts[4])
     cand.atomic_write_text(prep_dir / "interview-kit.json",
                            json.dumps(kit.model_dump(), indent=2, ensure_ascii=False))
     _finish(folder, candidate, artifacts)
     with Storage(root) as storage:
         cid = storage.upsert_candidate(candidate)
         storage.record_interview_kit(cid, kit)
-    console.print(f"Interview kit generated with {len(kit.exercises)} exercises.")
+        storage.record_exercise_assignments(cid, kit.exercises)
+    console.print(f"Interview kit generated with {len(kit.exercises)} exercises "
+                  f"(screening: {kit.screening_decision}).")
+    if kit.override_reason:
+        console.print(f"[red]Override recorded:[/] {kit.override_reason}")
+    if kit.unverified_mandatory:
+        console.print("[yellow]Unverified mandatory skills to validate live:[/] "
+                      + ", ".join(kit.unverified_mandatory))
     console.print(f"Candidate folder: {folder}")
     return folder
 
@@ -277,9 +319,13 @@ def filter_resume_cmd(
 @app.command("interview-prep")
 def interview_prep_cmd(
     candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+    override: bool = typer.Option(False, "--override",
+                                  help="Intentionally prep a Do-Not-Proceed candidate."),
+    override_reason: Optional[str] = typer.Option(
+        None, "--override-reason", help="Required justification when using --override."),
 ) -> None:
     """Trigger: Interview Prep - Automation Hiring."""
-    run_interview_prep(candidate)
+    run_interview_prep(candidate, override=override, override_reason=override_reason)
 
 
 @app.command("schedule-interview")
@@ -328,6 +374,23 @@ def validate_cmd(
         raise typer.Exit(code=1)
 
 
+@app.command("scan-secrets")
+def scan_secrets_cmd(
+    pii: bool = typer.Option(True, "--pii/--no-pii",
+                             help="Also scan for emails and phone numbers."),
+) -> None:
+    """Scan git-tracked text files for secrets and (optionally) PII."""
+    from zume.security import scan_repository
+
+    findings = scan_repository(_root(), include_pii=pii)
+    if not findings:
+        console.print("[green]PASS[/]  no secrets or PII found in tracked files")
+        return
+    for finding in findings:
+        console.print(f"[red]FOUND[/] {finding.kind} in {finding.path}:{finding.line}")
+    raise typer.Exit(code=1)
+
+
 @app.command("demo")
 def demo_cmd() -> None:
     """Run the fictional end-to-end sample through every workflow."""
@@ -358,6 +421,8 @@ def run_cmd(
     details: Optional[str] = typer.Option(None, "--details"),
     notes: Optional[str] = typer.Option(None, "--notes"),
     leadership: bool = typer.Option(False, "--leadership"),
+    override: bool = typer.Option(False, "--override"),
+    override_reason: Optional[str] = typer.Option(None, "--override-reason"),
 ) -> None:
     """Map an exact natural-language trigger to its workflow."""
     workflow = match_trigger(_root(), trigger)
@@ -370,13 +435,142 @@ def run_cmd(
     if candidate is None:
         raise typer.BadParameter(f"The '{trigger}' trigger requires --candidate.")
     if workflow == "interview_prep":
-        run_interview_prep(candidate)
+        run_interview_prep(candidate, override=override, override_reason=override_reason)
     elif workflow == "schedule_interview":
         run_schedule_interview(candidate, image, details)
     elif workflow == "interview_feedback":
         if notes is None:
             raise typer.BadParameter("This trigger requires --notes.")
         run_interview_feedback(candidate, notes, leadership)
+
+
+candidate_app = typer.Typer(name="candidate", help="Candidate privacy lifecycle commands.",
+                            no_args_is_help=True)
+app.add_typer(candidate_app)
+
+
+@candidate_app.command("export")
+def candidate_export_cmd(
+    candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+) -> None:
+    """Export a candidate folder as a zip package into the git-ignored export dir."""
+    root = _root()
+    folder = cand.resolve_candidate(root, candidate)
+    privacy = cfg.load_privacy(root)
+    package = cand.export_candidate(root, folder, privacy.get("export_dir", "output"))
+    record = cand.load_candidate(folder)
+    cand.record_status(record, "EXPORTED", f"Exported package: {package.name}")
+    cand.save_candidate(folder, record)
+    with Storage(root) as storage:
+        storage.set_status(folder.name, "EXPORTED")
+    console.print(f"[green]Exported[/] {folder.name} -> {package}")
+
+
+@candidate_app.command("archive")
+def candidate_archive_cmd(
+    candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+) -> None:
+    """Archive a candidate folder (moved under the git-ignored archive subdir)."""
+    root = _root()
+    folder = cand.resolve_candidate(root, candidate)
+    record = cand.load_candidate(folder)
+    cand.record_status(record, "ARCHIVED", "Candidate archived.")
+    cand.save_candidate(folder, record)
+    with Storage(root) as storage:
+        storage.set_status(folder.name, "ARCHIVED")
+    privacy = cfg.load_privacy(root)
+    target = cand.archive_candidate(root, folder, privacy.get("archive_subdir", "_archive"))
+    console.print(f"[green]Archived[/] {folder.name} -> {target}")
+
+
+@candidate_app.command("delete")
+def candidate_delete_cmd(
+    candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+    confirm: bool = typer.Option(False, "--confirm",
+                                 help="Required to actually delete. Omit to preview."),
+) -> None:
+    """Delete a candidate folder AND all associated SQLite rows (transactional)."""
+    root = _root()
+    folder = cand.resolve_candidate(root, candidate)
+    with Storage(root) as storage:
+        plan = storage.deletion_plan(folder.name)
+    console.print(f"[bold]Deletion plan for {folder.name}:[/]")
+    console.print(f"  candidate folder: {folder}")
+    if plan:
+        for table, count in plan.items():
+            console.print(f"  db {table}: {count} row(s)")
+    else:
+        console.print("  (no database rows found for this candidate)")
+    if not confirm:
+        console.print("[yellow]Preview only.[/] Re-run with --confirm to permanently delete.")
+        raise typer.Exit(code=0)
+    with Storage(root) as storage:
+        storage.delete_candidate(folder.name)
+    shutil.rmtree(folder, ignore_errors=False)
+    console.print(f"[red]Deleted[/] {folder.name} (folder and database rows removed).")
+
+
+@candidate_app.command("list")
+def candidate_list_cmd() -> None:
+    """List indexed candidates with status."""
+    root = _root()
+    with Storage(root) as storage:
+        rows = storage.search_candidates("")
+    if not rows:
+        console.print("No candidates indexed.")
+        return
+    for display, folder_name, status in rows:
+        console.print(f"  {status:<24} {folder_name}  ({display})")
+
+
+db_app = typer.Typer(name="db", help="Database reliability commands.", no_args_is_help=True)
+app.add_typer(db_app)
+
+
+@db_app.command("check")
+def db_check_cmd() -> None:
+    """Run integrity + foreign-key checks and report duplicates and schema version."""
+    root = _root()
+    with Storage(root) as storage:
+        console.print(f"Schema version: {storage.schema_version}")
+        ok, messages = storage.integrity_check()
+        if ok:
+            console.print("[green]PASS[/]  database integrity + foreign keys OK")
+        else:
+            for msg in messages:
+                console.print(f"[red]FAIL[/]  {msg}")
+        duplicates = storage.find_duplicate_candidates()
+    if duplicates:
+        console.print("[yellow]Possible duplicate candidates:[/]")
+        for reason, folders in duplicates:
+            console.print(f"  {reason}: {', '.join(f for f in folders if f)}")
+    else:
+        console.print("[green]PASS[/]  no duplicate candidates detected")
+    if not ok:
+        raise typer.Exit(code=1)
+
+
+@db_app.command("backup")
+def db_backup_cmd(
+    output: Optional[Path] = typer.Option(None, "--output", help="Backup file path."),
+) -> None:
+    """Create a validated backup of the SQLite index."""
+    root = _root()
+    dest = output or (root / "data" / f"zume-backup-{_timestamp()}.db")
+    with Storage(root) as storage:
+        storage.backup(dest)
+    ok, messages = Storage.validate_backup(dest)
+    if ok:
+        console.print(f"[green]Backup validated[/] -> {dest}")
+    else:
+        for msg in messages:
+            console.print(f"[red]Backup invalid:[/] {msg}")
+        raise typer.Exit(code=1)
+
+
+def _timestamp() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
 def _normalize_trigger(text: str) -> str:

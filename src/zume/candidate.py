@@ -181,6 +181,27 @@ def copy_source_file(folder: Path, source: Path, kind: str) -> SourceFile:
     )
 
 
+def export_candidate(root: Path, folder: Path, export_dir_name: str = "output") -> Path:
+    """Zip a candidate folder into the git-ignored export directory."""
+    export_dir = root / export_dir_name
+    export_dir.mkdir(parents=True, exist_ok=True)
+    base = export_dir / f"{folder.name}_package"
+    archive_str = shutil.make_archive(str(base), "zip", root_dir=folder)
+    return Path(archive_str)
+
+
+def archive_candidate(root: Path, folder: Path, archive_subdir: str = "_archive") -> Path:
+    """Move a candidate folder under candidates/<archive_subdir> (stays git-ignored)."""
+    archive_root = candidates_root(root) / archive_subdir
+    archive_root.mkdir(parents=True, exist_ok=True)
+    target = archive_root / folder.name
+    if target.exists():
+        stamp = utc_now_iso().replace(":", "").replace("-", "")
+        target = archive_root / f"{folder.name}__{stamp}"
+    shutil.move(str(folder), str(target))
+    return target
+
+
 def record_status(candidate: Candidate, status: str, note: str = "") -> None:
     candidate.status = status
     candidate.status_history.append(StatusEvent(status=status, note=note))

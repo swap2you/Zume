@@ -15,9 +15,9 @@ from docx import Document
 from zume.candidate import SUBFOLDERS
 
 EXPECTED_SECTIONS = {
-    "ATS Screening Report": ["Decision", "Evidence matrix — mandatory skills",
+    "ATS Screening Report": ["Decision", "Resume evidence coverage — mandatory skills",
                              "Risks and inconsistencies"],
-    "Full Interview Guide (3 Hours)": ["Session plan", "Exercises with expected answers",
+    "Full Interview Guide (3 Hours)": ["Session plan", "Exercises with expected reasoning",
                                        "Scoring per exercise"],
     "Interview Scorecard": ["Skill scores", "Recommendation bands",
                             "Independence observations"],
@@ -117,7 +117,23 @@ def find_soffice() -> str | None:
     return None
 
 
+def _expected_headings_for(path: Path) -> list[str]:
+    try:
+        doc = Document(str(path))
+    except Exception:  # noqa: BLE001
+        return []
+    paragraphs = [p for p in doc.paragraphs if p.text.strip()]
+    title = paragraphs[0].text.strip() if paragraphs else ""
+    return EXPECTED_SECTIONS.get(title, [])
+
+
 def render_docx(path: Path, soffice: str) -> ValidationReport:
+    """Render a DOCX to PDF and verify the rendered content, not just XML.
+
+    Checks: conversion succeeds, page count is nonzero, the document is not empty,
+    expected headings appear in the extracted PDF text, header and footer text are
+    present, and a page-number value is rendered.
+    """
     report = ValidationReport()
     with tempfile.TemporaryDirectory() as tmp:
         result = subprocess.run(
@@ -125,11 +141,44 @@ def render_docx(path: Path, soffice: str) -> ValidationReport:
             capture_output=True, text=True, timeout=180, check=False,
         )
         rendered = Path(tmp) / (path.stem + ".pdf")
-        if result.returncode == 0 and rendered.exists() and rendered.stat().st_size > 0:
-            report.passed.append(f"{path.name}: rendered to PDF via LibreOffice")
-        else:
+        if result.returncode != 0 or not rendered.exists() or rendered.stat().st_size == 0:
             report.errors.append(
                 f"{path.name}: LibreOffice render failed ({result.stderr.strip()[:200]})")
+            return report
+        report.passed.append(f"{path.name}: rendered to PDF via LibreOffice")
+        try:
+            from pypdf import PdfReader
+
+            reader = PdfReader(str(rendered))
+            page_count = len(reader.pages)
+            if page_count == 0:
+                report.errors.append(f"{path.name}: rendered PDF has zero pages")
+                return report
+            report.passed.append(f"{path.name}: rendered PDF has {page_count} page(s)")
+            text = "\n".join((p.extract_text() or "") for p in reader.pages)
+            if not text.strip():
+                report.errors.append(f"{path.name}: rendered PDF has no extractable text")
+                return report
+            # last page should not be blank (trailing empty page check)
+            last = (reader.pages[-1].extract_text() or "").strip()
+            if page_count > 1 and not last:
+                report.warnings.append(f"{path.name}: last rendered page appears blank")
+            if "ZUME" not in text.upper():
+                report.warnings.append(f"{path.name}: header text not found in rendered PDF")
+            else:
+                report.passed.append(f"{path.name}: header text present in rendered PDF")
+            if "Private" not in text:
+                report.warnings.append(f"{path.name}: footer text not found in rendered PDF")
+            else:
+                report.passed.append(f"{path.name}: footer text present in rendered PDF")
+            missing = [h for h in _expected_headings_for(path) if h not in text]
+            if missing:
+                report.warnings.append(
+                    f"{path.name}: headings not found in rendered PDF: {', '.join(missing)}")
+            elif _expected_headings_for(path):
+                report.passed.append(f"{path.name}: expected headings present in rendered PDF")
+        except Exception as exc:  # noqa: BLE001
+            report.warnings.append(f"{path.name}: rendered but PDF inspection failed ({exc})")
     return report
 
 

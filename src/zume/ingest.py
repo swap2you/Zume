@@ -12,11 +12,22 @@ from pypdf import PdfReader
 
 
 @dataclass
+class ExperienceAnalysis:
+    """Deterministic analysis of overall-experience claims in a resume."""
+
+    state: str  # "passed" | "failed" | "unknown" (resolved against the minimum later)
+    years: float | None
+    claims: list[float]
+    detail: str
+
+
+@dataclass
 class ResumeProfile:
     name: str
     experience_years: float | None
     text: str
     skills_mentioned: list[str] = field(default_factory=list)
+    experience: ExperienceAnalysis | None = None
 
 
 def extract_text(path: Path) -> str:
@@ -64,21 +75,108 @@ def parse_name(text: str) -> str:
 
 
 def parse_experience_years(text: str) -> float | None:
-    for pattern in _YEARS_PATTERNS:
-        match = pattern.search(text)
-        if match:
+    """Best-effort single value (kept for backward compatibility)."""
+    analysis = analyze_experience(text)
+    return analysis.years
+
+
+# Patterns that tie a year figure explicitly to *total* experience.
+_TOTAL_EXPERIENCE_PATTERNS = [
+    re.compile(
+        r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years|yrs)\.?\s+(?:of\s+)?"
+        r"(?:overall\s+|total\s+|professional\s+|relevant\s+|industry\s+|combined\s+)?"
+        r"(?:experience|exp\b)",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:overall|total|professional|relevant)?\s*experience\s*[:\-]?\s*"
+        r"(?:of\s+)?(\d+(?:\.\d+)?)\s*\+?\s*(?:years|yrs)",
+        re.IGNORECASE,
+    ),
+]
+
+# A summary/title line such as "Senior Automation Engineer — 9.2 years".
+_SUMMARY_ROLE_PATTERN = re.compile(
+    r"(?:engineer|sdet|developer|tester|analyst|lead|architect|consultant)"
+    r"[^\n]*?(\d+(?:\.\d+)?)\s*\+?\s*(?:years|yrs)",
+    re.IGNORECASE,
+)
+
+# Any year-denominated figure (used to detect ambiguity / tenure-only mentions).
+_ANY_YEARS_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years|yrs)\b", re.IGNORECASE)
+
+# Date ranges like "2016 - 2020", "Jan 2018 – Present".
+_DATE_RANGE_PATTERN = re.compile(
+    r"(?:19|20)\d{2}\s*(?:-|–|—|to)\s*(?:(?:19|20)\d{2}|present|current|now)",
+    re.IGNORECASE,
+)
+
+
+def _plausible_years(value: float) -> bool:
+    return 0 < value < 50
+
+
+def analyze_experience(text: str) -> ExperienceAnalysis:
+    """Classify overall-experience claims deterministically.
+
+    Returns a state of "passed"/"failed"/"unknown" is deferred to the caller
+    (which knows the configured minimum); here ``state`` is either "known" with a
+    resolved ``years`` value, or "unknown" with a human-readable ``detail``.
+    Never invents a number.
+    """
+    total_claims: list[float] = []
+    for pattern in (*_TOTAL_EXPERIENCE_PATTERNS, _SUMMARY_ROLE_PATTERN):
+        for match in pattern.finditer(text):
             value = float(match.group(1))
-            if 0 < value < 50:
-                return value
-    return None
+            if _plausible_years(value):
+                total_claims.append(value)
+
+    distinct = sorted({round(v, 1) for v in total_claims})
+
+    if len(distinct) == 1:
+        return ExperienceAnalysis(
+            state="known", years=distinct[0], claims=distinct,
+            detail=f"Single explicit total-experience claim: {distinct[0]:g} years.",
+        )
+    if len(distinct) > 1:
+        spread = max(distinct) - min(distinct)
+        if spread >= 1.0:
+            return ExperienceAnalysis(
+                state="unknown", years=None, claims=distinct,
+                detail=("Conflicting total-experience claims found: "
+                        + ", ".join(f"{d:g}" for d in distinct)
+                        + " years. Manual confirmation required."),
+            )
+        # Values agree within a rounding margin; use the largest.
+        return ExperienceAnalysis(
+            state="known", years=max(distinct), claims=distinct,
+            detail=f"Total-experience claims agree at ~{max(distinct):g} years.",
+        )
+
+    # No explicit total-experience claim. Distinguish ambiguous vs missing.
+    tenure_mentions = [float(m.group(1)) for m in _ANY_YEARS_PATTERN.finditer(text)
+                       if _plausible_years(float(m.group(1)))]
+    date_ranges = _DATE_RANGE_PATTERN.findall(text)
+    if date_ranges or tenure_mentions:
+        return ExperienceAnalysis(
+            state="unknown", years=None, claims=[],
+            detail=("No stated total experience; only per-role tenure or date "
+                    "ranges are present. Manual review required to total it up."),
+        )
+    return ExperienceAnalysis(
+        state="unknown", years=None, claims=[],
+        detail="No overall-experience statement found in the resume.",
+    )
 
 
 def parse_resume(text: str, name_override: str | None = None) -> ResumeProfile:
     name = name_override or parse_name(text)
+    analysis = analyze_experience(text)
     return ResumeProfile(
         name=name,
-        experience_years=parse_experience_years(text),
+        experience_years=analysis.years,
         text=text,
+        experience=analysis,
     )
 
 
@@ -109,6 +207,10 @@ def parse_schedule_text(text: str) -> dict[str, str]:
         "interviewer": "interviewers",
         "platform": "platform",
         "meeting": "platform",
+        "meeting method": "platform",
+        "timezone": "timezone",
+        "time zone": "timezone",
+        "tz": "timezone",
         "notes": "notes",
     }
     details: dict[str, str] = {}

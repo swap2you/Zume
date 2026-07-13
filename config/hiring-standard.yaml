@@ -26,3 +26,24 @@ automatic_reject_signals:
   - API experience limited to Postman without automation
   - no independent coding evidence
   - no framework ownership evidence
+# Phase 4 — deterministic evidence quality scoring. All values configurable.
+# credit is the fraction of a skill's weight awarded for each evidence type.
+# A bare skills-list keyword must never earn full credit for a skill.
+evidence_scoring:
+  credit:
+    quantified: 1.0
+    project: 0.85
+    responsibility: 0.6
+    skills_list: 0.35
+    inferred: 0.25
+    missing: 0.0
+  confidence_by_type:
+    quantified: high
+    project: high
+    responsibility: medium
+    skills_list: low
+    inferred: low
+    missing: none
+  # Decision thresholds (also configurable).
+  proceed_min_coverage: 75
+  conditional_min_coverage: 50

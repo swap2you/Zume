@@ -13,6 +13,13 @@ python -m venv .venv
 .\.venv\Scripts\python -m pip install -e ".[dev]"
 ```
 
+For a reproducible install pinned to verified versions, add the constraints
+file (`pyproject.toml` stays the source of truth):
+
+```powershell
+.\.venv\Scripts\python -m pip install -e ".[dev]" -c constraints.txt
+```
+
 The `zume` command is then available at `.venv\Scripts\zume` (or plainly as
 `zume` after activating the venv with `.\.venv\Scripts\Activate.ps1`).
 
@@ -51,6 +58,51 @@ zume demo
 zume validate --candidate Mehta_Aarav_2026-07-13
 ```
 
+### Screening terminology (important)
+
+The screening percentage is **resume evidence coverage**, not a competency
+score. It measures how strongly the resume evidences each mandatory skill
+(quantified > project > responsibility > skills-list mention). It does **not**
+establish technical competency — that is verified only through live assessment.
+The experience gate reports an explicit state: `passed`, `failed`, or `unknown`
+(unknown/conflicting experience routes to a conditional manual review rather
+than an automatic rejection).
+
+### Workflow gate and override
+
+`interview-prep` will not silently prepare a rejected candidate:
+
+```powershell
+# Blocked for a Do-Not-Proceed decision unless intentionally overridden:
+zume interview-prep --candidate "Rohan N" --override `
+    --override-reason "Hiring manager requested a courtesy screen"
+```
+
+The override reason is recorded in the candidate JSON, status history, SQLite,
+and the generated focus sheet. Interview prep also emits two exercise artifacts:
+an **interviewer** pack (with reference solutions) and a **candidate** sheet
+(tasks only — never solutions).
+
+### Candidate privacy lifecycle
+
+```powershell
+zume candidate list
+zume candidate export  --candidate "Rohan N"            # zip into git-ignored output/
+zume candidate archive --candidate "Rohan N"            # move under candidates/_archive
+zume candidate delete  --candidate "Rohan N"            # preview only (no --confirm)
+zume candidate delete  --candidate "Rohan N" --confirm  # folder + all DB rows (transactional)
+```
+
+Retention is documented in `config/privacy.yaml`. Zume never auto-deletes data.
+
+### Database and security utilities
+
+```powershell
+zume db check          # schema version, integrity, foreign keys, duplicates
+zume db backup         # validated online backup into git-ignored data/
+zume scan-secrets      # scan tracked text files for secrets and PII
+```
+
 ## Outputs by workflow
 
 | Workflow | Folder | Artifacts |
@@ -67,5 +119,20 @@ in `data/zume.db` (SQLite, git-ignored).
 ## Build with Cursor
 Open `.cursor/prompts/00_MASTER_BUILD_PROMPT.md` in Cursor Agent mode and run it from the repository root.
 
+## Documentation
+- `docs/OPERATING_GUIDE.md` — day-to-day operator workflows and commands.
+- `docs/ARCHITECTURE.md` — modules, data flow, and storage design.
+- `docs/PRIVACY.md` — privacy model, ignore rules, and lifecycle commands.
+- `docs/TROUBLESHOOTING.md` — common issues and fixes.
+- `.cursor/prompts/` — task prompts (00–09), each with objective, inputs,
+  privacy boundary, allowed files, validation commands, stop conditions,
+  required report, and git restrictions.
+- `reports/` — audit, risk assessment, render validation, and hardening reports.
+
 ## Privacy
-The current repository must be private before any real candidate material is used. Candidate files, generated outputs, screenshots, `General Docs/` and the production SQLite database must remain git-ignored.
+The current repository must be private before any real candidate material is
+used (see `reports/PUBLIC_REPOSITORY_RISK_ASSESSMENT.md`). Candidate files,
+generated outputs, screenshots, `General Docs/`, backups, and the production
+SQLite database must remain git-ignored. Run `zume scan-secrets` and
+`git status --short` before every commit. CI uses only fictional data and never
+uploads candidate folders.

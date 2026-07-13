@@ -3,12 +3,20 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
+.venv*/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
 
 # Secrets
 .env
+*.env
+.env.*
 
 # Real candidate data and generated output
 General Docs/
@@ -19,10 +27,13 @@ input/**
 output/**
 !output/.gitkeep
 data/*.db
+data/*.sqlite
+data/*.sqlite3
 *.pdf
 *.png
 *.jpg
 *.jpeg
+*.zip
 
 # Allow repository documentation/templates
 !docs/*.docx

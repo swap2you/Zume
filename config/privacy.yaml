@@ -1,0 +1,14 @@
+# Candidate data retention policy.
+#
+# Zume never auto-deletes candidate data. Deletion is always an explicit,
+# confirmed operator action (`zume candidate delete --confirm`). These values
+# document the intended retention window and drive the `candidate list` age
+# column only.
+retention_days: 180
+# Must stay false. Automatic purging is intentionally NOT implemented.
+auto_purge: false
+# Where archived candidate folders are moved (kept under the git-ignored
+# candidates/ tree so archived data is never committed).
+archive_subdir: _archive
+# Where exported candidate packages are written (git-ignored).
+export_dir: output

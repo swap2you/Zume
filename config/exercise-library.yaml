@@ -1,3 +1,19 @@
+# Zume interview exercise library.
+#
+# INTERVIEWER-ONLY material. Reference solutions, expected reasoning, red flags
+# and independence questions must never be shown to candidates. Candidate-facing
+# output includes only: task, requirement_change_follow_up, debugging_follow_up.
+#
+# Each exercise carries rotation metadata:
+#   status:         active | draft | retired   (only 'active' is selectable)
+#   rotation_group: exercises that test the same competency; rotate within it
+#   variant_family: never assign two from the same family to one candidate
+#   difficulty:     easy | medium | hard
+#   skill_area:     the core area key
+#
+# Rotation state (usage_count, last_used, per-candidate history) is tracked in
+# the SQLite index, not here, so this file stays declarative.
+
 scoring_dimensions:
   approach_before_coding: 2
   independent_implementation: 3
@@ -5,307 +21,633 @@ scoring_dimensions:
   modification_debugging: 2
   code_quality_cleanup: 1
 
+rotation:
+  # Avoid re-assigning a primary exercise while unused active alternatives exist.
+  prefer_unused: true
+  avoid_repeat_for_candidate: true
+
 areas:
   java:
     label: Java
+    core: true
     exercises:
       - id: java_duplicate_frequency
         title: Duplicate frequency
+        skill_area: java
+        variant_family: java_collections_counting
+        rotation_group: java-core
+        difficulty: easy
+        status: active
         task: >
           Count duplicate words in a sentence using a Map and print only the words
           whose count is greater than 1.
-        expected_answer: >
-          Split the sentence, populate a HashMap<String,Integer> with merge or
-          getOrDefault, then iterate entries and print keys with value > 1.
+        requirement_change_follow_up: Make it case-insensitive and ignore punctuation.
+        debugging_follow_up: >
+          The candidate's map prints every word, not only duplicates. Ask them to
+          find and fix the off-by-one filter condition live.
+        expected_reasoning: >
+          Populate a HashMap with merge/getOrDefault, then filter entries whose
+          value exceeds 1. O(n) time, O(k) space.
         reference_solution: |
           Map<String, Integer> counts = new HashMap<>();
-          for (String word : sentence.split("\\s+")) {
-              counts.merge(word, 1, Integer::sum);
-          }
+          for (String w : sentence.split("\\s+")) counts.merge(w, 1, Integer::sum);
           counts.forEach((w, c) -> { if (c > 1) System.out.println(w + "=" + c); });
-        follow_up: Make it case-insensitive and ignore punctuation.
+        scoring_rubric:
+          - Chooses a Map and explains why (2)
+          - Correct counting and filter (3)
+          - Explains complexity (2)
+          - Adapts to case-insensitive/punctuation (2)
+          - Clean, readable code (1)
         red_flags:
-          - Cannot explain how merge/getOrDefault works.
-          - Iterates the map with index-based logic.
-          - Unable to adapt to case-insensitive comparison.
+          - Cannot explain merge/getOrDefault.
+          - Index-based iteration over the map.
+          - Cannot adapt to case-insensitive comparison.
+        independence_questions:
+          - Why did you pick a HashMap over a TreeMap here?
+          - Walk me through what merge does on the second occurrence.
       - id: java_preserve_order
-        title: Preserve order
+        title: Preserve insertion order
+        skill_area: java
+        variant_family: java_collections_ordering
+        rotation_group: java-core
+        difficulty: easy
+        status: active
         task: Remove duplicates from a list while preserving insertion order.
-        expected_answer: >
-          Use a LinkedHashSet (or a seen-set plus result list). Explain that
-          HashSet does not guarantee order while LinkedHashSet keeps insertion
-          order with O(1) membership checks.
+        requirement_change_follow_up: Now also return the count of removed duplicates.
+        debugging_follow_up: >
+          A provided version uses HashSet and the order is wrong; ask the candidate
+          to diagnose why and correct it.
+        expected_reasoning: >
+          LinkedHashSet preserves insertion order with O(1) membership; HashSet does
+          not guarantee order.
         reference_solution: |
           List<String> unique = new ArrayList<>(new LinkedHashSet<>(items));
-        follow_up: Explain HashSet versus LinkedHashSet and the complexity of each.
+        scoring_rubric:
+          - Correct data structure choice (3)
+          - Explains HashSet vs LinkedHashSet (2)
+          - States complexity (2)
+          - Handles the follow-up (2)
+          - Clean code (1)
         red_flags:
-          - Sorts the list to remove duplicates, losing order.
-          - Cannot state the complexity of set membership.
+          - Sorts the list, losing order.
+          - Cannot state membership complexity.
+        independence_questions:
+          - What breaks if you swap LinkedHashSet for HashSet?
       - id: java_json_extraction
-        title: JSON extraction
+        title: Nested JSON extraction
+        skill_area: java
+        variant_family: java_json
+        rotation_group: java-core
+        difficulty: medium
+        status: active
         task: Extract the IDs of failed records from a nested JSON payload.
-        expected_answer: >
-          Parse the payload (Jackson/Gson or JsonPath), walk the nested array,
-          filter status == FAILED and collect ids; handle missing keys defensively.
+        requirement_change_follow_up: Also group the IDs by their error code.
+        debugging_follow_up: >
+          Given code throws a NullPointerException when 'status' is absent; ask the
+          candidate to make it null-safe live.
+        expected_reasoning: >
+          Parse with Jackson/Gson or JsonPath, iterate the nested array, filter
+          status == FAILED, collect ids, and guard missing keys.
         reference_solution: |
-          List<String> failedIds = JsonPath.read(json,
+          List<String> failed = JsonPath.read(json,
               "$.records[?(@.status == 'FAILED')].id");
-        follow_up: Handle a missing status field and malformed input.
+        scoring_rubric:
+          - Parses rather than string-splits (3)
+          - Correct filtering (2)
+          - Null/missing-field safety (2)
+          - Handles grouping follow-up (2)
+          - Clean code (1)
         red_flags:
-          - String-splits raw JSON instead of parsing it.
-          - No handling for a missing status field when asked.
+          - String-splits raw JSON.
+          - No handling for a missing status field.
+        independence_questions:
+          - How would you handle a malformed payload?
+      - id: java_stream_grouping
+        title: Stream grouping (draft)
+        skill_area: java
+        variant_family: java_streams
+        rotation_group: java-core
+        difficulty: medium
+        status: draft
+        task: Group employees by department and compute the average salary per group.
+        requirement_change_follow_up: Return only departments whose average exceeds a threshold.
+        debugging_follow_up: Fix a collector that returns counts instead of averages.
+        expected_reasoning: >
+          Use Collectors.groupingBy with Collectors.averagingDouble; explain the
+          downstream collector.
+        reference_solution: |
+          Map<String, Double> avg = emps.stream().collect(
+              Collectors.groupingBy(Employee::dept,
+                  Collectors.averagingDouble(Employee::salary)));
+        scoring_rubric:
+          - Correct groupingBy usage (3)
+          - Correct downstream collector (2)
+          - Explains stream pipeline (2)
+          - Handles threshold follow-up (2)
+          - Clean code (1)
+        red_flags:
+          - Manual loops when a collector is clearer and asked for.
+        independence_questions:
+          - What does the downstream collector control?
   selenium:
     label: Selenium
+    core: true
     exercises:
       - id: selenium_third_result
-        title: Google third result
+        title: Third search result
+        skill_area: selenium
+        variant_family: selenium_dynamic_list
+        rotation_group: selenium-core
+        difficulty: medium
+        status: active
         task: >
-          Search "automation testing", click the third organic result, and print
-          the resulting page title.
-        expected_answer: >
-          Explicit wait for results, collect organic result locators into a list,
-          index the third, click, handle possible new tab via window handles, and
-          return the title from a method rather than printing inline.
+          Search a term, click the third organic result, and return the resulting
+          page title from a method.
+        requirement_change_follow_up: Handle the result opening in a new tab.
+        debugging_follow_up: >
+          A provided script uses Thread.sleep and flakes; ask the candidate to
+          replace it with an explicit wait.
+        expected_reasoning: >
+          Explicit wait for results, collect result elements, index the third,
+          handle window handles, return title from a method.
         reference_solution: |
           wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(RESULTS));
           driver.findElements(RESULTS).get(2).click();
           return driver.getTitle();
-        follow_up: Handle DOM refresh or a new tab and return the title from a method.
+        scoring_rubric:
+          - Explicit waits over sleeps (3)
+          - Robust locator strategy (2)
+          - New-tab handling (2)
+          - Returns via method (1)
+          - Clean code (2)
         red_flags:
-          - Thread.sleep instead of explicit waits.
-          - Brittle absolute XPath for result selection.
+          - Thread.sleep instead of waits.
+          - Brittle absolute XPath.
+        independence_questions:
+          - Why is an explicit wait better than a fixed sleep here?
       - id: selenium_dynamic_table
-        title: Dynamic table
-        task: Find a row in a dynamic table by business ID and return its status column.
-        expected_answer: >
-          Locate the row by ID text with a relative XPath, then read the status
-          cell relative to that row; avoid fixed row/column indexes by resolving
-          the column from the header text.
+        title: Dynamic table lookup
+        skill_area: selenium
+        variant_family: selenium_table
+        rotation_group: selenium-core
+        difficulty: medium
+        status: active
+        task: Find a row by business ID and return its status column.
+        requirement_change_follow_up: Resolve the status column from its header text, not a fixed index.
+        debugging_follow_up: Fix a locator that matches multiple rows.
+        expected_reasoning: >
+          Relative XPath keyed on the business ID; resolve the status cell from the
+          header rather than a hard-coded index.
         reference_solution: |
-          String xpath = "//tr[td[normalize-space()='" + businessId + "']]";
+          String xpath = "//tr[td[normalize-space()='" + id + "']]";
           WebElement row = wait.until(
               ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
           return row.findElement(By.xpath("./td[" + statusCol + "]")).getText();
-        follow_up: Remove the hard-coded column index.
+        scoring_rubric:
+          - Locator keyed on business data (3)
+          - Dynamic column resolution (2)
+          - Explicit wait (2)
+          - Handles ambiguity (2)
+          - Clean code (1)
         red_flags:
-          - Iterates every row and cell with nested loops when a locator suffices.
-          - Cannot make the column lookup dynamic.
+          - Nested loops over every cell.
+          - Hard-coded column index left in after the follow-up.
+        independence_questions:
+          - How do you make the column index dynamic?
       - id: selenium_page_object
-        title: Page Object
-        task: >
-          Build a login Page Object with explicit waits and an error-message
-          accessor.
-        expected_answer: >
-          Fields via By locators, constructor receives WebDriver, explicit waits
-          wrapped in helper methods, login() returns the next page object, and
-          errorMessage() waits for visibility.
+        title: Login Page Object
+        skill_area: selenium
+        variant_family: selenium_pom
+        rotation_group: selenium-core
+        difficulty: medium
+        status: active
+        task: Build a login Page Object with explicit waits and an error-message accessor.
+        requirement_change_follow_up: Make it parallel-safe and add screenshot-on-failure.
+        debugging_follow_up: A shared static WebDriver causes cross-test failures; ask them to fix it.
+        expected_reasoning: >
+          Instance WebDriver, By locators, waits wrapped in helpers, login returns
+          next page, error accessor waits for visibility.
         reference_solution: |
           public class LoginPage {
-              private final WebDriver driver;
-              private final WebDriverWait wait;
-              private static final By USER = By.id("user");
-              private static final By PASS = By.id("pass");
-              private static final By SUBMIT = By.cssSelector("button[type=submit]");
-              private static final By ERROR = By.cssSelector(".error");
-              public HomePage login(String u, String p) { /* type, click, return */ }
-              public String errorMessage() {
-                  return wait.until(ExpectedConditions
-                      .visibilityOfElementLocated(ERROR)).getText();
-              }
+            private final WebDriver driver; private final WebDriverWait wait;
+            public HomePage login(String u, String p) { /* type, click, return */ }
+            public String errorMessage() {
+              return wait.until(ExpectedConditions
+                  .visibilityOfElementLocated(ERROR)).getText(); }
           }
-        follow_up: Make it parallel-safe and add screenshot-on-failure.
+        scoring_rubric:
+          - Encapsulation and locators (3)
+          - Waits in helpers (2)
+          - Parallel-safety reasoning (2)
+          - Screenshot-on-failure (2)
+          - Clean code (1)
         red_flags:
           - Static WebDriver shared across tests.
           - Assertions inside the page object.
+        independence_questions:
+          - Why must the driver not be static for parallel runs?
   rest_assured:
     label: REST Assured
+    core: true
     exercises:
       - id: rest_create_retrieve
         title: Create and retrieve
-        task: >
-          POST a new resource, validate 201, extract the ID, GET it by ID and
-          validate the fields.
-        expected_answer: >
-          Use given/when/then with a JSON body, extract id via jsonPath, chain a
-          GET with the extracted id and assert body fields; reuse a
-          RequestSpecification for base URI and headers.
+        skill_area: rest_assured
+        variant_family: rest_crud
+        rotation_group: rest-core
+        difficulty: medium
+        status: active
+        task: POST a resource, validate 201, extract the ID, GET it by ID and validate fields.
+        requirement_change_follow_up: Extract a reusable RequestSpecification for base URI and headers.
+        debugging_follow_up: A test hard-codes the created ID; ask them to extract it instead.
+        expected_reasoning: >
+          given/when/then, JSON body, extract id via jsonPath, chain GET with the
+          extracted id, assert body fields.
         reference_solution: |
-          String id = given().spec(spec).body(payload)
-              .when().post("/items")
+          String id = given().spec(spec).body(payload).when().post("/items")
               .then().statusCode(201).extract().jsonPath().getString("id");
-          given().spec(spec)
-              .when().get("/items/{id}", id)
+          given().spec(spec).when().get("/items/{id}", id)
               .then().statusCode(200).body("name", equalTo("widget"));
-        follow_up: Add a reusable RequestSpecification.
+        scoring_rubric:
+          - Programmatic chaining (3)
+          - Correct extraction (2)
+          - Reusable spec (2)
+          - Assertions on body (2)
+          - Clean code (1)
         red_flags:
           - Describes Postman steps instead of code.
-          - Hard-codes the created ID instead of extracting it.
+          - Hard-codes the created ID.
+        independence_questions:
+          - Where does the id come from in the second call?
       - id: rest_negative_auth
         title: Negative authorization
+        skill_area: rest_assured
+        variant_family: rest_auth
+        rotation_group: rest-core
+        difficulty: medium
+        status: active
         task: Validate missing, invalid and expired bearer-token scenarios.
-        expected_answer: >
-          Three cases asserting 401 (and 403 where applicable) with distinct
-          setups: no Authorization header, malformed token, expired token; assert
-          error body as well as status.
+        requirement_change_follow_up: Add a role/scope case expecting 403 and explain 401 vs 403.
+        debugging_follow_up: A case asserts 200 for an expired token; ask them to correct the expectation.
+        expected_reasoning: >
+          Three setups asserting 401 (and 403 where applicable), asserting error
+          bodies as well as status codes.
         reference_solution: |
           given().spec(spec).when().get("/secure").then().statusCode(401);
-          given().spec(spec).header("Authorization", "Bearer bad")
+          given().spec(spec).header("Authorization","Bearer bad")
               .when().get("/secure").then().statusCode(401);
-        follow_up: Add a role/scope authorization case expecting 403.
+        scoring_rubric:
+          - Distinct negative setups (3)
+          - Status + body assertions (2)
+          - 401 vs 403 reasoning (3)
+          - Clean code (2)
         red_flags:
-          - Only checks status code and cannot explain 401 versus 403.
+          - Only checks status codes; cannot explain 401 vs 403.
+        independence_questions:
+          - When is 403 correct rather than 401?
       - id: rest_async_status
-        title: Asynchronous status
+        title: Asynchronous status polling
+        skill_area: rest_assured
+        variant_family: rest_async
+        rotation_group: rest-core
+        difficulty: hard
+        status: active
         task: POST returns 202; poll the status endpoint until COMPLETED.
-        expected_answer: >
-          Poll with a bounded loop or Awaitility, delay between attempts, stop on
-          COMPLETED, fail fast on FAILED, and enforce an overall timeout.
+        requirement_change_follow_up: Handle a terminal FAILED status and an overall timeout.
+        debugging_follow_up: An unbounded while-loop hangs on FAILED; ask them to bound it.
+        expected_reasoning: >
+          Bounded polling with delay (or Awaitility), stop on COMPLETED, fail fast on
+          FAILED, enforce a timeout.
         reference_solution: |
           Awaitility.await().atMost(60, SECONDS).pollInterval(2, SECONDS)
               .until(() -> getStatus(id), anyOf(is("COMPLETED"), is("FAILED")));
           assertThat(getStatus(id), is("COMPLETED"));
-        follow_up: Handle a terminal FAILED status and timeout explicitly.
+        scoring_rubric:
+          - Bounded polling (3)
+          - Terminal-state handling (2)
+          - Timeout enforcement (2)
+          - Explains polling vs sleep (2)
+          - Clean code (1)
         red_flags:
-          - Unbounded while loop with no timeout.
+          - Unbounded loop with no timeout.
           - Fixed long sleep instead of polling.
+        independence_questions:
+          - What stops this loop if the job never completes?
   sql_oracle:
     label: SQL / Oracle
+    core: true
     exercises:
       - id: sql_missing_child
-        title: Missing or failed child
-        task: >
-          Return completed parent records that have no successful child/feed row.
-        expected_answer: >
-          LEFT JOIN parent to child on the key filtered to successful child rows,
-          keep rows where the child key is NULL; explain why INNER JOIN would drop
-          the rows being searched for.
+        title: Missing or failed child rows
+        skill_area: sql_oracle
+        variant_family: sql_outer_join
+        rotation_group: sql-core
+        difficulty: medium
+        status: active
+        task: Return completed parent records that have no successful child/feed row.
+        requirement_change_follow_up: Also return the count of missing children per parent.
+        debugging_follow_up: A query uses INNER JOIN and returns nothing; ask why and fix it.
+        expected_reasoning: >
+          LEFT JOIN with the child status filter in the ON clause; keep rows where
+          the child key IS NULL.
         reference_solution: |
-          SELECT p.id
-          FROM parent p
-          LEFT JOIN child c
-            ON c.parent_id = p.id AND c.status = 'SUCCESS'
+          SELECT p.id FROM parent p
+          LEFT JOIN child c ON c.parent_id = p.id AND c.status = 'SUCCESS'
           WHERE p.status = 'COMPLETED' AND c.id IS NULL;
-        follow_up: Explain why LEFT JOIN is required.
+        scoring_rubric:
+          - Correct outer join (3)
+          - Filter placement in ON vs WHERE (3)
+          - Explains why INNER fails (2)
+          - Clean SQL (2)
         red_flags:
-          - Uses INNER JOIN and cannot see why results vanish.
-          - Puts the child status filter in WHERE, defeating the outer join.
+          - INNER JOIN and cannot see why rows vanish.
+          - Child filter in WHERE, defeating the outer join.
+        independence_questions:
+          - Why does moving the status filter to WHERE change the result?
       - id: sql_duplicates
-        title: Duplicates
+        title: Duplicate detection
+        skill_area: sql_oracle
+        variant_family: sql_grouping
+        rotation_group: sql-core
+        difficulty: easy
+        status: active
         task: Find duplicate rows by business key and date.
-        expected_answer: >
-          GROUP BY business key and date with HAVING COUNT(*) > 1; for the newest
-          group, order by date descending or use window functions.
+        requirement_change_follow_up: Return only the newest duplicate group.
+        debugging_follow_up: A query uses WHERE COUNT(*)>1; ask them to fix it to HAVING.
+        expected_reasoning: GROUP BY business key and date with HAVING COUNT(*) > 1.
         reference_solution: |
           SELECT business_key, txn_date, COUNT(*)
-          FROM txns
-          GROUP BY business_key, txn_date
-          HAVING COUNT(*) > 1;
-        follow_up: Return only the newest duplicate group.
+          FROM txns GROUP BY business_key, txn_date HAVING COUNT(*) > 1;
+        scoring_rubric:
+          - Correct grouping (3)
+          - HAVING vs WHERE (3)
+          - Newest-group follow-up (2)
+          - Clean SQL (2)
         red_flags:
-          - DISTINCT confusion; cannot explain HAVING versus WHERE.
+          - Confuses HAVING and WHERE.
+        independence_questions:
+          - Why can't COUNT(*) be filtered in WHERE?
       - id: sql_latest_record
-        title: Latest record
+        title: Latest record per account
+        skill_area: sql_oracle
+        variant_family: sql_window
+        rotation_group: sql-core
+        difficulty: hard
+        status: active
         task: Return the latest record per account using ROW_NUMBER.
-        expected_answer: >
-          ROW_NUMBER() OVER (PARTITION BY account ORDER BY created_at DESC) and
-          filter rn = 1 in an outer query; explain ROW_NUMBER vs RANK vs
-          DENSE_RANK tie behavior.
+        requirement_change_follow_up: Explain ROW_NUMBER vs RANK vs DENSE_RANK on ties.
+        debugging_follow_up: A MAX(date) self-join returns duplicate ties; ask them to fix with a window function.
+        expected_reasoning: >
+          ROW_NUMBER() OVER (PARTITION BY account ORDER BY created_at DESC), filter
+          rn = 1 in an outer query.
         reference_solution: |
           SELECT * FROM (
             SELECT t.*, ROW_NUMBER() OVER (
-              PARTITION BY account_id ORDER BY created_at DESC) rn
-            FROM txns t
+              PARTITION BY account_id ORDER BY created_at DESC) rn FROM txns t
           ) WHERE rn = 1;
-        follow_up: Explain ROW_NUMBER, RANK and DENSE_RANK.
+        scoring_rubric:
+          - Correct window function (3)
+          - Partition/order reasoning (3)
+          - Tie-behavior explanation (2)
+          - Clean SQL (2)
         red_flags:
-          - MAX(date) join with duplicate ties unhandled.
-          - Cannot describe partition versus order clauses.
+          - MAX(date) join with ties unhandled.
+          - Cannot describe partition vs order.
+        independence_questions:
+          - How do RANK and DENSE_RANK differ from ROW_NUMBER on ties?
+  framework_design:
+    label: Framework design
+    core: true
+    exercises:
+      - id: framework_layered_design
+        title: Layered framework design
+        skill_area: framework_design
+        variant_family: framework_architecture
+        rotation_group: framework-core
+        difficulty: hard
+        status: active
+        task: Design a UI/API/DB framework with configuration, reporting and test data.
+        requirement_change_follow_up: Add ThreadLocal-based parallel execution.
+        debugging_follow_up: A design leaks driver state across threads; ask them to fix ownership.
+        expected_reasoning: >
+          Layered: config, driver/client factories, page/service objects, data
+          providers, assertions, reporting, logging, CI hooks; explain dependency flow.
+        reference_solution: |
+          config/ -> factories/ -> pages/ + services/ + db/ -> tests/
+          reporting via listener; data via DataProvider or external YAML.
+        scoring_rubric:
+          - Clear layering and responsibilities (3)
+          - Dependency direction (2)
+          - Reporting/data strategy (2)
+          - Parallelism design (2)
+          - Communication (1)
+        red_flags:
+          - Names folders but cannot explain wiring.
+        independence_questions:
+          - Which layer owns the WebDriver lifecycle and why?
+      - id: framework_reporting_data
+        title: Reporting and test data strategy
+        skill_area: framework_design
+        variant_family: framework_reporting
+        rotation_group: framework-core
+        difficulty: medium
+        status: active
+        task: Design reporting and test-data management for a mixed UI/API suite.
+        requirement_change_follow_up: Add environment-specific data sets without code changes.
+        debugging_follow_up: Reports lose failure screenshots on parallel runs; ask them to fix.
+        expected_reasoning: >
+          Externalized data (YAML/JSON/DB), a reporting listener (Extent/Allure),
+          per-thread artifacts, environment overlays.
+        reference_solution: |
+          data/{env}.yaml overlays base; listener attaches screenshots per thread.
+        scoring_rubric:
+          - Data externalization (3)
+          - Reporting design (2)
+          - Environment overlays (2)
+          - Parallel artifact handling (2)
+          - Communication (1)
+        red_flags:
+          - Hard-coded test data in tests.
+        independence_questions:
+          - How do you keep reports correct under parallel execution?
+      - id: framework_stabilize_suite
+        title: Stabilize an unstable suite
+        skill_area: framework_design
+        variant_family: framework_stability
+        rotation_group: framework-core
+        difficulty: hard
+        status: active
+        task: Stabilize a 400-test suite with a 65% pass rate.
+        requirement_change_follow_up: Produce a 30-day plan with metrics.
+        debugging_follow_up: Blanket retries hide real failures; ask them to propose a better approach.
+        expected_reasoning: >
+          Quarantine and classify (locator/data/env/timing), fix top clusters, retry
+          only known-transient, track weekly pass-rate metrics.
+        reference_solution: |
+          classify -> quarantine -> fix clusters -> gate new flakiness -> trend metrics
+        scoring_rubric:
+          - Root-cause classification (3)
+          - Prioritization (2)
+          - Metric tracking (2)
+          - Judicious retries (2)
+          - Communication (1)
+        red_flags:
+          - Blanket retries as the primary fix.
+        independence_questions:
+          - When is a retry acceptable and when is it masking a bug?
+  debugging:
+    label: Debugging
+    core: true
+    exercises:
+      - id: debug_ci_only_failure
+        title: Local pass, CI fail
+        skill_area: debugging
+        variant_family: debug_environment
+        rotation_group: debug-core
+        difficulty: hard
+        status: active
+        task: Diagnose a pipeline failure that only happens in CI.
+        requirement_change_follow_up: Prioritize the checks and state the evidence each would give.
+        debugging_follow_up: Given CI logs showing a headless-only failure, isolate the root cause live.
+        expected_reasoning: >
+          Compare environment (browser/driver versions, headless, resolution,
+          network, credentials, parallelism, timing), read CI artifacts, reproduce
+          locally with CI flags, isolate the first failing layer.
+        reference_solution: |
+          read CI log + screenshots -> pin versions -> run headless at CI resolution
+          -> check secrets/env -> isolate test order/parallel interference
+        scoring_rubric:
+          - Systematic diagnostic sequence (3)
+          - Environment comparison (2)
+          - Evidence-driven prioritization (2)
+          - Reproduction strategy (2)
+          - Communication (1)
+        red_flags:
+          - Immediately blames flakiness with no diagnostic sequence.
+        independence_questions:
+          - What is the first piece of evidence you would gather and why?
+      - id: debug_flaky_locator
+        title: Flaky locator triage
+        skill_area: debugging
+        variant_family: debug_flaky
+        rotation_group: debug-core
+        difficulty: medium
+        status: active
+        task: A test passes locally but intermittently fails finding an element in CI.
+        requirement_change_follow_up: Make the fix generic for all similar dynamic components.
+        debugging_follow_up: Given a stack trace, identify whether it is a wait, locator or timing issue.
+        expected_reasoning: >
+          Distinguish stale element, race with async render, and brittle locator;
+          apply explicit wait on a stable attribute; avoid index-based locators.
+        reference_solution: |
+          wait.until(ExpectedConditions.presenceOfElementLocated(STABLE_LOCATOR));
+        scoring_rubric:
+          - Correct root-cause categories (3)
+          - Explicit wait on stable attribute (2)
+          - Generic fix (2)
+          - Reasoning from stack trace (2)
+          - Communication (1)
+        red_flags:
+          - Adds a fixed sleep and moves on.
+        independence_questions:
+          - How do you tell a stale-element issue from a bad locator?
+      - id: debug_data_contamination
+        title: Test data contamination
+        skill_area: debugging
+        variant_family: debug_data
+        rotation_group: debug-core
+        difficulty: medium
+        status: active
+        task: A suite fails only when run in a certain order.
+        requirement_change_follow_up: Propose isolation so order no longer matters.
+        debugging_follow_up: Identify the shared mutable state causing the coupling.
+        expected_reasoning: >
+          Order dependence points to shared state or un-cleaned data; isolate with
+          per-test setup/teardown and independent data.
+        reference_solution: |
+          @BeforeMethod create fresh data; @AfterMethod clean up; no shared statics.
+        scoring_rubric:
+          - Identifies order-dependence cause (3)
+          - Isolation strategy (2)
+          - Data lifecycle design (2)
+          - Reasoning (2)
+          - Communication (1)
+        red_flags:
+          - Fixes by pinning test order instead of removing coupling.
+        independence_questions:
+          - Why is pinning the order a poor long-term fix?
   appium:
     label: Appium
-    optional: true
+    core: false
     exercises:
       - id: appium_native_login
         title: Native login
+        skill_area: appium
+        variant_family: appium_native
+        rotation_group: appium-optional
+        difficulty: medium
+        status: active
         task: Launch the app, log in, and validate the home screen.
-        expected_answer: >
-          Driver capabilities per platform, explicit waits on accessibility IDs,
-          login flow encapsulated in a screen object, home-screen assertion.
+        requirement_change_follow_up: Handle a permission prompt and screenshot on failure.
+        debugging_follow_up: Coordinate taps break on another device; switch to locators.
+        expected_reasoning: Capabilities per platform, waits on accessibility IDs, screen object.
         reference_solution: |
-          driver.findElement(AppiumBy.accessibilityId("user")).sendKeys(u);
-          driver.findElement(AppiumBy.accessibilityId("pass")).sendKeys(p);
           driver.findElement(AppiumBy.accessibilityId("login")).click();
-        follow_up: Handle a permission prompt and screenshot on failure.
+        scoring_rubric:
+          - Locator strategy (3)
+          - Waits (2)
+          - Permission handling (2)
+          - Screenshot on failure (2)
+          - Clean code (1)
         red_flags:
           - Coordinate taps instead of locators.
+        independence_questions:
+          - Why are coordinate taps fragile across devices?
       - id: appium_hybrid_context
-        title: Hybrid context
+        title: Hybrid context switch
+        skill_area: appium
+        variant_family: appium_context
+        rotation_group: appium-optional
+        difficulty: hard
+        status: active
         task: Switch from native context to WEBVIEW and back.
-        expected_answer: >
-          Enumerate driver.getContextHandles(), wait until the WEBVIEW context
-          appears, switch, act, switch back to NATIVE_APP.
+        requirement_change_follow_up: Wait for the context instead of a fixed sleep.
+        debugging_follow_up: A fixed sleep before switching flakes; replace it.
+        expected_reasoning: Enumerate context handles, wait for WEBVIEW, switch, act, switch back.
         reference_solution: |
           wait.until(d -> driver.getContextHandles().stream()
               .anyMatch(c -> c.contains("WEBVIEW")));
           driver.context(webviewContext);
-        follow_up: Wait for the context instead of a fixed sleep.
+        scoring_rubric:
+          - Context enumeration (3)
+          - Wait for context (2)
+          - Correct switch back (2)
+          - Reasoning (2)
+          - Clean code (1)
         red_flags:
           - Fixed Thread.sleep before switching.
+        independence_questions:
+          - How do you know the WEBVIEW context is ready?
       - id: appium_cross_platform
         title: Cross-platform locators
+        skill_area: appium
+        variant_family: appium_locators
+        rotation_group: appium-optional
+        difficulty: medium
+        status: active
         task: Design an Android/iOS locator strategy for shared tests.
-        expected_answer: >
-          Prefer accessibility IDs shared across platforms; fall back to resource
-          ID (Android) and iOS predicate/class chain; isolate platform locators
-          behind a strategy or annotations.
+        requirement_change_follow_up: Explain accessibility ID vs resource ID vs predicate vs XPath.
+        debugging_follow_up: An XPath-only strategy breaks on iOS; propose a fallback.
+        expected_reasoning: Prefer shared accessibility IDs; platform fallbacks isolated behind a strategy.
         reference_solution: |
-          @AndroidFindBy(id = "com.app:id/login")
-          @iOSXCUITFindBy(accessibility = "login")
-          private WebElement loginButton;
-        follow_up: Explain accessibility ID, resource ID, predicate and XPath tradeoffs.
+          @AndroidFindBy(id="...") @iOSXCUITFindBy(accessibility="...") WebElement el;
+        scoring_rubric:
+          - Shared-ID preference (3)
+          - Platform fallbacks (2)
+          - Tradeoff reasoning (2)
+          - Isolation of platform locators (2)
+          - Communication (1)
         red_flags:
-          - XPath-only strategy with no fallback reasoning.
-  framework_ci:
-    label: Framework / CI
-    exercises:
-      - id: framework_design
-        title: Framework design
-        task: >
-          Design a UI/API/DB framework with configuration, reporting and test
-          data management.
-        expected_answer: >
-          Layered design: config (env-aware), driver/client factories, page and
-          service objects, data providers, assertions, reporting (Extent/Allure),
-          logging, and CI hooks; explain dependency flow and ownership.
-        reference_solution: |
-          config/ -> factories/ -> pages/ + services/ + db/ -> tests/
-          reporting via listener; data via TestNG DataProvider or external YAML.
-        follow_up: Add ThreadLocal-based parallel execution.
-        red_flags:
-          - Names folders but cannot explain responsibilities or wiring.
-      - id: framework_ci_fail
-        title: Local pass, CI fail
-        task: Diagnose a pipeline failure that only happens in CI.
-        expected_answer: >
-          Compare environment (browser/driver versions, headless, resolution,
-          network, credentials, parallelism, timing), read CI logs and artifacts,
-          reproduce with the CI flags locally, isolate first failing layer.
-        reference_solution: |
-          1) read CI log + screenshot artifacts  2) pin versions
-          3) run headless locally with CI resolution  4) check secrets/env vars
-          5) isolate test order/parallel interference
-        follow_up: Prioritize the checks and identify the evidence required.
-        red_flags:
-          - Immediately blames flakiness with no diagnostic sequence.
-      - id: framework_unstable_suite
-        title: Unstable suite
-        task: Stabilize a 400-test suite with a 65% pass rate.
-        expected_answer: >
-          Quarantine and tag failures, classify root causes (locator, data, env,
-          timing), fix top clusters first, add retry only for known-transient
-          cases, track pass-rate metrics weekly.
-        reference_solution: |
-          classify -> quarantine -> fix clusters -> gate new flakiness ->
-          report trend metrics
-        follow_up: Create a 30-day plan with metrics.
-        red_flags:
-          - Blanket retries as the primary fix.
+          - XPath-only with no fallback reasoning.
+        independence_questions:
+          - Why prefer accessibility IDs across platforms?

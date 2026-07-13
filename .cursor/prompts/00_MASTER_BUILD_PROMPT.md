@@ -154,3 +154,13 @@ Do not declare completion until all are executed:
 
 ## Final response
 Report what was built, exact commands to use, where inputs go, where outputs appear, validation results, git/privacy status, and remaining optional enhancements. Do not say “complete” if any required gate was skipped.
+
+## Prompt contract (standard sections)
+- **Objective**: Build the complete local-first Zume CLI toolkit as specified above.
+- **Inputs**: The starter package, config files, and fictional example candidate.
+- **Privacy boundary**: Never commit real candidate data or PII; only fictional data is tracked.
+- **Files allowed to change**: All of `src/`, `config/`, `tests/`, `docs/`, `reports/`, and packaging files.
+- **Validation commands**: `python -m compileall src`, `pytest -q`, `ruff check .`, `mypy src`, `zume demo`, `zume validate --candidate <folder>`.
+- **Stop conditions**: Do not declare success if any gate fails or is skipped.
+- **Required final report**: `reports/FINAL_VALIDATION_REPORT.md`.
+- **Git restrictions**: Do not push unless the user explicitly authorizes it.

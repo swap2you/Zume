@@ -56,3 +56,7 @@ def load_theme(root: Path) -> dict[str, Any]:
 
 def load_exercise_library(root: Path) -> dict[str, Any]:
     return load_config(root, "exercise-library")
+
+
+def load_privacy(root: Path) -> dict[str, Any]:
+    return load_config(root, "privacy")

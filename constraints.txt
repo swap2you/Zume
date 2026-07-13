@@ -1,0 +1,44 @@
+# Reproducible dependency pins for Zume.
+#
+# pyproject.toml remains the source of truth (it declares supported lower
+# bounds). This constraints file pins the exact, verified versions used to run
+# every validation gate, so a clean install is reproducible:
+#
+#     python -m pip install -e ".[dev]" -c constraints.txt
+#
+# Regenerate after an intentional dependency bump with:
+#
+#     python -m pip freeze --exclude-editable | Sort-Object > constraints.txt
+#
+# Verified on: Windows 10.0.26200, Python 3.13.5 (2026-07-13).
+annotated-doc==0.0.4
+annotated-types==0.7.0
+ast_serialize==0.6.0
+colorama==0.4.6
+coverage==7.15.1
+iniconfig==2.3.0
+librt==0.13.0
+lxml==6.1.1
+markdown-it-py==4.2.0
+mdurl==0.1.2
+mypy==2.3.0
+mypy_extensions==1.1.0
+packaging==26.2
+pathspec==1.1.1
+pillow==12.3.0
+pluggy==1.6.0
+pydantic==2.13.4
+pydantic_core==2.46.4
+Pygments==2.20.0
+pypdf==6.14.2
+pytest==9.1.1
+pytest-cov==7.1.0
+python-docx==1.2.0
+PyYAML==6.0.3
+rich==15.0.0
+ruff==0.15.21
+shellingham==1.5.4
+typer==0.26.8
+types-PyYAML==6.0.12.20260518
+typing-inspection==0.4.2
+typing_extensions==4.16.0

@@ -21,3 +21,12 @@ zume = "zume.cli:app"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["zume"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+# Meaningful threshold reflecting current suite coverage; do not lower to pass.
+fail_under = 80

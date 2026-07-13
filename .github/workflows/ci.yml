@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Never expose candidate data. This workflow uses only fictional demo data and
+# does not upload candidate folders or generated candidate documents.
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate (${{ matrix.os }}, py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.11', '3.13']
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Clean install (source of truth)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+          python -m pip install build
+
+      - name: Byte-compile
+        run: python -m compileall src
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Types (mypy)
+        run: mypy src
+
+      - name: Tests with coverage threshold
+        run: pytest -q --cov=zume --cov-report=xml --cov-fail-under=80
+
+      - name: Demo (fictional data only)
+        run: zume demo
+
+      - name: Candidate-folder validation
+        run: |
+          python - <<'PY'
+          import subprocess, sys
+          from pathlib import Path
+          folders = [p.name for p in Path("candidates").iterdir()
+                     if (p / "candidate.json").exists()]
+          assert folders, "demo did not produce a candidate folder"
+          rc = subprocess.run(
+              ["zume", "validate", "--candidate", folders[0], "--no-render"]).returncode
+          sys.exit(rc)
+          PY
+
+      - name: Privacy and security checks
+        run: pytest -q tests/test_privacy.py tests/test_security.py
+
+      - name: Package build verification
+        run: |
+          python -m build
+          ls -l dist
+
+  reproducible-install:
+    name: reproducible install (pinned constraints)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Clean install with pinned constraints
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]" -c constraints.txt
+      - name: Smoke test
+        run: |
+          python -m compileall src
+          zume --help
