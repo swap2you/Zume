@@ -44,6 +44,14 @@ def _mark_header_row(row: Any) -> None:
     tr_pr.append(header)
 
 
+def _prevent_row_split(row: Any) -> None:
+    """Keep a table row's cells on one page when practical (Phase 13)."""
+    tr_pr = row._tr.get_or_add_trPr()
+    cant = OxmlElement("w:cantSplit")
+    cant.set(qn("w:val"), "true")
+    tr_pr.append(cant)
+
+
 def _add_page_number_field(paragraph: Any) -> None:
     run = paragraph.add_run("Page ")
     run.font.size = Pt(8)
@@ -169,6 +177,7 @@ class ZumeDocument:
             _set_cell_shading(cell, header_fill)
         for row_idx, values in enumerate(rows):
             row = table.add_row()
+            _prevent_row_split(row)
             if row_idx % 2 == 1:
                 for cell in row.cells:
                     _set_cell_shading(cell, "F2F2F2")
@@ -176,6 +185,24 @@ class ZumeDocument:
                 row.cells[idx].text = str(value)
         self.doc.add_paragraph()
         return table
+
+    def code_block(self, text: str, size_pt: float = 9.0) -> None:
+        """Monospace, lightly shaded reference-code block that stays together."""
+        for raw in text.splitlines() or [" "]:
+            para = self.doc.add_paragraph()
+            para.paragraph_format.keep_together = True
+            para.paragraph_format.space_after = Pt(0)
+            shd = OxmlElement("w:shd")
+            shd.set(qn("w:val"), "clear")
+            shd.set(qn("w:fill"), "F4F4F4")
+            para._p.get_or_add_pPr().append(shd)
+            run = para.add_run(raw or " ")
+            run.font.name = "Consolas"
+            run.font.size = Pt(size_pt)
+        self.doc.add_paragraph()
+
+    def page_break(self) -> None:
+        self.doc.add_page_break()
 
     def spacer(self) -> None:
         self.doc.add_paragraph()
@@ -187,6 +214,15 @@ class ZumeDocument:
         self.doc.save(buffer)
         return buffer.getvalue()
 
-    def save(self, path: Path) -> bool:
-        """Save with atomic replace and content-hash versioning."""
-        return versioned_write_bytes(path, self.to_bytes())
+    def save(self, path: Path, versioned: bool = True) -> bool:
+        """Save the document.
+
+        Legacy callers keep content-hash versioning; the v2 deliverables path
+        passes ``versioned=False`` for an atomic replace with no ``__vN`` copies.
+        """
+        if versioned:
+            return versioned_write_bytes(path, self.to_bytes())
+        from zume.candidate import atomic_write_bytes
+
+        atomic_write_bytes(path, self.to_bytes())
+        return True

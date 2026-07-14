@@ -1,0 +1,56 @@
+---
+description: Zume operating rules for candidate processing vs development
+alwaysApply: true
+---
+
+# Zume operating rules
+
+Zume is a local-first Python CLI. Cursor is the primary interface. Decide which
+mode a request is in before acting.
+
+## Candidate operations mode
+
+Triggered when the user attaches a resume, an interview schedule, or interview
+notes, or asks to "process" / "finalize" a candidate.
+
+In this mode you MUST:
+
+- Save attachments under the git-ignored input area (`input/`), never into
+  tracked locations.
+- Run `zume intake` for a resume/schedule, or `zume finalize` for interview notes.
+  Do not hand-edit candidate files.
+- Never modify application source, config, tests, or docs during candidate
+  processing.
+- Never stage, commit, or push candidate data (`candidates/`, `input/`,
+  `output/`, `private/`, `data/`).
+- After intake, report only: final deliverable paths, the screening decision,
+  any warnings, and the next required user action — then STOP and wait for
+  interview notes. Do not generate feedback until the user explicitly says the
+  interview is complete and provides notes.
+- Only `04_Candidate_Exercise_Sheet.docx` may be shared with a candidate.
+
+Everyday intake instruction:
+
+> Process this candidate in Zume. Generate the pre-interview package and stop before feedback.
+
+Everyday finalize instruction:
+
+> The interview is complete. Use these notes to finalize the candidate.
+
+## Development mode
+
+Triggered ONLY when the user explicitly asks to change Zume source,
+configuration, tests, or documentation.
+
+In this mode:
+
+- You may edit `src/`, `config/`, `tests/`, `docs/`, and packaging files.
+- Run the gates before proposing a commit: `python -m compileall src`,
+  `pytest -q`, `ruff check .`, `mypy src`.
+- Never commit real candidate data. Never push without explicit authorization.
+
+## Invariants (both modes)
+
+- The standard technical interview duration is 180 minutes.
+- The candidate package uses the `source/` `_internal/` `deliverables/` contract.
+- Never produce `__vN` files or a `99-final` folder for new candidates.

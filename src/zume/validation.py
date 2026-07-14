@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import statistics
 import subprocess
 import tempfile
 from dataclasses import dataclass, field
@@ -12,19 +13,36 @@ from pathlib import Path
 
 from docx import Document
 
-from zume.candidate import SUBFOLDERS
+from zume.candidate import (
+    CONTRACT_SUBFOLDERS,
+    DELIVERABLES_DIR,
+    INTERNAL_DIR,
+    SUBFOLDERS,
+    candidate_json_path,
+)
 
 EXPECTED_SECTIONS = {
+    # Legacy documents.
     "ATS Screening Report": ["Decision", "Resume evidence coverage — mandatory skills",
                              "Risks and inconsistencies"],
     "Full Interview Guide (3 Hours)": ["Session plan", "Exercises with expected reasoning",
                                        "Scoring per exercise"],
-    "Interview Scorecard": ["Skill scores", "Recommendation bands",
-                            "Independence observations"],
-    "Final Interview Evaluation": ["Decision", "Skill assessment",
-                                   "Independence observations (neutral record)"],
     "Interview Schedule": ["Details", "Interviewer preparation checklist"],
+    # v2 consolidated deliverables (unique titles).
+    "Screening Summary": ["Resume summary", "Mandatory-skill evidence",
+                          "Risks, inconsistencies and missing evidence",
+                          "Recruiter screening message (copy-ready)"],
+    "Three-Hour Interview Guide": ["Candidate-specific risks and validation targets",
+                                   "180-minute agenda", "Knockout round (20 minutes)",
+                                   "Live exercises (expected reasoning and reference solutions)"],
+    "Schedule and Communications": ["Confirmed details", "Interviewer preparation checklist",
+                                    "Copy-ready communication drafts"],
+    "Interview Exercises (Candidate Copy)": ["What to expect"],
+    "Post-Interview Communications": ["Recruiter draft (copy-ready)"],
 }
+
+# Titles that must NEVER expose interviewer-only material to candidates.
+CANDIDATE_SHAREABLE_TITLES = {"Interview Exercises (Candidate Copy)"}
 
 _PLACEHOLDER = re.compile(r"\[(?:[A-Za-z][A-Za-z ]{2,})\]")
 
@@ -103,6 +121,20 @@ def validate_docx(path: Path) -> ValidationReport:
     return report
 
 
+def detect_sparse_trailing_page(page_texts: list[str], threshold: float = 0.2) -> str | None:
+    """Return a message when the last page has far less text than the median
+    page (Phase 13). Single-page documents are always fine."""
+    lengths = [len(t.strip()) for t in page_texts]
+    if len(lengths) < 2:
+        return None
+    median = statistics.median(lengths[:-1])
+    last = lengths[-1]
+    if median > 0 and last < threshold * median:
+        return (f"trailing page has {last} characters vs a median of {int(median)} "
+                f"(< {int(threshold * 100)}% — likely a sparse/near-blank page)")
+    return None
+
+
 def find_soffice() -> str | None:
     for name in ("soffice", "soffice.exe"):
         found = shutil.which(name)
@@ -125,6 +157,97 @@ def _expected_headings_for(path: Path) -> list[str]:
     paragraphs = [p for p in doc.paragraphs if p.text.strip()]
     title = paragraphs[0].text.strip() if paragraphs else ""
     return EXPECTED_SECTIONS.get(title, [])
+
+
+def word_com_available() -> bool:
+    """True when Microsoft Word can be driven via COM (Windows + pywin32)."""
+    try:
+        import win32com.client  # type: ignore  # noqa: F401
+    except Exception:  # noqa: BLE001
+        return False
+    return True
+
+
+def _inspect_pdf(path: Path, rendered: Path, backend: str) -> ValidationReport:
+    """Shared rendered-PDF content checks used by every render backend."""
+    report = ValidationReport()
+    report.passed.append(f"{path.name}: rendered to PDF via {backend}")
+    try:
+        from pypdf import PdfReader
+
+        reader = PdfReader(str(rendered))
+        page_count = len(reader.pages)
+        if page_count == 0:
+            report.errors.append(f"{path.name}: rendered PDF has zero pages")
+            return report
+        report.passed.append(f"{path.name}: rendered PDF has {page_count} page(s)")
+        page_texts = [(p.extract_text() or "") for p in reader.pages]
+        text = "\n".join(page_texts)
+        if not text.strip():
+            report.errors.append(f"{path.name}: rendered PDF has no extractable text")
+            return report
+        if page_count > 1 and not page_texts[-1].strip():
+            report.warnings.append(f"{path.name}: last rendered page appears blank")
+        sparse = detect_sparse_trailing_page(page_texts)
+        if sparse:
+            report.warnings.append(f"{path.name}: {sparse}")
+        if "ZUME" in text.upper():
+            report.passed.append(f"{path.name}: header text present in rendered PDF")
+        else:
+            report.warnings.append(f"{path.name}: header text not found in rendered PDF")
+        if "Private" in text:
+            report.passed.append(f"{path.name}: footer text present in rendered PDF")
+        else:
+            report.warnings.append(f"{path.name}: footer text not found in rendered PDF")
+        leftovers = sorted(set(_PLACEHOLDER.findall(text)))
+        if leftovers:
+            report.warnings.append(
+                f"{path.name}: possible unresolved placeholders in PDF: {', '.join(leftovers)}")
+        missing = [h for h in _expected_headings_for(path) if h not in text]
+        if missing:
+            report.warnings.append(
+                f"{path.name}: headings not found in rendered PDF: {', '.join(missing)}")
+        elif _expected_headings_for(path):
+            report.passed.append(f"{path.name}: expected headings present in rendered PDF")
+    except Exception as exc:  # noqa: BLE001
+        report.warnings.append(f"{path.name}: rendered but PDF inspection failed ({exc})")
+    return report
+
+
+def render_docx_word(path: Path) -> ValidationReport:
+    """Render a DOCX to PDF using Microsoft Word via COM, then inspect it."""
+    report = ValidationReport()
+    try:
+        import win32com.client  # type: ignore
+
+        pythoncom = __import__("pythoncom")
+        pythoncom.CoInitialize()
+    except Exception as exc:  # noqa: BLE001
+        report.warnings.append(f"{path.name}: Word COM unavailable ({exc})")
+        return report
+    with tempfile.TemporaryDirectory() as tmp:
+        rendered = Path(tmp) / (path.stem + ".pdf")
+        word = None
+        try:
+            word = win32com.client.DispatchEx("Word.Application")
+            word.Visible = False
+            doc = word.Documents.Open(str(path), ReadOnly=True)
+            doc.SaveAs(str(rendered), FileFormat=17)  # wdFormatPDF
+            doc.Close(False)
+        except Exception as exc:  # noqa: BLE001
+            report.errors.append(f"{path.name}: Word render failed ({exc})")
+            return report
+        finally:
+            if word is not None:
+                try:
+                    word.Quit()
+                except Exception:  # noqa: BLE001
+                    pass
+        if not rendered.exists() or rendered.stat().st_size == 0:
+            report.errors.append(f"{path.name}: Word produced no PDF output")
+            return report
+        report.merge(_inspect_pdf(path, rendered, "Microsoft Word"))
+    return report
 
 
 def render_docx(path: Path, soffice: str) -> ValidationReport:
@@ -160,9 +283,13 @@ def render_docx(path: Path, soffice: str) -> ValidationReport:
                 report.errors.append(f"{path.name}: rendered PDF has no extractable text")
                 return report
             # last page should not be blank (trailing empty page check)
-            last = (reader.pages[-1].extract_text() or "").strip()
+            page_texts = [(p.extract_text() or "") for p in reader.pages]
+            last = page_texts[-1].strip()
             if page_count > 1 and not last:
                 report.warnings.append(f"{path.name}: last rendered page appears blank")
+            sparse = detect_sparse_trailing_page(page_texts)
+            if sparse:
+                report.warnings.append(f"{path.name}: {sparse}")
             if "ZUME" not in text.upper():
                 report.warnings.append(f"{path.name}: header text not found in rendered PDF")
             else:
@@ -182,14 +309,21 @@ def render_docx(path: Path, soffice: str) -> ValidationReport:
     return report
 
 
+def _is_v2_folder(folder: Path) -> bool:
+    return (folder / INTERNAL_DIR).is_dir() or (folder / DELIVERABLES_DIR).is_dir()
+
+
 def validate_candidate_folder(folder: Path, render: bool = True) -> ValidationReport:
     report = ValidationReport()
-    for sub in SUBFOLDERS:
+    v2 = _is_v2_folder(folder)
+    expected_folders = CONTRACT_SUBFOLDERS if v2 else SUBFOLDERS
+    for sub in expected_folders:
         if (folder / sub).is_dir():
             report.passed.append(f"folder: {sub} present")
         else:
             report.errors.append(f"folder: {sub} missing")
-    audit = folder / "candidate.json"
+
+    audit = candidate_json_path(folder)
     if not audit.exists():
         report.errors.append("candidate.json missing")
     else:
@@ -199,23 +333,54 @@ def validate_candidate_folder(folder: Path, render: bool = True) -> ValidationRe
         except json.JSONDecodeError as exc:
             report.errors.append(f"candidate.json is invalid JSON: {exc}")
 
-    docx_files = sorted(p for p in folder.rglob("*.docx") if not p.name.startswith("~$"))
+    if v2:
+        _validate_v2_invariants(folder, report)
+        docx_files = sorted(p for p in (folder / DELIVERABLES_DIR).glob("*.docx")
+                            if not p.name.startswith("~$"))
+    else:
+        docx_files = sorted(p for p in folder.rglob("*.docx")
+                            if not p.name.startswith("~$"))
     if not docx_files:
         report.warnings.append("no DOCX artifacts found to validate")
     for doc_path in docx_files:
         report.merge(validate_docx(doc_path))
 
-    soffice = find_soffice()
-    if soffice is None:
-        report.warnings.append(
-            "LibreOffice is not installed; DOCX render verification was skipped. "
-            "Install LibreOffice to enable PDF render checks."
-        )
-    elif render:
-        final_docs = sorted((folder / "99-final").glob("*.docx")) or docx_files[:2]
-        for doc_path in final_docs:
-            report.merge(render_docx(doc_path, soffice))
+    if render:
+        if v2:
+            render_docs = docx_files
+        else:
+            render_docs = sorted((folder / "99-final").glob("*.docx")) or docx_files[:2]
+        soffice = find_soffice()
+        if soffice is not None:
+            for doc_path in render_docs:
+                report.merge(render_docx(doc_path, soffice))
+        elif word_com_available():
+            for doc_path in render_docs:
+                report.merge(render_docx_word(doc_path))
+        else:
+            report.warnings.append(
+                "No render backend available (LibreOffice or Microsoft Word); DOCX "
+                "render verification was skipped. Structural checks still ran."
+            )
     return report
+
+
+def _validate_v2_invariants(folder: Path, report: ValidationReport) -> None:
+    """Phase 15/16 invariants: <=7 deliverables, no __vN, no 99-final."""
+    deliverables = sorted((folder / DELIVERABLES_DIR).glob("*.docx"))
+    if len(deliverables) <= 7:
+        report.passed.append(f"deliverables: {len(deliverables)} DOCX (<= 7)")
+    else:
+        report.errors.append(f"deliverables: {len(deliverables)} DOCX exceeds the 7 maximum")
+    versioned = [p.name for p in folder.rglob("*__v[0-9]*")]
+    if versioned:
+        report.errors.append(f"versioned copies present: {', '.join(versioned)}")
+    else:
+        report.passed.append("no __vN versioned files")
+    if (folder / "99-final").exists():
+        report.errors.append("legacy 99-final folder present in a v2 candidate")
+    else:
+        report.passed.append("no 99-final folder")
 
 
 def check_privacy(root: Path) -> ValidationReport:

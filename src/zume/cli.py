@@ -16,6 +16,7 @@ from zume import config as cfg
 from zume import exercises as ex_lib
 from zume import feedback as fb
 from zume import interview as iv
+from zume import pipeline
 from zume import scheduling as sched
 from zume import screening as scr
 from zume.ingest import extract_text, parse_resume
@@ -391,23 +392,88 @@ def scan_secrets_cmd(
     raise typer.Exit(code=1)
 
 
+@app.command("intake")
+def intake_cmd(
+    resume: Optional[Path] = typer.Option(None, "--resume", help="Resume PDF/DOCX/TXT path."),
+    text_file: Optional[Path] = typer.Option(None, "--text-file",
+                                             help="File with pasted resume text."),
+    name: Optional[str] = typer.Option(None, "--name", help="Candidate name override."),
+    schedule_image: Optional[Path] = typer.Option(None, "--schedule-image",
+                                                  help="Schedule screenshot (untrusted)."),
+    schedule_details: Optional[str] = typer.Option(None, "--schedule-details",
+                                                   help="Schedule text or file."),
+    override: bool = typer.Option(False, "--override",
+                                  help="Build a full package for a Do-Not-Proceed candidate."),
+    override_reason: Optional[str] = typer.Option(None, "--override-reason"),
+    rotate_exercises: bool = typer.Option(False, "--rotate-exercises",
+                                          help="Assign fresh exercises (needs a reason)."),
+    rotation_reason: Optional[str] = typer.Option(None, "--rotation-reason"),
+) -> None:
+    """Screen a resume and build the complete pre-interview package, then stop."""
+    resume_text = text_file.read_text(encoding="utf-8", errors="replace") if text_file else None
+    try:
+        result = pipeline.run_intake(
+            _root(), resume_path=resume, resume_text=resume_text, name=name,
+            schedule_image=schedule_image, schedule_details=schedule_details,
+            override=override, override_reason=override_reason,
+            rotate_exercises=rotate_exercises, rotation_reason=rotation_reason)
+    except pipeline.WorkflowError as exc:
+        console.print(f"[red]Blocked:[/] {exc}")
+        raise typer.Exit(code=2) from exc
+    console.print(f"Decision: {result.screening.decision.value} "
+                  f"(resume evidence coverage {result.screening.score_percent:g}%)")
+    console.print(f"Status: {result.status}")
+    console.print("Deliverables: " + ", ".join(result.deliverables))
+    if result.export_zip:
+        console.print(f"Package: {result.export_zip}")
+    if result.schedule_needs_confirmation:
+        console.print("[yellow]Schedule needs confirmation before it can be relied on.[/]")
+    for err in result.validation_errors:
+        console.print(f"[red]DOCX issue:[/] {err}")
+    console.print(f"Candidate folder: {result.folder}")
+    if result.status != pipeline.DO_NOT_PROCEED:
+        console.print(f"[bold]{pipeline.WAIT_MESSAGE}[/]")
+
+
+@app.command("finalize")
+def finalize_cmd(
+    candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+    notes: str = typer.Option(..., "--notes", help="Interview notes: file path or text."),
+    leadership: bool = typer.Option(False, "--leadership",
+                                    help="Also include a leadership draft."),
+) -> None:
+    """After the interview: generate the final evaluation and communications."""
+    try:
+        result = pipeline.run_finalize(_root(), candidate, notes, leadership=leadership)
+    except pipeline.WorkflowError as exc:
+        console.print(f"[red]Blocked:[/] {exc}")
+        raise typer.Exit(code=2) from exc
+    console.print(f"Status: {result.status}")
+    console.print("Deliverables: " + ", ".join(result.deliverables))
+    if result.export_zip:
+        console.print(f"Package: {result.export_zip}")
+    for err in result.validation_errors:
+        console.print(f"[red]DOCX issue:[/] {err}")
+    console.print(f"Candidate folder: {result.folder}")
+
+
 @app.command("demo")
 def demo_cmd() -> None:
-    """Run the fictional end-to-end sample through every workflow."""
+    """Run the fictional end-to-end sample: intake, then finalize."""
     root = _root()
     examples = root / "examples" / "fictional-candidate"
-    console.rule("1/4 Filter Resume")
-    folder = run_filter_resume(examples / "resume.txt", None, None)
-    ref = folder.name
-    console.rule("2/4 Interview Prep")
-    run_interview_prep(ref)
-    console.rule("3/4 Schedule Interview")
-    run_schedule_interview(ref, None, str(examples / "schedule.txt"))
-    console.rule("4/4 Interview Feedback")
-    run_interview_feedback(ref, str(examples / "interview-notes.txt"), leadership=True)
+    console.rule("1/2 Intake (pre-interview package)")
+    intake = pipeline.run_intake(
+        root, resume_path=examples / "resume.txt",
+        schedule_details=str(examples / "schedule.txt"))
+    console.print(f"Status: {intake.status}; deliverables: {', '.join(intake.deliverables)}")
+    console.rule("2/2 Finalize (after interview notes)")
+    final = pipeline.run_finalize(root, intake.folder.name,
+                                  str(examples / "interview-notes.txt"), leadership=True)
     console.rule("Demo complete")
-    console.print(f"Demo candidate folder: {folder.name}")
-    console.print(f"Validate with: zume validate --candidate {folder.name}")
+    console.print(f"Demo candidate folder: {intake.folder.name}")
+    console.print(f"Final status: {final.status}")
+    console.print(f"Validate with: zume validate --candidate {intake.folder.name}")
 
 
 @app.command("run")
@@ -452,18 +518,73 @@ app.add_typer(candidate_app)
 @candidate_app.command("export")
 def candidate_export_cmd(
     candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+    include_source: bool = typer.Option(False, "--include-source",
+                                        help="Also include the original resume."),
+    include_internal: bool = typer.Option(False, "--include-internal",
+                                          help="Also include internal working files (audit)."),
 ) -> None:
-    """Export a candidate folder as a zip package into the git-ignored export dir."""
+    """Export a clean, deliverables-only zip (interviewer + candidate copies)."""
     root = _root()
     folder = cand.resolve_candidate(root, candidate)
     privacy = cfg.load_privacy(root)
-    package = cand.export_candidate(root, folder, privacy.get("export_dir", "output"))
+    if include_internal:
+        console.print("[yellow]Warning:[/] including internal files; do not share externally.")
+    package = cand.export_deliverables(root, folder, privacy.get("export_dir", "output"),
+                                       include_source=include_source,
+                                       include_internal=include_internal)
     record = cand.load_candidate(folder)
     cand.record_status(record, "EXPORTED", f"Exported package: {package.name}")
     cand.save_candidate(folder, record)
     with Storage(root) as storage:
         storage.set_status(folder.name, "EXPORTED")
     console.print(f"[green]Exported[/] {folder.name} -> {package}")
+
+
+@candidate_app.command("migrate")
+def candidate_migrate_cmd(
+    candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+    preview: bool = typer.Option(False, "--preview", help="Show planned changes only."),
+    apply: bool = typer.Option(False, "--apply", help="Apply the migration."),
+) -> None:
+    """Migrate a legacy candidate folder to the v2 three-folder contract."""
+    root = _root()
+    folder = cand.resolve_candidate(root, candidate)
+    if apply and not preview:
+        done = cand.apply_migration(folder)
+        console.print(f"[green]Migrated[/] {folder.name}")
+        for label, items in done.items():
+            for item in items:
+                console.print(f"  {label}: {item}")
+        return
+    plan = cand.plan_migration(folder)
+    console.print(f"[bold]Migration plan for {folder.name}:[/]")
+    for label, items in plan.items():
+        for item in items:
+            console.print(f"  {label}: {item}")
+    console.print("[yellow]Preview only.[/] Re-run with --apply to migrate. "
+                  "Source files are moved, never deleted.")
+
+
+@candidate_app.command("cleanup")
+def candidate_cleanup_cmd(
+    candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
+    preview: bool = typer.Option(False, "--preview", help="Show removable files only."),
+    apply: bool = typer.Option(False, "--apply", help="Remove redundant versioned files."),
+) -> None:
+    """Remove redundant __vN and 99-final copies after previewing them."""
+    root = _root()
+    folder = cand.resolve_candidate(root, candidate)
+    if apply and not preview:
+        removed = cand.apply_cleanup(folder)
+        console.print(f"[green]Cleaned[/] {folder.name}: removed {len(removed)} file(s).")
+        for item in removed:
+            console.print(f"  removed: {item}")
+        return
+    targets = cand.plan_cleanup(folder)
+    console.print(f"[bold]Cleanup plan for {folder.name}:[/]")
+    for item in targets or ["(nothing to clean)"]:
+        console.print(f"  {item}")
+    console.print("[yellow]Preview only.[/] Re-run with --apply to remove.")
 
 
 @candidate_app.command("archive")

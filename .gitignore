@@ -20,6 +20,7 @@ build/
 
 # Real candidate data and generated output
 General Docs/
+private/
 candidates/**
 !candidates/.gitkeep
 input/**

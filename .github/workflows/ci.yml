@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch: {}
 
 # Never expose candidate data. This workflow uses only fictional demo data and
 # does not upload candidate folders or generated candidate documents.
@@ -52,21 +53,61 @@ jobs:
       - name: Demo (fictional data only)
         run: zume demo
 
-      - name: Candidate-folder validation
+      - name: Candidate-folder validation (v2 contract)
         run: |
           python - <<'PY'
           import subprocess, sys
           from pathlib import Path
+          # v2 stores candidate.json under _internal/; legacy at the root.
           folders = [p.name for p in Path("candidates").iterdir()
-                     if (p / "candidate.json").exists()]
+                     if (p / "_internal" / "candidate.json").exists()
+                     or (p / "candidate.json").exists()]
           assert folders, "demo did not produce a candidate folder"
           rc = subprocess.run(
               ["zume", "validate", "--candidate", folders[0], "--no-render"]).returncode
           sys.exit(rc)
           PY
 
+      - name: Simplification invariants (contract, count, no versioned files)
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          root = next(p for p in Path("candidates").iterdir()
+                      if (p / "_internal" / "candidate.json").exists())
+          errors = []
+          for sub in ("source", "_internal", "deliverables"):
+              if not (root / sub).is_dir():
+                  errors.append(f"missing {sub}/ contract folder")
+          if (root / "99-final").exists():
+              errors.append("legacy 99-final/ folder present")
+          docx = list((root / "deliverables").glob("*.docx"))
+          if not (1 <= len(docx) <= 7):
+              errors.append(f"expected 1..7 deliverables, found {len(docx)}")
+          if list(root.rglob("*__v[0-9]*")):
+              errors.append("versioned __vN files present")
+          if errors:
+              print("\n".join(errors)); sys.exit(1)
+          print(f"contract OK: {len(docx)} deliverables, no __vN, no 99-final")
+          PY
+
       - name: Privacy and security checks
         run: pytest -q tests/test_privacy.py tests/test_security.py
+
+      - name: No candidate data tracked by Git
+        run: |
+          python - <<'PY'
+          import subprocess, sys
+          out = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all"],
+                               capture_output=True, text=True).stdout
+          leaked = [ln for ln in out.splitlines()
+                    if any(seg in ln for seg in
+                           ("candidates/", "input/", "output/", "private/", "data/"))]
+          if leaked:
+              print("candidate/private data would be tracked:"); print("\n".join(leaked))
+              sys.exit(1)
+          print("git status clean of candidate/private data")
+          PY
 
       - name: Package build verification
         run: |

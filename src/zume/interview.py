@@ -10,6 +10,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from zume import agenda as agenda_lib
+from zume import questions as q_lib
 from zume.documents import ZumeDocument
 from zume.exercises import Exercise, ExerciseSelector, load_exercises
 from zume.models import (
@@ -17,9 +19,15 @@ from zume.models import (
     EvidenceLevel,
     EvidenceType,
     ExerciseSelection,
+    GuideFollowUp,
+    GuideQuestion,
     InterviewKit,
     ScreeningResult,
 )
+
+# Areas (in order) that get a basic/intermediate/advanced question block.
+GUIDE_QUESTION_AREAS = ["java", "selenium", "testng", "cucumber", "rest_assured",
+                        "sql_oracle", "framework_design", "cicd", "debugging"]
 
 CORE_AREAS = ["java", "selenium", "rest_assured", "sql_oracle",
               "framework_design", "debugging"]
@@ -98,9 +106,66 @@ def unverified_mandatory_skills(result: ScreeningResult) -> list[str]:
             if item.mandatory and item.evidence_type in _UNVERIFIED_TYPES]
 
 
+def _resume_tags(result: ScreeningResult) -> set[str]:
+    tags: set[str] = set()
+    for item in result.evidence:
+        tags.add(item.skill.lower())
+        tags.add(item.label.lower())
+    return tags
+
+
+def _to_guide_question(question: q_lib.Question, area_label: str) -> GuideQuestion:
+    return GuideQuestion(
+        id=question.id,
+        area=question.area,
+        area_label=area_label,
+        level=question.level,
+        question=question.question,
+        recommended_answer=question.recommended_answer,
+        key_points=list(question.key_points),
+        strong_signals=list(question.strong_signals),
+        weak_signals=list(question.weak_signals),
+        red_flags=list(question.red_flags),
+        follow_ups=[GuideFollowUp(question=f.question, recommended_answer=f.recommended_answer)
+                    for f in question.follow_ups],
+        score_guidance=question.score_guidance,
+        time_minutes=question.time_minutes,
+    )
+
+
+def _choose_optional_area(result: ScreeningResult, areas: dict[str, q_lib.Area]) -> str:
+    """Adapt the 10-minute optional slot: mobile/performance when the resume
+    supports it, otherwise the highest-risk mandatory area."""
+    if _supports_optional_area(result, ["Appium", "Android and iOS"]) and "appium" in areas:
+        return "appium"
+    if _supports_optional_area(result, ["Performance", "JMeter", "Gatling"]) and "performance" in areas:
+        return "performance"
+    if _supports_optional_area(result, ["BrowserStack"]) and "browserstack" in areas:
+        return "browserstack"
+    unverified = unverified_mandatory_skills(result)
+    return unverified[0] if unverified else "framework_design"
+
+
+def build_question_sections(
+    question_areas: dict[str, q_lib.Area], resume_tags: set[str],
+) -> tuple[dict[str, list[GuideQuestion]], list[GuideQuestion]]:
+    sections: dict[str, list[GuideQuestion]] = {}
+    reserve: list[GuideQuestion] = []
+    for key in GUIDE_QUESTION_AREAS:
+        area = question_areas.get(key)
+        if area is None:
+            continue
+        selected, extra = q_lib.select_for_area(area, resume_tags)
+        sections[key] = [_to_guide_question(s, area.label) for s in selected]
+        reserve.extend(_to_guide_question(e, area.label) for e in extra)
+    return sections, reserve
+
+
 def build_kit(library: dict[str, Any], result: ScreeningResult,
               override_reason: str = "",
-              selector: ExerciseSelector | None = None) -> InterviewKit:
+              selector: ExerciseSelector | None = None,
+              question_areas: dict[str, q_lib.Area] | None = None,
+              preassigned_ids: list[str] | None = None) -> InterviewKit:
     if selector is None:
         selector = ExerciseSelector(load_exercises(library))
     focus = []
@@ -109,15 +174,52 @@ def build_kit(library: dict[str, Any], result: ScreeningResult,
             focus.append(f"{item.label} ({item.level.value} evidence — validate live)")
     if not focus:
         focus = ["All mandatory areas showed explicit resume evidence; verify depth, not presence."]
+
+    if preassigned_ids:
+        exercises = _reselect_by_id(library, preassigned_ids)
+    else:
+        exercises = select_exercises(selector, result)
+
+    agenda = agenda_lib.build_agenda()
+    knockout: list = []
+    sections: dict[str, list[GuideQuestion]] = {}
+    reserve: list[GuideQuestion] = []
+    optional_area = ""
+    if question_areas:
+        knockout = agenda_lib.build_knockout(question_areas)
+        sections, reserve = build_question_sections(question_areas, _resume_tags(result))
+        optional_area = _choose_optional_area(result, question_areas)
+
     return InterviewKit(
         candidate_name=result.candidate_name,
         focus_areas=focus,
         validation_questions=list(result.validation_questions),
-        exercises=select_exercises(selector, result),
+        exercises=exercises,
         screening_decision=result.decision.value,
         unverified_mandatory=unverified_mandatory_skills(result),
         override_reason=override_reason,
+        agenda=agenda,
+        knockout=knockout,
+        knockout_minutes=agenda_lib.KNOCKOUT_MINUTES,
+        knockout_decision_rule=list(agenda_lib.KNOCKOUT_DECISION_RULE),
+        question_sections=sections,
+        reserve_questions=reserve,
+        optional_area=optional_area,
     )
+
+
+def _reselect_by_id(library: dict[str, Any], ids: list[str]) -> list[ExerciseSelection]:
+    """Rebuild the exact same exercise assignment (Phase 6 idempotency)."""
+    by_id: dict[str, Exercise] = {}
+    for area_exercises in load_exercises(library).values():
+        for ex in area_exercises:
+            by_id[ex.id] = ex
+    selections: list[ExerciseSelection] = []
+    for ex_id in ids:
+        exercise = by_id.get(ex_id)
+        if exercise is not None:
+            selections.append(exercise.to_selection())
+    return selections
 
 
 def generate_focus_sheet(theme: dict[str, Any], kit: InterviewKit,

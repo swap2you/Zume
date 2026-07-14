@@ -25,6 +25,11 @@ _MONTH_DATE = re.compile(
 _TIME = re.compile(r"(\d{1,2}):(\d{2})\s*([ap]\.?m\.?)?", re.IGNORECASE)
 _DURATION = re.compile(r"(\d+(?:\.\d+)?)\s*(hours?|hrs?|minutes?|mins?|m\b|h\b)", re.IGNORECASE)
 
+# The configured standard technical interview duration (Phase 9).
+STANDARD_INTERVIEW_MINUTES = 180
+# Abbreviations that do not resolve to a single zone without the date/convention.
+_AMBIGUOUS_TZ = {"ET", "CT", "MT", "PT"}
+
 
 def extract_timezone(*texts: str) -> str:
     for text in texts:
@@ -84,7 +89,8 @@ def parse_duration_minutes(raw: str) -> int | None:
     return int(value)
 
 
-def validate_schedule(record: ScheduleRecord, today: date_cls | None = None) -> list[str]:
+def validate_schedule(record: ScheduleRecord, today: date_cls | None = None,
+                      standard_minutes: int = STANDARD_INTERVIEW_MINUTES) -> list[str]:
     """Return blocking/confirmation issues; never trust OCR silently."""
     today = today or date_cls.today()
     issues: list[str] = []
@@ -108,12 +114,25 @@ def validate_schedule(record: ScheduleRecord, today: date_cls | None = None) -> 
                 issues.append(f"Time {record.time} is not a valid clock time.")
     if not record.timezone:
         issues.append("Timezone is missing; confirm the interviewer's timezone.")
-    if record.duration:
+    elif record.timezone.upper() in _AMBIGUOUS_TZ:
+        issues.append(
+            f"Timezone '{record.timezone}' is ambiguous; record the IANA zone "
+            "(e.g. America/New_York) and confirm before relying on the time.")
+    # Phase 9 — duration is measured against the 180-minute standard.
+    if not record.duration:
+        issues.append(
+            f"Duration is missing; confirm the {standard_minutes}-minute standard interview.")
+    else:
         minutes = parse_duration_minutes(record.duration)
         if minutes is None:
             issues.append("Duration could not be parsed.")
         elif minutes <= 0:
             issues.append("Duration must be greater than zero.")
+        elif minutes != standard_minutes:
+            issues.append(
+                f"Duration is {minutes} minutes but the standard interview is "
+                f"{standard_minutes} minutes. Confirm a {standard_minutes}-minute schedule "
+                "or intentionally generate a shortened/custom interview plan.")
     return issues
 
 
@@ -166,6 +185,14 @@ def build_schedule(candidate_name: str, image_path: Path | None,
             record.notes = (record.notes + "; " if record.notes else "") + details["notes"]
         if record.extraction_source == "manual":
             record.extraction_source = "text"
+
+    record.duration_minutes = parse_duration_minutes(record.duration) if record.duration else None
+    if record.duration_minutes is None:
+        record.duration_status = "missing"
+    elif record.duration_minutes == STANDARD_INTERVIEW_MINUTES:
+        record.duration_status = "confirmed"
+    else:
+        record.duration_status = "mismatch"
 
     record.validation_issues = validate_schedule(record, today=today)
     record.needs_confirmation = bool(record.validation_issues)

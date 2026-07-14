@@ -102,6 +102,9 @@ class ScheduleRecord(BaseModel):
     time: str = ""
     timezone: str = ""
     duration: str = ""
+    duration_minutes: int | None = None
+    # confirmed | missing | mismatch — drives whether the schedule can be trusted.
+    duration_status: str = "missing"
     interviewers: str = ""
     platform: str = ""  # meeting method
     extraction_source: str = "manual"  # manual | image-metadata | text
@@ -135,6 +138,43 @@ class ExerciseSelection(BaseModel):
     independence_questions: list[str] = Field(default_factory=list)
 
 
+class GuideFollowUp(BaseModel):
+    question: str
+    recommended_answer: str
+
+
+class GuideQuestion(BaseModel):
+    id: str
+    area: str
+    area_label: str
+    level: str
+    question: str
+    recommended_answer: str
+    key_points: list[str] = Field(default_factory=list)
+    strong_signals: list[str] = Field(default_factory=list)
+    weak_signals: list[str] = Field(default_factory=list)
+    red_flags: list[str] = Field(default_factory=list)
+    follow_ups: list[GuideFollowUp] = Field(default_factory=list)
+    score_guidance: str = ""
+    time_minutes: int = 5
+
+
+class KnockoutItem(BaseModel):
+    area_label: str
+    question: str
+    recommended_answer: str
+    strong_indicator: str = ""
+    weak_indicator: str = ""
+
+
+class AgendaSegment(BaseModel):
+    start: str
+    end: str
+    minutes: int
+    title: str
+    focus: str = ""
+
+
 class InterviewKit(BaseModel):
     candidate_name: str
     focus_areas: list[str]
@@ -143,6 +183,15 @@ class InterviewKit(BaseModel):
     screening_decision: str = ""
     unverified_mandatory: list[str] = Field(default_factory=list)
     override_reason: str = ""
+    # Phase 4 — real 180-minute operating model.
+    duration_minutes: int = 180
+    agenda: list[AgendaSegment] = Field(default_factory=list)
+    knockout: list[KnockoutItem] = Field(default_factory=list)
+    knockout_minutes: int = 20
+    knockout_decision_rule: list[str] = Field(default_factory=list)
+    question_sections: dict[str, list[GuideQuestion]] = Field(default_factory=dict)
+    reserve_questions: list[GuideQuestion] = Field(default_factory=list)
+    optional_area: str = ""
     created_at: str = Field(default_factory=utc_now_iso)
 
 
@@ -201,4 +250,8 @@ class Candidate(BaseModel):
     status_history: list[StatusEvent] = Field(default_factory=list)
     artifacts: list[str] = Field(default_factory=list)
     override_reasons: list[str] = Field(default_factory=list)
+    # Phase 6 — exercises assigned on the first prep; preserved across reruns.
+    assigned_exercise_ids: list[str] = Field(default_factory=list)
+    rotation_reasons: list[str] = Field(default_factory=list)
+    contract_version: int = 1
     updated_at: str = Field(default_factory=utc_now_iso)

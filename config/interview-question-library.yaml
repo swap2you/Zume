@@ -1,0 +1,1564 @@
+# Zume interview question library
+#
+# INTERVIEWER-ONLY. Contains recommended answers and signals. Never share.
+#
+# Every question and every follow-up has a non-empty recommended_answer.
+# Depth contract (enforced by tests/test_question_library.py):
+#   core areas    : >= 3 basic, >= 3 intermediate, >= 3 advanced
+#   optional areas: >= 2 basic, >= 2 intermediate, >= 2 advanced
+#
+# Question record schema:
+#   id, area, level, question, recommended_answer, key_points,
+#   strong_signals, weak_signals, red_flags,
+#   follow_ups[{question, recommended_answer}],
+#   score_guidance, resume_tags, time_minutes
+
+meta:
+  version: 1
+  levels: [basic, intermediate, advanced]
+
+areas:
+  java:
+    label: "Java"
+    core: true
+    questions:
+      - id: java-b1
+        area: java
+        level: basic
+        question: "What is the difference between `==` and `.equals()` for objects, and why does it matter for Strings?"
+        recommended_answer: "`==` compares references (identity); `.equals()` compares logical value. For Strings, literals may be interned so `==` sometimes appears to work, but value comparison must use `.equals()`."
+        key_points: ["reference vs value", "String interning is not guaranteed", "override equals/hashCode together"]
+        strong_signals: ["mentions hashCode contract", "gives a concrete String pool example"]
+        weak_signals: ["says == always works for Strings"]
+        red_flags: ["cannot explain why == may pass in tests but fail in production"]
+        follow_ups:
+          - question: "Why must you override hashCode when you override equals?"
+            recommended_answer: "Because hash-based collections (HashMap/HashSet) locate objects by hashCode first; equal objects with different hashCodes break the collection contract."
+        score_guidance: "Full credit for value-vs-reference plus the hashCode contract."
+        resume_tags: ["java", "core java"]
+        time_minutes: 4
+      - id: java-b2
+        area: java
+        level: basic
+        question: "Explain checked vs unchecked exceptions and when you would create a custom exception."
+        recommended_answer: "Checked exceptions are enforced at compile time (recoverable, external conditions); unchecked (RuntimeException) signal programming errors. Custom exceptions add domain meaning and cleaner handling at boundaries."
+        key_points: ["compile-time enforcement", "recoverable vs programming error", "domain clarity"]
+        strong_signals: ["discusses not swallowing exceptions", "wraps low-level exceptions with context"]
+        weak_signals: ["catches Exception broadly everywhere"]
+        red_flags: ["empty catch blocks are acceptable"]
+        follow_ups:
+          - question: "What is wrong with `catch (Exception e) {}`?"
+            recommended_answer: "It swallows all errors silently, hiding failures and making debugging impossible; at minimum log and rethrow or handle specifically."
+        score_guidance: "Credit for the distinction plus a sensible custom-exception rationale."
+        resume_tags: ["java"]
+        time_minutes: 4
+      - id: java-b3
+        area: java
+        level: basic
+        question: "What are the main differences between ArrayList and HashMap, and when do you pick each?"
+        recommended_answer: "ArrayList is an ordered, index-accessible list (O(1) get by index, O(n) search). HashMap is a key/value store with average O(1) lookup by key. Choose by access pattern: sequence vs keyed retrieval."
+        key_points: ["ordered list vs keyed store", "complexity of common ops", "access pattern drives choice"]
+        strong_signals: ["mentions load factor / collisions", "knows List allows duplicates, Map keys unique"]
+        weak_signals: ["cannot state lookup complexity"]
+        red_flags: ["uses a List and linear search where a Map is obvious"]
+        follow_ups:
+          - question: "How does HashMap behave with a poor hashCode?"
+            recommended_answer: "Many collisions degrade lookups toward O(n) (buckets become long chains / trees since Java 8); a good, well-distributed hashCode keeps it near O(1)."
+        score_guidance: "Credit for correct data-structure selection reasoning."
+        resume_tags: ["java", "collections"]
+        time_minutes: 4
+      - id: java-i1
+        area: java
+        level: intermediate
+        question: "How do Java Streams differ from loops, and what are the trade-offs?"
+        recommended_answer: "Streams express declarative pipelines (map/filter/collect) with lazy evaluation; they improve readability for transformations but can hurt debuggability and performance for trivial loops or heavy side effects."
+        key_points: ["declarative vs imperative", "laziness / short-circuiting", "avoid side effects in streams"]
+        strong_signals: ["knows terminal vs intermediate ops", "mentions when NOT to use streams"]
+        weak_signals: ["thinks streams are always faster"]
+        red_flags: ["mutates external state inside a stream"]
+        follow_ups:
+          - question: "What does `Collectors.groupingBy` do?"
+            recommended_answer: "Groups elements into a Map keyed by a classifier function, with values as lists (or a downstream collector result) per key."
+        score_guidance: "Credit for trade-off awareness, not just syntax."
+        resume_tags: ["java", "streams", "java 8"]
+        time_minutes: 5
+      - id: java-i2
+        area: java
+        level: intermediate
+        question: "Explain how you achieve thread safety for shared mutable state."
+        recommended_answer: "Prefer immutability; otherwise synchronize access (synchronized/locks), use concurrent collections (ConcurrentHashMap), atomics, or confine state to one thread. Choose the least-locking correct option."
+        key_points: ["immutability first", "synchronization vs concurrent collections", "atomics"]
+        strong_signals: ["mentions visibility (volatile) vs atomicity", "knows ConcurrentHashMap semantics"]
+        weak_signals: ["synchronizes everything indiscriminately"]
+        red_flags: ["believes volatile makes compound actions atomic"]
+        follow_ups:
+          - question: "Difference between `volatile` and `synchronized`?"
+            recommended_answer: "`volatile` guarantees visibility of a single variable's latest value but not atomic compound actions; `synchronized` provides both mutual exclusion and visibility for a block."
+        score_guidance: "Credit for visibility vs atomicity distinction."
+        resume_tags: ["java", "concurrency", "multithreading"]
+        time_minutes: 6
+      - id: java-i3
+        area: java
+        level: intermediate
+        question: "What is the difference between an interface and an abstract class in modern Java?"
+        recommended_answer: "Interfaces define capability and support multiple inheritance and default methods; abstract classes hold shared state and partial implementation. Use interfaces for contracts, abstract classes for shared base behavior/state."
+        key_points: ["multiple interfaces vs single superclass", "default methods", "state in abstract class"]
+        strong_signals: ["mentions default methods and diamond resolution", "composition over inheritance"]
+        weak_signals: ["says interfaces cannot have method bodies (pre-Java 8 view)"]
+        red_flags: ["deep inheritance chains as default design"]
+        follow_ups:
+          - question: "When would you favor composition over inheritance?"
+            recommended_answer: "When behavior varies independently or you need flexibility; composition avoids fragile base-class coupling and supports runtime swapping of collaborators."
+        score_guidance: "Credit for design reasoning, not just definitions."
+        resume_tags: ["java", "oop", "design"]
+        time_minutes: 5
+      - id: java-a1
+        area: java
+        level: advanced
+        question: "Walk through diagnosing a memory leak in a long-running Java test framework or service."
+        recommended_answer: "Reproduce and monitor heap (JVisualVM/JFR), capture a heap dump, analyze dominators (MAT) for growing retained sets, identify GC roots holding references (static caches, ThreadLocals, listeners), then fix retention and verify."
+        key_points: ["heap dump + dominator analysis", "common culprits: statics, ThreadLocal, unbounded caches", "verify after fix"]
+        strong_signals: ["names concrete tools", "mentions ThreadLocal leaks in thread pools"]
+        weak_signals: ["only says add more memory"]
+        red_flags: ["no methodology, guesses randomly"]
+        follow_ups:
+          - question: "Why are ThreadLocals dangerous in pooled threads?"
+            recommended_answer: "Pooled threads live long and are reused; if you never remove() the ThreadLocal, the value is retained across tasks and leaks memory (and can bleed state)."
+        score_guidance: "Full credit for a systematic, tool-backed methodology."
+        resume_tags: ["java", "performance", "jvm"]
+        time_minutes: 8
+      - id: java-a2
+        area: java
+        level: advanced
+        question: "How would you design a reusable, thread-safe utility used across parallel tests?"
+        recommended_answer: "Make it stateless or immutable; if state is required, isolate per-thread (ThreadLocal with cleanup) or use concurrent structures; expose a small, well-documented API and cover it with concurrency tests."
+        key_points: ["stateless/immutable design", "per-thread isolation vs shared", "concurrency testing"]
+        strong_signals: ["discusses cleanup and lifecycle", "considers test parallelism explicitly"]
+        weak_signals: ["global mutable singleton without synchronization"]
+        red_flags: ["shared static WebDriver across parallel tests"]
+        follow_ups:
+          - question: "Why is a shared static WebDriver a problem in parallel runs?"
+            recommended_answer: "WebDriver is not thread-safe; parallel threads would interleave commands on one session, causing flaky, corrupted results. Use per-thread driver instances."
+        score_guidance: "Credit for concrete parallel-safety design."
+        resume_tags: ["java", "concurrency", "framework"]
+        time_minutes: 8
+      - id: java-a3
+        area: java
+        level: advanced
+        question: "Explain generics wildcards (`? extends` vs `? super`) and when to use each."
+        recommended_answer: "Use `? extends T` for producers (read T out) and `? super T` for consumers (write T in) — the PECS rule (Producer Extends, Consumer Super). This maximizes API flexibility while keeping type safety."
+        key_points: ["PECS", "producer vs consumer", "type safety vs flexibility"]
+        strong_signals: ["states PECS and gives a Collections.copy-style example"]
+        weak_signals: ["uses raw types to avoid the issue"]
+        red_flags: ["cannot reason about compile errors from wildcards"]
+        follow_ups:
+          - question: "Why can't you add elements to a `List<? extends Number>`?"
+            recommended_answer: "The exact element type is unknown (could be Integer or Double), so the compiler forbids inserts to preserve type safety; you can only read as Number."
+        score_guidance: "Credit for PECS with correct rationale."
+        resume_tags: ["java", "generics"]
+        time_minutes: 7
+
+  selenium:
+    label: "Selenium"
+    core: true
+    questions:
+      - id: sel-b1
+        area: selenium
+        level: basic
+        question: "What locator strategies does Selenium support and how do you choose a robust one?"
+        recommended_answer: "id, name, className, tagName, linkText, cssSelector, xpath. Prefer stable, unique locators (id or a purpose-built data attribute), then CSS; use XPath when you need text or axis relationships."
+        key_points: ["prefer stable/unique", "CSS over XPath generally", "avoid brittle absolute XPath"]
+        strong_signals: ["advocates data-test attributes", "explains CSS vs XPath trade-offs"]
+        weak_signals: ["defaults to absolute XPath copied from devtools"]
+        red_flags: ["locators tied to auto-generated dynamic ids"]
+        follow_ups:
+          - question: "When is XPath genuinely better than CSS?"
+            recommended_answer: "When you must match by visible text, traverse to a parent/ancestor, or select based on sibling relationships — things CSS cannot express."
+        score_guidance: "Credit for stability-first reasoning."
+        resume_tags: ["selenium", "locators"]
+        time_minutes: 4
+      - id: sel-b2
+        area: selenium
+        level: basic
+        question: "Explain implicit vs explicit waits and why mixing them is discouraged."
+        recommended_answer: "Implicit wait sets a global poll timeout for element lookups; explicit wait (WebDriverWait + ExpectedConditions) waits for a specific condition. Mixing them can compound timeouts and cause unpredictable waits."
+        key_points: ["global vs conditional", "ExpectedConditions", "do not mix"]
+        strong_signals: ["prefers explicit waits for conditions", "mentions FluentWait"]
+        weak_signals: ["uses Thread.sleep everywhere"]
+        red_flags: ["thinks sleep is equivalent to explicit wait"]
+        follow_ups:
+          - question: "Why is Thread.sleep an anti-pattern?"
+            recommended_answer: "It waits a fixed time regardless of readiness — slow when too long, flaky when too short. Condition-based waits are both faster and more reliable."
+        score_guidance: "Credit for condition-based waiting."
+        resume_tags: ["selenium", "waits", "synchronization"]
+        time_minutes: 4
+      - id: sel-b3
+        area: selenium
+        level: basic
+        question: "What is the Page Object Model and what problem does it solve?"
+        recommended_answer: "POM encapsulates each page's locators and actions in a class, separating test logic from UI structure. It reduces duplication and localizes maintenance when the UI changes."
+        key_points: ["encapsulation of locators/actions", "reduces duplication", "maintainability"]
+        strong_signals: ["separates assertions from page actions", "mentions loadable/component pattern"]
+        weak_signals: ["puts assertions inside page objects"]
+        red_flags: ["no abstraction; locators scattered in tests"]
+        follow_ups:
+          - question: "Should assertions live in page objects?"
+            recommended_answer: "Generally no — page objects model behavior/state; assertions belong in tests to keep pages reusable across scenarios."
+        score_guidance: "Credit for separation of concerns."
+        resume_tags: ["selenium", "page object", "pom"]
+        time_minutes: 4
+      - id: sel-i1
+        area: selenium
+        level: intermediate
+        question: "How do you handle a flaky element that is sometimes not interactable?"
+        recommended_answer: "Diagnose the cause (animation, overlay, not-yet-rendered), use explicit waits for elementToBeClickable, ensure it is scrolled into view, and avoid blind retries; fix the root synchronization issue rather than sleeping."
+        key_points: ["find root cause", "elementToBeClickable", "scroll into view / overlays"]
+        strong_signals: ["distinguishes visible vs clickable", "checks for overlays/spinners"]
+        weak_signals: ["adds retries without diagnosis"]
+        red_flags: ["increases global sleep to mask flakiness"]
+        follow_ups:
+          - question: "Difference between visibilityOf and elementToBeClickable?"
+            recommended_answer: "visibilityOf checks the element is displayed and has size; elementToBeClickable additionally requires it be enabled and not obscured, so it is safer before clicks."
+        score_guidance: "Credit for root-cause diagnosis."
+        resume_tags: ["selenium", "flaky", "waits"]
+        time_minutes: 6
+      - id: sel-i2
+        area: selenium
+        level: intermediate
+        question: "How do you manage WebDriver lifecycle across parallel tests?"
+        recommended_answer: "Instantiate one driver per thread (ThreadLocal) or per test method, initialize in setup, quit in teardown, and never share a driver across threads. Manage driver binaries via a manager or Selenium Manager."
+        key_points: ["per-thread driver", "setup/teardown lifecycle", "no shared driver"]
+        strong_signals: ["ThreadLocal<WebDriver> with cleanup", "quit in finally/teardown"]
+        weak_signals: ["single static driver"]
+        red_flags: ["never quits drivers (leaks sessions)"]
+        follow_ups:
+          - question: "What happens if you never call driver.quit()?"
+            recommended_answer: "Browser processes and sessions leak, consuming memory and grid slots and eventually failing runs; quit releases the session cleanly."
+        score_guidance: "Credit for parallel-safe lifecycle."
+        resume_tags: ["selenium", "parallel", "webdriver"]
+        time_minutes: 6
+      - id: sel-i3
+        area: selenium
+        level: intermediate
+        question: "How do you interact with elements inside an iframe or a new browser tab?"
+        recommended_answer: "For iframes, switch with driver.switchTo().frame(...) and back with defaultContent(); for tabs/windows, capture window handles and switchTo().window(handle). Always switch back after interacting."
+        key_points: ["switchTo().frame / window", "window handles", "switch back"]
+        strong_signals: ["remembers to switch back to default content", "handles multiple handles set"]
+        weak_signals: ["forgets context switching, gets NoSuchElement"]
+        red_flags: ["cannot explain why element is not found in iframe"]
+        follow_ups:
+          - question: "How do you return focus to the main document from a nested frame?"
+            recommended_answer: "Use switchTo().defaultContent() to jump to the top, or switchTo().parentFrame() to move up one level."
+        score_guidance: "Credit for correct context handling."
+        resume_tags: ["selenium", "iframe", "windows"]
+        time_minutes: 5
+      - id: sel-a1
+        area: selenium
+        level: advanced
+        question: "Design a resilient wait/synchronization utility for a framework used by many teams."
+        recommended_answer: "Wrap WebDriverWait with configurable timeout/polling, expose intent-based methods (waitClickable, waitVisible), ignore transient exceptions (StaleElement), log context on timeout, and keep it stateless/thread-safe."
+        key_points: ["configurable, intent-based API", "ignore transient exceptions", "diagnostic logging on timeout"]
+        strong_signals: ["handles StaleElementReferenceException retry", "adds screenshot/log on failure"]
+        weak_signals: ["hardcoded timeouts only"]
+        red_flags: ["catches and hides all exceptions"]
+        follow_ups:
+          - question: "How do you handle StaleElementReferenceException robustly?"
+            recommended_answer: "Re-find the element inside the wait/polling loop rather than caching the reference, so each poll re-locates a fresh element."
+        score_guidance: "Credit for a reusable, diagnosable design."
+        resume_tags: ["selenium", "framework", "waits"]
+        time_minutes: 8
+      - id: sel-a2
+        area: selenium
+        level: advanced
+        question: "A UI suite is 15% flaky. How do you systematically drive it toward reliable?"
+        recommended_answer: "Quantify and categorize failures, fix synchronization root causes, isolate test data and state, stabilize environment, quarantine truly flaky tests, and track flakiness as a metric over time rather than blanket-retrying."
+        key_points: ["measure/categorize", "fix sync + data isolation", "quarantine + track metric"]
+        strong_signals: ["treats flakiness as a first-class metric", "data/state isolation"]
+        weak_signals: ["just enables retries"]
+        red_flags: ["deletes failing tests to make suite green"]
+        follow_ups:
+          - question: "When is a retry acceptable?"
+            recommended_answer: "As a temporary safety net for known-external instability while the root cause is being fixed — never as the permanent solution, and always with visibility into retry rates."
+        score_guidance: "Credit for a measurable, root-cause program."
+        resume_tags: ["selenium", "flaky", "reliability"]
+        time_minutes: 8
+      - id: sel-a3
+        area: selenium
+        level: advanced
+        question: "How would you structure a Selenium framework to support web plus future mobile with minimal duplication?"
+        recommended_answer: "Layer the framework: driver/session abstraction, page/screen objects behind interfaces, shared business flows, and platform-specific implementations selected by config. Appium's WebDriver protocol lets much tooling be reused."
+        key_points: ["driver abstraction layer", "interface-based pages", "config-selected implementations"]
+        strong_signals: ["separates business flows from platform", "mentions Appium protocol reuse"]
+        weak_signals: ["copies the whole framework per platform"]
+        red_flags: ["platform-specific logic leaks into tests"]
+        follow_ups:
+          - question: "What stays common between Selenium and Appium layers?"
+            recommended_answer: "Waits/utilities, reporting, test data, business-flow orchestration, and the WebDriver-style API; only locators and driver setup are platform-specific."
+        score_guidance: "Credit for a layered, extensible design."
+        resume_tags: ["selenium", "appium", "framework"]
+        time_minutes: 8
+
+  testng:
+    label: "TestNG"
+    core: true
+    questions:
+      - id: tng-b1
+        area: testng
+        level: basic
+        question: "What are the common TestNG annotations and their order of execution?"
+        recommended_answer: "@BeforeSuite/Test/Class/Method and their After counterparts wrap @Test methods. Order: BeforeSuite > BeforeTest > BeforeClass > BeforeMethod > Test > AfterMethod ... AfterSuite."
+        key_points: ["lifecycle annotations", "scope hierarchy", "setup/teardown placement"]
+        strong_signals: ["correct nesting order", "knows @BeforeMethod runs per test"]
+        weak_signals: ["confuses class vs method scope"]
+        red_flags: ["puts per-test setup in @BeforeClass causing state bleed"]
+        follow_ups:
+          - question: "Where do you put per-test data setup?"
+            recommended_answer: "In @BeforeMethod so each test gets a fresh, isolated state; @BeforeClass is for expensive one-time setup shared safely across tests."
+        score_guidance: "Credit for correct scope reasoning."
+        resume_tags: ["testng"]
+        time_minutes: 4
+      - id: tng-b2
+        area: testng
+        level: basic
+        question: "How do groups and priorities work in TestNG?"
+        recommended_answer: "Groups tag tests for selective inclusion/exclusion in the suite XML; priority orders @Test methods (lower runs first). Groups enable smoke/regression slicing without code changes."
+        key_points: ["groups for selection", "priority for ordering", "suite XML control"]
+        strong_signals: ["uses groups for smoke/regression", "avoids over-relying on priority"]
+        weak_signals: ["orders tests via priority to create dependencies"]
+        red_flags: ["tests depend on execution order implicitly"]
+        follow_ups:
+          - question: "Why avoid inter-test ordering dependencies?"
+            recommended_answer: "They make tests fragile and non-parallelizable; each test should set up its own state and pass independently."
+        score_guidance: "Credit for independence awareness."
+        resume_tags: ["testng", "groups"]
+        time_minutes: 4
+      - id: tng-b3
+        area: testng
+        level: basic
+        question: "What is a DataProvider and when do you use it?"
+        recommended_answer: "A DataProvider supplies multiple data sets to a single @Test, enabling data-driven testing; the test runs once per row returned."
+        key_points: ["data-driven", "one test, many inputs", "returns Object[][] or Iterator"]
+        strong_signals: ["externalizes data", "combines with parallel data providers"]
+        weak_signals: ["copies the test per input"]
+        red_flags: ["hardcodes many near-identical tests"]
+        follow_ups:
+          - question: "How do you run a DataProvider's rows in parallel?"
+            recommended_answer: "Set parallel=true on the @DataProvider annotation so rows execute concurrently (ensure the test is thread-safe)."
+        score_guidance: "Credit for data-driven understanding."
+        resume_tags: ["testng", "dataprovider"]
+        time_minutes: 4
+      - id: tng-i1
+        area: testng
+        level: intermediate
+        question: "How do you configure parallel execution in TestNG and what must you watch for?"
+        recommended_answer: "Set parallel (methods/tests/classes) and thread-count in the suite XML. You must ensure thread safety: per-thread drivers, no shared mutable state, and isolated test data."
+        key_points: ["parallel + thread-count", "thread safety", "ThreadLocal driver"]
+        strong_signals: ["ties parallelism to ThreadLocal driver", "isolates data"]
+        weak_signals: ["enables parallel without thread-safety changes"]
+        red_flags: ["shared statics cause random failures"]
+        follow_ups:
+          - question: "What's the difference between parallel='methods' and 'classes'?"
+            recommended_answer: "'methods' runs individual @Test methods concurrently; 'classes' runs each class in its own thread but methods within a class sequentially."
+        score_guidance: "Credit for parallel + safety linkage."
+        resume_tags: ["testng", "parallel"]
+        time_minutes: 6
+      - id: tng-i2
+        area: testng
+        level: intermediate
+        question: "How do you implement retry logic for genuinely flaky tests in TestNG?"
+        recommended_answer: "Implement IRetryAnalyzer to retry failed tests up to N times, attach via annotation or IAnnotationTransformer globally, and track retry counts so flakiness stays visible rather than hidden."
+        key_points: ["IRetryAnalyzer", "global via IAnnotationTransformer", "keep flakiness visible"]
+        strong_signals: ["logs retries as a metric", "uses retry as temporary"]
+        weak_signals: ["blanket retry to force green"]
+        red_flags: ["retries mask real product bugs"]
+        follow_ups:
+          - question: "How do you apply a retry analyzer to all tests without editing each?"
+            recommended_answer: "Use an IAnnotationTransformer listener to set the retry analyzer on every @Test at runtime."
+        score_guidance: "Credit for controlled, visible retries."
+        resume_tags: ["testng", "retry", "listeners"]
+        time_minutes: 6
+      - id: tng-i3
+        area: testng
+        level: intermediate
+        question: "How do TestNG listeners help build reporting and diagnostics?"
+        recommended_answer: "ITestListener/ISuiteListener hook lifecycle events (onTestFailure, etc.) to capture screenshots, logs, and feed reporters like ExtentReports without cluttering test code."
+        key_points: ["ITestListener hooks", "screenshot on failure", "decouples reporting"]
+        strong_signals: ["captures artifacts on failure", "central reporting"]
+        weak_signals: ["reporting logic copied into every test"]
+        red_flags: ["no failure diagnostics captured"]
+        follow_ups:
+          - question: "Which listener method captures a screenshot on failure?"
+            recommended_answer: "onTestFailure(ITestResult) in an ITestListener implementation."
+        score_guidance: "Credit for decoupled diagnostics."
+        resume_tags: ["testng", "listeners", "reporting"]
+        time_minutes: 5
+      - id: tng-a1
+        area: testng
+        level: advanced
+        question: "How would you design dependency and ordering handling for a large TestNG suite?"
+        recommended_answer: "Minimize dependencies; where necessary use dependsOnMethods/Groups for setup gating, keep tests independent for parallelism, and prefer setup fixtures over test-to-test coupling."
+        key_points: ["minimize dependencies", "dependsOnGroups for gating", "independence for parallelism"]
+        strong_signals: ["treats dependencies as last resort", "keeps suite parallelizable"]
+        weak_signals: ["heavy dependsOn chains"]
+        red_flags: ["suite only passes when run in one exact order"]
+        follow_ups:
+          - question: "What is the downside of dependsOnMethods at scale?"
+            recommended_answer: "It serializes execution and creates cascading skips; a single upstream failure skips many tests and blocks parallelism."
+        score_guidance: "Credit for scalable, independent design."
+        resume_tags: ["testng", "design"]
+        time_minutes: 7
+      - id: tng-a2
+        area: testng
+        level: advanced
+        question: "How do you integrate TestNG with a data-driven, environment-parameterized pipeline?"
+        recommended_answer: "Parameterize via suite XML @Parameters or external config, drive data with DataProviders sourced from files/DB, and select suites/groups per environment in CI to run the right slice."
+        key_points: ["@Parameters + external config", "external data source", "env-based suite selection"]
+        strong_signals: ["separates config from code", "CI selects groups per env"]
+        weak_signals: ["hardcodes environment values"]
+        red_flags: ["credentials hardcoded in suite XML"]
+        follow_ups:
+          - question: "How do you keep environment secrets out of the suite XML?"
+            recommended_answer: "Inject them via environment variables or a secrets manager at runtime; never commit secrets to XML or code."
+        score_guidance: "Credit for config/secret separation."
+        resume_tags: ["testng", "cicd", "data-driven"]
+        time_minutes: 7
+      - id: tng-a3
+        area: testng
+        level: advanced
+        question: "Compare TestNG and JUnit 5 for a senior automation framework decision."
+        recommended_answer: "Both support parameterization, parallelism, and lifecycle hooks. TestNG has mature suite XML, groups, and built-in data providers; JUnit 5 has extensions and a modern module model. Choose by team familiarity, ecosystem, and parallel/data needs."
+        key_points: ["feature parity in essentials", "TestNG suite/groups vs JUnit extensions", "decision by context"]
+        strong_signals: ["balanced, context-driven choice", "no dogma"]
+        weak_signals: ["picks one purely by habit"]
+        red_flags: ["cannot name any real difference"]
+        follow_ups:
+          - question: "What TestNG feature is hardest to replicate in JUnit?"
+            recommended_answer: "Rich suite-level configuration with groups and flexible parallel policies via suite XML, though JUnit 5 narrows the gap with tags and extensions."
+        score_guidance: "Credit for a reasoned, non-dogmatic comparison."
+        resume_tags: ["testng", "junit"]
+        time_minutes: 6
+
+  cucumber:
+    label: "Cucumber / BDD"
+    core: true
+    questions:
+      - id: cuc-b1
+        area: cucumber
+        level: basic
+        question: "What is Gherkin and how do Given/When/Then map to a test?"
+        recommended_answer: "Gherkin is a business-readable DSL. Given sets context/preconditions, When performs the action, Then asserts the outcome. Steps bind to step-definition methods."
+        key_points: ["business-readable DSL", "Given/When/Then roles", "step bindings"]
+        strong_signals: ["keeps steps declarative", "one behavior per scenario"]
+        weak_signals: ["writes UI-click steps in Gherkin"]
+        red_flags: ["scenarios describe implementation, not behavior"]
+        follow_ups:
+          - question: "Should Gherkin describe clicks or behavior?"
+            recommended_answer: "Behavior/intent ('When the user submits a valid order'), not low-level clicks; implementation lives in step definitions."
+        score_guidance: "Credit for behavior-focused Gherkin."
+        resume_tags: ["cucumber", "bdd", "gherkin"]
+        time_minutes: 4
+      - id: cuc-b2
+        area: cucumber
+        level: basic
+        question: "What are step definitions and how do you avoid duplicating them?"
+        recommended_answer: "Step definitions are methods bound to Gherkin steps via regex/expressions. Avoid duplication by parameterizing steps and reusing common steps across features."
+        key_points: ["regex/cucumber expressions", "parameterization", "reuse"]
+        strong_signals: ["parameterized reusable steps", "no near-duplicate steps"]
+        weak_signals: ["one step def per literal sentence"]
+        red_flags: ["copy-pasted step defs everywhere"]
+        follow_ups:
+          - question: "How do Cucumber expressions simplify step matching?"
+            recommended_answer: "They provide typed placeholders like {int}/{string} that are more readable than raw regex while still parameterizing steps."
+        score_guidance: "Credit for reuse via parameterization."
+        resume_tags: ["cucumber", "bdd"]
+        time_minutes: 4
+      - id: cuc-b3
+        area: cucumber
+        level: basic
+        question: "What is a Scenario Outline and when do you use it?"
+        recommended_answer: "A Scenario Outline runs the same scenario for multiple Examples rows, enabling data-driven BDD without duplicating scenarios."
+        key_points: ["Examples table", "data-driven scenarios", "reduce duplication"]
+        strong_signals: ["uses outlines for equivalence sets", "meaningful example data"]
+        weak_signals: ["duplicates scenarios instead"]
+        red_flags: ["huge example tables testing everything in one scenario"]
+        follow_ups:
+          - question: "How do placeholders in an Outline connect to Examples?"
+            recommended_answer: "Angle-bracket placeholders like <email> are substituted by the matching column header in each Examples row."
+        score_guidance: "Credit for correct data-driven use."
+        resume_tags: ["cucumber", "bdd"]
+        time_minutes: 4
+      - id: cuc-i1
+        area: cucumber
+        level: intermediate
+        question: "How do hooks and tags control Cucumber execution?"
+        recommended_answer: "@Before/@After hooks run setup/teardown around scenarios (optionally tag-scoped); tags select subsets (@smoke) via runner filters, enabling targeted runs and conditional setup."
+        key_points: ["hooks lifecycle", "tag-scoped hooks", "tag filtering in runner"]
+        strong_signals: ["tag-scoped hooks", "smoke/regression tag strategy"]
+        weak_signals: ["global setup regardless of scenario"]
+        red_flags: ["setup logic duplicated across steps"]
+        follow_ups:
+          - question: "How do you run only @smoke scenarios?"
+            recommended_answer: "Pass a tag filter (e.g. --tags @smoke or in the runner's tags option) so only tagged scenarios execute."
+        score_guidance: "Credit for hooks + tag strategy."
+        resume_tags: ["cucumber", "hooks", "tags"]
+        time_minutes: 6
+      - id: cuc-i2
+        area: cucumber
+        level: intermediate
+        question: "How do you share state between steps safely, especially in parallel?"
+        recommended_answer: "Use dependency injection (PicoContainer/Spring) to share a scenario-scoped context object between step classes; avoid static state so parallel scenarios stay isolated."
+        key_points: ["DI-based scenario scope", "no static shared state", "parallel isolation"]
+        strong_signals: ["mentions PicoContainer/scenario scope", "thread isolation"]
+        weak_signals: ["shares data via static fields"]
+        red_flags: ["global mutable state across scenarios"]
+        follow_ups:
+          - question: "Why is static state dangerous for parallel Cucumber runs?"
+            recommended_answer: "Parallel scenarios would read/write the same static fields, cross-contaminating data and causing flaky, order-dependent results."
+        score_guidance: "Credit for DI-based isolation."
+        resume_tags: ["cucumber", "di", "parallel"]
+        time_minutes: 6
+      - id: cuc-i3
+        area: cucumber
+        level: intermediate
+        question: "How do you keep a BDD suite maintainable as features grow?"
+        recommended_answer: "Keep scenarios behavior-focused and few-per-feature, reuse parameterized steps, organize features by domain, avoid UI detail in Gherkin, and review living documentation with stakeholders."
+        key_points: ["behavior focus", "reusable steps", "domain organization"]
+        strong_signals: ["treats features as living docs", "controls scenario sprawl"]
+        weak_signals: ["Gherkin as a scripting language"]
+        red_flags: ["thousands of brittle UI-detailed scenarios"]
+        follow_ups:
+          - question: "What is a sign BDD is being misused?"
+            recommended_answer: "When Gherkin encodes clicks/technical steps and no business stakeholder can read it — it's just a verbose scripting layer at that point."
+        score_guidance: "Credit for sustainable BDD practices."
+        resume_tags: ["cucumber", "bdd", "maintainability"]
+        time_minutes: 5
+      - id: cuc-a1
+        area: cucumber
+        level: advanced
+        question: "Design parallel execution for a large Cucumber suite."
+        recommended_answer: "Run scenarios in parallel (JUnit5 or TestNG runner / cucumber-jvm parallel), ensure per-thread drivers and DI-scoped state, partition by tags, and aggregate reports across threads."
+        key_points: ["parallel runner config", "per-thread driver + DI scope", "tag partitioning + report merge"]
+        strong_signals: ["addresses report aggregation", "scenario-level parallelism"]
+        weak_signals: ["only feature-level parallelism"]
+        red_flags: ["parallel without isolating driver/state"]
+        follow_ups:
+          - question: "How do you merge reports from parallel threads?"
+            recommended_answer: "Collect each thread's JSON output and merge with a reporting plugin (e.g., cucumber reporting / Allure) into a single consolidated report."
+        score_guidance: "Credit for end-to-end parallel design."
+        resume_tags: ["cucumber", "parallel", "reporting"]
+        time_minutes: 8
+      - id: cuc-a2
+        area: cucumber
+        level: advanced
+        question: "How do you integrate BDD living documentation into the delivery process?"
+        recommended_answer: "Treat features as executable specs co-authored with product, keep them versioned with code, publish reports/living docs from CI, and use tags to link scenarios to requirements/acceptance criteria."
+        key_points: ["co-authored specs", "versioned with code", "CI-published living docs"]
+        strong_signals: ["three-amigos process", "requirement traceability via tags"]
+        weak_signals: ["BDD written after code by QA alone"]
+        red_flags: ["features never read by product"]
+        follow_ups:
+          - question: "What is the 'three amigos' practice?"
+            recommended_answer: "Product, dev, and test collaboratively define scenarios before implementation to align on behavior and edge cases."
+        score_guidance: "Credit for process integration."
+        resume_tags: ["cucumber", "bdd", "process"]
+        time_minutes: 6
+      - id: cuc-a3
+        area: cucumber
+        level: advanced
+        question: "When would you argue against using Cucumber/BDD?"
+        recommended_answer: "When there's no business-stakeholder audience for the scenarios, the team only wants a test harness, or the abstraction adds maintenance cost without collaboration value — plain JUnit/TestNG may be simpler."
+        key_points: ["needs stakeholder audience", "abstraction cost", "use the simplest effective tool"]
+        strong_signals: ["pragmatic, avoids cargo-cult BDD"]
+        weak_signals: ["insists BDD is always best"]
+        red_flags: ["cannot articulate any downside"]
+        follow_ups:
+          - question: "What's the main hidden cost of BDD?"
+            recommended_answer: "The extra glue/step-definition and Gherkin maintenance layer, which only pays off when non-technical stakeholders actually engage with the scenarios."
+        score_guidance: "Credit for critical, pragmatic judgment."
+        resume_tags: ["cucumber", "bdd"]
+        time_minutes: 6
+
+  rest_assured:
+    label: "REST Assured / API automation"
+    core: true
+    questions:
+      - id: api-b1
+        area: rest_assured
+        level: basic
+        question: "Describe the given/when/then structure of a REST Assured test."
+        recommended_answer: "given() sets request spec (headers, auth, body/params), when() issues the HTTP method, then() asserts status, headers, and body. It reads as a clear request/response contract."
+        key_points: ["request spec / action / assertion", "status + body validation", "readable structure"]
+        strong_signals: ["validates status and payload", "uses specs for reuse"]
+        weak_signals: ["only checks status code"]
+        red_flags: ["no assertions on response body"]
+        follow_ups:
+          - question: "What should you always assert beyond the status code?"
+            recommended_answer: "Key response body fields and critical headers/schema, since a 200 can still return wrong or malformed data."
+        score_guidance: "Credit for full response validation."
+        resume_tags: ["rest assured", "api", "rest"]
+        time_minutes: 4
+      - id: api-b2
+        area: rest_assured
+        level: basic
+        question: "How do you validate a JSON response body in REST Assured?"
+        recommended_answer: "Use body() with JsonPath expressions (or hamcrest matchers) to assert fields, or deserialize to a POJO and assert on objects; JSON schema validation covers structure."
+        key_points: ["JsonPath / matchers", "POJO deserialization", "schema validation"]
+        strong_signals: ["mentions schema validation", "POJO mapping for complex bodies"]
+        weak_signals: ["string-contains checks on raw JSON"]
+        red_flags: ["asserts by substring matching"]
+        follow_ups:
+          - question: "When is JSON schema validation better than field asserts?"
+            recommended_answer: "When you care about the overall contract/structure and types across many fields rather than a few specific values."
+        score_guidance: "Credit for structured validation."
+        resume_tags: ["rest assured", "json", "api"]
+        time_minutes: 4
+      - id: api-b3
+        area: rest_assured
+        level: basic
+        question: "How do you handle authentication (e.g., bearer token) in API tests?"
+        recommended_answer: "Obtain a token via an auth call or config, set it in the Authorization header (or use auth().oauth2()), and centralize it in a request spec so tests don't repeat auth setup."
+        key_points: ["Authorization header / oauth2", "token acquisition", "centralize in spec"]
+        strong_signals: ["reuses auth via RequestSpecification", "keeps secrets out of code"]
+        weak_signals: ["hardcodes tokens in each test"]
+        red_flags: ["commits real tokens/credentials"]
+        follow_ups:
+          - question: "Where should API credentials come from?"
+            recommended_answer: "From environment variables or a secrets manager at runtime — never hardcoded or committed."
+        score_guidance: "Credit for reusable, secure auth."
+        resume_tags: ["rest assured", "auth", "api"]
+        time_minutes: 4
+      - id: api-i1
+        area: rest_assured
+        level: intermediate
+        question: "How do you chain API calls (use one response to drive the next)?"
+        recommended_answer: "Extract values from the first response via extract().path(...), store them, and inject into the next request. This models real workflows (create -> read -> update -> delete)."
+        key_points: ["extract().path()", "pass data between calls", "workflow modeling"]
+        strong_signals: ["builds CRUD workflows", "cleans up created data"]
+        weak_signals: ["independent calls only, no chaining"]
+        red_flags: ["leaves test data behind every run"]
+        follow_ups:
+          - question: "How do you avoid polluting the system with test data across chained calls?"
+            recommended_answer: "Clean up in teardown (delete created resources) or use disposable/isolated test data and environments."
+        score_guidance: "Credit for realistic chained workflows."
+        resume_tags: ["rest assured", "api", "workflow"]
+        time_minutes: 6
+      - id: api-i2
+        area: rest_assured
+        level: intermediate
+        question: "How do you use request/response specifications to reduce duplication?"
+        recommended_answer: "Define a RequestSpecification (base URI, headers, auth) and ResponseSpecification (common status/time assertions) once and reuse across tests via given(spec)/then(spec)."
+        key_points: ["RequestSpecification reuse", "ResponseSpecification reuse", "DRY config"]
+        strong_signals: ["central base config", "common response checks factored out"]
+        weak_signals: ["repeats base URI/headers in every test"]
+        red_flags: ["no reuse, heavy duplication"]
+        follow_ups:
+          - question: "What belongs in a ResponseSpecification?"
+            recommended_answer: "Assertions common to many endpoints — e.g., expected content type, max response time, and baseline status expectations."
+        score_guidance: "Credit for spec-based reuse."
+        resume_tags: ["rest assured", "api", "specification"]
+        time_minutes: 5
+      - id: api-i3
+        area: rest_assured
+        level: intermediate
+        question: "How do you test negative and edge cases for an API?"
+        recommended_answer: "Cover invalid inputs, missing/wrong auth, boundary values, and error codes; assert error status, error body/schema, and that the system fails safely without leaking internals."
+        key_points: ["invalid input + auth cases", "boundary values", "assert error contracts"]
+        strong_signals: ["checks error schema, not just code", "boundary thinking"]
+        weak_signals: ["only happy-path tests"]
+        red_flags: ["never tests auth or error responses"]
+        follow_ups:
+          - question: "What should a good API error response include?"
+            recommended_answer: "A correct status code plus a consistent error body (code/message) without leaking stack traces or sensitive internals."
+        score_guidance: "Credit for negative/edge coverage."
+        resume_tags: ["rest assured", "api", "negative testing"]
+        time_minutes: 6
+      - id: api-a1
+        area: rest_assured
+        level: advanced
+        question: "Design an API test layer that is maintainable and CI-friendly."
+        recommended_answer: "Separate endpoint clients (services), data models (POJOs), specs, and tests; drive base URLs/creds from config per environment; parallelize independent tests; and produce machine-readable reports for CI."
+        key_points: ["service/model/spec/test layering", "env config", "parallel + CI reporting"]
+        strong_signals: ["clear layering + env strategy", "parallel-safe design"]
+        weak_signals: ["one giant test class"]
+        red_flags: ["environment values hardcoded across tests"]
+        follow_ups:
+          - question: "How do you switch environments cleanly?"
+            recommended_answer: "Externalize base URI/creds into per-environment config selected by a system property/env var; tests read the resolved config, no code changes needed."
+        score_guidance: "Credit for a layered, configurable design."
+        resume_tags: ["rest assured", "api", "framework"]
+        time_minutes: 8
+      - id: api-a2
+        area: rest_assured
+        level: advanced
+        question: "How do you validate a complex API contract and detect breaking changes?"
+        recommended_answer: "Use JSON schema / contract tests (e.g., Pact for consumer-driven contracts) versioned with code and run in CI; fail the build when the response contract diverges from the agreed schema."
+        key_points: ["schema/contract testing", "consumer-driven contracts", "CI gate on breakage"]
+        strong_signals: ["mentions Pact/contract testing", "versioned schemas"]
+        weak_signals: ["manual field checks only"]
+        red_flags: ["no contract safety net"]
+        follow_ups:
+          - question: "What problem do consumer-driven contracts solve?"
+            recommended_answer: "They ensure a provider doesn't break its consumers by validating the provider against the exact expectations each consumer depends on."
+        score_guidance: "Credit for contract-testing awareness."
+        resume_tags: ["rest assured", "api", "contract testing"]
+        time_minutes: 8
+      - id: api-a3
+        area: rest_assured
+        level: advanced
+        question: "How would you approach performance-sensitive API assertions within a functional suite?"
+        recommended_answer: "Add lightweight response-time assertions/thresholds for critical endpoints, but keep true load testing separate (JMeter/Gatling); functional tests validate correctness plus coarse latency budgets."
+        key_points: ["coarse latency budgets in functional", "separate real load testing", "critical endpoints only"]
+        strong_signals: ["separates functional vs load concerns", "sets thresholds thoughtfully"]
+        weak_signals: ["treats functional suite as load test"]
+        red_flags: ["flaky time assertions on every test"]
+        follow_ups:
+          - question: "Why not run load tests inside the functional suite?"
+            recommended_answer: "Load testing needs controlled environments, ramp profiles, and isolation; mixing it makes functional tests slow and flaky and gives unreliable performance data."
+        score_guidance: "Credit for correct separation of concerns."
+        resume_tags: ["rest assured", "api", "performance"]
+        time_minutes: 7
+
+  sql_oracle:
+    label: "SQL / Oracle"
+    core: true
+    questions:
+      - id: sql-b1
+        area: sql_oracle
+        level: basic
+        question: "Explain INNER JOIN vs LEFT JOIN with a testing example."
+        recommended_answer: "INNER JOIN returns only matching rows in both tables; LEFT JOIN returns all left rows plus matches (NULLs where none). For test validation, LEFT JOIN helps find records missing a related row."
+        key_points: ["match-only vs all-left", "NULLs for non-matches", "use to find missing relations"]
+        strong_signals: ["gives a data-validation use case", "knows NULL behavior"]
+        weak_signals: ["confuses which side is preserved"]
+        red_flags: ["cannot write a basic join"]
+        follow_ups:
+          - question: "How do you find left rows with no match?"
+            recommended_answer: "LEFT JOIN then filter WHERE right_table.key IS NULL."
+        score_guidance: "Credit for correct join semantics + example."
+        resume_tags: ["sql", "oracle", "joins"]
+        time_minutes: 4
+      - id: sql-b2
+        area: sql_oracle
+        level: basic
+        question: "What is the difference between WHERE and HAVING?"
+        recommended_answer: "WHERE filters rows before aggregation; HAVING filters groups after GROUP BY aggregation. Use HAVING for conditions on aggregate values like COUNT/SUM."
+        key_points: ["pre- vs post-aggregation", "HAVING for aggregates", "GROUP BY interaction"]
+        strong_signals: ["correctly places aggregate filters", "clear ordering understanding"]
+        weak_signals: ["uses HAVING where WHERE suffices"]
+        red_flags: ["cannot aggregate at all"]
+        follow_ups:
+          - question: "Can you use an aggregate in WHERE?"
+            recommended_answer: "No — aggregates aren't available at WHERE time; you must use HAVING (or a subquery) for conditions on aggregated values."
+        score_guidance: "Credit for correct filtering stages."
+        resume_tags: ["sql", "aggregation"]
+        time_minutes: 4
+      - id: sql-b3
+        area: sql_oracle
+        level: basic
+        question: "How do you remove duplicates and count distinct values?"
+        recommended_answer: "SELECT DISTINCT removes duplicate rows; COUNT(DISTINCT col) counts unique values. GROUP BY can also collapse duplicates while aggregating."
+        key_points: ["DISTINCT", "COUNT(DISTINCT ...)", "GROUP BY alternative"]
+        strong_signals: ["knows DISTINCT vs GROUP BY trade-offs"]
+        weak_signals: ["confuses COUNT(*) and COUNT(DISTINCT)"]
+        red_flags: ["deduplicates in application code unnecessarily"]
+        follow_ups:
+          - question: "Difference between COUNT(*) and COUNT(col)?"
+            recommended_answer: "COUNT(*) counts all rows; COUNT(col) counts rows where col is non-NULL."
+        score_guidance: "Credit for distinct/aggregate correctness."
+        resume_tags: ["sql", "distinct"]
+        time_minutes: 3
+      - id: sql-i1
+        area: sql_oracle
+        level: intermediate
+        question: "Write logic to fetch the latest record per group (e.g., latest order per customer)."
+        recommended_answer: "Use a window function: ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date DESC) and filter rn = 1; or a correlated subquery on MAX(order_date)."
+        key_points: ["ROW_NUMBER + PARTITION BY", "filter rn=1", "correlated subquery alternative"]
+        strong_signals: ["reaches for window functions", "handles ties deliberately"]
+        weak_signals: ["only GROUP BY MAX losing other columns"]
+        red_flags: ["cannot retrieve full latest row"]
+        follow_ups:
+          - question: "Why is GROUP BY MAX(date) alone often insufficient?"
+            recommended_answer: "It gives the max date but not the other columns of that specific row; you need a window function or join back to recover the full record."
+        score_guidance: "Credit for window-function fluency."
+        resume_tags: ["sql", "oracle", "window functions"]
+        time_minutes: 6
+      - id: sql-i2
+        area: sql_oracle
+        level: intermediate
+        question: "How do subqueries and CTEs differ, and when do you prefer a CTE?"
+        recommended_answer: "Both nest queries; a CTE (WITH) is named and reusable within the statement, improving readability and enabling recursion. Prefer CTEs for complex, multi-step logic."
+        key_points: ["named/reusable CTE", "readability", "recursion support"]
+        strong_signals: ["uses CTEs for clarity", "knows recursive CTEs"]
+        weak_signals: ["deeply nested unreadable subqueries"]
+        red_flags: ["cannot structure multi-step queries"]
+        follow_ups:
+          - question: "Give a use for a recursive CTE."
+            recommended_answer: "Traversing hierarchies like an org chart or category tree (parent-child relationships) to arbitrary depth."
+        score_guidance: "Credit for readability + recursion awareness."
+        resume_tags: ["sql", "cte"]
+        time_minutes: 5
+      - id: sql-i3
+        area: sql_oracle
+        level: intermediate
+        question: "How do you validate data integrity between two systems using SQL?"
+        recommended_answer: "Compare row counts, use EXCEPT/MINUS to find rows in one not the other, checksum/hash key columns, and reconcile on business keys — automating these as data-quality tests."
+        key_points: ["counts + MINUS/EXCEPT", "hash/checksum comparison", "reconcile on business key"]
+        strong_signals: ["automates reconciliation", "uses set operators"]
+        weak_signals: ["eyeballs samples only"]
+        red_flags: ["no systematic comparison"]
+        follow_ups:
+          - question: "What does Oracle's MINUS operator do?"
+            recommended_answer: "Returns rows from the first query not present in the second — useful to detect missing/extra records between datasets."
+        score_guidance: "Credit for systematic data validation."
+        resume_tags: ["sql", "oracle", "data validation"]
+        time_minutes: 6
+      - id: sql-a1
+        area: sql_oracle
+        level: advanced
+        question: "A validation query runs slowly. How do you diagnose and optimize it?"
+        recommended_answer: "Read the execution plan (EXPLAIN PLAN/autotrace), look for full scans on large tables and missing indexes, check SARGable predicates, reduce returned columns/rows, and add/adjust indexes or rewrite joins; re-measure."
+        key_points: ["execution plan analysis", "indexes + SARGable predicates", "measure before/after"]
+        strong_signals: ["reads plans", "knows functions on columns kill index use"]
+        weak_signals: ["adds indexes blindly"]
+        red_flags: ["no plan analysis at all"]
+        follow_ups:
+          - question: "Why can wrapping a column in a function disable an index?"
+            recommended_answer: "The predicate is no longer SARGable — the DB can't use the plain-column index; a function-based index or rewriting the predicate is needed."
+        score_guidance: "Credit for plan-driven optimization."
+        resume_tags: ["sql", "oracle", "performance", "tuning"]
+        time_minutes: 8
+      - id: sql-a2
+        area: sql_oracle
+        level: advanced
+        question: "How do transactions and isolation levels affect test data reliability?"
+        recommended_answer: "Isolation levels control visibility of concurrent changes (dirty/non-repeatable/phantom reads). Tests must control commit/rollback and understand isolation to avoid seeing partial or stale data; often use transaction rollback to reset state."
+        key_points: ["isolation phenomena", "commit/rollback control", "rollback for test reset"]
+        strong_signals: ["uses rollback to isolate tests", "knows read phenomena"]
+        weak_signals: ["ignores transaction boundaries"]
+        red_flags: ["tests depend on uncommitted data"]
+        follow_ups:
+          - question: "How can transaction rollback help test isolation?"
+            recommended_answer: "Run a test inside a transaction and roll back at teardown so the database returns to its original state without manual cleanup."
+        score_guidance: "Credit for transaction/isolation understanding."
+        resume_tags: ["sql", "oracle", "transactions"]
+        time_minutes: 7
+      - id: sql-a3
+        area: sql_oracle
+        level: advanced
+        question: "How would you automate large-scale data comparison in an ETL/regression context?"
+        recommended_answer: "Parameterize source/target queries, compare aggregates and row-level hashes in batches, store results, flag mismatches with keys, and integrate into CI with thresholds — avoiding pulling entire tables into memory."
+        key_points: ["batch/hash comparison", "keyed mismatch reporting", "CI integration + memory awareness"]
+        strong_signals: ["scales via hashing/batching", "reports actionable diffs"]
+        weak_signals: ["loads whole tables to compare"]
+        red_flags: ["manual, non-repeatable comparisons"]
+        follow_ups:
+          - question: "Why hash columns instead of comparing raw values across millions of rows?"
+            recommended_answer: "Hashing reduces transfer/compare cost and lets you detect any change per row cheaply; you only drill into raw values for the rows whose hashes differ."
+        score_guidance: "Credit for scalable ETL validation."
+        resume_tags: ["sql", "etl", "data validation"]
+        time_minutes: 7
+
+  framework_design:
+    label: "Framework design"
+    core: true
+    questions:
+      - id: fw-b1
+        area: framework_design
+        level: basic
+        question: "What are the core layers of a well-structured automation framework?"
+        recommended_answer: "Driver/session management, page/screen or service objects, reusable utilities (waits, data, config), test layer, and reporting. Clear separation keeps tests readable and maintainable."
+        key_points: ["layering", "separation of concerns", "reuse + reporting"]
+        strong_signals: ["names layers with responsibilities", "config externalized"]
+        weak_signals: ["everything in test classes"]
+        red_flags: ["no structure, copy-paste tests"]
+        follow_ups:
+          - question: "Where does configuration belong?"
+            recommended_answer: "In externalized files/environment variables loaded by a config layer, not hardcoded in tests."
+        score_guidance: "Credit for clear layered structure."
+        resume_tags: ["framework", "architecture"]
+        time_minutes: 4
+      - id: fw-b2
+        area: framework_design
+        level: basic
+        question: "How do you manage test data in a framework?"
+        recommended_answer: "Externalize data (files/DB/builders), keep it environment-appropriate, generate or isolate per-test data to avoid collisions, and clean up. Avoid hardcoding data in tests."
+        key_points: ["externalize + isolate", "builders/factories", "cleanup"]
+        strong_signals: ["per-test isolation", "data builders"]
+        weak_signals: ["shared mutable global data"]
+        red_flags: ["hardcoded production-like data in code"]
+        follow_ups:
+          - question: "Why isolate test data per test?"
+            recommended_answer: "To avoid cross-test contamination and enable parallel execution without collisions or order dependencies."
+        score_guidance: "Credit for isolation-aware data management."
+        resume_tags: ["framework", "test data"]
+        time_minutes: 4
+      - id: fw-b3
+        area: framework_design
+        level: basic
+        question: "What makes a framework 'maintainable' in practice?"
+        recommended_answer: "Low duplication, clear naming/structure, stable locators/abstractions, good failure diagnostics, fast reliable runs, and documentation so new engineers onboard quickly."
+        key_points: ["low duplication", "diagnostics", "onboarding/docs"]
+        strong_signals: ["mentions diagnostics + onboarding", "reliability focus"]
+        weak_signals: ["equates maintainable with 'it works'"]
+        red_flags: ["no consideration for other engineers"]
+        follow_ups:
+          - question: "What single feature most helps debugging failures?"
+            recommended_answer: "Rich failure artifacts — screenshots, logs, request/response, and clear error context captured automatically on failure."
+        score_guidance: "Credit for practical maintainability factors."
+        resume_tags: ["framework", "maintainability"]
+        time_minutes: 4
+      - id: fw-i1
+        area: framework_design
+        level: intermediate
+        question: "How do you design configuration and environment management?"
+        recommended_answer: "Layered config (defaults + per-environment overrides + runtime system properties/env vars), no secrets in code, and a single config accessor tests use so switching environments requires no code changes."
+        key_points: ["layered overrides", "secrets via env/secrets manager", "single accessor"]
+        strong_signals: ["clear override precedence", "secret hygiene"]
+        weak_signals: ["environment if/else scattered in tests"]
+        red_flags: ["secrets committed to config"]
+        follow_ups:
+          - question: "What precedence do you give runtime overrides?"
+            recommended_answer: "Highest — command-line/env vars override per-environment files, which override packaged defaults."
+        score_guidance: "Credit for clean config strategy."
+        resume_tags: ["framework", "config", "environments"]
+        time_minutes: 6
+      - id: fw-i2
+        area: framework_design
+        level: intermediate
+        question: "How do you build reporting and failure diagnostics into a framework?"
+        recommended_answer: "Hook lifecycle listeners to capture screenshots/logs/request data on failure, integrate a reporter (Allure/Extent), attach artifacts, and surface a concise failure reason — all without cluttering test code."
+        key_points: ["listener-based capture", "reporter integration", "artifacts + concise reason"]
+        strong_signals: ["auto-capture on failure", "decoupled from tests"]
+        weak_signals: ["manual logging per test"]
+        red_flags: ["failures give no context"]
+        follow_ups:
+          - question: "What should be attached to a failed UI test?"
+            recommended_answer: "A screenshot at failure, the page URL/DOM snapshot if feasible, and relevant logs to reproduce and diagnose quickly."
+        score_guidance: "Credit for automatic diagnostics."
+        resume_tags: ["framework", "reporting"]
+        time_minutes: 6
+      - id: fw-i3
+        area: framework_design
+        level: intermediate
+        question: "How do you enable parallel execution safely at the framework level?"
+        recommended_answer: "Per-thread driver/context (ThreadLocal), no shared mutable state, isolated data, thread-safe utilities, and a runner configured for parallelism with merged reporting."
+        key_points: ["ThreadLocal context", "no shared state", "thread-safe utilities + report merge"]
+        strong_signals: ["designs for parallelism from the start", "cleanup per thread"]
+        weak_signals: ["bolts parallelism on later"]
+        red_flags: ["global statics shared across threads"]
+        follow_ups:
+          - question: "What is the most common cause of parallel flakiness?"
+            recommended_answer: "Shared mutable state (static drivers/data) being read/written by multiple threads simultaneously."
+        score_guidance: "Credit for parallel-safe architecture."
+        resume_tags: ["framework", "parallel"]
+        time_minutes: 6
+      - id: fw-a1
+        area: framework_design
+        level: advanced
+        question: "You inherit a slow, flaky, duplicated framework. Lay out a remediation plan."
+        recommended_answer: "Measure baseline (runtime, flake rate, coverage), quarantine flaky tests, fix synchronization/data-isolation root causes, introduce shared abstractions to cut duplication, parallelize, and track metrics over time with incremental, reviewed changes."
+        key_points: ["baseline metrics", "root-cause fixes + abstractions", "incremental + tracked"]
+        strong_signals: ["data-driven, incremental plan", "quarantine strategy"]
+        weak_signals: ["big-bang rewrite proposal"]
+        red_flags: ["delete tests to hit green"]
+        follow_ups:
+          - question: "Why prefer incremental over a full rewrite?"
+            recommended_answer: "Rewrites are high-risk, lose accumulated coverage/edge cases, and delay value; incremental refactors keep the suite useful and de-risk change."
+        score_guidance: "Credit for a measured remediation strategy."
+        resume_tags: ["framework", "refactoring", "reliability"]
+        time_minutes: 8
+      - id: fw-a2
+        area: framework_design
+        level: advanced
+        question: "How do you design a framework used by multiple teams with differing needs?"
+        recommended_answer: "Provide a stable core (drivers, utilities, reporting) with extension points and sensible defaults, document conventions, version it, and avoid team-specific hacks in the core — teams extend, not fork."
+        key_points: ["stable core + extension points", "versioning + docs", "no forks/hacks in core"]
+        strong_signals: ["treats framework as a product", "backward-compatible evolution"]
+        weak_signals: ["one team's needs hardcoded for all"]
+        red_flags: ["every team forks the framework"]
+        follow_ups:
+          - question: "How do you evolve a shared framework without breaking teams?"
+            recommended_answer: "Semantic versioning, deprecation cycles, backward-compatible additions, and changelogs/migration notes so teams upgrade on their schedule."
+        score_guidance: "Credit for product-minded platform design."
+        resume_tags: ["framework", "platform", "architecture"]
+        time_minutes: 8
+      - id: fw-a3
+        area: framework_design
+        level: advanced
+        question: "How do you balance abstraction and simplicity so a framework doesn't become over-engineered?"
+        recommended_answer: "Abstract only proven, repeated needs (rule of three), keep APIs small and discoverable, avoid speculative generality, and prefer readable straightforward code over clever indirection."
+        key_points: ["abstract proven repetition", "small discoverable API", "avoid speculative generality"]
+        strong_signals: ["cites YAGNI/rule of three", "values readability"]
+        weak_signals: ["abstracts everything up front"]
+        red_flags: ["deep indirection nobody understands"]
+        follow_ups:
+          - question: "What's a sign a framework is over-engineered?"
+            recommended_answer: "New engineers can't add a simple test without navigating many layers, or abstractions exist for cases that never occurred."
+        score_guidance: "Credit for pragmatic restraint."
+        resume_tags: ["framework", "design", "simplicity"]
+        time_minutes: 7
+
+  cicd:
+    label: "CI/CD"
+    core: true
+    questions:
+      - id: ci-b1
+        area: cicd
+        level: basic
+        question: "What is the role of CI in test automation?"
+        recommended_answer: "CI runs the build and automated tests on every change, giving fast feedback, preventing regressions from merging, and keeping the main branch releasable."
+        key_points: ["run on every change", "fast feedback", "protect main branch"]
+        strong_signals: ["ties CI to fast feedback + gates", "mentions branch protection"]
+        weak_signals: ["thinks CI is just nightly runs"]
+        red_flags: ["tests run only manually"]
+        follow_ups:
+          - question: "Why run tests on pull requests, not just after merge?"
+            recommended_answer: "To catch failures before they reach the shared branch, keeping main green and reducing costly post-merge debugging."
+        score_guidance: "Credit for feedback + gating understanding."
+        resume_tags: ["cicd", "ci"]
+        time_minutes: 4
+      - id: ci-b2
+        area: cicd
+        level: basic
+        question: "How do you structure a basic CI pipeline for a test suite?"
+        recommended_answer: "Stages: checkout, install/build, run tests (with reporting), publish artifacts/results, and gate merge on results. Keep it fast and deterministic."
+        key_points: ["checkout/build/test/report stages", "gate on results", "speed + determinism"]
+        strong_signals: ["publishes reports/artifacts", "fails fast"]
+        weak_signals: ["one monolithic step"]
+        red_flags: ["no result gating"]
+        follow_ups:
+          - question: "Why publish test reports as artifacts?"
+            recommended_answer: "So failures are diagnosable after the run without re-executing, and history/trends are visible to the team."
+        score_guidance: "Credit for a sensible pipeline shape."
+        resume_tags: ["cicd", "pipeline"]
+        time_minutes: 4
+      - id: ci-b3
+        area: cicd
+        level: basic
+        question: "How do you keep secrets out of a CI pipeline?"
+        recommended_answer: "Store secrets in the CI secrets manager / vault and inject as masked environment variables at runtime; never commit them to the repo or logs."
+        key_points: ["secrets manager", "masked env injection", "never commit/log"]
+        strong_signals: ["mentions masking + rotation", "least privilege"]
+        weak_signals: ["puts secrets in pipeline YAML"]
+        red_flags: ["hardcodes credentials in scripts"]
+        follow_ups:
+          - question: "What if a secret is accidentally printed in logs?"
+            recommended_answer: "Rotate it immediately, purge/limit log access, and add masking so it can't recur."
+        score_guidance: "Credit for secret hygiene."
+        resume_tags: ["cicd", "security", "secrets"]
+        time_minutes: 4
+      - id: ci-i1
+        area: cicd
+        level: intermediate
+        question: "How do you run automated tests in parallel and manage environments in CI?"
+        recommended_answer: "Shard tests across parallel jobs/agents, provision isolated/ephemeral environments (containers) per shard, manage data isolation, and aggregate results/reports at the end."
+        key_points: ["sharding", "ephemeral/isolated environments", "result aggregation"]
+        strong_signals: ["uses containers/ephemeral envs", "merges shard reports"]
+        weak_signals: ["all tests one job, shared env"]
+        red_flags: ["shared env causes cross-run interference"]
+        follow_ups:
+          - question: "Why ephemeral environments per run?"
+            recommended_answer: "They guarantee a clean, reproducible state and avoid contamination between runs, improving reliability."
+        score_guidance: "Credit for scalable CI execution."
+        resume_tags: ["cicd", "parallel", "docker"]
+        time_minutes: 6
+      - id: ci-i2
+        area: cicd
+        level: intermediate
+        question: "How do you handle flaky tests within a CI gate?"
+        recommended_answer: "Track flake rates, quarantine known-flaky tests out of the blocking gate while fixing them, use bounded retries with visibility, and never let flakiness silently erode trust in the gate."
+        key_points: ["measure flake rate", "quarantine + fix", "bounded, visible retries"]
+        strong_signals: ["keeps gate trustworthy", "flakiness as tracked metric"]
+        weak_signals: ["blanket retries to force green"]
+        red_flags: ["disables the gate to ship"]
+        follow_ups:
+          - question: "What is the risk of unbounded retries in CI?"
+            recommended_answer: "They hide real regressions and slow the pipeline, eroding trust while masking product bugs."
+        score_guidance: "Credit for gate integrity."
+        resume_tags: ["cicd", "flaky"]
+        time_minutes: 6
+      - id: ci-i3
+        area: cicd
+        level: intermediate
+        question: "How do you decide which tests run at which pipeline stage?"
+        recommended_answer: "Run fast unit/smoke on every PR for quick feedback, broader integration/regression on merge or nightly, and full/slow suites on schedule or pre-release — balancing speed vs coverage."
+        key_points: ["fast on PR", "broader on merge/nightly", "speed/coverage balance"]
+        strong_signals: ["tiered test strategy", "tags/groups for slicing"]
+        weak_signals: ["runs everything everywhere"]
+        red_flags: ["30-minute PR gate discourages commits"]
+        follow_ups:
+          - question: "Why not run the full regression on every PR?"
+            recommended_answer: "It's too slow, hurting developer feedback loops; tiering keeps PRs fast while still catching regressions before release."
+        score_guidance: "Credit for tiered strategy."
+        resume_tags: ["cicd", "strategy"]
+        time_minutes: 5
+      - id: ci-a1
+        area: cicd
+        level: advanced
+        question: "Design a CI/CD quality gate for a large automation suite."
+        recommended_answer: "Layered gates: lint/compile, fast unit+smoke on PR (blocking), integration/regression sharded in parallel with reporting, flake quarantine, coverage thresholds, and controlled promotion to environments — all with fast feedback and clear ownership."
+        key_points: ["layered blocking gates", "sharded parallel + reporting", "coverage + quarantine + promotion"]
+        strong_signals: ["clear stage ownership", "balances speed and safety"]
+        weak_signals: ["single monolithic gate"]
+        red_flags: ["no coverage/quality thresholds"]
+        follow_ups:
+          - question: "How do you prevent the gate from becoming a bottleneck?"
+            recommended_answer: "Parallelize/shard, tier tests by stage, cache dependencies, and keep the PR-blocking set fast; push slower suites to later stages."
+        score_guidance: "Credit for a robust, fast gate design."
+        resume_tags: ["cicd", "quality gate"]
+        time_minutes: 8
+      - id: ci-a2
+        area: cicd
+        level: advanced
+        question: "How do you integrate automated tests into a deployment/promotion pipeline?"
+        recommended_answer: "Gate each promotion (dev->staging->prod) on the appropriate test tier, run smoke/health checks post-deploy, support automatic rollback on failure, and record traceability from build to release."
+        key_points: ["per-stage gating", "post-deploy smoke + rollback", "build-to-release traceability"]
+        strong_signals: ["post-deploy verification + rollback", "environment promotion"]
+        weak_signals: ["tests only pre-merge, none post-deploy"]
+        red_flags: ["no rollback plan"]
+        follow_ups:
+          - question: "Why run smoke tests after deployment?"
+            recommended_answer: "To confirm the deployed environment (config, connectivity, dependencies) actually works, catching issues that pre-deploy tests can't."
+        score_guidance: "Credit for deployment-aware testing."
+        resume_tags: ["cicd", "deployment"]
+        time_minutes: 7
+      - id: ci-a3
+        area: cicd
+        level: advanced
+        question: "How do you make CI runs fast and reproducible at scale?"
+        recommended_answer: "Cache dependencies, use pinned/locked versions and container images, shard/parallelize, run only impacted tests where possible, and keep environments ephemeral and declarative so runs are deterministic."
+        key_points: ["dependency caching + pinning", "sharding + impacted-test selection", "ephemeral declarative envs"]
+        strong_signals: ["mentions pinned deps + caching", "test impact analysis"]
+        weak_signals: ["ignores reproducibility"]
+        red_flags: ["unpinned deps causing random breakage"]
+        follow_ups:
+          - question: "Why pin dependency versions in CI?"
+            recommended_answer: "To ensure the same inputs produce the same results, preventing surprise breakage from upstream changes."
+        score_guidance: "Credit for speed + reproducibility."
+        resume_tags: ["cicd", "performance", "reproducibility"]
+        time_minutes: 7
+
+  debugging:
+    label: "Debugging / troubleshooting"
+    core: true
+    questions:
+      - id: dbg-b1
+        area: debugging
+        level: basic
+        question: "Walk through your general process for debugging a failing test."
+        recommended_answer: "Reproduce reliably, read the actual error/stack, isolate the cause (product bug vs test/env issue), inspect logs/artifacts, form and test a hypothesis, fix the root cause, and confirm the fix."
+        key_points: ["reproduce + read error", "isolate cause", "hypothesis-driven fix + verify"]
+        strong_signals: ["distinguishes product vs test failure", "systematic"]
+        weak_signals: ["random changes until green"]
+        red_flags: ["reruns until it passes"]
+        follow_ups:
+          - question: "How do you tell a product bug from a test bug?"
+            recommended_answer: "Reproduce manually/against the API: if the behavior is genuinely wrong it's a product bug; if the app is correct but the test mis-asserts or mis-syncs, it's a test bug."
+        score_guidance: "Credit for a systematic method."
+        resume_tags: ["debugging", "troubleshooting"]
+        time_minutes: 4
+      - id: dbg-b2
+        area: debugging
+        level: basic
+        question: "What information do you gather first when a test fails in CI but passes locally?"
+        recommended_answer: "Compare environments (versions, data, timing, headless vs headed, parallelism), read CI logs/artifacts, check for timing/data-isolation differences, and reproduce with CI-like conditions."
+        key_points: ["environment diff", "timing/data/parallelism", "reproduce CI conditions"]
+        strong_signals: ["thinks about env/timing differences", "uses artifacts"]
+        weak_signals: ["assumes CI is 'just broken'"]
+        red_flags: ["ignores the failure as environmental noise"]
+        follow_ups:
+          - question: "Why might headless mode change results?"
+            recommended_answer: "Different window sizes, rendering timing, or missing display can affect element visibility/interaction, exposing synchronization assumptions."
+        score_guidance: "Credit for environment-aware diagnosis."
+        resume_tags: ["debugging", "ci"]
+        time_minutes: 4
+      - id: dbg-b3
+        area: debugging
+        level: basic
+        question: "How do logging levels help debugging, and how do you use them well?"
+        recommended_answer: "Levels (ERROR/WARN/INFO/DEBUG/TRACE) control verbosity; log meaningful context at appropriate levels, raise verbosity when reproducing, and avoid noisy or sensitive logging in normal runs."
+        key_points: ["appropriate levels", "context-rich messages", "no sensitive data"]
+        strong_signals: ["adjusts verbosity to reproduce", "avoids logging secrets"]
+        weak_signals: ["prints everything at INFO"]
+        red_flags: ["logs credentials/PII"]
+        follow_ups:
+          - question: "What must never appear in logs?"
+            recommended_answer: "Secrets, tokens, passwords, and PII — they create security and privacy exposure."
+        score_guidance: "Credit for effective, safe logging."
+        resume_tags: ["debugging", "logging"]
+        time_minutes: 3
+      - id: dbg-i1
+        area: debugging
+        level: intermediate
+        question: "How do you debug an intermittent (heisenbug) failure?"
+        recommended_answer: "Increase observability (logs/artifacts on every run), run repeatedly to raise reproduction odds, look for timing/ordering/data/concurrency causes, add targeted instrumentation, and fix the underlying nondeterminism."
+        key_points: ["observability", "repeat to reproduce", "target timing/concurrency/data"]
+        strong_signals: ["adds instrumentation deliberately", "targets nondeterminism"]
+        weak_signals: ["just retries"]
+        red_flags: ["marks it 'known flaky' and ignores"]
+        follow_ups:
+          - question: "What are the usual roots of intermittent test failures?"
+            recommended_answer: "Race conditions/synchronization, shared/uncleaned data, order dependencies, and environment/timing variability."
+        score_guidance: "Credit for targeting nondeterminism."
+        resume_tags: ["debugging", "flaky"]
+        time_minutes: 6
+      - id: dbg-i2
+        area: debugging
+        level: intermediate
+        question: "A NullPointerException appears deep in framework code. How do you trace it?"
+        recommended_answer: "Read the full stack to the origin frame, identify which reference is null and why (uninitialized config, failed lookup, missing data), reproduce with a debugger/logs, and add a guard plus a clearer error at the true source."
+        key_points: ["trace stack to origin", "find why null", "guard + clearer error"]
+        strong_signals: ["fixes root cause + improves error message", "uses debugger"]
+        weak_signals: ["adds a null check that hides the problem"]
+        red_flags: ["catches NPE and continues silently"]
+        follow_ups:
+          - question: "How do you make future failures like this easier to diagnose?"
+            recommended_answer: "Fail fast with a descriptive message at initialization (e.g., validate required config) so the null can't propagate deep before surfacing."
+        score_guidance: "Credit for root-cause + prevention."
+        resume_tags: ["debugging", "java"]
+        time_minutes: 6
+      - id: dbg-i3
+        area: debugging
+        level: intermediate
+        question: "How do you debug a failing API test where the response looks correct manually?"
+        recommended_answer: "Capture the exact request/response the test sends (headers, auth, body, timing), compare with the manual call, check environment/data differences and serialization, and assert on the actual payload to locate the mismatch."
+        key_points: ["capture exact request/response", "compare with manual call", "env/data/serialization diff"]
+        strong_signals: ["logs full request/response", "checks auth/timing/data"]
+        weak_signals: ["assumes the API is wrong"]
+        red_flags: ["no inspection of what the test actually sent"]
+        follow_ups:
+          - question: "Why log the request the test sends, not just the response?"
+            recommended_answer: "Because the bug is often in what the test sends (wrong header/body/auth/env); the response only makes sense in light of the actual request."
+        score_guidance: "Credit for request/response evidence gathering."
+        resume_tags: ["debugging", "api"]
+        time_minutes: 6
+      - id: dbg-a1
+        area: debugging
+        level: advanced
+        question: "Production reports a defect that automation missed. How do you respond?"
+        recommended_answer: "Reproduce and understand the gap, add a failing automated test that captures the scenario, fix/verify, then do a blameless analysis of why it was missed and improve coverage/process to prevent recurrence."
+        key_points: ["reproduce + add regression test", "fix/verify", "blameless gap analysis + prevention"]
+        strong_signals: ["adds regression test first", "process improvement"]
+        weak_signals: ["only patches without a test"]
+        red_flags: ["blames individuals, no coverage change"]
+        follow_ups:
+          - question: "Why add the automated test before fixing?"
+            recommended_answer: "It proves the bug, prevents regression, and confirms the fix actually resolves the reported scenario."
+        score_guidance: "Credit for regression-first, preventive response."
+        resume_tags: ["debugging", "quality", "process"]
+        time_minutes: 8
+      - id: dbg-a2
+        area: debugging
+        level: advanced
+        question: "How do you approach performance debugging of a slow test suite?"
+        recommended_answer: "Measure where time goes (setup, waits, network, teardown), remove unnecessary waits/sleeps, parallelize, cache/reuse expensive setup safely, and optimize the biggest contributors first with before/after metrics."
+        key_points: ["measure hotspots", "remove sleeps + parallelize", "optimize biggest first, measure"]
+        strong_signals: ["profiles before optimizing", "targets top contributors"]
+        weak_signals: ["guesses at optimizations"]
+        red_flags: ["shrinks coverage to speed up"]
+        follow_ups:
+          - question: "What is usually the biggest hidden time cost in UI suites?"
+            recommended_answer: "Fixed sleeps and slow/duplicated setup/teardown; replacing sleeps with condition waits and reusing safe setup yields large gains."
+        score_guidance: "Credit for measurement-driven optimization."
+        resume_tags: ["debugging", "performance"]
+        time_minutes: 7
+      - id: dbg-a3
+        area: debugging
+        level: advanced
+        question: "How do you diagnose an environment/config issue causing widespread failures?"
+        recommended_answer: "Confirm scope (all tests vs subset), check recent env/config/dependency changes, verify connectivity/credentials/versions, reproduce in isolation, and roll back or fix the config; add a health-check to catch it earlier next time."
+        key_points: ["scope + recent changes", "connectivity/creds/versions", "health-check prevention"]
+        strong_signals: ["adds a pre-run health check", "systematic scoping"]
+        weak_signals: ["debugs individual tests when all fail"]
+        red_flags: ["no environment validation"]
+        follow_ups:
+          - question: "What does a pre-run environment health check buy you?"
+            recommended_answer: "It fails fast with a clear reason (e.g., unreachable service, bad credentials) instead of hundreds of confusing test failures."
+        score_guidance: "Credit for environment-level diagnosis + prevention."
+        resume_tags: ["debugging", "environment"]
+        time_minutes: 7
+
+  appium:
+    label: "Appium / mobile"
+    core: false
+    questions:
+      - id: mob-b1
+        area: appium
+        level: basic
+        question: "How does Appium relate to Selenium, and what makes mobile locators different?"
+        recommended_answer: "Appium implements the WebDriver protocol for mobile, so the API is familiar. Locators use platform strategies (accessibility id, UIAutomator/XCUITest, id) rather than CSS; accessibility id is preferred as cross-platform and stable."
+        key_points: ["WebDriver protocol reuse", "platform locator strategies", "accessibility id preferred"]
+        strong_signals: ["prefers accessibility id", "knows platform differences"]
+        weak_signals: ["expects CSS selectors on mobile"]
+        red_flags: ["treats mobile exactly like web"]
+        follow_ups:
+          - question: "Why prefer accessibility id on mobile?"
+            recommended_answer: "It's stable, meaningful, cross-platform, and doubles as an accessibility improvement, unlike brittle xpath."
+        score_guidance: "Credit for protocol reuse + locator awareness."
+        resume_tags: ["appium", "mobile"]
+        time_minutes: 4
+      - id: mob-b2
+        area: appium
+        level: basic
+        question: "What are desired/capabilities in Appium and why do they matter?"
+        recommended_answer: "Capabilities configure the session: platform, device/emulator, app path, automation engine, timeouts. They must match the target device/app to start a valid session."
+        key_points: ["session configuration", "platform/device/app", "automation engine"]
+        strong_signals: ["knows key caps", "separates iOS/Android engines"]
+        weak_signals: ["copies caps without understanding"]
+        red_flags: ["cannot start a session reliably"]
+        follow_ups:
+          - question: "Which automation engines back Android and iOS?"
+            recommended_answer: "UiAutomator2 for Android and XCUITest for iOS."
+        score_guidance: "Credit for capability understanding."
+        resume_tags: ["appium", "mobile"]
+        time_minutes: 4
+      - id: mob-i1
+        area: appium
+        level: intermediate
+        question: "How do you handle gestures and waits reliably in mobile automation?"
+        recommended_answer: "Use W3C actions / mobile gesture commands for swipe/scroll/tap, and explicit waits for element state; mobile is slower and more variable, so condition-based synchronization is essential."
+        key_points: ["W3C actions/gestures", "explicit waits", "account for device variability"]
+        strong_signals: ["condition waits over sleeps", "handles scroll-to-element"]
+        weak_signals: ["sleeps to handle animations"]
+        red_flags: ["coordinate taps hardcoded to one device"]
+        follow_ups:
+          - question: "Why avoid absolute coordinate taps?"
+            recommended_answer: "Screen sizes/densities vary across devices, so fixed coordinates break; target elements or relative gestures instead."
+        score_guidance: "Credit for reliable gesture/sync handling."
+        resume_tags: ["appium", "mobile", "gestures"]
+        time_minutes: 6
+      - id: mob-i2
+        area: appium
+        level: intermediate
+        question: "How do you manage running mobile tests across many devices?"
+        recommended_answer: "Use a device cloud/farm (BrowserStack/Sauce/local grid), parameterize capabilities per device, run in parallel with isolation, and prioritize a representative device matrix rather than all combinations."
+        key_points: ["device cloud/farm", "parameterized caps + parallel", "representative matrix"]
+        strong_signals: ["chooses a smart device matrix", "parallel via cloud"]
+        weak_signals: ["one physical device only"]
+        red_flags: ["tries to cover every device combination"]
+        follow_ups:
+          - question: "How do you choose which devices to test?"
+            recommended_answer: "Base it on real user analytics — top OS versions and screen sizes — plus known problem devices, to maximize coverage of actual usage."
+        score_guidance: "Credit for practical device strategy."
+        resume_tags: ["appium", "mobile", "device cloud"]
+        time_minutes: 6
+      - id: mob-a1
+        area: appium
+        level: advanced
+        question: "How would you architect a cross-platform (iOS + Android) mobile framework?"
+        recommended_answer: "Share business flows and utilities; abstract platform specifics (locators, gestures, caps) behind interfaces selected by config; reuse reporting/data layers; keep only platform-specific implementations separate."
+        key_points: ["shared flows + interface abstraction", "config-selected platform impls", "reuse reporting/data"]
+        strong_signals: ["interface-based platform abstraction", "maximizes reuse"]
+        weak_signals: ["duplicates whole framework per platform"]
+        red_flags: ["platform if/else scattered in tests"]
+        follow_ups:
+          - question: "What differs between iOS and Android at the implementation layer?"
+            recommended_answer: "Locator strategies (XCUITest vs UiAutomator2), some gestures, and capabilities; business logic and assertions stay shared."
+        score_guidance: "Credit for reuse-maximizing cross-platform design."
+        resume_tags: ["appium", "mobile", "framework"]
+        time_minutes: 8
+      - id: mob-a2
+        area: appium
+        level: advanced
+        question: "How do you keep mobile tests stable given emulator/device flakiness?"
+        recommended_answer: "Use reliable device infrastructure, condition-based waits, retries only for known-external instability with visibility, capture rich artifacts on failure, and isolate state; treat device/network variability as a first-class reliability concern."
+        key_points: ["reliable infra + waits", "visible bounded retries", "artifacts + isolation"]
+        strong_signals: ["treats device variability explicitly", "captures diagnostics"]
+        weak_signals: ["blanket retries"]
+        red_flags: ["ignores instability as unavoidable"]
+        follow_ups:
+          - question: "What artifacts are most useful for mobile failures?"
+            recommended_answer: "Screenshots, device logs (logcat/syslog), and the page source/DOM at failure time."
+        score_guidance: "Credit for reliability-focused mobile testing."
+        resume_tags: ["appium", "mobile", "reliability"]
+        time_minutes: 7
+
+  browserstack:
+    label: "BrowserStack / cloud execution"
+    core: false
+    questions:
+      - id: bs-b1
+        area: browserstack
+        level: basic
+        question: "What problem does a cloud grid like BrowserStack solve?"
+        recommended_answer: "It provides on-demand real browsers/devices/OS combinations without maintaining local infrastructure, enabling broad cross-browser/device coverage and parallel execution."
+        key_points: ["on-demand real browsers/devices", "cross-platform coverage", "parallel execution"]
+        strong_signals: ["values coverage + no infra upkeep", "parallel scale"]
+        weak_signals: ["thinks it's just remote Selenium"]
+        red_flags: ["cannot state any benefit"]
+        follow_ups:
+          - question: "When is local execution still preferable?"
+            recommended_answer: "For fast local debugging, offline work, or highly sensitive apps where sending traffic to a third party isn't acceptable."
+        score_guidance: "Credit for coverage/scale rationale."
+        resume_tags: ["browserstack", "cloud", "cross-browser"]
+        time_minutes: 4
+      - id: bs-b2
+        area: browserstack
+        level: basic
+        question: "How do you connect a Selenium suite to a cloud grid?"
+        recommended_answer: "Point the RemoteWebDriver at the grid's hub URL with capabilities specifying browser/OS/version and credentials (injected securely), then run tests as usual against the remote session."
+        key_points: ["RemoteWebDriver + hub URL", "capabilities for browser/OS", "secure credentials"]
+        strong_signals: ["keeps creds in env/secrets", "capability-driven selection"]
+        weak_signals: ["hardcodes credentials"]
+        red_flags: ["commits grid keys to the repo"]
+        follow_ups:
+          - question: "Where do the grid access keys belong?"
+            recommended_answer: "In environment variables or a secrets manager injected at runtime — never in code or the repo."
+        score_guidance: "Credit for secure remote setup."
+        resume_tags: ["browserstack", "selenium", "cloud"]
+        time_minutes: 4
+      - id: bs-i1
+        area: browserstack
+        level: intermediate
+        question: "How do you decide a cross-browser/device test matrix?"
+        recommended_answer: "Base it on real usage analytics (top browsers/OS/devices), business-critical combinations, and known problem areas; cover a representative matrix in parallel rather than every combination."
+        key_points: ["analytics-driven matrix", "representative not exhaustive", "parallel coverage"]
+        strong_signals: ["uses real usage data", "prioritizes critical paths"]
+        weak_signals: ["tests everything or one browser"]
+        red_flags: ["combinatorial explosion attempt"]
+        follow_ups:
+          - question: "Why not test every browser/OS combination?"
+            recommended_answer: "It's combinatorially huge, slow, and costly with diminishing returns; a data-driven representative matrix covers real risk efficiently."
+        score_guidance: "Credit for a pragmatic matrix strategy."
+        resume_tags: ["browserstack", "cross-browser", "strategy"]
+        time_minutes: 6
+      - id: bs-i2
+        area: browserstack
+        level: intermediate
+        question: "How do you manage parallel sessions and cost on a cloud grid?"
+        recommended_answer: "Respect parallel-session limits, shard tests to fit, keep sessions short (fast tests, proper teardown), run the full matrix on schedule rather than every PR, and monitor usage."
+        key_points: ["respect session limits + shard", "short sessions + teardown", "tiered scheduling + monitoring"]
+        strong_signals: ["tiers full matrix vs PR runs", "cost-aware"]
+        weak_signals: ["runs full matrix on every commit"]
+        red_flags: ["leaks sessions (no quit) inflating cost"]
+        follow_ups:
+          - question: "Why quit sessions promptly on a cloud grid?"
+            recommended_answer: "Open sessions consume paid parallel slots and can exhaust limits, blocking other runs and increasing cost."
+        score_guidance: "Credit for cost-and-limit awareness."
+        resume_tags: ["browserstack", "parallel", "cost"]
+        time_minutes: 6
+      - id: bs-a1
+        area: browserstack
+        level: advanced
+        question: "How do you integrate cloud execution into CI while keeping it reliable and debuggable?"
+        recommended_answer: "Parameterize grid vs local by config, inject credentials securely, run a representative matrix at the right pipeline stage, capture cloud session logs/video/screenshots, and merge results into unified CI reports."
+        key_points: ["config-driven grid/local", "secure creds + staged matrix", "capture session artifacts + report merge"]
+        strong_signals: ["uses session video/logs for debugging", "unified reporting"]
+        weak_signals: ["cloud only, no local fallback"]
+        red_flags: ["no artifact capture from cloud runs"]
+        follow_ups:
+          - question: "What cloud-run artifacts help debug failures?"
+            recommended_answer: "Session video, console/network logs, and screenshots that most grids record automatically per session."
+        score_guidance: "Credit for reliable, debuggable integration."
+        resume_tags: ["browserstack", "cicd", "cloud"]
+        time_minutes: 7
+      - id: bs-a2
+        area: browserstack
+        level: advanced
+        question: "How do you keep a local and cloud execution model interchangeable in a framework?"
+        recommended_answer: "Abstract driver creation behind a factory selected by config; keep tests unaware of where they run; centralize capabilities and credentials; ensure the same tests pass locally and on the grid."
+        key_points: ["driver factory by config", "tests location-agnostic", "centralized caps/creds"]
+        strong_signals: ["single factory + config switch", "same tests both places"]
+        weak_signals: ["separate test code per environment"]
+        red_flags: ["grid logic hardcoded in tests"]
+        follow_ups:
+          - question: "What should tests NOT know about?"
+            recommended_answer: "Whether they run locally or on the grid, and the specific browser/creds — those belong in the driver factory/config."
+        score_guidance: "Credit for clean execution abstraction."
+        resume_tags: ["browserstack", "framework", "cloud"]
+        time_minutes: 7
+
+  performance:
+    label: "Performance testing"
+    core: false
+    questions:
+      - id: perf-b1
+        area: performance
+        level: basic
+        question: "What is the difference between load, stress, and soak testing?"
+        recommended_answer: "Load tests expected concurrency; stress pushes beyond limits to find breaking points; soak runs sustained load over time to reveal leaks/degradation. Each answers a different reliability question."
+        key_points: ["load = expected", "stress = beyond limit", "soak = sustained/duration"]
+        strong_signals: ["maps each to a purpose", "mentions leak detection in soak"]
+        weak_signals: ["uses the terms interchangeably"]
+        red_flags: ["no distinction at all"]
+        follow_ups:
+          - question: "What does a soak test typically uncover?"
+            recommended_answer: "Memory leaks, resource exhaustion, and gradual performance degradation that only appear over extended runtime."
+        score_guidance: "Credit for correct test-type distinctions."
+        resume_tags: ["performance", "load testing"]
+        time_minutes: 4
+      - id: perf-b2
+        area: performance
+        level: basic
+        question: "Which metrics matter most in a performance test?"
+        recommended_answer: "Response time (percentiles, not just average), throughput (req/s), error rate, and resource utilization (CPU/memory). Percentiles (p95/p99) reveal tail latency users actually feel."
+        key_points: ["percentile latency", "throughput + error rate", "resource utilization"]
+        strong_signals: ["emphasizes p95/p99 over average", "watches error rate"]
+        weak_signals: ["only looks at average response time"]
+        red_flags: ["reports averages only"]
+        follow_ups:
+          - question: "Why are averages misleading for latency?"
+            recommended_answer: "Averages hide tail latency; a good average can still mean many users experience slow p95/p99 responses."
+        score_guidance: "Credit for percentile awareness."
+        resume_tags: ["performance", "metrics"]
+        time_minutes: 4
+      - id: perf-i1
+        area: performance
+        level: intermediate
+        question: "How do you design a realistic load test?"
+        recommended_answer: "Model real user journeys and mix, use production-like data/volume, ramp up gradually, include think times, run against a representative environment, and set pass/fail thresholds from SLAs."
+        key_points: ["realistic journeys + mix", "ramp + think time", "SLA-based thresholds"]
+        strong_signals: ["mirrors real traffic patterns", "ties to SLAs"]
+        weak_signals: ["hammers one endpoint with no ramp"]
+        red_flags: ["tests against a tiny dev box and extrapolates"]
+        follow_ups:
+          - question: "Why include think time between actions?"
+            recommended_answer: "Real users pause between actions; omitting think time creates unrealistic, overly aggressive load that misrepresents behavior."
+        score_guidance: "Credit for realistic modeling."
+        resume_tags: ["performance", "jmeter", "gatling"]
+        time_minutes: 6
+      - id: perf-i2
+        area: performance
+        level: intermediate
+        question: "How do you identify a bottleneck from performance test results?"
+        recommended_answer: "Correlate response-time/throughput degradation with resource metrics (CPU, memory, DB, network) and downstream dependencies, find the saturating resource, and drill into that layer (e.g., slow queries, thread pool exhaustion)."
+        key_points: ["correlate latency with resources", "find saturating layer", "drill into that component"]
+        strong_signals: ["correlates across layers", "checks DB/dependencies"]
+        weak_signals: ["only reads client-side numbers"]
+        red_flags: ["blames the network by default"]
+        follow_ups:
+          - question: "What's a common backend bottleneck under load?"
+            recommended_answer: "Database (slow queries, connection-pool/lock contention) or thread-pool exhaustion in the application tier."
+        score_guidance: "Credit for cross-layer bottleneck analysis."
+        resume_tags: ["performance", "bottleneck"]
+        time_minutes: 6
+      - id: perf-a1
+        area: performance
+        level: advanced
+        question: "How do you integrate performance testing into CI/CD without slowing delivery?"
+        recommended_answer: "Run lightweight performance smoke/baseline checks with thresholds on key transactions in the pipeline, schedule full load tests separately in a stable environment, track trends over time, and gate on regressions beyond a tolerance."
+        key_points: ["lightweight perf smoke in CI", "full load scheduled separately", "trend tracking + regression gate"]
+        strong_signals: ["separates smoke vs full load", "trend-based regression gate"]
+        weak_signals: ["full load on every commit"]
+        red_flags: ["no performance baseline at all"]
+        follow_ups:
+          - question: "Why track performance trends over time?"
+            recommended_answer: "To catch gradual regressions early against a baseline, rather than discovering a big slowdown only at release."
+        score_guidance: "Credit for pragmatic perf-in-CI strategy."
+        resume_tags: ["performance", "cicd"]
+        time_minutes: 7
+      - id: perf-a2
+        area: performance
+        level: advanced
+        question: "How do you ensure performance test results are trustworthy and reproducible?"
+        recommended_answer: "Use a stable, isolated, production-like environment, controlled data/state, warm-up, sufficient duration and repetitions, consistent load-generator capacity, and report percentiles with confidence — not single noisy runs."
+        key_points: ["stable isolated prod-like env", "warm-up + duration + repeats", "percentiles, not single runs"]
+        strong_signals: ["controls environment + repeats", "avoids single-run conclusions"]
+        weak_signals: ["one run on a shared box"]
+        red_flags: ["draws conclusions from noisy single runs"]
+        follow_ups:
+          - question: "Why warm up before measuring?"
+            recommended_answer: "JIT compilation, caches, and connection pools stabilize after warm-up; measuring cold skews results toward artificially slow numbers."
+        score_guidance: "Credit for rigor and reproducibility."
+        resume_tags: ["performance", "reproducibility"]
+        time_minutes: 7

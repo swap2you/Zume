@@ -58,5 +58,9 @@ def load_exercise_library(root: Path) -> dict[str, Any]:
     return load_config(root, "exercise-library")
 
 
+def load_question_library(root: Path) -> dict[str, Any]:
+    return load_config(root, "interview-question-library")
+
+
 def load_privacy(root: Path) -> dict[str, Any]:
     return load_config(root, "privacy")

@@ -1,5 +1,7 @@
 Candidate: Aarav Mehta
 Date: 2026-07-20
-Time: 10:00 AM ET
-Duration: 90 minutes
+Time: 10:00 AM
+Timezone: America/New_York
+Duration: 180 minutes
 Interviewers: Hiring Panel
+Meeting: Zoom
