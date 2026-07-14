@@ -278,7 +278,10 @@ def generate_interview_guide(theme: dict[str, Any], kit: InterviewKit,
             doc.paragraph(line or " ", size_pt=9)
         doc.key_values([
             ("Requirement-change follow-up", exercise.requirement_change_follow_up),
+            ("Requirement-change recommended answer",
+             exercise.requirement_change_recommended_answer or "—"),
             ("Debugging follow-up", exercise.debugging_follow_up),
+            ("Debugging recommended answer", exercise.debugging_recommended_answer or "—"),
         ])
         if exercise.scoring_rubric:
             doc.paragraph("Scoring rubric:", bold=True)
@@ -288,7 +291,9 @@ def generate_interview_guide(theme: dict[str, Any], kit: InterviewKit,
             doc.bullets(exercise.red_flags)
         if exercise.independence_questions:
             doc.paragraph("Independence-verification questions:", bold=True)
-            doc.bullets(exercise.independence_questions)
+            for q in exercise.independence_questions:
+                doc.paragraph(f"Q: {q.question}", bold=True)
+                doc.paragraph(f"Recommended answer: {q.recommended_answer or '—'}")
     doc.heading("Scoring per exercise", 1)
     dims = library.get("scoring_dimensions", {})
     doc.table(["Dimension", "Points"],
@@ -349,7 +354,10 @@ def generate_exercise_pack(theme: dict[str, Any], kit: InterviewKit, out_path: P
             ("Difficulty", exercise.difficulty),
             ("Task", exercise.task),
             ("Requirement-change follow-up", exercise.requirement_change_follow_up),
+            ("Requirement-change recommended answer",
+             exercise.requirement_change_recommended_answer or "—"),
             ("Debugging follow-up", exercise.debugging_follow_up),
+            ("Debugging recommended answer", exercise.debugging_recommended_answer or "—"),
         ])
         doc.paragraph("Expected reasoning:", bold=True)
         doc.paragraph(exercise.expected_reasoning)
@@ -364,7 +372,9 @@ def generate_exercise_pack(theme: dict[str, Any], kit: InterviewKit, out_path: P
             doc.bullets(exercise.red_flags)
         if exercise.independence_questions:
             doc.paragraph("Independence-verification questions:", bold=True)
-            doc.bullets(exercise.independence_questions)
+            for q in exercise.independence_questions:
+                doc.paragraph(f"Q: {q.question}", bold=True)
+                doc.paragraph(f"Recommended answer: {q.recommended_answer or '—'}")
     doc.save(out_path)
 
 

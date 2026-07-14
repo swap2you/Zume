@@ -244,41 +244,60 @@ def generate_schedule_doc(theme: dict[str, Any], record: ScheduleRecord, out_pat
 
 
 def _when(record: ScheduleRecord) -> str:
+    """Human-readable timestamp including the timezone (Part 7).
+
+    The timezone is always rendered so a reader is never left guessing the zone;
+    a missing zone is shown as an explicit placeholder rather than omitted.
+    """
     date = record.date or "[date]"
     time = record.time or "[time]"
-    return f"{date} at {time}"
+    timezone = record.timezone or "[timezone — confirm]"
+    return f"{date} at {time} {timezone}"
+
+
+def _unconfirmed_prefix(record: ScheduleRecord) -> str:
+    """Never present an unconfirmed schedule as confirmed (Part 7)."""
+    if record.needs_confirmation:
+        return ("[DRAFT — schedule is NOT confirmed; verify date, time and timezone "
+                "before sending]\n\n")
+    return ""
 
 
 def build_communication_drafts(record: ScheduleRecord) -> list[CommunicationDraft]:
     name = record.candidate_name
     when = _when(record)
+    prefix = _unconfirmed_prefix(record)
+    platform = record.platform or "the shared meeting link"
+    confirm_word = "Proposing" if record.needs_confirmation else "Confirming"
     return [
         CommunicationDraft(
             kind="join",
             subject=f"Interview Confirmation – {name}",
-            body=(f"Hi Team,\n\nConfirming the interview with {name} on {when}"
+            body=(f"{prefix}Hi Team,\n\n{confirm_word} the interview with {name} on {when}"
                   f" ({record.duration or 'duration TBC'}). I will join on time via "
-                  f"{record.platform or 'the shared meeting link'}.\n\nThanks."),
+                  f"{platform}.\n\nThanks."),
         ),
         CommunicationDraft(
             kind="reschedule",
             subject=f"Reschedule Request – {name}",
-            body=(f"Hi Team,\n\nI am unavailable for the currently scheduled interview with "
-                  f"{name} on {when}. Please reschedule with at least one business day notice "
-                  "and share the updated invitation.\n\nThanks."),
+            body=(f"{prefix}Hi Team,\n\nI am unavailable for the currently scheduled interview "
+                  f"with {name} on {when} (via {platform}). Please reschedule with at least one "
+                  "business day notice and share the updated invitation.\n\nThanks."),
         ),
         CommunicationDraft(
             kind="cancel",
             subject=f"Interview Cancellation – {name}",
-            body=(f"Hi Team,\n\nPlease cancel the interview with {name} scheduled for {when}. "
-                  "I will follow up if a new slot is needed.\n\nThanks."),
+            body=(f"{prefix}Hi Team,\n\nPlease cancel the interview with {name} scheduled for "
+                  f"{when} (via {platform}). I will follow up if a new slot is needed.\n\n"
+                  "Thanks."),
         ),
         CommunicationDraft(
             kind="no-show",
             subject=f"Interview No-Show – {name}",
-            body=(f"Hi Team,\n\n{name} did not join the interview scheduled for {when}, and I "
-                  "waited approximately 10 minutes without receiving an update. Please mark "
-                  "this profile as not proceeding from my side.\n\nThanks."),
+            body=(f"{prefix}Hi Team,\n\n{name} did not join the interview scheduled for {when} "
+                  f"(via {platform}), and I waited approximately 10 minutes without receiving "
+                  "an update. Please mark this profile as not proceeding from my side.\n\n"
+                  "Thanks."),
         ),
     ]
 

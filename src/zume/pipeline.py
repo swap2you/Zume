@@ -32,6 +32,8 @@ READY = "READY_FOR_INTERVIEW"
 SCHEDULED = "INTERVIEW_SCHEDULED"
 DO_NOT_PROCEED = "DO_NOT_PROCEED"
 FINALIZE_ALLOWED_STATES = {READY, SCHEDULED}
+# Lockdown Part 3 — post-interview/terminal states an intake rerun must not reset.
+TERMINAL_STATES = {"INTERVIEWED", "SELECTED", "REJECTED", "SECOND_ROUND"}
 
 WAIT_MESSAGE = ("Pre-interview package is ready. Zume is waiting for interview notes. "
                 "No feedback has been generated.")
@@ -95,6 +97,7 @@ def run_intake(root: Path, resume_path: Path | None = None,
                schedule_details: str | None = None,
                override: bool = False, override_reason: str | None = None,
                rotate_exercises: bool = False, rotation_reason: str | None = None,
+               reopen: bool = False, reopen_reason: str | None = None,
                keep_history: bool = False,
                today: date_cls | None = None) -> IntakeResult:
     if resume_path is None and not resume_text:
@@ -111,6 +114,20 @@ def run_intake(root: Path, resume_path: Path | None = None,
     privacy = cfg.load_privacy(root)
 
     candidate, folder = cand.new_package_candidate(root, profile.name, on_date=today)
+
+    # Lockdown Part 3 — never reset or partially erase a finalized candidate.
+    prior_status = candidate.status
+    reopening = prior_status in TERMINAL_STATES
+    if reopening:
+        if not reopen:
+            raise WorkflowError(
+                f"Candidate {folder.name} is in a completed state ({prior_status}). Intake will "
+                "not reset a finalized candidate. Re-run with --reopen and "
+                '--reopen-reason "<reason>" to intentionally regenerate the pre-interview '
+                "package; existing final deliverables are preserved.")
+        if not reopen_reason or not reopen_reason.strip():
+            raise WorkflowError("--reopen requires a non-empty --reopen-reason.")
+
     candidate.experience_years = profile.experience_years
     source_name = _write_source_resume(folder, resume_path, text)
     if source_name not in {s.stored_path for s in candidate.source_files}:
@@ -135,6 +152,9 @@ def run_intake(root: Path, resume_path: Path | None = None,
     effective_override = override_reason.strip() if (override and override_reason) else ""
 
     keep: set[str] = {dl.SCREENING_SUMMARY}
+    # On a reopen, never silently delete the finalized deliverables.
+    if reopening:
+        keep |= {dl.FINAL_EVALUATION, dl.POST_INTERVIEW_COMMS}
     schedule_needs_confirmation = False
 
     if not blocked:
@@ -167,7 +187,18 @@ def run_intake(root: Path, resume_path: Path | None = None,
     # Feedback deliverables must never exist after intake.
     cand.clean_deliverables(folder, keep)
 
-    if blocked:
+    if reopening:
+        # Preserve the finalized status; record the reopen as an auditable event.
+        status = prior_status
+        reason = reopen_reason.strip()  # type: ignore[union-attr]
+        if reason not in candidate.reopen_reasons:
+            candidate.reopen_reasons.append(reason)
+        cand.record_event(
+            candidate,
+            f"Pre-interview package regenerated via reopen. Reason: {reason}. "
+            f"Final status preserved: {prior_status}. Final deliverables preserved.",
+            kind="REOPENED")
+    elif blocked:
         status = DO_NOT_PROCEED
         cand.record_status_once(candidate, status,
                                 "Screening decision: do not proceed (no interview package).")

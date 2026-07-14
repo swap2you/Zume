@@ -2,7 +2,12 @@
 
 from zume import interview as iv
 from zume.config import load_exercise_library, load_hiring_standard, load_theme
-from zume.exercises import ExerciseSelector, fingerprint, load_exercises
+from zume.exercises import (
+    ExerciseSelector,
+    fingerprint,
+    load_exercises,
+    validate_exercise_answers,
+)
 from zume.ingest import parse_resume
 from zume.screening import screen_resume
 
@@ -35,6 +40,21 @@ def test_every_exercise_has_required_fields(repo_root):
             assert ex.scoring_rubric
             assert ex.red_flags
             assert ex.independence_questions
+
+
+def test_every_active_exercise_has_complete_recommended_answers(repo_root):
+    """Lockdown Part 6 — the complete answer contract for every ACTIVE exercise."""
+    exercises = load_exercises(load_exercise_library(repo_root))
+    problems = validate_exercise_answers(exercises)
+    assert problems == [], "\n".join(problems)
+    for area_exercises in exercises.values():
+        for ex in area_exercises:
+            if ex.status != "active":
+                continue
+            assert ex.requirement_change_recommended_answer
+            assert ex.debugging_recommended_answer
+            for q in ex.independence_questions:
+                assert q.question and q.recommended_answer
 
 
 def test_draft_and_retired_exercises_are_never_selected(repo_root):
@@ -73,6 +93,37 @@ def test_no_duplicate_variant_family_in_one_area(repo_root):
 def test_fingerprint_is_stable_and_task_specific(repo_root):
     assert fingerprint("Count duplicates ") == fingerprint("count   Duplicates")
     assert fingerprint("task a") != fingerprint("task b")
+
+
+def test_interview_generators_render_with_answers(repo_root, theme, tmp_path):
+    """Cover every interviewer/candidate generator with the new answer fields."""
+    from zume import questions as q_lib
+    from zume.config import load_question_library
+
+    result = screen_resume(parse_resume(RICH_RESUME), load_hiring_standard(repo_root))
+    library = load_exercise_library(repo_root)
+    question_areas = q_lib.load_library(load_question_library(repo_root))
+    kit = iv.build_kit(library, result, question_areas=question_areas)
+
+    outputs = {
+        "focus": tmp_path / "focus.docx",
+        "guide": tmp_path / "guide.docx",
+        "scorecard": tmp_path / "scorecard.docx",
+        "pack": tmp_path / "pack.docx",
+        "candidate": tmp_path / "candidate.docx",
+    }
+    iv.generate_focus_sheet(theme, kit, result, outputs["focus"])
+    iv.generate_interview_guide(theme, kit, library, outputs["guide"])
+    iv.generate_scorecard(theme, kit, outputs["scorecard"])
+    iv.generate_exercise_pack(theme, kit, outputs["pack"])
+    iv.generate_candidate_exercise_sheet(theme, kit, outputs["candidate"])
+    for path in outputs.values():
+        assert path.exists() and path.stat().st_size > 0
+
+    from docx import Document
+
+    guide_text = "\n".join(p.text for p in Document(str(outputs["guide"])).paragraphs)
+    assert "Recommended answer" in guide_text  # follow-up + independence answers rendered
 
 
 def test_candidate_sheet_excludes_reference_solutions(repo_root, tmp_path):

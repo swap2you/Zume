@@ -107,6 +107,21 @@ def extract_observations(notes: str) -> IndependenceObservations:
 
 
 MANDATORY_CORE = ("java", "selenium", "rest_assured", "sql_oracle")
+MANDATORY_LABELS = {
+    "java": "Java",
+    "selenium": "Selenium",
+    "rest_assured": "REST Assured / API automation",
+    "sql_oracle": "SQL / Oracle",
+}
+INDEPENDENCE_AREA = "Independent explanation or modification evidence"
+INCOMPLETE_RECOMMENDATION = (
+    "Incomplete interview evidence — manual review required before a final hiring decision.")
+
+
+def _independence_assessed(observations: IndependenceObservations) -> bool:
+    """True when the notes contain any explanation/modification evidence."""
+    return (observations.can_explain_solution != "Not assessed"
+            or observations.can_modify_solution != "Not assessed")
 
 
 def evaluate_notes(candidate_name: str, notes: str) -> FeedbackResult:
@@ -119,18 +134,37 @@ def evaluate_notes(candidate_name: str, notes: str) -> FeedbackResult:
         total = 0.0
     override_failed = [scored[s].label for s in MANDATORY_CORE
                        if s in scored and scored[s].score < 5]
+
+    # Part 5 — evidence completeness. A final SELECTED requires assessable
+    # evidence for every mandatory live area AND independence evidence.
+    assessed_areas = [MANDATORY_LABELS[s] for s in MANDATORY_CORE if s in scored]
+    missing_areas = [MANDATORY_LABELS[s] for s in MANDATORY_CORE if s not in scored]
+    if _independence_assessed(observations):
+        assessed_areas.append(INDEPENDENCE_AREA)
+    else:
+        missing_areas.append(INDEPENDENCE_AREA)
+
+    decision_permitted = True
     if observations.confidence_independent_execution == "Low":
+        # A low-confidence independence result may still be a firm Do Not Proceed.
         recommendation, decision = (
             "Do Not Proceed — confidence in independent execution is low based on "
             "recorded observations.",
             Decision.DO_NOT_PROCEED,
         )
     elif override_failed:
+        # An explicitly failed mandatory area may still be a firm Do Not Proceed.
         recommendation, decision = (
             "Do Not Proceed — mandatory hands-on override triggered for: "
             + ", ".join(override_failed) + ".",
             Decision.DO_NOT_PROCEED,
         )
+    elif missing_areas:
+        # Incomplete evidence must NOT produce a SELECTED from partial notes.
+        decision_permitted = False
+        recommendation = (INCOMPLETE_RECOMMENDATION
+                          + " Missing assessed areas: " + ", ".join(missing_areas) + ".")
+        decision = Decision.CONDITIONAL
     elif total >= 85:
         recommendation, decision = "Strong Senior SDET.", Decision.PROCEED
     elif total >= 75:
@@ -148,6 +182,9 @@ def evaluate_notes(candidate_name: str, notes: str) -> FeedbackResult:
         Decision.CONDITIONAL: "SECOND_ROUND",
         Decision.DO_NOT_PROCEED: "REJECTED",
     }[decision]
+    # A blocked (incomplete) evaluation is a manual-review/second-round state.
+    if not decision_permitted:
+        status = "SECOND_ROUND"
     return FeedbackResult(
         candidate_name=candidate_name,
         skill_scores=scores,
@@ -159,6 +196,9 @@ def evaluate_notes(candidate_name: str, notes: str) -> FeedbackResult:
         concerns=concerns,
         observations=observations,
         status=status,
+        assessed_areas=assessed_areas,
+        missing_areas=missing_areas,
+        decision_permitted=decision_permitted,
     )
 
 
@@ -191,12 +231,20 @@ def generate_final_evaluation(theme: dict[str, Any], result: FeedbackResult,
                               notes: str, out_path: Path) -> None:
     doc = ZumeDocument(theme, "Final Interview Evaluation", f"Candidate: {result.candidate_name}")
     _decision_banner(doc, result)
+    if not result.decision_permitted:
+        doc.banner("A final hiring decision was NOT permitted: mandatory interview evidence "
+                   "is incomplete. Manual review required.", kind="warning", label="MANUAL REVIEW")
     doc.heading("Decision", 1)
     doc.key_values([
         ("Decision", result.decision.value),
-        ("Score", f"{result.total_percent:g}%"),
+        ("Calculated interview score", f"{result.total_percent:g}%"),
+        ("Final decision permitted", "Yes" if result.decision_permitted else "No — manual review"),
         ("New status", result.status),
     ])
+    doc.heading("Evidence completeness", 1)
+    doc.table(["Assessed areas", "Missing / unassessed areas"],
+              [["; ".join(result.assessed_areas) or "None",
+                "; ".join(result.missing_areas) or "None — all mandatory areas assessed"]])
     if result.mandatory_override_failed:
         doc.banner("Mandatory hands-on override triggered: "
                    + ", ".join(result.mandatory_override_failed), kind="danger", label="OVERRIDE")

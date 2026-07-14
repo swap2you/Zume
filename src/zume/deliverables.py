@@ -178,7 +178,10 @@ def three_hour_guide(theme: dict[str, Any], kit: InterviewKit,
         doc.code_block(exercise.reference_solution)
         doc.paragraph(f"Requirement-change follow-up: {exercise.requirement_change_follow_up}",
                       bold=True)
+        doc.paragraph("Recommended answer: "
+                      + (exercise.requirement_change_recommended_answer or "—"))
         doc.paragraph(f"Debugging follow-up: {exercise.debugging_follow_up}", bold=True)
+        doc.paragraph("Recommended answer: " + (exercise.debugging_recommended_answer or "—"))
         if exercise.scoring_rubric:
             doc.paragraph("Scoring rubric:", bold=True)
             doc.bullets(exercise.scoring_rubric)
@@ -187,7 +190,9 @@ def three_hour_guide(theme: dict[str, Any], kit: InterviewKit,
             doc.bullets(exercise.red_flags)
         if exercise.independence_questions:
             doc.paragraph("Independence-verification questions:", bold=True)
-            doc.bullets(exercise.independence_questions)
+            for q in exercise.independence_questions:
+                doc.paragraph(f"Q: {q.question}", bold=True)
+                doc.paragraph(f"Recommended answer: {q.recommended_answer or '—'}")
 
     doc.page_break()
     doc.heading("Interviewer skip logic and time control", 1)
@@ -337,11 +342,20 @@ def schedule_and_comms(theme: dict[str, Any], record: ScheduleRecord,
 def final_evaluation(theme: dict[str, Any], result: FeedbackResult, notes: str) -> bytes:
     doc = ZumeDocument(theme, "Final Interview Evaluation", f"Candidate: {result.candidate_name}")
     doc.banner(result.recommendation, kind=_decision_kind(result.decision), label="DECISION")
+    if not result.decision_permitted:
+        doc.banner("A final hiring decision was NOT permitted from these notes: mandatory "
+                   "interview evidence is incomplete. Complete a focused follow-up before "
+                   "deciding.", kind="warning", label="MANUAL REVIEW")
     doc.key_values([
         ("Decision", result.decision.value),
-        ("Interview score", f"{result.total_percent:g}%"),
+        ("Calculated interview score", f"{result.total_percent:g}%"),
+        ("Final decision permitted", "Yes" if result.decision_permitted else "No — manual review"),
         ("New status", result.status),
     ])
+    doc.heading("Evidence completeness", 1)
+    doc.table(["Assessed areas", "Missing / unassessed areas"],
+              [["; ".join(result.assessed_areas) or "None",
+                "; ".join(result.missing_areas) or "None — all mandatory areas assessed"]])
     if result.mandatory_override_failed:
         doc.banner("Mandatory hands-on override triggered: "
                    + ", ".join(result.mandatory_override_failed),

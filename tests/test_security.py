@@ -77,3 +77,37 @@ def test_scanner_detects_planted_secret_and_pii(tmp_path: Path):
 
 def test_pattern_sets_are_non_empty():
     assert SECRET_PATTERNS and PII_PATTERNS
+
+
+def test_scanner_detects_pii_inside_tracked_docx(tmp_path: Path):
+    """Lockdown Part 8 — extract DOCX paragraph/table text and scan it for PII."""
+    from docx import Document
+
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    email = "person" + "@" + "example.com"
+    phone = "555" + "-" + "867" + "-" + "5309"
+    doc = Document()
+    doc.add_paragraph("Reference contact: " + email)
+    table = doc.add_table(rows=1, cols=1)
+    table.rows[0].cells[0].text = "Phone: " + phone
+    doc.save(str(tmp_path / "reference.docx"))
+    subprocess.run(["git", "add", "-A"], cwd=tmp_path, check=True)
+
+    findings = scan_repository(tmp_path, include_pii=True)
+    kinds = {f.kind for f in findings}
+    paths = {f.path for f in findings}
+    assert "email" in kinds
+    assert "phone" in kinds
+    assert "reference.docx" in paths
+    # Findings never echo the matched value — only kind, path and line.
+    for finding in findings:
+        assert email not in finding.kind and phone not in finding.kind
+
+
+def test_docx_scan_reports_path_only_not_value(tmp_path: Path):
+    """A finding exposes the document path and kind, never the candidate value."""
+    from zume.security import Finding
+
+    f = Finding(path="docs/x.docx", line=1, kind="email")
+    assert f.path == "docs/x.docx" and f.kind == "email"
+    assert "@" not in f.kind

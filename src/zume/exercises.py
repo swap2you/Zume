@@ -14,7 +14,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Any
 
-from zume.models import ExerciseSelection
+from zume.models import ExerciseSelection, IndependenceQuestion
 
 
 @dataclass
@@ -33,9 +33,11 @@ class Exercise:
     debugging_follow_up: str
     expected_reasoning: str
     reference_solution: str
+    requirement_change_recommended_answer: str = ""
+    debugging_recommended_answer: str = ""
     scoring_rubric: list[str] = field(default_factory=list)
     red_flags: list[str] = field(default_factory=list)
-    independence_questions: list[str] = field(default_factory=list)
+    independence_questions: list[IndependenceQuestion] = field(default_factory=list)
 
     @property
     def fingerprint(self) -> str:
@@ -55,12 +57,14 @@ class Exercise:
             fingerprint=self.fingerprint,
             task=self.task,
             requirement_change_follow_up=self.requirement_change_follow_up,
+            requirement_change_recommended_answer=self.requirement_change_recommended_answer,
             debugging_follow_up=self.debugging_follow_up,
+            debugging_recommended_answer=self.debugging_recommended_answer,
             expected_reasoning=self.expected_reasoning,
             reference_solution=self.reference_solution,
             scoring_rubric=list(self.scoring_rubric),
             red_flags=list(self.red_flags),
-            independence_questions=list(self.independence_questions),
+            independence_questions=[q.model_copy() for q in self.independence_questions],
         )
 
 
@@ -72,6 +76,20 @@ def fingerprint(task_text: str) -> str:
 
 def _clean(value: Any) -> str:
     return str(value or "").strip()
+
+
+def _parse_independence_questions(raw: Any) -> list[IndependenceQuestion]:
+    """Accept either legacy plain strings or objects with a recommended answer."""
+    parsed: list[IndependenceQuestion] = []
+    for item in raw or []:
+        if isinstance(item, dict):
+            parsed.append(IndependenceQuestion(
+                question=_clean(item.get("question")),
+                recommended_answer=_clean(item.get("recommended_answer")),
+            ))
+        else:
+            parsed.append(IndependenceQuestion(question=_clean(item), recommended_answer=""))
+    return parsed
 
 
 def load_exercises(library: dict[str, Any]) -> dict[str, list[Exercise]]:
@@ -93,15 +111,43 @@ def load_exercises(library: dict[str, Any]) -> dict[str, list[Exercise]]:
                 rotation_group=ex.get("rotation_group", area),
                 task=_clean(ex.get("task")),
                 requirement_change_follow_up=_clean(ex.get("requirement_change_follow_up")),
+                requirement_change_recommended_answer=_clean(
+                    ex.get("requirement_change_recommended_answer")),
                 debugging_follow_up=_clean(ex.get("debugging_follow_up")),
+                debugging_recommended_answer=_clean(ex.get("debugging_recommended_answer")),
                 expected_reasoning=_clean(ex.get("expected_reasoning")),
                 reference_solution=_clean(ex.get("reference_solution")),
                 scoring_rubric=list(ex.get("scoring_rubric", [])),
                 red_flags=list(ex.get("red_flags", [])),
-                independence_questions=list(ex.get("independence_questions", [])),
+                independence_questions=_parse_independence_questions(
+                    ex.get("independence_questions")),
             ))
         out[area] = items
     return out
+
+
+def validate_exercise_answers(exercises_by_area: dict[str, list[Exercise]]) -> list[str]:
+    """Return contract violations: every active exercise must carry non-empty
+    requirement-change and debugging recommended answers, and every independence
+    question must have a non-empty recommended answer."""
+    problems: list[str] = []
+    for area_exercises in exercises_by_area.values():
+        for ex in area_exercises:
+            if ex.status != "active":
+                continue
+            if not ex.requirement_change_recommended_answer:
+                problems.append(f"{ex.id}: missing requirement_change_recommended_answer")
+            if not ex.debugging_recommended_answer:
+                problems.append(f"{ex.id}: missing debugging_recommended_answer")
+            if not ex.independence_questions:
+                problems.append(f"{ex.id}: has no independence questions")
+            for i, q in enumerate(ex.independence_questions):
+                if not q.question:
+                    problems.append(f"{ex.id}: independence question {i} has no text")
+                if not q.recommended_answer:
+                    problems.append(
+                        f"{ex.id}: independence question {i} missing recommended_answer")
+    return problems
 
 
 class ExerciseSelector:

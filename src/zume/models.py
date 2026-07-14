@@ -117,6 +117,13 @@ class ScheduleRecord(BaseModel):
     created_at: str = Field(default_factory=utc_now_iso)
 
 
+class IndependenceQuestion(BaseModel):
+    """An interviewer independence-verification question with its expected answer."""
+
+    question: str
+    recommended_answer: str = ""
+
+
 class ExerciseSelection(BaseModel):
     area: str
     area_label: str
@@ -130,12 +137,14 @@ class ExerciseSelection(BaseModel):
     fingerprint: str = ""
     task: str = ""
     requirement_change_follow_up: str = ""
+    requirement_change_recommended_answer: str = ""
     debugging_follow_up: str = ""
+    debugging_recommended_answer: str = ""
     expected_reasoning: str = ""
     reference_solution: str = ""
     scoring_rubric: list[str] = Field(default_factory=list)
     red_flags: list[str] = Field(default_factory=list)
-    independence_questions: list[str] = Field(default_factory=list)
+    independence_questions: list[IndependenceQuestion] = Field(default_factory=list)
 
 
 class GuideFollowUp(BaseModel):
@@ -222,6 +231,10 @@ class FeedbackResult(BaseModel):
     concerns: list[str] = Field(default_factory=list)
     observations: IndependenceObservations = Field(default_factory=IndependenceObservations)
     status: str = "INTERVIEWED"
+    # Part 5 — interview-evidence completeness gate.
+    assessed_areas: list[str] = Field(default_factory=list)
+    missing_areas: list[str] = Field(default_factory=list)
+    decision_permitted: bool = True
     created_at: str = Field(default_factory=utc_now_iso)
 
 
@@ -253,5 +266,7 @@ class Candidate(BaseModel):
     # Phase 6 — exercises assigned on the first prep; preserved across reruns.
     assigned_exercise_ids: list[str] = Field(default_factory=list)
     rotation_reasons: list[str] = Field(default_factory=list)
+    # Lockdown Part 3 — reasons recorded when a finalized candidate is reopened.
+    reopen_reasons: list[str] = Field(default_factory=list)
     contract_version: int = 1
     updated_at: str = Field(default_factory=utc_now_iso)

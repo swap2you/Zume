@@ -30,10 +30,18 @@ to stop rather than guessing.
 - Re-running intake for the same name/date is idempotent and updates in place.
 - Expected: the same folder, same assigned exercises, no duplicate files.
 
-## Interview prep is blocked
+## Intake is blocked (Do-Not-Proceed)
 
-- The decision is Do-Not-Proceed. To proceed anyway, re-run with
+- The screening decision is Do-Not-Proceed, so `zume intake` builds only the
+  screening summary. To build the full package anyway, re-run intake with
   `--override --override-reason "<reason>"`. The reason is recorded.
+
+## Intake refuses to rerun a finalized candidate
+
+- Once a candidate is interviewed/selected/rejected, `zume intake` stops to
+  avoid erasing final documents. To intentionally regenerate the pre-interview
+  package, re-run with `--reopen --reopen-reason "<reason>"`; the final
+  evaluation and post-interview communications are preserved.
 
 ## Schedule image is ambiguous
 
@@ -54,7 +62,8 @@ to stop rather than guessing.
 ## Package contains duplicate or versioned files
 
 - Run `zume candidate cleanup --candidate "<ref>" --preview` then `--apply`.
-- Expected: no `__vN` files and no `99-final` folder remain.
+- Expected: redundant versioned copies and any legacy final-copy folders are
+  removed; deliverables live only under `deliverables/`.
 
 ## Rerun changed exercises
 

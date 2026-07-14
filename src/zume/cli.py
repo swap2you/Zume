@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import re
 import shutil
 from pathlib import Path
@@ -13,16 +12,9 @@ from rich.console import Console
 
 from zume import candidate as cand
 from zume import config as cfg
-from zume import exercises as ex_lib
-from zume import feedback as fb
-from zume import interview as iv
 from zume import pipeline
-from zume import scheduling as sched
-from zume import screening as scr
-from zume.ingest import extract_text, parse_resume
-from zume.models import Decision, ScreeningResult
 from zume.storage import Storage
-from zume.validation import check_privacy, validate_candidate_folder, validate_docx
+from zume.validation import check_privacy, validate_candidate_folder
 
 app = typer.Typer(name="zume", help="Local-first Senior SDET hiring operations toolkit.",
                   no_args_is_help=True)
@@ -33,323 +25,82 @@ def _root() -> Path:
     return cfg.find_root()
 
 
-def _promote_if_valid(folder: Path, artifacts: list[Path]) -> list[str]:
-    """Copy structurally valid DOCX artifacts into 99-final."""
-    issues: list[str] = []
-    for artifact in artifacts:
-        if artifact.suffix != ".docx":
-            continue
-        report = validate_docx(artifact)
-        if report.ok:
-            cand.versioned_write_bytes(folder / "99-final" / artifact.name,
-                                       artifact.read_bytes())
-        else:
-            issues.extend(report.errors)
-    return issues
-
-
-def _finish(folder: Path, candidate, artifacts: list[Path]) -> None:
-    for artifact in artifacts:
-        cand.record_artifact(candidate, folder, artifact)
-    issues = _promote_if_valid(folder, artifacts)
-    cand.save_candidate(folder, candidate)
-    with Storage(_root()) as storage:
-        storage.sync_candidate(candidate, folder)
-    for issue in issues:
-        console.print(f"[yellow]Not promoted to 99-final:[/] {issue}")
-
-
-def _read_text_argument(value: str) -> str:
-    path = Path(value)
-    if path.exists() and path.is_file():
-        return path.read_text(encoding="utf-8", errors="replace")
-    return value
-
-
 # ---------------------------------------------------------------------------
-# Workflows
+# Legacy command lockdown (Lockdown Part 2)
+#
+# The v1 workflow commands used to create numbered candidate folders, versioned
+# files and a 99-final folder. They are now hidden, print a deprecation notice,
+# and either delegate to the v2 intake/finalize path where the mapping is
+# unambiguous or refuse to run. No legacy command creates a v1 candidate folder.
+
+LEGACY_DEPRECATION = (
+    "[yellow]Deprecated command.[/] Zume now uses two commands: "
+    "'zume intake' (pre-interview package) and 'zume finalize' (after notes). "
+    "See CURSOR_START_HERE.md.")
 
 
-def run_filter_resume(input_path: Optional[Path], text_file: Optional[Path],
-                      name: Optional[str]) -> Path:
-    root = _root()
-    if input_path is None and text_file is None:
-        raise typer.BadParameter("Provide --input <resume file> and/or --text-file <pasted text>.")
-    if input_path is not None and not input_path.exists():
-        raise typer.BadParameter(f"Input file not found: {input_path}")
-    text = ""
-    if input_path is not None:
-        text = extract_text(input_path)
-    if text_file is not None:
-        text = (text + "\n" + text_file.read_text(encoding="utf-8", errors="replace")).strip()
-    profile = parse_resume(text, name_override=name)
-
-    candidate, folder = cand.new_candidate(root, profile.name)
-    if input_path is not None:
-        source = cand.copy_source_file(folder, input_path, kind="resume")
-        if source.stored_path not in {s.stored_path for s in candidate.source_files}:
-            candidate.source_files.append(source)
-    else:
-        pasted = folder / "00-source" / "resume-pasted.txt"
-        cand.atomic_write_text(pasted, text)
-        source = cand.copy_source_file(folder, pasted, kind="pasted-text")
-        if source.stored_path not in {s.stored_path for s in candidate.source_files}:
-            candidate.source_files.append(source)
-    candidate.experience_years = profile.experience_years
-
-    standard = cfg.load_hiring_standard(root)
-    theme = cfg.load_theme(root)
-    result = scr.screen_resume(profile, standard)
-
-    screening_dir = folder / "01-screening"
-    comms_dir = folder / "06-communications"
-    artifacts = [
-        screening_dir / "Standardized_Resume.docx",
-        screening_dir / "ATS_Screening.docx",
-        screening_dir / "Recruiter_Feedback.docx",
-    ]
-    scr.generate_standardized_resume(theme, profile, result, artifacts[0])
-    scr.generate_ats_screening(theme, result, artifacts[1])
-    scr.generate_recruiter_feedback(theme, result, artifacts[2],
-                                    comms_dir / "Recruiter_Feedback.md")
-    cand.atomic_write_text(screening_dir / "screening.json",
-                           json.dumps(result.model_dump(), indent=2, ensure_ascii=False))
-
-    status = {
-        Decision.PROCEED: ("SCREENING", "Screening passed: proceed to technical screen."),
-        Decision.CONDITIONAL: ("CONDITIONAL_SCREEN", "Conditional technical screen required."),
-        Decision.DO_NOT_PROCEED: ("DO_NOT_PROCEED", "Screening decision: do not proceed."),
-    }[result.decision]
-    cand.record_status(candidate, status[0], status[1])
-    _finish(folder, candidate, artifacts + [comms_dir / "Recruiter_Feedback.md"])
-    with Storage(root) as storage:
-        cid = storage.upsert_candidate(candidate)
-        storage.record_screening(cid, result)
-        storage.record_communication(cid, "recruiter-screening",
-                                     f"Profile Screening Feedback - {profile.name}",
-                                     "06-communications/Recruiter_Feedback.md")
-
-    console.print(f"Decision: {result.decision.value} "
-                  f"(resume evidence coverage {result.score_percent:g}%; "
-                  f"experience gate {result.experience_state.value})")
-    console.print("Note: coverage measures resume evidence only, not competency.")
-    console.print(f"Candidate folder: {folder}")
-    return folder
-
-
-def _load_screening(folder: Path) -> ScreeningResult:
-    path = folder / "01-screening" / "screening.json"
-    if not path.exists():
-        raise typer.BadParameter(
-            "No screening found for this candidate. Run 'zume filter-resume' first.")
-    return ScreeningResult.model_validate_json(path.read_text(encoding="utf-8"))
-
-
-def run_interview_prep(candidate_ref: str, override: bool = False,
-                       override_reason: str | None = None) -> Path:
-    root = _root()
-    folder = cand.resolve_candidate(root, candidate_ref)
-    candidate = cand.load_candidate(folder)
-    result = _load_screening(folder)
-    theme = cfg.load_theme(root)
-    library = cfg.load_exercise_library(root)
-
-    # Phase 5 — workflow gate: never silently prep a rejected candidate.
-    if result.decision == Decision.DO_NOT_PROCEED:
-        if not override:
-            console.print(
-                "[red]Blocked:[/] screening decision is 'Do Not Proceed'. Interview prep "
-                "is not generated for rejected candidates. Re-run with --override and "
-                "--override-reason \"<reason>\" to intentionally proceed anyway.")
-            raise typer.Exit(code=2)
-        if not override_reason or not override_reason.strip():
-            raise typer.BadParameter("--override requires a non-empty --override-reason.")
-
-    effective_reason = override_reason.strip() if (override and override_reason) else ""
-    if effective_reason:
-        cand.record_status(candidate, "INTERVIEW_PREP_OVERRIDE",
-                           f"Interview prep generated over a Do-Not-Proceed decision. "
-                           f"Reason: {effective_reason}")
-        if effective_reason not in candidate.override_reasons:
-            candidate.override_reasons.append(effective_reason)
-
-    # Rotation-aware exercise selection from persisted usage + candidate history.
-    exercises_by_area = ex_lib.load_exercises(library)
-    with Storage(root) as storage:
-        cid = storage.upsert_candidate(candidate)
-        usage = storage.get_exercise_usage()
-        history = storage.get_candidate_exercise_history(cid)
-    selector = ex_lib.ExerciseSelector(exercises_by_area, usage=usage, candidate_history=history)
-    kit = iv.build_kit(library, result, override_reason=effective_reason, selector=selector)
-
-    prep_dir = folder / "03-interview-prep"
-    artifacts = [
-        prep_dir / "Candidate_Focus_Sheet.docx",
-        prep_dir / "Full_Interview_Guide.docx",
-        prep_dir / "Scorecard.docx",
-        prep_dir / "Exercise_Pack.docx",
-        prep_dir / "Candidate_Exercise_Sheet.docx",
-    ]
-    iv.generate_focus_sheet(theme, kit, result, artifacts[0])
-    iv.generate_interview_guide(theme, kit, library, artifacts[1])
-    iv.generate_scorecard(theme, kit, artifacts[2])
-    iv.generate_exercise_pack(theme, kit, artifacts[3])
-    iv.generate_candidate_exercise_sheet(theme, kit, artifacts[4])
-    cand.atomic_write_text(prep_dir / "interview-kit.json",
-                           json.dumps(kit.model_dump(), indent=2, ensure_ascii=False))
-    _finish(folder, candidate, artifacts)
-    with Storage(root) as storage:
-        cid = storage.upsert_candidate(candidate)
-        storage.record_interview_kit(cid, kit)
-        storage.record_exercise_assignments(cid, kit.exercises)
-    console.print(f"Interview kit generated with {len(kit.exercises)} exercises "
-                  f"(screening: {kit.screening_decision}).")
-    if kit.override_reason:
-        console.print(f"[red]Override recorded:[/] {kit.override_reason}")
-    if kit.unverified_mandatory:
-        console.print("[yellow]Unverified mandatory skills to validate live:[/] "
-                      + ", ".join(kit.unverified_mandatory))
-    console.print(f"Candidate folder: {folder}")
-    return folder
-
-
-def run_schedule_interview(candidate_ref: str, image: Optional[Path],
-                           details: Optional[str]) -> Path:
-    root = _root()
-    folder = cand.resolve_candidate(root, candidate_ref)
-    candidate = cand.load_candidate(folder)
-    theme = cfg.load_theme(root)
-
-    if image is not None:
-        if not image.exists():
-            raise typer.BadParameter(f"Screenshot not found: {image}")
-        source = cand.copy_source_file(folder, image, kind="schedule-image")
-        if source.stored_path not in {s.stored_path for s in candidate.source_files}:
-            candidate.source_files.append(source)
-
-    details_text = _read_text_argument(details) if details else None
-    record = sched.build_schedule(candidate.display_name, image, details_text)
-
-    schedule_dir = folder / "02-schedule"
-    comms_dir = folder / "06-communications"
-    schedule_doc = schedule_dir / "Interview_Schedule.docx"
-    sched.generate_schedule_doc(theme, record, schedule_doc)
-    cand.atomic_write_text(schedule_dir / "schedule.json",
-                           json.dumps(record.model_dump(), indent=2, ensure_ascii=False))
-    drafts = sched.build_communication_drafts(record)
-    drafts_md = comms_dir / "Schedule_Drafts.md"
-    sched.write_draft_markdown(drafts, drafts_md)
-
-    if not record.needs_confirmation:
-        cand.record_status(candidate, "INTERVIEW_SCHEDULED",
-                           f"Interview scheduled for {record.date} {record.time}.")
-    _finish(folder, candidate, [schedule_doc, drafts_md])
-    with Storage(root) as storage:
-        cid = storage.upsert_candidate(candidate)
-        for draft in drafts:
-            storage.record_communication(cid, draft.kind, draft.subject,
-                                         "06-communications/Schedule_Drafts.md")
-    if record.needs_confirmation:
-        console.print("[yellow]Schedule details are incomplete. Re-run with --details "
-                      "(text or file with 'Date:', 'Time:', ... lines) to confirm.[/]")
-    console.print(f"Candidate folder: {folder}")
-    return folder
-
-
-def run_interview_feedback(candidate_ref: str, notes: str, leadership: bool) -> Path:
-    root = _root()
-    folder = cand.resolve_candidate(root, candidate_ref)
-    candidate = cand.load_candidate(folder)
-    theme = cfg.load_theme(root)
-
-    notes_text = _read_text_argument(notes)
-    notes_path = folder / "04-interview" / "interviewer-notes.txt"
-    cand.versioned_write_bytes(notes_path, notes_text.encode("utf-8"))
-
-    result = fb.evaluate_notes(candidate.display_name, notes_text)
-    feedback_dir = folder / "05-feedback"
-    comms_dir = folder / "06-communications"
-    artifacts = [
-        feedback_dir / "Final_Evaluation.docx",
-        feedback_dir / "Completed_Scorecard.docx",
-        feedback_dir / "Recruiter_Feedback_Post_Interview.docx",
-    ]
-    fb.generate_final_evaluation(theme, result, notes_text, artifacts[0])
-    fb.generate_completed_scorecard(theme, result, artifacts[1])
-    fb.generate_recruiter_feedback(theme, result, artifacts[2],
-                                   comms_dir / "Recruiter_Feedback_Post_Interview.md")
-    if leadership:
-        leadership_doc = feedback_dir / "Leadership_Feedback.docx"
-        fb.generate_leadership_feedback(theme, result, leadership_doc,
-                                        comms_dir / "Leadership_Feedback.md")
-        artifacts.append(leadership_doc)
-    cand.atomic_write_text(feedback_dir / "feedback.json",
-                           json.dumps(result.model_dump(), indent=2, ensure_ascii=False))
-
-    cand.record_status(candidate, "INTERVIEWED", "Interview feedback recorded.")
-    cand.record_status(candidate, result.status, result.recommendation)
-    _finish(folder, candidate, artifacts)
-    with Storage(root) as storage:
-        cid = storage.upsert_candidate(candidate)
-        storage.record_feedback(cid, result)
-        storage.record_communication(cid, "recruiter-final",
-                                     f"Interview Feedback - {candidate.display_name}",
-                                     "06-communications/Recruiter_Feedback_Post_Interview.md")
-
-    console.print(f"Decision: {result.decision.value} (score {result.total_percent:g}%)")
-    console.print(f"Status update: {result.status}")
-    console.print(f"Candidate folder: {folder}")
-    return folder
+def _deprecation_notice(old: str, guidance: str) -> None:
+    console.print(LEGACY_DEPRECATION)
+    console.print(f"[yellow]'{old}' is retired.[/] {guidance}")
 
 
 # ---------------------------------------------------------------------------
 # Commands
 
 
-@app.command("filter-resume")
+@app.command("filter-resume", hidden=True)
 def filter_resume_cmd(
     input: Optional[Path] = typer.Option(None, "--input", help="Resume PDF/DOCX/TXT path."),
     text_file: Optional[Path] = typer.Option(None, "--text-file",
                                              help="File containing pasted resume text."),
     name: Optional[str] = typer.Option(None, "--name", help="Candidate name override."),
 ) -> None:
-    """Trigger: Filter Resume - Automation Hiring."""
-    run_filter_resume(input, text_file, name)
+    """(Deprecated) Delegates to 'zume intake'. Never creates a v1 folder."""
+    _deprecation_notice("filter-resume", "Delegating to 'zume intake' (v2 contract).")
+    intake_cmd(resume=input, text_file=text_file, name=name, schedule_image=None,
+               schedule_details=None, override=False, override_reason=None,
+               rotate_exercises=False, rotation_reason=None, reopen=False, reopen_reason=None)
 
 
-@app.command("interview-prep")
+@app.command("interview-prep", hidden=True)
 def interview_prep_cmd(
     candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
-    override: bool = typer.Option(False, "--override",
-                                  help="Intentionally prep a Do-Not-Proceed candidate."),
-    override_reason: Optional[str] = typer.Option(
-        None, "--override-reason", help="Required justification when using --override."),
+    override: bool = typer.Option(False, "--override"),
+    override_reason: Optional[str] = typer.Option(None, "--override-reason"),
 ) -> None:
-    """Trigger: Interview Prep - Automation Hiring."""
-    run_interview_prep(candidate, override=override, override_reason=override_reason)
+    """(Deprecated) 'zume intake' already builds the full pre-interview package."""
+    _deprecation_notice(
+        "interview-prep",
+        "'zume intake' now builds screening, guide, scorecard and exercise sheet in one "
+        "step. Re-run: zume intake --resume <file>. No candidate folder was created.")
+    raise typer.Exit(code=2)
 
 
-@app.command("schedule-interview")
+@app.command("schedule-interview", hidden=True)
 def schedule_interview_cmd(
     candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
-    image: Optional[Path] = typer.Option(None, "--image", help="Schedule screenshot path."),
-    details: Optional[str] = typer.Option(
-        None, "--details",
-        help="Confirmed schedule details: text or a file with 'Date:', 'Time:', ... lines."),
+    image: Optional[Path] = typer.Option(None, "--image"),
+    details: Optional[str] = typer.Option(None, "--details"),
 ) -> None:
-    """Trigger: Schedule Interview - Automation Hiring."""
-    run_schedule_interview(candidate, image, details)
+    """(Deprecated) Scheduling is part of 'zume intake --schedule-details'."""
+    _deprecation_notice(
+        "schedule-interview",
+        "Re-run intake with the schedule: "
+        'zume intake --resume <file> --schedule-details "<text or file>". '
+        "No candidate folder was created.")
+    raise typer.Exit(code=2)
 
 
-@app.command("interview-feedback")
+@app.command("interview-feedback", hidden=True)
 def interview_feedback_cmd(
     candidate: str = typer.Option(..., "--candidate", help="Candidate name or folder."),
     notes: str = typer.Option(..., "--notes", help="Interview notes: file path or text."),
     leadership: bool = typer.Option(False, "--leadership",
                                     help="Also generate leadership feedback."),
 ) -> None:
-    """Trigger: Interview Feedback - Automation Hiring."""
-    run_interview_feedback(candidate, notes, leadership)
+    """(Deprecated) Delegates to 'zume finalize'."""
+    _deprecation_notice("interview-feedback", "Delegating to 'zume finalize' (v2 contract).")
+    finalize_cmd(candidate=candidate, notes=notes, leadership=leadership)
 
 
 @app.command("validate")
@@ -408,6 +159,10 @@ def intake_cmd(
     rotate_exercises: bool = typer.Option(False, "--rotate-exercises",
                                           help="Assign fresh exercises (needs a reason)."),
     rotation_reason: Optional[str] = typer.Option(None, "--rotation-reason"),
+    reopen: bool = typer.Option(False, "--reopen",
+                                help="Regenerate the package for a finalized candidate."),
+    reopen_reason: Optional[str] = typer.Option(
+        None, "--reopen-reason", help="Required justification when using --reopen."),
 ) -> None:
     """Screen a resume and build the complete pre-interview package, then stop."""
     resume_text = text_file.read_text(encoding="utf-8", errors="replace") if text_file else None
@@ -416,7 +171,8 @@ def intake_cmd(
             _root(), resume_path=resume, resume_text=resume_text, name=name,
             schedule_image=schedule_image, schedule_details=schedule_details,
             override=override, override_reason=override_reason,
-            rotate_exercises=rotate_exercises, rotation_reason=rotation_reason)
+            rotate_exercises=rotate_exercises, rotation_reason=rotation_reason,
+            reopen=reopen, reopen_reason=reopen_reason)
     except pipeline.WorkflowError as exc:
         console.print(f"[red]Blocked:[/] {exc}")
         raise typer.Exit(code=2) from exc
@@ -462,6 +218,12 @@ def demo_cmd() -> None:
     """Run the fictional end-to-end sample: intake, then finalize."""
     root = _root()
     examples = root / "examples" / "fictional-candidate"
+    # The demo is a throwaway fictional sample; start clean so it is repeatable
+    # even after a previous run finalized the candidate (Part 3 intake guard).
+    demo_folder = cand.candidates_root(root) / cand.folder_name_for(
+        *cand.normalize_name("Aarav Mehta"))
+    if demo_folder.exists():
+        shutil.rmtree(demo_folder, ignore_errors=True)
     console.rule("1/2 Intake (pre-interview package)")
     intake = pipeline.run_intake(
         root, resume_path=examples / "resume.txt",
@@ -476,7 +238,7 @@ def demo_cmd() -> None:
     console.print(f"Validate with: zume validate --candidate {intake.folder.name}")
 
 
-@app.command("run")
+@app.command("run", hidden=True)
 def run_cmd(
     trigger: str = typer.Option(..., "--trigger", help="Exact natural-language trigger."),
     input: Optional[Path] = typer.Option(None, "--input"),
@@ -490,24 +252,31 @@ def run_cmd(
     override: bool = typer.Option(False, "--override"),
     override_reason: Optional[str] = typer.Option(None, "--override-reason"),
 ) -> None:
-    """Map an exact natural-language trigger to its workflow."""
+    """(Deprecated) Natural-language trigger flow. Delegates to intake/finalize only."""
     workflow = match_trigger(_root(), trigger)
     if workflow is None:
         known = "\n  ".join(cfg.load_triggers(_root()).values())
         raise typer.BadParameter(f"Unknown trigger: {trigger!r}. Known triggers:\n  {known}")
     if workflow == "filter_resume":
-        run_filter_resume(input, text_file, name)
+        _deprecation_notice("run --trigger 'Filter Resume …'", "Delegating to 'zume intake'.")
+        intake_cmd(resume=input, text_file=text_file, name=name, schedule_image=None,
+                   schedule_details=None, override=override, override_reason=override_reason,
+                   rotate_exercises=False, rotation_reason=None, reopen=False, reopen_reason=None)
         return
-    if candidate is None:
-        raise typer.BadParameter(f"The '{trigger}' trigger requires --candidate.")
-    if workflow == "interview_prep":
-        run_interview_prep(candidate, override=override, override_reason=override_reason)
-    elif workflow == "schedule_interview":
-        run_schedule_interview(candidate, image, details)
-    elif workflow == "interview_feedback":
-        if notes is None:
-            raise typer.BadParameter("This trigger requires --notes.")
-        run_interview_feedback(candidate, notes, leadership)
+    if workflow == "interview_feedback":
+        if candidate is None or notes is None:
+            raise typer.BadParameter("This trigger requires --candidate and --notes.")
+        _deprecation_notice("run --trigger 'Interview Feedback …'",
+                            "Delegating to 'zume finalize'.")
+        finalize_cmd(candidate=candidate, notes=notes, leadership=leadership)
+        return
+    # interview_prep / schedule_interview have no unambiguous v2 delegate.
+    _deprecation_notice(
+        f"run --trigger {trigger!r}",
+        "Interview prep and scheduling are now part of 'zume intake'. "
+        "Re-run: zume intake --resume <file> [--schedule-details \"<...>\"]. "
+        "No candidate folder was created.")
+    raise typer.Exit(code=2)
 
 
 candidate_app = typer.Typer(name="candidate", help="Candidate privacy lifecycle commands.",
@@ -533,11 +302,14 @@ def candidate_export_cmd(
                                        include_source=include_source,
                                        include_internal=include_internal)
     record = cand.load_candidate(folder)
-    cand.record_status(record, "EXPORTED", f"Exported package: {package.name}")
+    # Record the export as an audit event only; never overwrite the workflow
+    # status, otherwise a later finalize (ready/scheduled only) would be blocked.
+    cand.record_event(record, f"Exported package: {package.name}", kind="EXPORTED")
     cand.save_candidate(folder, record)
     with Storage(root) as storage:
-        storage.set_status(folder.name, "EXPORTED")
-    console.print(f"[green]Exported[/] {folder.name} -> {package}")
+        storage.upsert_candidate(record)
+    console.print(f"[green]Exported[/] {folder.name} -> {package} "
+                  f"(workflow status unchanged: {record.status})")
 
 
 @candidate_app.command("migrate")

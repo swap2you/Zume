@@ -1,6 +1,15 @@
 # Zume
 
-Zume is a lightweight, local-first Senior SDET hiring operations toolkit. It turns resumes, interview schedule screenshots, and interview notes into structured screening, interview, feedback, and communication artifacts.
+Zume is a lightweight, local-first Senior SDET hiring operations toolkit. It
+turns a resume and interviewer notes into a small, consistent set of interview
+documents. Zume is driven primarily from **Cursor**, using two commands:
+`zume intake` (before the interview) and `zume finalize` (after the interview).
+
+## Start here
+
+- **[`CURSOR_START_HERE.md`](CURSOR_START_HERE.md)** — how to run Zume from Cursor.
+- **[`docs/ZUME_DAILY_USE_GUIDE.md`](docs/ZUME_DAILY_USE_GUIDE.md)** — day-to-day use for non-developers.
+- **[`docs/ZUME_TROUBLESHOOTING_GUIDE.md`](docs/ZUME_TROUBLESHOOTING_GUIDE.md)** — common issues and fixes.
 
 ## Local path
 `C:\Development\Workspace\Zume`
@@ -10,53 +19,64 @@ Zume is a lightweight, local-first Senior SDET hiring operations toolkit. It tur
 ```powershell
 cd C:\Development\Workspace\Zume
 python -m venv .venv
-.\.venv\Scripts\python -m pip install -e ".[dev]"
-```
-
-For a reproducible install pinned to verified versions, add the constraints
-file (`pyproject.toml` stays the source of truth):
-
-```powershell
 .\.venv\Scripts\python -m pip install -e ".[dev]" -c constraints.txt
 ```
 
 The `zume` command is then available at `.venv\Scripts\zume` (or plainly as
 `zume` after activating the venv with `.\.venv\Scripts\Activate.ps1`).
 
-## Core triggers
-- `Filter Resume – Automation Hiring`
-- `Interview Prep – Automation Hiring`
-- `Schedule Interview – Automation Hiring`
-- `Interview Feedback – Automation Hiring`
+## The two-command workflow
 
-## Usage
-
-Place input files in `input/` (or reference any path). Every workflow writes
-into `candidates/LastName_FirstName_YYYY-MM-DD/` and promotes validated DOCX
-files to that folder's `99-final/`.
+Zume uses exactly two operational commands:
 
 ```powershell
-# 1. Screen a resume (PDF, DOCX or TXT; --text-file for pasted text)
-zume filter-resume --input input\Rohan_N.pdf
-zume filter-resume --text-file input\pasted-resume.txt --name "Rohan N"
+# 1. Before the interview — screen the resume and build the full package, then STOP.
+zume intake --resume input\Candidate.pdf
+zume intake --text-file input\pasted-resume.txt --name "Candidate Name"
+zume intake --resume input\Candidate.pdf `
+    --schedule-details "Date: 2026-07-20`nTime: 10:00 AM`nTimezone: America/New_York`nDuration: 180 minutes"
 
-# 2. Build the interview kit (focus sheet, 3-hour guide, scorecard, exercises)
-zume interview-prep --candidate "Rohan N"
-
-# 3. Record the schedule (screenshot metadata + confirmed details)
-zume schedule-interview --candidate "Rohan N" --image input\rohan_interview.png `
-    --details "Date: 2026-07-20`nTime: 10:00 AM ET`nDuration: 90 minutes"
-
-# 4. Turn interviewer notes into the evaluation package
-zume interview-feedback --candidate "Rohan N" --notes input\notes.txt --leadership
-
-# Natural-language trigger mapping
-zume run --trigger "Filter Resume – Automation Hiring" --input input\Rohan_N.pdf
-
-# Fictional end-to-end sample and validation
-zume demo
-zume validate --candidate Mehta_Aarav_2026-07-13
+# 2. After the interview — turn interviewer notes into the final evaluation.
+zume finalize --candidate "Candidate Name" --notes input\notes.txt --leadership
 ```
+
+`intake` never produces interview feedback; it stops and waits for real
+interviewer notes. `finalize` runs only after those notes exist.
+
+The standard interview is **180 minutes** with a **20-minute knockout round**.
+
+### Candidate folder contract
+
+Every candidate folder contains exactly three subfolders:
+
+- `source/` — the original resume (and any schedule screenshot).
+- `_internal/` — working JSON and interviewer notes (never shared).
+- `deliverables/` — the final, user-facing DOCX files.
+
+There is no separate legacy final-copy folder and there are no user-visible
+versioned (`__vN`) files. At most seven canonical deliverables exist:
+
+| # | Deliverable | Audience |
+|---|-------------|----------|
+| 01 | `01_Screening_Summary.docx` | interviewer |
+| 02 | `02_Three_Hour_Interview_Guide.docx` | interviewer (answers + solutions) |
+| 03 | `03_Interview_Scorecard.docx` | interviewer |
+| 04 | `04_Candidate_Exercise_Sheet.docx` | **candidate-shareable** (tasks only) |
+| 05 | `05_Schedule_and_Communications.docx` | interviewer |
+| 06 | `06_Final_Interview_Evaluation.docx` | interviewer (after `finalize`) |
+| 07 | `07_Post_Interview_Communications.docx` | interviewer (after `finalize`) |
+
+### Guards worth knowing
+
+- **Do-Not-Proceed:** `intake` builds only the screening summary unless you pass
+  `--override --override-reason "<reason>"`.
+- **Finalized candidates:** re-running `intake` on an interviewed/selected/
+  rejected candidate is blocked. Use `--reopen --reopen-reason "<reason>"` to
+  regenerate the pre-interview package; final documents are preserved.
+- **Export:** `zume candidate export` is deliverables-only by default and records
+  an export event **without** changing the hiring workflow status.
+- **Incomplete notes:** `finalize` will not produce a "Selected" from partial
+  notes; it lists the missing mandatory areas and routes to manual review.
 
 ### Screening terminology (important)
 
@@ -64,75 +84,43 @@ The screening percentage is **resume evidence coverage**, not a competency
 score. It measures how strongly the resume evidences each mandatory skill
 (quantified > project > responsibility > skills-list mention). It does **not**
 establish technical competency — that is verified only through live assessment.
-The experience gate reports an explicit state: `passed`, `failed`, or `unknown`
-(unknown/conflicting experience routes to a conditional manual review rather
-than an automatic rejection).
+The experience gate reports an explicit state: `passed`, `failed`, or `unknown`.
 
-### Workflow gate and override
-
-`interview-prep` will not silently prepare a rejected candidate:
-
-```powershell
-# Blocked for a Do-Not-Proceed decision unless intentionally overridden:
-zume interview-prep --candidate "Rohan N" --override `
-    --override-reason "Hiring manager requested a courtesy screen"
-```
-
-The override reason is recorded in the candidate JSON, status history, SQLite,
-and the generated focus sheet. Interview prep also emits two exercise artifacts:
-an **interviewer** pack (with reference solutions) and a **candidate** sheet
-(tasks only — never solutions).
-
-### Candidate privacy lifecycle
+## Lifecycle, database and security utilities
 
 ```powershell
 zume candidate list
-zume candidate export  --candidate "Rohan N"            # zip into git-ignored output/
-zume candidate archive --candidate "Rohan N"            # move under candidates/_archive
-zume candidate delete  --candidate "Rohan N"            # preview only (no --confirm)
-zume candidate delete  --candidate "Rohan N" --confirm  # folder + all DB rows (transactional)
+zume candidate export  --candidate "Candidate Name"     # deliverables-only zip into output/
+zume candidate migrate --candidate "Candidate Name" --preview   # legacy folder -> v2
+zume candidate cleanup --candidate "Candidate Name" --preview   # remove redundant copies
+zume candidate archive --candidate "Candidate Name"
+zume candidate delete  --candidate "Candidate Name" --confirm
+
+zume db check          # schema version, integrity, foreign keys, duplicates
+zume db backup         # validated online backup into git-ignored data/
+zume scan-secrets      # scan tracked text AND DOCX files for secrets and PII
 ```
 
 Retention is documented in `config/privacy.yaml`. Zume never auto-deletes data.
 
-### Database and security utilities
+## Fictional sample and validation
 
 ```powershell
-zume db check          # schema version, integrity, foreign keys, duplicates
-zume db backup         # validated online backup into git-ignored data/
-zume scan-secrets      # scan tracked text files for secrets and PII
+zume demo
+zume validate --candidate Mehta_Aarav_2026-07-13
 ```
 
-## Outputs by workflow
-
-| Workflow | Folder | Artifacts |
-|----------|--------|-----------|
-| Screening | `01-screening` | Standardized Resume, ATS Screening, Recruiter Feedback (DOCX + MD draft) |
-| Interview prep | `03-interview-prep` | Focus Sheet, Full Interview Guide, Scorecard, Exercise Pack |
-| Schedule | `02-schedule` | Interview Schedule DOCX, join/reschedule/cancel/no-show drafts (MD) |
-| Feedback | `05-feedback` | Final Evaluation, Completed Scorecard, Recruiter/Leadership Feedback (DOCX + MD) |
-
-Copy-ready communication drafts land in `06-communications`. Searchable
-metadata (candidates, screenings, scores, status history, artifacts) is indexed
-in `data/zume.db` (SQLite, git-ignored).
-
-## Build with Cursor
-Open `.cursor/prompts/00_MASTER_BUILD_PROMPT.md` in Cursor Agent mode and run it from the repository root.
-
 ## Documentation
-- `docs/OPERATING_GUIDE.md` — day-to-day operator workflows and commands.
+
 - `docs/ARCHITECTURE.md` — modules, data flow, and storage design.
 - `docs/PRIVACY.md` — privacy model, ignore rules, and lifecycle commands.
-- `docs/TROUBLESHOOTING.md` — common issues and fixes.
-- `.cursor/prompts/` — task prompts (00–09), each with objective, inputs,
-  privacy boundary, allowed files, validation commands, stop conditions,
-  required report, and git restrictions.
-- `reports/` — audit, risk assessment, render validation, and hardening reports.
+- `docs/reference/legacy/` — historical notes on the retired v1 workflow.
+- `reports/` — audit, risk assessment, render validation, and lockdown reports.
 
 ## Privacy
-The current repository must be private before any real candidate material is
-used (see `reports/PUBLIC_REPOSITORY_RISK_ASSESSMENT.md`). Candidate files,
-generated outputs, screenshots, `General Docs/`, backups, and the production
-SQLite database must remain git-ignored. Run `zume scan-secrets` and
+
+The repository must be private before any real candidate material is used.
+Candidate files, generated outputs, screenshots, backups, and the production
+SQLite database remain git-ignored. Run `zume scan-secrets` and
 `git status --short` before every commit. CI uses only fictional data and never
 uploads candidate folders.

@@ -56,22 +56,58 @@ def _is_text(path: Path) -> bool:
     return path.suffix.lower() in TEXT_SUFFIXES or path.name == ".gitignore"
 
 
+def _extract_docx_text(path: Path) -> str:
+    """Extract paragraph and table text from a DOCX using python-docx.
+
+    Returns an empty string if the file cannot be opened as a Word document."""
+    try:
+        from docx import Document
+    except Exception:  # noqa: BLE001 - python-docx is a hard dependency, but stay safe
+        return ""
+    try:
+        document = Document(str(path))
+    except Exception:  # noqa: BLE001 - not a valid docx / unreadable
+        return ""
+    parts: list[str] = [p.text for p in document.paragraphs]
+    for table in document.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                parts.append(cell.text)
+    return "\n".join(parts)
+
+
+def _scan_text(text: str, patterns: dict[str, re.Pattern[str]], rel: str,
+               findings: list[Finding]) -> None:
+    for lineno, line in enumerate(text.splitlines(), start=1):
+        for kind, pattern in patterns.items():
+            if pattern.search(line):
+                findings.append(Finding(path=rel, line=lineno, kind=kind))
+
+
 def scan_repository(root: Path, include_pii: bool = True) -> list[Finding]:
-    """Return secret/PII findings across git-tracked text files."""
+    """Return secret/PII findings across git-tracked text and DOCX files.
+
+    Only git-tracked files are inspected, so ignored candidate/private material
+    is never read. Findings report the finding *kind* and document path only —
+    never the matched value."""
     findings: list[Finding] = []
     patterns = dict(SECRET_PATTERNS)
     if include_pii:
         patterns.update(PII_PATTERNS)
     for rel in list_tracked_files(root):
         path = root / rel
-        if not path.exists() or not _is_text(path):
+        if not path.exists():
+            continue
+        if path.suffix.lower() == ".docx":
+            text = _extract_docx_text(path)
+            if text:
+                _scan_text(text, patterns, rel, findings)
+            continue
+        if not _is_text(path):
             continue
         try:
             text = path.read_text(encoding="utf-8", errors="strict")
         except (UnicodeDecodeError, OSError):
             continue
-        for lineno, line in enumerate(text.splitlines(), start=1):
-            for kind, pattern in patterns.items():
-                if pattern.search(line):
-                    findings.append(Finding(path=rel, line=lineno, kind=kind))
+        _scan_text(text, patterns, rel, findings)
     return findings

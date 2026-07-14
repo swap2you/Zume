@@ -1,6 +1,7 @@
 """Phase 7 — candidate privacy lifecycle (export / archive / delete). Fictional data only."""
 
 import zipfile
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -8,6 +9,7 @@ import typer
 
 from zume import candidate as cand
 from zume import cli
+from zume import pipeline
 from zume.storage import Storage
 
 RESUME = """Test Person
@@ -18,11 +20,9 @@ Built and maintained a Java Selenium framework and owned delivery.
 
 
 def _make_candidate(tmp_root: Path) -> Path:
-    src = tmp_root / "input"
-    src.mkdir(exist_ok=True)
-    resume = src / "resume.txt"
-    resume.write_text(RESUME, encoding="utf-8")
-    return cli.run_filter_resume(resume, None, None)
+    result = pipeline.run_intake(tmp_root, resume_text=RESUME, name="Test Person",
+                                 today=date(2026, 7, 1))
+    return result.folder
 
 
 def test_export_creates_zip_package(tmp_root: Path):

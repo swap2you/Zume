@@ -371,6 +371,14 @@ def record_status(candidate: Candidate, status: str, note: str = "") -> None:
     candidate.status_history.append(StatusEvent(status=status, note=note))
 
 
+def record_event(candidate: Candidate, note: str, kind: str = "EXPORTED") -> None:
+    """Append a non-workflow history event (Part 4).
+
+    Records an auditable event (e.g. an export) WITHOUT replacing the candidate's
+    current hiring workflow ``status``, so a later ``finalize`` is not blocked."""
+    candidate.status_history.append(StatusEvent(status=kind, note=note))
+
+
 def record_status_once(candidate: Candidate, status: str, note: str = "") -> bool:
     """Idempotent status update (Phase 15): set current status, but only append
     a history event when the most recent event differs in status or note."""
