@@ -1,0 +1,851 @@
+version: 1
+records:
+- id: mobile-appium-b-01
+  domain: mobile-appium
+  subdomain: architecture
+  title: 'Architecture: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does architecture address, and what is its practical boundary?
+  concise_answer: Architecture should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that architecture supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your architecture approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative architecture case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - architecture
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: architecture
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-02
+  domain: mobile-appium
+  subdomain: options
+  title: 'Options: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Explain options to a teammate who must use it safely tomorrow.
+  concise_answer: Options should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that options supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your options approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative options case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - options
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: options
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-03
+  domain: mobile-appium
+  subdomain: android-ios-engines
+  title: 'Android Ios Engines: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: What would you check first before relying on android ios engines in a test or delivery workflow?
+  concise_answer: Android Ios Engines should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that android ios engines supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your android ios engines approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative android ios engines case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - android-ios-engines
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: android ios engines
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-04
+  domain: mobile-appium
+  subdomain: gestures
+  title: 'Gestures: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Give a small example of gestures and state the observable outcome.
+  concise_answer: Gestures should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that gestures supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your gestures approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative gestures case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - gestures
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: gestures
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-05
+  domain: mobile-appium
+  subdomain: synchronization
+  title: 'Synchronization: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about synchronization most often causes an avoidable defect?
+  concise_answer: Synchronization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that synchronization supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your synchronization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative synchronization case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - synchronization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-06
+  domain: mobile-appium
+  subdomain: hybrid-apps
+  title: 'Hybrid Apps: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that hybrid apps is being used for the wrong purpose?
+  concise_answer: Hybrid Apps should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hybrid apps supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your hybrid apps approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative hybrid apps case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - hybrid-apps
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: hybrid apps
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-07
+  domain: mobile-appium
+  subdomain: device-matrix
+  title: 'Device Matrix: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing device matrix?
+  concise_answer: Device Matrix should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that device matrix supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your device matrix approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative device matrix case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - device-matrix
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: device matrix
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-08
+  domain: mobile-appium
+  subdomain: cloud-execution
+  title: 'Cloud Execution: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is the simplest useful validation for cloud execution?
+  concise_answer: Cloud Execution should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cloud execution supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative cloud execution case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - cloud-execution
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: cloud execution
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-09
+  domain: mobile-appium
+  subdomain: architecture
+  title: 'Architecture: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Compare a sound use of architecture with a superficially similar but unsafe use.
+  concise_answer: Architecture should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that architecture supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative architecture case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - architecture
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: architecture
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-10
+  domain: mobile-appium
+  subdomain: options
+  title: 'Options: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What should a concise team convention say about options?
+  concise_answer: Options should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that options supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative options case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - options
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: options
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-11
+  domain: mobile-appium
+  subdomain: android-ios-engines
+  title: 'Android Ios Engines: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How does android ios engines affect the reliability of a routine automated check?
+  concise_answer: Android Ios Engines should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that android ios engines supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative android ios engines case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - android-ios-engines
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: android ios engines
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-12
+  domain: mobile-appium
+  subdomain: gestures
+  title: 'Gestures: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What evidence would make you trust a result produced through gestures?
+  concise_answer: Gestures should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that gestures supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative gestures case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - gestures
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: gestures
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-13
+  domain: mobile-appium
+  subdomain: synchronization
+  title: 'Synchronization: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What failure mode should be made visible when introducing synchronization?
+  concise_answer: Synchronization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that synchronization supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative synchronization case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - synchronization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-14
+  domain: mobile-appium
+  subdomain: hybrid-apps
+  title: 'Hybrid Apps: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you explain the trade-off behind hybrid apps without relying on jargon?
+  concise_answer: Hybrid Apps should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hybrid apps supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative hybrid apps case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - hybrid-apps
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: hybrid apps
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: mobile-appium-b-15
+  domain: mobile-appium
+  subdomain: device-matrix
+  title: 'Device Matrix: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which input or precondition matters most for device matrix?
+  concise_answer: Device Matrix should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Mobile testing and Appium, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that device matrix supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Mobile testing and Appium example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative device matrix case before generalizing.
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - mobile-appium
+  - device-matrix
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: appium-docs
+    locator: device matrix
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept

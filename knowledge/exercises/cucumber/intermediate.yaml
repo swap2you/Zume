@@ -1,0 +1,274 @@
+version: 1
+records:
+- id: cucumber-exercise-i-01
+  domain: cucumber
+  subdomain: bdd-purpose
+  title: Bdd Purpose evidence exercise
+  level: intermediate
+  priority: P1
+  task: Given a small Cucumber, Gherkin, and BDD scenario, propose and implement or describe a bounded
+    approach for bdd purpose. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for bdd purpose, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for bdd
+    purpose. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the bdd purpose approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for bdd purpose passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the bdd purpose solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: java
+  allowed_languages:
+  - Java
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: cucumber-docs
+    locator: bdd purpose
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  tags:
+  - cucumber
+  - bdd-purpose
+  - exercise
+  variant_family: cucumber-bdd-purpose
+- id: cucumber-exercise-i-02
+  domain: cucumber
+  subdomain: discovery
+  title: Discovery evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small Cucumber, Gherkin, and BDD scenario, propose and implement or describe a bounded
+    approach for discovery. State assumptions, cover a failure path, and show the evidence you would collect.
+    Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for discovery, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for discovery.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the discovery approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for discovery passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the discovery solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: java
+  allowed_languages:
+  - Java
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: cucumber-docs
+    locator: discovery
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  tags:
+  - cucumber
+  - discovery
+  - exercise
+  variant_family: cucumber-discovery
+- id: cucumber-exercise-i-03
+  domain: cucumber
+  subdomain: gherkin
+  title: Gherkin evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small Cucumber, Gherkin, and BDD scenario, propose and implement or describe a bounded
+    approach for gherkin. State assumptions, cover a failure path, and show the evidence you would collect.
+    Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for gherkin, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for gherkin.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the gherkin approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for gherkin passes locally but fails intermittently in CI. What do
+    you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the gherkin solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: java
+  allowed_languages:
+  - Java
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: cucumber-docs
+    locator: gherkin
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  tags:
+  - cucumber
+  - gherkin
+  - exercise
+  variant_family: cucumber-gherkin
+- id: cucumber-exercise-i-04
+  domain: cucumber
+  subdomain: scenarios-outlines-tables
+  title: Scenarios Outlines Tables evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small Cucumber, Gherkin, and BDD scenario, propose and implement or describe a bounded
+    approach for scenarios outlines tables. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for scenarios outlines tables, choose a minimal approach,
+    exercise normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for scenarios
+    outlines tables. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the scenarios outlines tables approach if the input
+    volume or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for scenarios outlines tables passes locally but fails intermittently
+    in CI. What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the scenarios outlines tables solution is independently understood
+      rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: java
+  allowed_languages:
+  - Java
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: cucumber-docs
+    locator: scenarios outlines tables
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  tags:
+  - cucumber
+  - scenarios-outlines-tables
+  - exercise
+  variant_family: cucumber-scenarios-outlines-tables

@@ -1,0 +1,499 @@
+version: 1
+records:
+- id: python-automation-i-01
+  domain: python-automation
+  subdomain: language-basics
+  title: 'Language Basics: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design language basics for a changing product while preserving clear ownership?
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Python for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your language basics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - language-basics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-02
+  domain: python-automation
+  subdomain: pytest
+  title: 'Pytest: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling pytest across multiple teams?
+  concise_answer: Pytest should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that pytest supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your pytest approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative pytest case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - pytest
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: pytest
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-03
+  domain: python-automation
+  subdomain: fixtures
+  title: 'Fixtures: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: A result involving fixtures is intermittent. How do you isolate cause from symptom?
+  concise_answer: Fixtures should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that fixtures supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your fixtures approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative fixtures case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - fixtures
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: fixtures
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-04
+  domain: python-automation
+  subdomain: http-clients
+  title: 'Http Clients: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: How would you make http clients observable enough to support a production investigation?
+  concise_answer: Http Clients should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that http clients supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your http clients approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative http clients case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - http-clients
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: http clients
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-05
+  domain: python-automation
+  subdomain: concurrency
+  title: 'Concurrency: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: Where should the boundary around concurrency live, and why?
+  concise_answer: Concurrency should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that concurrency supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative concurrency case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - concurrency
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: concurrency
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-06
+  domain: python-automation
+  subdomain: packaging
+  title: 'Packaging: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you validate that packaging remains correct when inputs are incomplete or delayed?
+  concise_answer: Packaging should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that packaging supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative packaging case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - packaging
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: packaging
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-07
+  domain: python-automation
+  subdomain: language-basics
+  title: 'Language Basics: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What design choice makes language basics easier to evolve without hiding failures?
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Python for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - language-basics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-08
+  domain: python-automation
+  subdomain: pytest
+  title: 'Pytest: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around pytest?
+  concise_answer: Pytest should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that pytest supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative pytest case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - pytest
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: pytest
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: python-automation-i-09
+  domain: python-automation
+  subdomain: fixtures
+  title: 'Fixtures: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What data would you collect before tuning or optimizing fixtures?
+  concise_answer: Fixtures should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that fixtures supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative fixtures case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - fixtures
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: fixtures
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario

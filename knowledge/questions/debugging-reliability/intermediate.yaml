@@ -1,0 +1,1403 @@
+version: 1
+records:
+- id: debugging-reliability-i-01
+  domain: debugging-reliability
+  subdomain: reproduce-isolate
+  title: 'Reproduce Isolate: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design reproduce isolate for a changing product while preserving clear ownership?
+  concise_answer: Reproduce Isolate should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that reproduce isolate supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reproduce isolate approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reproduce isolate case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - reproduce-isolate
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: reproduce isolate
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-02
+  domain: debugging-reliability
+  subdomain: artifacts
+  title: 'Artifacts: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling artifacts across multiple teams?
+  concise_answer: Artifacts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that artifacts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your artifacts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative artifacts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - artifacts
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: artifacts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-03
+  domain: debugging-reliability
+  subdomain: synchronization
+  title: 'Synchronization: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: A result involving synchronization is intermittent. How do you isolate cause from symptom?
+  concise_answer: Synchronization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that synchronization supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your synchronization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative synchronization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - synchronization
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-04
+  domain: debugging-reliability
+  subdomain: environments-data
+  title: 'Environments Data: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you make environments data observable enough to support a production investigation?
+  concise_answer: Environments Data should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that environments data supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your environments data approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative environments data case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - environments-data
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: environments data
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-05
+  domain: debugging-reliability
+  subdomain: races
+  title: 'Races: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Where should the boundary around races live, and why?
+  concise_answer: Races should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that races supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your races approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative races case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - races
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: races
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-06
+  domain: debugging-reliability
+  subdomain: nondeterminism
+  title: 'Nondeterminism: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you validate that nondeterminism remains correct when inputs are incomplete or delayed?
+  concise_answer: Nondeterminism should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that nondeterminism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your nondeterminism approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative nondeterminism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - nondeterminism
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: nondeterminism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-07
+  domain: debugging-reliability
+  subdomain: retries-repair
+  title: 'Retries Repair: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What design choice makes retries repair easier to evolve without hiding failures?
+  concise_answer: Retries Repair should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that retries repair supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your retries repair approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative retries repair case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - retries-repair
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: retries repair
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-08
+  domain: debugging-reliability
+  subdomain: quarantines
+  title: 'Quarantines: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around quarantines?
+  concise_answer: Quarantines should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that quarantines supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your quarantines approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative quarantines case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - quarantines
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: quarantines
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-09
+  domain: debugging-reliability
+  subdomain: classification
+  title: 'Classification: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What data would you collect before tuning or optimizing classification?
+  concise_answer: Classification should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that classification supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your classification approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative classification case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - classification
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: classification
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-10
+  domain: debugging-reliability
+  subdomain: root-cause
+  title: 'Root Cause: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you review a proposal that centralizes root cause?
+  concise_answer: Root Cause should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that root cause supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your root cause approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative root cause case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - root-cause
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: root cause
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-11
+  domain: debugging-reliability
+  subdomain: observability
+  title: 'Observability: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What are the consequences of retrying failures associated with observability?
+  concise_answer: Observability should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that observability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your observability approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative observability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - observability
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: observability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-12
+  domain: debugging-reliability
+  subdomain: ci-only
+  title: 'Ci Only: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you build a representative test matrix for ci only without testing every combination?
+  concise_answer: Ci Only should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ci only supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your ci only approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative ci only case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - ci-only
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: ci only
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-13
+  domain: debugging-reliability
+  subdomain: browser-network-database
+  title: 'Browser Network Database: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What contract should adjacent components share when they use browser network database?
+  concise_answer: Browser Network Database should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test
+    engineering, validate both the intended result and the meaningful negative or failure path before
+    treating it as reliable.
+  recommended_answer: Start by naming the decision that browser network database supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative browser network database case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - browser-network-database
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: browser network database
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-14
+  domain: debugging-reliability
+  subdomain: incidents
+  title: 'Incidents: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How do you prevent a local optimization of incidents from degrading system behavior?
+  concise_answer: Incidents should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that incidents supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative incidents case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - incidents
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: incidents
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-15
+  domain: debugging-reliability
+  subdomain: reliability-metrics
+  title: 'Reliability Metrics: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you introduce reliability metrics incrementally and measure whether it helped?
+  concise_answer: Reliability Metrics should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that reliability metrics supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reliability metrics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - reliability-metrics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: reliability metrics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-16
+  domain: debugging-reliability
+  subdomain: reproduce-isolate
+  title: 'Reproduce Isolate: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What failure classification would you use for incidents involving reproduce isolate?
+  concise_answer: Reproduce Isolate should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that reproduce isolate supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reproduce isolate case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - reproduce-isolate
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: reproduce isolate
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-17
+  domain: debugging-reliability
+  subdomain: artifacts
+  title: 'Artifacts: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you decide whether artifacts belongs in a reusable abstraction?
+  concise_answer: Artifacts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that artifacts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative artifacts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - artifacts
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: artifacts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-18
+  domain: debugging-reliability
+  subdomain: synchronization
+  title: 'Synchronization: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What is the difference between validating synchronization and merely exercising it?
+  concise_answer: Synchronization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that synchronization supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative synchronization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - synchronization
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-19
+  domain: debugging-reliability
+  subdomain: environments-data
+  title: 'Environments Data: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you debug a discrepancy between local and CI behavior involving environments data?
+  concise_answer: Environments Data should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that environments data supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative environments data case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - environments-data
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: environments data
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-20
+  domain: debugging-reliability
+  subdomain: races
+  title: 'Races: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: Which signals would trigger a review of the current races design?
+  concise_answer: Races should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that races supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative races case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - races
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: races
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-21
+  domain: debugging-reliability
+  subdomain: nondeterminism
+  title: 'Nondeterminism: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you handle concurrency or shared-state risk around nondeterminism?
+  concise_answer: Nondeterminism should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that nondeterminism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative nondeterminism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - nondeterminism
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: nondeterminism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-22
+  domain: debugging-reliability
+  subdomain: retries-repair
+  title: 'Retries Repair: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What should a high-signal test report expose about retries repair?
+  concise_answer: Retries Repair should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that retries repair supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative retries repair case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - retries-repair
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: retries repair
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-23
+  domain: debugging-reliability
+  subdomain: quarantines
+  title: 'Quarantines: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you make a change to quarantines reversible?
+  concise_answer: Quarantines should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that quarantines supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative quarantines case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - quarantines
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: quarantines
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: debugging-reliability-i-24
+  domain: debugging-reliability
+  subdomain: classification
+  title: 'Classification: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: Which shortcut around classification seems efficient but creates future maintenance cost?
+  concise_answer: Classification should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Debugging, reliability, and flaky-test engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that classification supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Debugging, reliability, and flaky-test engineering example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative classification case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - classification
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: classification
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario

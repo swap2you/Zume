@@ -1,0 +1,270 @@
+version: 1
+records:
+- id: ai-quality-exercise-i-01
+  domain: ai-quality
+  subdomain: test-generation
+  title: Test Generation evidence exercise
+  level: intermediate
+  priority: P1
+  task: Given a small AI for quality engineering scenario, propose and implement or describe a bounded
+    approach for test generation. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for test generation, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for test
+    generation. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the test generation approach if the input volume or
+    failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for test generation passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the test generation solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: openai-docs
+    locator: test generation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  tags:
+  - ai-quality
+  - test-generation
+  - exercise
+  variant_family: ai-quality-test-generation
+- id: ai-quality-exercise-i-02
+  domain: ai-quality
+  subdomain: requirements-analysis
+  title: Requirements Analysis evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small AI for quality engineering scenario, propose and implement or describe a bounded
+    approach for requirements analysis. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for requirements analysis, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for requirements
+    analysis. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the requirements analysis approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for requirements analysis passes locally but fails intermittently
+    in CI. What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the requirements analysis solution is independently understood
+      rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: openai-docs
+    locator: requirements analysis
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  tags:
+  - ai-quality
+  - requirements-analysis
+  - exercise
+  variant_family: ai-quality-requirements-analysis
+- id: ai-quality-exercise-i-03
+  domain: ai-quality
+  subdomain: locator-claims
+  title: Locator Claims evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small AI for quality engineering scenario, propose and implement or describe a bounded
+    approach for locator claims. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for locator claims, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for locator
+    claims. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the locator claims approach if the input volume or
+    failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for locator claims passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the locator claims solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: openai-docs
+    locator: locator claims
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  tags:
+  - ai-quality
+  - locator-claims
+  - exercise
+  variant_family: ai-quality-locator-claims
+- id: ai-quality-exercise-i-04
+  domain: ai-quality
+  subdomain: api-schema-generation
+  title: Api Schema Generation evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small AI for quality engineering scenario, propose and implement or describe a bounded
+    approach for api schema generation. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for api schema generation, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for api
+    schema generation. It implements the smallest clear mechanism, validates representative normal and
+    failure cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the api schema generation approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for api schema generation passes locally but fails intermittently
+    in CI. What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the api schema generation solution is independently understood
+      rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: openai-docs
+    locator: api schema generation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  tags:
+  - ai-quality
+  - api-schema-generation
+  - exercise
+  variant_family: ai-quality-api-schema-generation

@@ -1,0 +1,270 @@
+version: 1
+records:
+- id: agentic-ai-exercise-i-01
+  domain: agentic-ai
+  subdomain: agents-workflows
+  title: Agents Workflows evidence exercise
+  level: intermediate
+  priority: P1
+  task: Given a small Agentic AI, tools, MCP, and orchestration scenario, propose and implement or describe
+    a bounded approach for agents workflows. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for agents workflows, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for agents
+    workflows. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the agents workflows approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for agents workflows passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the agents workflows solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: mcp-spec
+    locator: agents workflows
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  tags:
+  - agentic-ai
+  - agents-workflows
+  - exercise
+  variant_family: agentic-ai-agents-workflows
+- id: agentic-ai-exercise-i-02
+  domain: agentic-ai
+  subdomain: planning-tools
+  title: Planning Tools evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small Agentic AI, tools, MCP, and orchestration scenario, propose and implement or describe
+    a bounded approach for planning tools. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for planning tools, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for planning
+    tools. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the planning tools approach if the input volume or
+    failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for planning tools passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the planning tools solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: mcp-spec
+    locator: planning tools
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  tags:
+  - agentic-ai
+  - planning-tools
+  - exercise
+  variant_family: agentic-ai-planning-tools
+- id: agentic-ai-exercise-i-03
+  domain: agentic-ai
+  subdomain: state-memory
+  title: State Memory evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small Agentic AI, tools, MCP, and orchestration scenario, propose and implement or describe
+    a bounded approach for state memory. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for state memory, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for state
+    memory. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the state memory approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for state memory passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the state memory solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: mcp-spec
+    locator: state memory
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  tags:
+  - agentic-ai
+  - state-memory
+  - exercise
+  variant_family: agentic-ai-state-memory
+- id: agentic-ai-exercise-i-04
+  domain: agentic-ai
+  subdomain: handoffs
+  title: Handoffs evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small Agentic AI, tools, MCP, and orchestration scenario, propose and implement or describe
+    a bounded approach for handoffs. State assumptions, cover a failure path, and show the evidence you
+    would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for handoffs, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for handoffs.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the handoffs approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for handoffs passes locally but fails intermittently in CI. What do
+    you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the handoffs solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: mcp-spec
+    locator: handoffs
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  tags:
+  - agentic-ai
+  - handoffs
+  - exercise
+  variant_family: agentic-ai-handoffs

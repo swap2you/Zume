@@ -1,0 +1,1412 @@
+version: 1
+records:
+- id: git-maven-a-01
+  domain: git-maven
+  subdomain: git-model
+  title: 'Git Model: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for git model that balances correctness, delivery speed, and operational evidence.
+  concise_answer: Git Model should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that git model supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your git model approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative git model case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - git-model
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: git model
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-02
+  domain: git-maven
+  subdomain: merge-rebase
+  title: 'Merge Rebase: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of merge rebase. How would you converge
+    them safely?
+  concise_answer: Merge Rebase should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that merge rebase supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your merge rebase approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative merge rebase case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - merge-rebase
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: merge rebase
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-03
+  domain: git-maven
+  subdomain: conflicts
+  title: 'Conflicts: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: How would you evaluate competing architectures for conflicts under reliability and cost constraints?
+  concise_answer: Conflicts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that conflicts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your conflicts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative conflicts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - conflicts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: conflicts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-04
+  domain: git-maven
+  subdomain: reset-revert-restore
+  title: 'Reset Revert Restore: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: What governance and exception path would you establish for reset revert restore?
+  concise_answer: Reset Revert Restore should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reset revert restore supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reset revert restore approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reset revert restore case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - reset-revert-restore
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: reset revert restore
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-05
+  domain: git-maven
+  subdomain: cherry-pick
+  title: 'Cherry Pick: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of cherry pick before users report it?
+  concise_answer: Cherry Pick should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cherry pick supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your cherry pick approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative cherry pick case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - cherry-pick
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: cherry pick
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-06
+  domain: git-maven
+  subdomain: releases
+  title: 'Releases: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether releases improves outcomes or only activity
+    metrics.
+  concise_answer: Releases should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that releases supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your releases approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative releases case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - releases
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: releases
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-07
+  domain: git-maven
+  subdomain: hooks
+  title: 'Hooks: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to hooks?
+  concise_answer: Hooks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hooks supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your hooks approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative hooks case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - hooks
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: hooks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-08
+  domain: git-maven
+  subdomain: branching
+  title: 'Branching: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What must be true before delegating decisions about branching to automation?
+  concise_answer: Branching should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that branching supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your branching approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative branching case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - branching
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: branching
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-09
+  domain: git-maven
+  subdomain: maven-lifecycle
+  title: 'Maven Lifecycle: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving maven lifecycle?
+  concise_answer: Maven Lifecycle should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that maven lifecycle supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your maven lifecycle approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative maven lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - maven-lifecycle
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: maven lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-10
+  domain: git-maven
+  subdomain: pom-dependencies
+  title: 'Pom Dependencies: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring pom dependencies?
+  concise_answer: Pom Dependencies should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that pom dependencies supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your pom dependencies approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative pom dependencies case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - pom-dependencies
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: pom dependencies
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-11
+  domain: git-maven
+  subdomain: plugins-profiles
+  title: 'Plugins Profiles: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you establish ownership boundaries for plugins profiles across platform and product
+    teams?
+  concise_answer: Plugins Profiles should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that plugins profiles supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your plugins profiles approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative plugins profiles case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - plugins-profiles
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: plugins profiles
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-12
+  domain: git-maven
+  subdomain: surefire-failsafe
+  title: 'Surefire Failsafe: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature surefire failsafe implementation?
+  concise_answer: Surefire Failsafe should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that surefire failsafe supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your surefire failsafe approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative surefire failsafe case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - surefire-failsafe
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: surefire failsafe
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-13
+  domain: git-maven
+  subdomain: multi-module
+  title: 'Multi Module: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you design a post-incident review focused on multi module without blaming individuals?
+  concise_answer: Multi Module should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that multi module supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative multi module case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - multi-module
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: multi module
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-14
+  domain: git-maven
+  subdomain: dependency-convergence
+  title: 'Dependency Convergence: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What is the minimum observability design that makes dependency convergence auditable?
+  concise_answer: Dependency Convergence should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency convergence supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative dependency convergence case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - dependency-convergence
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: dependency convergence
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-15
+  domain: git-maven
+  subdomain: reproducibility
+  title: 'Reproducibility: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you make reproducibility resilient to partial failure and degraded dependencies?
+  concise_answer: Reproducibility should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reproducibility supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reproducibility case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - reproducibility
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: reproducibility
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-16
+  domain: git-maven
+  subdomain: secrets-artifacts
+  title: 'Secrets Artifacts: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you review a vendor claim that automates secrets artifacts?
+  concise_answer: Secrets Artifacts should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that secrets artifacts supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative secrets artifacts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - secrets-artifacts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: secrets artifacts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-17
+  domain: git-maven
+  subdomain: git-model
+  title: 'Git Model: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you protect sensitive data while operating git model at scale?
+  concise_answer: Git Model should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that git model supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative git model case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - git-model
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: git model
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-18
+  domain: git-maven
+  subdomain: merge-rebase
+  title: 'Merge Rebase: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What decision record would you require before changing a high-impact merge rebase?
+  concise_answer: Merge Rebase should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that merge rebase supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative merge rebase case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - merge-rebase
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: merge rebase
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-19
+  domain: git-maven
+  subdomain: conflicts
+  title: 'Conflicts: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you balance standardization with context-specific needs for conflicts?
+  concise_answer: Conflicts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that conflicts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative conflicts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - conflicts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: conflicts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-20
+  domain: git-maven
+  subdomain: reset-revert-restore
+  title: 'Reset Revert Restore: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you test whether a proposed abstraction for reset revert restore hides important
+    domain behavior?
+  concise_answer: Reset Revert Restore should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Git, Maven, and build engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reset revert restore supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reset revert restore case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - reset-revert-restore
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: reset revert restore
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-21
+  domain: git-maven
+  subdomain: cherry-pick
+  title: 'Cherry Pick: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What leading and lagging indicators should inform investment in cherry pick?
+  concise_answer: Cherry Pick should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cherry pick supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative cherry pick case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - cherry-pick
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: cherry pick
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-22
+  domain: git-maven
+  subdomain: releases
+  title: 'Releases: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you define a human-approval boundary for releases?
+  concise_answer: Releases should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that releases supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative releases case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - releases
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: releases
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-23
+  domain: git-maven
+  subdomain: hooks
+  title: 'Hooks: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you challenge a design that treats hooks as a one-time project?
+  concise_answer: Hooks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hooks supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative hooks case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - hooks
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: hooks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: git-maven-a-24
+  domain: git-maven
+  subdomain: branching
+  title: 'Branching: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What systemic failure patterns would you look for when branching repeatedly causes incidents?
+  concise_answer: Branching should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Git, Maven, and build engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that branching supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Git, Maven, and build engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative branching case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - git-maven
+  - branching
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: maven-docs
+    locator: branching
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario

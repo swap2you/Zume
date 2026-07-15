@@ -1,0 +1,850 @@
+version: 1
+records:
+- id: ml-fundamentals-b-01
+  domain: ml-fundamentals
+  subdomain: learning-types
+  title: 'Learning Types: basic decision'
+  level: basic
+  priority: P0
+  frequency: emerging
+  question: What problem does learning types address, and what is its practical boundary?
+  concise_answer: Learning Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI and machine-learning fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that learning types supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your learning types approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative learning types case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - learning-types
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: learning types
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-02
+  domain: ml-fundamentals
+  subdomain: validation
+  title: 'Validation: basic decision'
+  level: basic
+  priority: P0
+  frequency: emerging
+  question: Explain validation to a teammate who must use it safely tomorrow.
+  concise_answer: Validation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that validation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your validation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative validation case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - validation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: validation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-03
+  domain: ml-fundamentals
+  subdomain: overfitting
+  title: 'Overfitting: basic decision'
+  level: basic
+  priority: P1
+  frequency: emerging
+  question: What would you check first before relying on overfitting in a test or delivery workflow?
+  concise_answer: Overfitting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that overfitting supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your overfitting approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative overfitting case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - overfitting
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: overfitting
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-04
+  domain: ml-fundamentals
+  subdomain: metrics
+  title: 'Metrics: basic decision'
+  level: basic
+  priority: P1
+  frequency: emerging
+  question: Give a small example of metrics and state the observable outcome.
+  concise_answer: Metrics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that metrics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your metrics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative metrics case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - metrics
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: metrics
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-05
+  domain: ml-fundamentals
+  subdomain: data-quality
+  title: 'Data Quality: basic decision'
+  level: basic
+  priority: P1
+  frequency: emerging
+  question: Which assumption about data quality most often causes an avoidable defect?
+  concise_answer: Data Quality should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data quality supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data quality approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data quality case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - data-quality
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: data quality
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-06
+  domain: ml-fundamentals
+  subdomain: inference
+  title: 'Inference: basic decision'
+  level: basic
+  priority: P1
+  frequency: emerging
+  question: How would you recognize that inference is being used for the wrong purpose?
+  concise_answer: Inference should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that inference supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your inference approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative inference case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - inference
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: inference
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-07
+  domain: ml-fundamentals
+  subdomain: drift
+  title: 'Drift: basic decision'
+  level: basic
+  priority: P1
+  frequency: emerging
+  question: What information must be known before choosing drift?
+  concise_answer: Drift should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that drift supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your drift approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative drift case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - drift
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: drift
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-08
+  domain: ml-fundamentals
+  subdomain: explainability
+  title: 'Explainability: basic decision'
+  level: basic
+  priority: P2
+  frequency: emerging
+  question: What is the simplest useful validation for explainability?
+  concise_answer: Explainability should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI and machine-learning fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that explainability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative explainability case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - explainability
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: explainability
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-09
+  domain: ml-fundamentals
+  subdomain: responsible-ai
+  title: 'Responsible Ai: basic decision'
+  level: basic
+  priority: P2
+  frequency: emerging
+  question: Compare a sound use of responsible ai with a superficially similar but unsafe use.
+  concise_answer: Responsible Ai should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI and machine-learning fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that responsible ai supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative responsible ai case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - responsible-ai
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: responsible ai
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-10
+  domain: ml-fundamentals
+  subdomain: learning-types
+  title: 'Learning Types: basic decision'
+  level: basic
+  priority: P2
+  frequency: emerging
+  question: What should a concise team convention say about learning types?
+  concise_answer: Learning Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI and machine-learning fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that learning types supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative learning types case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - learning-types
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: learning types
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-11
+  domain: ml-fundamentals
+  subdomain: validation
+  title: 'Validation: basic decision'
+  level: basic
+  priority: P2
+  frequency: emerging
+  question: How does validation affect the reliability of a routine automated check?
+  concise_answer: Validation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that validation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative validation case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - validation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: validation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-12
+  domain: ml-fundamentals
+  subdomain: overfitting
+  title: 'Overfitting: basic decision'
+  level: basic
+  priority: P2
+  frequency: emerging
+  question: What evidence would make you trust a result produced through overfitting?
+  concise_answer: Overfitting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that overfitting supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative overfitting case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - overfitting
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: overfitting
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-13
+  domain: ml-fundamentals
+  subdomain: metrics
+  title: 'Metrics: basic decision'
+  level: basic
+  priority: P3
+  frequency: emerging
+  question: What failure mode should be made visible when introducing metrics?
+  concise_answer: Metrics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that metrics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative metrics case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - metrics
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: metrics
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-14
+  domain: ml-fundamentals
+  subdomain: data-quality
+  title: 'Data Quality: basic decision'
+  level: basic
+  priority: P3
+  frequency: emerging
+  question: How would you explain the trade-off behind data quality without relying on jargon?
+  concise_answer: Data Quality should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data quality supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative data quality case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - data-quality
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: data quality
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept
+- id: ml-fundamentals-b-15
+  domain: ml-fundamentals
+  subdomain: inference
+  title: 'Inference: basic decision'
+  level: basic
+  priority: P3
+  frequency: emerging
+  question: Which input or precondition matters most for inference?
+  concise_answer: Inference should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI and machine-learning fundamentals, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that inference supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI and machine-learning fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative inference case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - ml-fundamentals
+  - inference
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: nist-ai-rmf
+    locator: inference
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: concept

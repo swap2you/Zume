@@ -1,0 +1,270 @@
+version: 1
+records:
+- id: git-maven-exercise-b-01
+  domain: git-maven
+  subdomain: git-model
+  title: Git Model evidence exercise
+  level: basic
+  priority: P1
+  task: Given a small Git, Maven, and build engineering scenario, propose and implement or describe a
+    bounded approach for git model. State assumptions, cover a failure path, and show the evidence you
+    would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for git model, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for git
+    model. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the git model approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for git model passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the git model solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: maven-docs
+    locator: git model
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  tags:
+  - git-maven
+  - git-model
+  - exercise
+  variant_family: git-maven-git-model
+- id: git-maven-exercise-b-02
+  domain: git-maven
+  subdomain: merge-rebase
+  title: Merge Rebase evidence exercise
+  level: basic
+  priority: P2
+  task: Given a small Git, Maven, and build engineering scenario, propose and implement or describe a
+    bounded approach for merge rebase. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for merge rebase, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for merge
+    rebase. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the merge rebase approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for merge rebase passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the merge rebase solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: maven-docs
+    locator: merge rebase
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  tags:
+  - git-maven
+  - merge-rebase
+  - exercise
+  variant_family: git-maven-merge-rebase
+- id: git-maven-exercise-b-03
+  domain: git-maven
+  subdomain: conflicts
+  title: Conflicts evidence exercise
+  level: basic
+  priority: P2
+  task: Given a small Git, Maven, and build engineering scenario, propose and implement or describe a
+    bounded approach for conflicts. State assumptions, cover a failure path, and show the evidence you
+    would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for conflicts, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for conflicts.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the conflicts approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for conflicts passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the conflicts solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: maven-docs
+    locator: conflicts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  tags:
+  - git-maven
+  - conflicts
+  - exercise
+  variant_family: git-maven-conflicts
+- id: git-maven-exercise-b-04
+  domain: git-maven
+  subdomain: reset-revert-restore
+  title: Reset Revert Restore evidence exercise
+  level: basic
+  priority: P2
+  task: Given a small Git, Maven, and build engineering scenario, propose and implement or describe a
+    bounded approach for reset revert restore. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for reset revert restore, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for reset
+    revert restore. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the reset revert restore approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for reset revert restore passes locally but fails intermittently in
+    CI. What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the reset revert restore solution is independently understood
+      rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: maven-docs
+    locator: reset revert restore
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+  tags:
+  - git-maven
+  - reset-revert-restore
+  - exercise
+  variant_family: git-maven-reset-revert-restore

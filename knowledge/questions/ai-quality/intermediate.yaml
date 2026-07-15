@@ -1,0 +1,1392 @@
+version: 1
+records:
+- id: ai-quality-i-01
+  domain: ai-quality
+  subdomain: test-generation
+  title: 'Test Generation: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: How would you design test generation for a changing product while preserving clear ownership?
+  concise_answer: Test Generation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that test generation supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your test generation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative test generation case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - test-generation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: test generation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-02
+  domain: ai-quality
+  subdomain: requirements-analysis
+  title: 'Requirements Analysis: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: What trade-offs would you evaluate before scaling requirements analysis across multiple teams?
+  concise_answer: Requirements Analysis should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In AI for quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that requirements analysis supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your requirements analysis approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative requirements analysis case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - requirements-analysis
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: requirements analysis
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-03
+  domain: ai-quality
+  subdomain: locator-claims
+  title: 'Locator Claims: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: A result involving locator claims is intermittent. How do you isolate cause from symptom?
+  concise_answer: Locator Claims should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that locator claims supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your locator claims approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative locator claims case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - locator-claims
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: locator claims
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-04
+  domain: ai-quality
+  subdomain: api-schema-generation
+  title: 'Api Schema Generation: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: How would you make api schema generation observable enough to support a production investigation?
+  concise_answer: Api Schema Generation should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In AI for quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that api schema generation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your api schema generation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative api schema generation case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - api-schema-generation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: api schema generation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-05
+  domain: ai-quality
+  subdomain: failure-triage
+  title: 'Failure Triage: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: Where should the boundary around failure triage live, and why?
+  concise_answer: Failure Triage should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that failure triage supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your failure triage approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative failure triage case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - failure-triage
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: failure triage
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-06
+  domain: ai-quality
+  subdomain: synthetic-data
+  title: 'Synthetic Data: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you validate that synthetic data remains correct when inputs are incomplete or delayed?
+  concise_answer: Synthetic Data should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that synthetic data supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your synthetic data approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative synthetic data case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - synthetic-data
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: synthetic data
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-07
+  domain: ai-quality
+  subdomain: visual-testing
+  title: 'Visual Testing: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: What design choice makes visual testing easier to evolve without hiding failures?
+  concise_answer: Visual Testing should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that visual testing supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your visual testing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative visual testing case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - visual-testing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: visual testing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-08
+  domain: ai-quality
+  subdomain: risk-selection
+  title: 'Risk Selection: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you separate deterministic checks from environmental uncertainty around risk selection?
+  concise_answer: Risk Selection should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that risk selection supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your risk selection approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative risk selection case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - risk-selection
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: risk selection
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-09
+  domain: ai-quality
+  subdomain: autonomous-testing
+  title: 'Autonomous Testing: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: What data would you collect before tuning or optimizing autonomous testing?
+  concise_answer: Autonomous Testing should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that autonomous testing supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your autonomous testing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative autonomous testing case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - autonomous-testing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: autonomous testing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-10
+  domain: ai-quality
+  subdomain: ai-system-testing
+  title: 'Ai System Testing: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you review a proposal that centralizes ai system testing?
+  concise_answer: Ai System Testing should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ai system testing supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your ai system testing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative ai system testing case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - ai-system-testing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: ai system testing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-11
+  domain: ai-quality
+  subdomain: nondeterminism
+  title: 'Nondeterminism: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: What are the consequences of retrying failures associated with nondeterminism?
+  concise_answer: Nondeterminism should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that nondeterminism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your nondeterminism approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative nondeterminism case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - nondeterminism
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: nondeterminism
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-12
+  domain: ai-quality
+  subdomain: evals
+  title: 'Evals: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you build a representative test matrix for evals without testing every combination?
+  concise_answer: Evals should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI for quality engineering, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that evals supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your evals approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative evals case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - evals
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: evals
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-13
+  domain: ai-quality
+  subdomain: prompt-injection
+  title: 'Prompt Injection: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: What contract should adjacent components share when they use prompt injection?
+  concise_answer: Prompt Injection should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that prompt injection supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative prompt injection case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - prompt-injection
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: prompt injection
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-14
+  domain: ai-quality
+  subdomain: drift
+  title: 'Drift: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How do you prevent a local optimization of drift from degrading system behavior?
+  concise_answer: Drift should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI for quality engineering, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that drift supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative drift case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - drift
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: drift
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-15
+  domain: ai-quality
+  subdomain: adversarial-testing
+  title: 'Adversarial Testing: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How would you introduce adversarial testing incrementally and measure whether it helped?
+  concise_answer: Adversarial Testing should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In AI for quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that adversarial testing supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative adversarial testing case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - adversarial-testing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: adversarial testing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-16
+  domain: ai-quality
+  subdomain: governance
+  title: 'Governance: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: What failure classification would you use for incidents involving governance?
+  concise_answer: Governance should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI for quality engineering, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that governance supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative governance case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - governance
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: governance
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-17
+  domain: ai-quality
+  subdomain: human-review
+  title: 'Human Review: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How would you decide whether human review belongs in a reusable abstraction?
+  concise_answer: Human Review should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI for quality engineering, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that human review supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative human review case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - human-review
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: human review
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-18
+  domain: ai-quality
+  subdomain: test-generation
+  title: 'Test Generation: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: What is the difference between validating test generation and merely exercising it?
+  concise_answer: Test Generation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that test generation supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative test generation case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - test-generation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: test generation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-19
+  domain: ai-quality
+  subdomain: requirements-analysis
+  title: 'Requirements Analysis: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How would you debug a discrepancy between local and CI behavior involving requirements analysis?
+  concise_answer: Requirements Analysis should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In AI for quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that requirements analysis supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative requirements analysis case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - requirements-analysis
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: requirements analysis
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-20
+  domain: ai-quality
+  subdomain: locator-claims
+  title: 'Locator Claims: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: Which signals would trigger a review of the current locator claims design?
+  concise_answer: Locator Claims should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that locator claims supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative locator claims case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - locator-claims
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: locator claims
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-21
+  domain: ai-quality
+  subdomain: api-schema-generation
+  title: 'Api Schema Generation: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: How would you handle concurrency or shared-state risk around api schema generation?
+  concise_answer: Api Schema Generation should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In AI for quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that api schema generation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative api schema generation case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - api-schema-generation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: api schema generation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-22
+  domain: ai-quality
+  subdomain: failure-triage
+  title: 'Failure Triage: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: What should a high-signal test report expose about failure triage?
+  concise_answer: Failure Triage should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that failure triage supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative failure triage case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - failure-triage
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: failure triage
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-23
+  domain: ai-quality
+  subdomain: synthetic-data
+  title: 'Synthetic Data: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: How would you make a change to synthetic data reversible?
+  concise_answer: Synthetic Data should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that synthetic data supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative synthetic data case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - synthetic-data
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: synthetic data
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-quality-i-24
+  domain: ai-quality
+  subdomain: visual-testing
+  title: 'Visual Testing: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: Which shortcut around visual testing seems efficient but creates future maintenance cost?
+  concise_answer: Visual Testing should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI for quality engineering, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that visual testing supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete AI for quality engineering example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative visual testing case before generalizing.
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-quality
+  - visual-testing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: visual testing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario

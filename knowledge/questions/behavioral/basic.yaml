@@ -1,0 +1,865 @@
+version: 1
+records:
+- id: behavioral-b-01
+  domain: behavioral
+  subdomain: ownership
+  title: 'Ownership: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does ownership address, and what is its practical boundary?
+  concise_answer: Ownership should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ownership supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your ownership approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative ownership case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - ownership
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: ownership
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-02
+  domain: behavioral
+  subdomain: communication
+  title: 'Communication: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Explain communication to a teammate who must use it safely tomorrow.
+  concise_answer: Communication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that communication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your communication approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative communication case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - communication
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: communication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-03
+  domain: behavioral
+  subdomain: conflict
+  title: 'Conflict: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: What would you check first before relying on conflict in a test or delivery workflow?
+  concise_answer: Conflict should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that conflict supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your conflict approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative conflict case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - conflict
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: conflict
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-04
+  domain: behavioral
+  subdomain: feedback
+  title: 'Feedback: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Give a small example of feedback and state the observable outcome.
+  concise_answer: Feedback should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that feedback supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your feedback approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative feedback case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - feedback
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: feedback
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-05
+  domain: behavioral
+  subdomain: prioritization
+  title: 'Prioritization: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about prioritization most often causes an avoidable defect?
+  concise_answer: Prioritization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that prioritization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your prioritization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative prioritization case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - prioritization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: prioritization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-06
+  domain: behavioral
+  subdomain: ethics
+  title: 'Ethics: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that ethics is being used for the wrong purpose?
+  concise_answer: Ethics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ethics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your ethics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative ethics case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - ethics
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: ethics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-07
+  domain: behavioral
+  subdomain: ownership
+  title: 'Ownership: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing ownership?
+  concise_answer: Ownership should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ownership supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your ownership approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative ownership case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - ownership
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: ownership
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-08
+  domain: behavioral
+  subdomain: communication
+  title: 'Communication: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is the simplest useful validation for communication?
+  concise_answer: Communication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that communication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative communication case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - communication
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: communication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-09
+  domain: behavioral
+  subdomain: conflict
+  title: 'Conflict: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Compare a sound use of conflict with a superficially similar but unsafe use.
+  concise_answer: Conflict should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that conflict supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative conflict case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - conflict
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: conflict
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-10
+  domain: behavioral
+  subdomain: feedback
+  title: 'Feedback: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What should a concise team convention say about feedback?
+  concise_answer: Feedback should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that feedback supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative feedback case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - feedback
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: feedback
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-11
+  domain: behavioral
+  subdomain: prioritization
+  title: 'Prioritization: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How does prioritization affect the reliability of a routine automated check?
+  concise_answer: Prioritization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that prioritization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative prioritization case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - prioritization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: prioritization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-12
+  domain: behavioral
+  subdomain: ethics
+  title: 'Ethics: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What evidence would make you trust a result produced through ethics?
+  concise_answer: Ethics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ethics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative ethics case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - ethics
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: ethics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-13
+  domain: behavioral
+  subdomain: ownership
+  title: 'Ownership: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What failure mode should be made visible when introducing ownership?
+  concise_answer: Ownership should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ownership supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative ownership case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - ownership
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: ownership
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-14
+  domain: behavioral
+  subdomain: communication
+  title: 'Communication: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you explain the trade-off behind communication without relying on jargon?
+  concise_answer: Communication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that communication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative communication case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - communication
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: communication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: behavioral-b-15
+  domain: behavioral
+  subdomain: conflict
+  title: 'Conflict: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which input or precondition matters most for conflict?
+  concise_answer: Conflict should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Behavioral, HR, communication, conflict, and ownership, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that conflict supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Behavioral, HR, communication, conflict, and ownership example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative conflict case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+  years_range:
+  - 1
+  - 8
+  tags:
+  - behavioral
+  - conflict
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: conflict
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept

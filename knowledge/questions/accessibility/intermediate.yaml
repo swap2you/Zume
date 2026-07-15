@@ -1,0 +1,846 @@
+version: 1
+records:
+- id: accessibility-i-01
+  domain: accessibility
+  subdomain: wcag
+  title: 'Wcag: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design wcag for a changing product while preserving clear ownership?
+  concise_answer: Wcag should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that wcag supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your wcag approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative wcag case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - wcag
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: wcag
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-02
+  domain: accessibility
+  subdomain: keyboard
+  title: 'Keyboard: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling keyboard across multiple teams?
+  concise_answer: Keyboard should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that keyboard supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your keyboard approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative keyboard case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - keyboard
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: keyboard
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-03
+  domain: accessibility
+  subdomain: semantics
+  title: 'Semantics: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: A result involving semantics is intermittent. How do you isolate cause from symptom?
+  concise_answer: Semantics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that semantics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your semantics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative semantics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - semantics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: semantics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-04
+  domain: accessibility
+  subdomain: screen-readers
+  title: 'Screen Readers: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: How would you make screen readers observable enough to support a production investigation?
+  concise_answer: Screen Readers should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Accessibility testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that screen readers supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your screen readers approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative screen readers case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - screen-readers
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: screen readers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-05
+  domain: accessibility
+  subdomain: automation
+  title: 'Automation: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Where should the boundary around automation live, and why?
+  concise_answer: Automation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that automation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your automation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative automation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - automation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: automation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-06
+  domain: accessibility
+  subdomain: remediation
+  title: 'Remediation: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you validate that remediation remains correct when inputs are incomplete or delayed?
+  concise_answer: Remediation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that remediation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your remediation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative remediation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - remediation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: remediation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-07
+  domain: accessibility
+  subdomain: wcag
+  title: 'Wcag: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What design choice makes wcag easier to evolve without hiding failures?
+  concise_answer: Wcag should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that wcag supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your wcag approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative wcag case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - wcag
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: wcag
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-08
+  domain: accessibility
+  subdomain: keyboard
+  title: 'Keyboard: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around keyboard?
+  concise_answer: Keyboard should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that keyboard supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative keyboard case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - keyboard
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: keyboard
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-09
+  domain: accessibility
+  subdomain: semantics
+  title: 'Semantics: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What data would you collect before tuning or optimizing semantics?
+  concise_answer: Semantics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that semantics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative semantics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - semantics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: semantics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-10
+  domain: accessibility
+  subdomain: screen-readers
+  title: 'Screen Readers: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you review a proposal that centralizes screen readers?
+  concise_answer: Screen Readers should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Accessibility testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that screen readers supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative screen readers case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - screen-readers
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: screen readers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-11
+  domain: accessibility
+  subdomain: automation
+  title: 'Automation: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What are the consequences of retrying failures associated with automation?
+  concise_answer: Automation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that automation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative automation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - automation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: automation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-12
+  domain: accessibility
+  subdomain: remediation
+  title: 'Remediation: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you build a representative test matrix for remediation without testing every combination?
+  concise_answer: Remediation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that remediation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative remediation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - remediation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: remediation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-13
+  domain: accessibility
+  subdomain: wcag
+  title: 'Wcag: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What contract should adjacent components share when they use wcag?
+  concise_answer: Wcag should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that wcag supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative wcag case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - wcag
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: wcag
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-14
+  domain: accessibility
+  subdomain: keyboard
+  title: 'Keyboard: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How do you prevent a local optimization of keyboard from degrading system behavior?
+  concise_answer: Keyboard should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that keyboard supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative keyboard case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - keyboard
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: keyboard
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: accessibility-i-15
+  domain: accessibility
+  subdomain: semantics
+  title: 'Semantics: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you introduce semantics incrementally and measure whether it helped?
+  concise_answer: Semantics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Accessibility testing, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that semantics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Accessibility testing example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative semantics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - accessibility
+  - semantics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-wcag
+    locator: semantics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario

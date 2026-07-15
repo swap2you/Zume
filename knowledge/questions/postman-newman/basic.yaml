@@ -1,0 +1,848 @@
+version: 1
+records:
+- id: postman-newman-b-01
+  domain: postman-newman
+  subdomain: collections
+  title: 'Collections: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does collections address, and what is its practical boundary?
+  concise_answer: Collections should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that collections supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your collections approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative collections case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - collections
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: collections
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-02
+  domain: postman-newman
+  subdomain: environments
+  title: 'Environments: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Explain environments to a teammate who must use it safely tomorrow.
+  concise_answer: Environments should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that environments supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your environments approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative environments case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - environments
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: environments
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-03
+  domain: postman-newman
+  subdomain: scripts
+  title: 'Scripts: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: What would you check first before relying on scripts in a test or delivery workflow?
+  concise_answer: Scripts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scripts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your scripts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative scripts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - scripts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: scripts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-04
+  domain: postman-newman
+  subdomain: data-files
+  title: 'Data Files: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Give a small example of data files and state the observable outcome.
+  concise_answer: Data Files should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data files supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data files approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data files case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - data-files
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: data files
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-05
+  domain: postman-newman
+  subdomain: cli-runs
+  title: 'Cli Runs: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about cli runs most often causes an avoidable defect?
+  concise_answer: Cli Runs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cli runs supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your cli runs approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative cli runs case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - cli-runs
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: cli runs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-06
+  domain: postman-newman
+  subdomain: reporting
+  title: 'Reporting: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that reporting is being used for the wrong purpose?
+  concise_answer: Reporting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reporting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reporting approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reporting case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - reporting
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: reporting
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-07
+  domain: postman-newman
+  subdomain: collections
+  title: 'Collections: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing collections?
+  concise_answer: Collections should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that collections supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your collections approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative collections case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - collections
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: collections
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-08
+  domain: postman-newman
+  subdomain: environments
+  title: 'Environments: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is the simplest useful validation for environments?
+  concise_answer: Environments should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that environments supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative environments case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - environments
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: environments
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-09
+  domain: postman-newman
+  subdomain: scripts
+  title: 'Scripts: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Compare a sound use of scripts with a superficially similar but unsafe use.
+  concise_answer: Scripts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scripts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative scripts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - scripts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: scripts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-10
+  domain: postman-newman
+  subdomain: data-files
+  title: 'Data Files: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What should a concise team convention say about data files?
+  concise_answer: Data Files should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data files supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative data files case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - data-files
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: data files
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-11
+  domain: postman-newman
+  subdomain: cli-runs
+  title: 'Cli Runs: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How does cli runs affect the reliability of a routine automated check?
+  concise_answer: Cli Runs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cli runs supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative cli runs case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - cli-runs
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: cli runs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-12
+  domain: postman-newman
+  subdomain: reporting
+  title: 'Reporting: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What evidence would make you trust a result produced through reporting?
+  concise_answer: Reporting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reporting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reporting case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - reporting
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: reporting
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-13
+  domain: postman-newman
+  subdomain: collections
+  title: 'Collections: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What failure mode should be made visible when introducing collections?
+  concise_answer: Collections should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that collections supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative collections case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - collections
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: collections
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-14
+  domain: postman-newman
+  subdomain: environments
+  title: 'Environments: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you explain the trade-off behind environments without relying on jargon?
+  concise_answer: Environments should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that environments supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative environments case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - environments
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: environments
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: postman-newman-b-15
+  domain: postman-newman
+  subdomain: scripts
+  title: 'Scripts: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which input or precondition matters most for scripts?
+  concise_answer: Scripts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Postman, Newman, and API tooling, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scripts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Postman, Newman, and API tooling example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative scripts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - postman-newman
+  - scripts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: postman-docs
+    locator: scripts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept

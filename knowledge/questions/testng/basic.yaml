@@ -1,0 +1,1360 @@
+version: 1
+records:
+- id: testng-b-01
+  domain: testng
+  subdomain: lifecycle
+  title: 'Lifecycle: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does lifecycle address, and what is its practical boundary?
+  concise_answer: Lifecycle should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that lifecycle supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your lifecycle approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - lifecycle
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-02
+  domain: testng
+  subdomain: assertions
+  title: 'Assertions: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Explain assertions to a teammate who must use it safely tomorrow.
+  concise_answer: Assertions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that assertions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your assertions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative assertions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - assertions
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: assertions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-03
+  domain: testng
+  subdomain: data-providers
+  title: 'Data Providers: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What would you check first before relying on data providers in a test or delivery workflow?
+  concise_answer: Data Providers should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In TestNG and Java test execution, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data providers supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data providers approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data providers case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - data-providers
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: data providers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-04
+  domain: testng
+  subdomain: parameters
+  title: 'Parameters: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Give a small example of parameters and state the observable outcome.
+  concise_answer: Parameters should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parameters supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your parameters approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative parameters case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - parameters
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: parameters
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-05
+  domain: testng
+  subdomain: groups-dependencies
+  title: 'Groups Dependencies: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about groups dependencies most often causes an avoidable defect?
+  concise_answer: Groups Dependencies should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In TestNG and Java test execution, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that groups dependencies supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your groups dependencies approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative groups dependencies case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - groups-dependencies
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: groups dependencies
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-06
+  domain: testng
+  subdomain: listeners
+  title: 'Listeners: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that listeners is being used for the wrong purpose?
+  concise_answer: Listeners should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that listeners supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your listeners approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative listeners case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - listeners
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: listeners
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-07
+  domain: testng
+  subdomain: retries
+  title: 'Retries: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing retries?
+  concise_answer: Retries should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that retries supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your retries approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative retries case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - retries
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: retries
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-08
+  domain: testng
+  subdomain: parallelism
+  title: 'Parallelism: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What is the simplest useful validation for parallelism?
+  concise_answer: Parallelism should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parallelism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your parallelism approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative parallelism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - parallelism
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: parallelism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-09
+  domain: testng
+  subdomain: factories
+  title: 'Factories: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Compare a sound use of factories with a superficially similar but unsafe use.
+  concise_answer: Factories should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that factories supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your factories approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative factories case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - factories
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: factories
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-10
+  domain: testng
+  subdomain: suites-xml
+  title: 'Suites Xml: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What should a concise team convention say about suites xml?
+  concise_answer: Suites Xml should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that suites xml supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your suites xml approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative suites xml case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - suites-xml
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: suites xml
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-11
+  domain: testng
+  subdomain: reporting
+  title: 'Reporting: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How does reporting affect the reliability of a routine automated check?
+  concise_answer: Reporting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reporting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reporting approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reporting case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - reporting
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: reporting
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-12
+  domain: testng
+  subdomain: maven-ci
+  title: 'Maven Ci: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What evidence would make you trust a result produced through maven ci?
+  concise_answer: Maven Ci should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that maven ci supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your maven ci approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative maven ci case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - maven-ci
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: maven ci
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-13
+  domain: testng
+  subdomain: thread-safety
+  title: 'Thread Safety: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What failure mode should be made visible when introducing thread safety?
+  concise_answer: Thread Safety should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In TestNG and Java test execution, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that thread safety supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative thread safety case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - thread-safety
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: thread safety
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-14
+  domain: testng
+  subdomain: anti-patterns
+  title: 'Anti Patterns: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you explain the trade-off behind anti patterns without relying on jargon?
+  concise_answer: Anti Patterns should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In TestNG and Java test execution, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that anti patterns supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative anti patterns case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - anti-patterns
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: anti patterns
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-15
+  domain: testng
+  subdomain: lifecycle
+  title: 'Lifecycle: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Which input or precondition matters most for lifecycle?
+  concise_answer: Lifecycle should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that lifecycle supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - lifecycle
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-16
+  domain: testng
+  subdomain: assertions
+  title: 'Assertions: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: When should a team stop and clarify the intended use of assertions?
+  concise_answer: Assertions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that assertions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative assertions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - assertions
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: assertions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-17
+  domain: testng
+  subdomain: data-providers
+  title: 'Data Providers: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What would a useful acceptance criterion for data providers look like?
+  concise_answer: Data Providers should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In TestNG and Java test execution, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data providers supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative data providers case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - data-providers
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: data providers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-18
+  domain: testng
+  subdomain: parameters
+  title: 'Parameters: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you test the negative path around parameters?
+  concise_answer: Parameters should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parameters supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative parameters case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - parameters
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: parameters
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-19
+  domain: testng
+  subdomain: groups-dependencies
+  title: 'Groups Dependencies: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is a reasonable first diagnostic when groups dependencies behaves unexpectedly?
+  concise_answer: Groups Dependencies should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In TestNG and Java test execution, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that groups dependencies supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative groups dependencies case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - groups-dependencies
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: groups dependencies
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-20
+  domain: testng
+  subdomain: listeners
+  title: 'Listeners: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How can a team avoid turning listeners into a brittle convention?
+  concise_answer: Listeners should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that listeners supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative listeners case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - listeners
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: listeners
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-21
+  domain: testng
+  subdomain: retries
+  title: 'Retries: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which outcome would show that retries has delivered value?
+  concise_answer: Retries should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that retries supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative retries case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - retries
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: retries
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-22
+  domain: testng
+  subdomain: parallelism
+  title: 'Parallelism: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What should be documented about parallelism for the next maintainer?
+  concise_answer: Parallelism should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parallelism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative parallelism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - parallelism
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: parallelism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-23
+  domain: testng
+  subdomain: factories
+  title: 'Factories: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you make factories understandable in a code review?
+  concise_answer: Factories should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that factories supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative factories case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - factories
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: factories
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept
+- id: testng-b-24
+  domain: testng
+  subdomain: suites-xml
+  title: 'Suites Xml: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What is a common scope mistake when applying suites xml?
+  concise_answer: Suites Xml should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In TestNG and Java test execution, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that suites xml supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete TestNG and Java test execution example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative suites xml case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - testng
+  - suites-xml
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: testng-docs
+    locator: suites xml
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: concept

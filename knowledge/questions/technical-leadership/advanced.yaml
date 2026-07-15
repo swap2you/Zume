@@ -1,0 +1,894 @@
+version: 1
+records:
+- id: technical-leadership-a-01
+  domain: technical-leadership
+  subdomain: mentoring
+  title: 'Mentoring: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for mentoring that balances correctness, delivery speed, and operational evidence.
+  concise_answer: Mentoring should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that mentoring supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your mentoring approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative mentoring case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - mentoring
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: mentoring
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-02
+  domain: technical-leadership
+  subdomain: delegation
+  title: 'Delegation: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of delegation. How would you converge
+    them safely?
+  concise_answer: Delegation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that delegation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your delegation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative delegation case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - delegation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: delegation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-03
+  domain: technical-leadership
+  subdomain: stakeholder-alignment
+  title: 'Stakeholder Alignment: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for stakeholder alignment under reliability
+    and cost constraints?
+  concise_answer: Stakeholder Alignment should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder
+    management, validate both the intended result and the meaningful negative or failure path before treating
+    it as reliable.
+  recommended_answer: Start by naming the decision that stakeholder alignment supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your stakeholder alignment approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative stakeholder alignment case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - stakeholder-alignment
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: stakeholder alignment
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-04
+  domain: technical-leadership
+  subdomain: conflict
+  title: 'Conflict: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for conflict?
+  concise_answer: Conflict should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that conflict supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your conflict approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative conflict case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - conflict
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: conflict
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-05
+  domain: technical-leadership
+  subdomain: feedback
+  title: 'Feedback: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of feedback before users report it?
+  concise_answer: Feedback should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that feedback supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your feedback approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative feedback case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - feedback
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: feedback
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-06
+  domain: technical-leadership
+  subdomain: influence
+  title: 'Influence: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether influence improves outcomes or only activity
+    metrics.
+  concise_answer: Influence should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that influence supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your influence approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative influence case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - influence
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: influence
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-07
+  domain: technical-leadership
+  subdomain: mentoring
+  title: 'Mentoring: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to mentoring?
+  concise_answer: Mentoring should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that mentoring supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your mentoring approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative mentoring case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - mentoring
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: mentoring
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-08
+  domain: technical-leadership
+  subdomain: delegation
+  title: 'Delegation: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What must be true before delegating decisions about delegation to automation?
+  concise_answer: Delegation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that delegation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative delegation case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - delegation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: delegation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-09
+  domain: technical-leadership
+  subdomain: stakeholder-alignment
+  title: 'Stakeholder Alignment: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving stakeholder alignment?
+  concise_answer: Stakeholder Alignment should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder
+    management, validate both the intended result and the meaningful negative or failure path before treating
+    it as reliable.
+  recommended_answer: Start by naming the decision that stakeholder alignment supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative stakeholder alignment case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - stakeholder-alignment
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: stakeholder alignment
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-10
+  domain: technical-leadership
+  subdomain: conflict
+  title: 'Conflict: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring conflict?
+  concise_answer: Conflict should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that conflict supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative conflict case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - conflict
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: conflict
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-11
+  domain: technical-leadership
+  subdomain: feedback
+  title: 'Feedback: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you establish ownership boundaries for feedback across platform and product teams?
+  concise_answer: Feedback should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that feedback supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative feedback case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - feedback
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: feedback
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-12
+  domain: technical-leadership
+  subdomain: influence
+  title: 'Influence: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature influence implementation?
+  concise_answer: Influence should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that influence supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative influence case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - influence
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: influence
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-13
+  domain: technical-leadership
+  subdomain: mentoring
+  title: 'Mentoring: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you design a post-incident review focused on mentoring without blaming individuals?
+  concise_answer: Mentoring should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that mentoring supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative mentoring case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - mentoring
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: mentoring
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-14
+  domain: technical-leadership
+  subdomain: delegation
+  title: 'Delegation: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What is the minimum observability design that makes delegation auditable?
+  concise_answer: Delegation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder management,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that delegation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative delegation case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - delegation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: delegation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario
+- id: technical-leadership-a-15
+  domain: technical-leadership
+  subdomain: stakeholder-alignment
+  title: 'Stakeholder Alignment: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you make stakeholder alignment resilient to partial failure and degraded dependencies?
+  concise_answer: Stakeholder Alignment should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Technical leadership, mentoring, and stakeholder
+    management, validate both the intended result and the meaningful negative or failure path before treating
+    it as reliable.
+  recommended_answer: Start by naming the decision that stakeholder alignment supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Technical leadership, mentoring, and stakeholder management example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative stakeholder alignment case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - technical-leadership
+  - stakeholder-alignment
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: stakeholder alignment
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  question_type: scenario

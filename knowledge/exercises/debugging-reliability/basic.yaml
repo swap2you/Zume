@@ -1,0 +1,270 @@
+version: 1
+records:
+- id: debugging-reliability-exercise-b-01
+  domain: debugging-reliability
+  subdomain: reproduce-isolate
+  title: Reproduce Isolate evidence exercise
+  level: basic
+  priority: P1
+  task: Given a small Debugging, reliability, and flaky-test engineering scenario, propose and implement
+    or describe a bounded approach for reproduce isolate. State assumptions, cover a failure path, and
+    show the evidence you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for reproduce isolate, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for reproduce
+    isolate. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the reproduce isolate approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for reproduce isolate passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the reproduce isolate solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: selenium-dev
+    locator: reproduce isolate
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  tags:
+  - debugging-reliability
+  - reproduce-isolate
+  - exercise
+  variant_family: debugging-reliability-reproduce-isolate
+- id: debugging-reliability-exercise-b-02
+  domain: debugging-reliability
+  subdomain: artifacts
+  title: Artifacts evidence exercise
+  level: basic
+  priority: P2
+  task: Given a small Debugging, reliability, and flaky-test engineering scenario, propose and implement
+    or describe a bounded approach for artifacts. State assumptions, cover a failure path, and show the
+    evidence you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for artifacts, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for artifacts.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the artifacts approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for artifacts passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the artifacts solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: selenium-dev
+    locator: artifacts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  tags:
+  - debugging-reliability
+  - artifacts
+  - exercise
+  variant_family: debugging-reliability-artifacts
+- id: debugging-reliability-exercise-b-03
+  domain: debugging-reliability
+  subdomain: synchronization
+  title: Synchronization evidence exercise
+  level: basic
+  priority: P2
+  task: Given a small Debugging, reliability, and flaky-test engineering scenario, propose and implement
+    or describe a bounded approach for synchronization. State assumptions, cover a failure path, and show
+    the evidence you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for synchronization, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for synchronization.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the synchronization approach if the input volume or
+    failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for synchronization passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the synchronization solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: selenium-dev
+    locator: synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  tags:
+  - debugging-reliability
+  - synchronization
+  - exercise
+  variant_family: debugging-reliability-synchronization
+- id: debugging-reliability-exercise-b-04
+  domain: debugging-reliability
+  subdomain: environments-data
+  title: Environments Data evidence exercise
+  level: basic
+  priority: P2
+  task: Given a small Debugging, reliability, and flaky-test engineering scenario, propose and implement
+    or describe a bounded approach for environments data. State assumptions, cover a failure path, and
+    show the evidence you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for environments data, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for environments
+    data. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the environments data approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for environments data passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the environments data solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: selenium-dev
+    locator: environments data
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  tags:
+  - debugging-reliability
+  - environments-data
+  - exercise
+  variant_family: debugging-reliability-environments-data

@@ -1,0 +1,882 @@
+version: 1
+records:
+- id: ai-governance-a-01
+  domain: ai-governance
+  subdomain: business-case
+  title: 'Business Case: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: emerging
+  question: Design a policy for business case that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Business Case should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI leadership, governance, and adoption, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that business case supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your business case approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative business case case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - business-case
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: business case
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-02
+  domain: ai-governance
+  subdomain: build-buy
+  title: 'Build Buy: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: emerging
+  question: A large organization has inconsistent implementations of build buy. How would you converge
+    them safely?
+  concise_answer: Build Buy should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that build buy supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your build buy approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative build buy case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - build-buy
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: build buy
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-03
+  domain: ai-governance
+  subdomain: privacy
+  title: 'Privacy: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you evaluate competing architectures for privacy under reliability and cost constraints?
+  concise_answer: Privacy should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that privacy supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your privacy approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative privacy case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - privacy
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: privacy
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-04
+  domain: ai-governance
+  subdomain: vendor-risk
+  title: 'Vendor Risk: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: What governance and exception path would you establish for vendor risk?
+  concise_answer: Vendor Risk should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that vendor risk supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your vendor risk approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative vendor risk case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - vendor-risk
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: vendor risk
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-05
+  domain: ai-governance
+  subdomain: governance
+  title: 'Governance: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you detect silent degradation of governance before users report it?
+  concise_answer: Governance should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that governance supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your governance approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative governance case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - governance
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: governance
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-06
+  domain: ai-governance
+  subdomain: roi
+  title: 'Roi: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: Design an experiment that distinguishes whether roi improves outcomes or only activity metrics.
+  concise_answer: Roi should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that roi supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your roi approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative roi case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - roi
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: roi
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-07
+  domain: ai-governance
+  subdomain: change-management
+  title: 'Change Management: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you set risk-based quality gates for a change to change management?
+  concise_answer: Change Management should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI leadership, governance, and adoption, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that change management supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your change management approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative change management case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - change-management
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: change management
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-08
+  domain: ai-governance
+  subdomain: capability
+  title: 'Capability: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: What must be true before delegating decisions about capability to automation?
+  concise_answer: Capability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that capability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative capability case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - capability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: capability
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-09
+  domain: ai-governance
+  subdomain: responsible-use
+  title: 'Responsible Use: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you model blast radius and rollback for a failure involving responsible use?
+  concise_answer: Responsible Use should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI leadership, governance, and adoption, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that responsible use supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative responsible use case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - responsible-use
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: responsible use
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-10
+  domain: ai-governance
+  subdomain: evaluation
+  title: 'Evaluation: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How do you avoid Goodhart-style metric misuse when measuring evaluation?
+  concise_answer: Evaluation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that evaluation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative evaluation case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - evaluation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: evaluation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-11
+  domain: ai-governance
+  subdomain: incidents
+  title: 'Incidents: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you establish ownership boundaries for incidents across platform and product teams?
+  concise_answer: Incidents should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that incidents supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative incidents case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - incidents
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: incidents
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-12
+  domain: ai-governance
+  subdomain: cost
+  title: 'Cost: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: What evidence would justify retiring or replacing a mature cost implementation?
+  concise_answer: Cost should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cost supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative cost case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - cost
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: cost
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-13
+  domain: ai-governance
+  subdomain: workforce
+  title: 'Workforce: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: How would you design a post-incident review focused on workforce without blaming individuals?
+  concise_answer: Workforce should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In AI leadership, governance, and adoption, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that workforce supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative workforce case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - workforce
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: workforce
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-14
+  domain: ai-governance
+  subdomain: executive-communication
+  title: 'Executive Communication: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: What is the minimum observability design that makes executive communication auditable?
+  concise_answer: Executive Communication should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In AI leadership, governance, and adoption,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that executive communication supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative executive communication case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - executive-communication
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: executive communication
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario
+- id: ai-governance-a-15
+  domain: ai-governance
+  subdomain: business-case
+  title: 'Business Case: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: How would you make business case resilient to partial failure and degraded dependencies?
+  concise_answer: Business Case should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In AI leadership, governance, and adoption, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that business case supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete AI leadership, governance, and adoption example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative business case case before generalizing.
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - business-case
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: nist-ai-rmf
+    locator: business case
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: published
+  question_type: scenario

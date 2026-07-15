@@ -1,0 +1,68 @@
+version: 1
+records:
+- id: sre-resilience-exercise-i-01
+  domain: sre-resilience
+  subdomain: slo-sli
+  title: Slo Sli evidence exercise
+  level: intermediate
+  priority: P1
+  task: Given a small SRE, resilience, chaos, and production quality scenario, propose and implement or
+    describe a bounded approach for slo sli. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for slo sli, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for slo
+    sli. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the slo sli approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for slo sli passes locally but fails intermittently in CI. What do
+    you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the slo sli solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: istqb-glossary
+    locator: slo sli
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: published
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  tags:
+  - sre-resilience
+  - slo-sli
+  - exercise
+  variant_family: sre-resilience-slo-sli
