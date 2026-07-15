@@ -36,9 +36,11 @@ data/*.sqlite3
 *.jpeg
 *.zip
 
-# Allow repository documentation/templates
+# Allow repository documentation/templates and UI QA screenshots
 !docs/*.docx
 !templates/*.docx
+!reports/screenshots/*.png
+!reports/screenshots/.gitkeep
 
 # Zume 1.0 runtime / generated artifacts (never commit)
 .venv*/

@@ -213,6 +213,30 @@ def finalize_cmd(
     console.print(f"Candidate folder: {result.folder}")
 
 
+@app.command("doctor")
+def doctor_cmd() -> None:
+    """Report local provider/runtime status without revealing secrets."""
+    from zume.doctor import format_doctor_text
+
+    console.print(format_doctor_text())
+
+
+@app.command("serve")
+def serve_cmd(
+    host: str = typer.Option("127.0.0.1", "--host", help="Bind host (localhost only)."),
+    port: int = typer.Option(8787, "--port", help="Bind port."),
+    no_open: bool = typer.Option(False, "--no-open", help="Do not open a browser."),
+) -> None:
+    """Start the local API + UI on localhost."""
+    from zume.serve import run_server
+
+    try:
+        run_server(_root(), host=host, port=port, open_browser=not no_open)
+    except (ValueError, RuntimeError) as exc:
+        console.print(f"[red]Serve blocked:[/] {exc}")
+        raise typer.Exit(code=2) from exc
+
+
 @app.command("demo")
 def demo_cmd() -> None:
     """Run the fictional end-to-end sample: intake, then finalize."""
@@ -464,6 +488,146 @@ def db_backup_cmd(
 def _timestamp() -> str:
     from datetime import datetime, timezone
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+knowledge_app = typer.Typer(name="knowledge", help="Knowledge library commands.", no_args_is_help=True)
+app.add_typer(knowledge_app)
+
+
+@knowledge_app.command("validate")
+def knowledge_validate_cmd() -> None:
+    """Validate published knowledge records against the canonical schema."""
+    from zume.knowledge.validate import validate_library
+
+    errors = validate_library(_root())
+    if errors:
+        for err in errors[:50]:
+            console.print(f"[red]FAIL[/] {err}")
+        if len(errors) > 50:
+            console.print(f"... and {len(errors) - 50} more")
+        raise typer.Exit(code=1)
+    console.print("[green]PASS[/] knowledge library validation")
+
+
+@knowledge_app.command("stats")
+def knowledge_stats_cmd() -> None:
+    """Print knowledge library counts."""
+    from zume.knowledge.stats import collect_stats
+
+    stats = collect_stats(_root())
+    console.print(stats)
+
+
+@knowledge_app.command("build-index")
+def knowledge_build_index_cmd() -> None:
+    """Rebuild the deterministic SQLite FTS index (generated artifact)."""
+    from zume.knowledge.index import build_index
+
+    path = build_index(_root())
+    console.print(f"[green]Index built[/] -> {path}")
+
+
+@knowledge_app.command("search")
+def knowledge_search_cmd(
+    query: str = typer.Argument(..., help="Full-text query."),
+    limit: int = typer.Option(10, "--limit"),
+    domain: Optional[str] = typer.Option(None, "--domain"),
+) -> None:
+    """Search the local knowledge index."""
+    from zume.knowledge.search import search
+
+    results = search(_root(), query, limit=limit, domain=domain)
+    if not results:
+        console.print("No results.")
+        return
+    for row in results:
+        console.print(f"- {row.get('id')} [{row.get('domain')}/{row.get('level')}] {row.get('title')}")
+
+
+@knowledge_app.command("gaps")
+def knowledge_gaps_cmd() -> None:
+    """Report coverage gaps against taxonomy targets."""
+    from zume.knowledge.gaps import collect_gaps
+
+    report = collect_gaps(_root())
+    console.print(
+        f"Published questions: {report['published_questions']}; "
+        f"exercises: {report['published_exercises']}"
+    )
+    gaps = report.get("gaps") or []
+    if not gaps:
+        console.print("[green]No gaps against configured per-domain targets.[/]")
+        return
+    for gap in gaps[:40]:
+        console.print(
+            f"[yellow]GAP[/] {gap['domain']} {gap['level']} {gap['kind']}: "
+            f"{gap['have']}/{gap['target']} (missing {gap['missing']})"
+        )
+
+
+@knowledge_app.command("research")
+def knowledge_research_cmd(
+    domain: str = typer.Option(..., "--domain"),
+    proposals_only: bool = typer.Option(True, "--proposals-only/--publish-forbidden"),
+) -> None:
+    """Write research proposals only; never publishes directly."""
+    from datetime import datetime, timezone
+
+    if not proposals_only:
+        console.print("[red]Publishing from research is forbidden. Use --proposals-only.[/]")
+        raise typer.Exit(code=2)
+    out = _root() / "knowledge" / "proposals" / f"{domain}-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.yaml"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(
+        f"# Proposal-only research stub for domain={domain}\n"
+        "# Review and merge manually after critic + validation.\n"
+        "proposals: []\n",
+        encoding="utf-8",
+    )
+    console.print(f"[green]Wrote proposal file[/] -> {out}")
+
+
+release_app = typer.Typer(name="release", help="Release validation commands.", no_args_is_help=True)
+app.add_typer(release_app)
+
+
+@release_app.command("validate")
+def release_validate_cmd(
+    full: bool = typer.Option(False, "--full", help="Run the full local gate set."),
+    local: bool = typer.Option(True, "--local", help="Run local compile/lint/type/tests."),
+) -> None:
+    """Run local release gates (does not merge or tag)."""
+    import subprocess
+    import sys
+
+    root = _root()
+    steps = [
+        [sys.executable, "-m", "compileall", "src"],
+        ["ruff", "check", "."],
+        ["mypy", "src"],
+        [sys.executable, "-m", "pytest", "-q", "--cov=zume", "--cov-fail-under=80"],
+    ]
+    if full:
+        steps.extend([
+            [sys.executable, "-m", "zume", "knowledge", "validate"],
+            [sys.executable, "-m", "zume", "knowledge", "stats"],
+            [sys.executable, "-m", "zume", "doctor"],
+            [sys.executable, "-m", "zume", "scan-secrets"],
+        ])
+    elif not local:
+        console.print("Specify --local and/or --full")
+        raise typer.Exit(code=2)
+    failed = False
+    for cmd in steps:
+        console.rule(" ".join(cmd))
+        rc = subprocess.call(cmd, cwd=str(root))
+        if rc != 0:
+            console.print(f"[red]FAIL[/] exit {rc}")
+            failed = True
+            break
+        console.print("[green]PASS[/]")
+    if failed:
+        raise typer.Exit(code=1)
 
 
 def _normalize_trigger(text: str) -> str:

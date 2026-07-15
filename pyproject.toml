@@ -1,7 +1,7 @@
 [project]
 name = "zume"
-version = "0.1.0"
-description = "Local-first Senior SDET hiring operations toolkit"
+version = "1.0.0"
+description = "Local-first interview hiring and preparation workspace"
 requires-python = ">=3.11"
 dependencies = [
   "python-docx>=1.1.2",
@@ -10,7 +10,11 @@ dependencies = [
   "typer>=0.12",
   "rich>=13.7",
   "pypdf>=5.0",
-  "Pillow>=10.0"
+  "Pillow>=10.0",
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "python-multipart>=0.0.9",
+  "httpx>=0.27",
 ]
 
 [project.optional-dependencies]
