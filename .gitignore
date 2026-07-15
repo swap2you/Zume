@@ -40,5 +40,23 @@ data/*.sqlite3
 !docs/*.docx
 !templates/*.docx
 
+# Zume 1.0 runtime / generated artifacts (never commit)
+.venv*/
+node_modules/
+apps/web/dist/
+apps/web/playwright-report/
+apps/web/test-results/
+knowledge/index/
+knowledge/_generated/
+data/knowledge*.db
+data/chat/
+data/audio-cache/
+data/lab-workspaces/
+release-staging/
+releases/
+*.log
+Zume_1_0_Cursor_Release_Package/
+Zume-v*.zip
+
 # Office temporary files
 ~$*.docx

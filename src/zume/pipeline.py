@@ -308,9 +308,20 @@ def run_finalize(root: Path, candidate_ref: str, notes: str,
 
 
 def _read_arg(value: str | None) -> str | None:
+    """Return file contents when ``value`` is an existing path; else treat as literal text.
+
+    Long interview-note strings must never be probed as filesystem paths on platforms
+    that raise ``OSError`` for over-long names (Linux ENAMETOOLONG).
+    """
     if value is None:
         return None
+    # Heuristic: obvious multi-line / very long payloads are never file paths.
+    if "\n" in value or len(value) > 240:
+        return value
     path = Path(value)
-    if path.exists() and path.is_file():
-        return path.read_text(encoding="utf-8", errors="replace")
+    try:
+        if path.exists() and path.is_file():
+            return path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return value
     return value

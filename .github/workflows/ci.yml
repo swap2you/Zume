@@ -2,10 +2,15 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, "release/zume-1.0"]
   pull_request:
     branches: [main]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Optional diagnostic note (never contains secrets)"
+        required: false
+        default: ""
 
 # Never expose candidate data. This workflow uses only fictional demo data and
 # does not upload candidate folders or generated candidate documents.

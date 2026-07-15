@@ -1,0 +1,37 @@
+[
+  {
+    "file": "00_READ_ME_FIRST.md",
+    "sha256": "0d6948f203a4b2263233afb50eac414f5de58351def1f32c95d1cf400544dcf6",
+    "bytes": 3034
+  },
+  {
+    "file": "01_ZUME_1_0_MASTER_CURSOR_PROMPT.md",
+    "sha256": "0add46246d61802a8a6461404cee8d47056710a37f74af81d6de4603b250f39b",
+    "bytes": 29039
+  },
+  {
+    "file": "02_ACCEPTANCE_MATRIX.md",
+    "sha256": "90aa50e969be86c2a4341a96183d9e1910340a6b3aa264113defc59e51373a71",
+    "bytes": 5676
+  },
+  {
+    "file": "03_KNOWLEDGE_TAXONOMY.md",
+    "sha256": "3d588608ac51a3d8a47a723309612fba25c1a0750fa030992e4902f2c5ff3e88",
+    "bytes": 9766
+  },
+  {
+    "file": "04_SOURCE_AND_RESEARCH_POLICY.md",
+    "sha256": "be878f9d8f734113f14e7e33856e47a0cd9ef44bf8b312f22846cd745a9283dd",
+    "bytes": 4792
+  },
+  {
+    "file": "05_CLEAN_ROOM_VALIDATOR_PROMPT.md",
+    "sha256": "6801bd15fd4a0f6031acbae2ebff41a4eaf0e05ea9ec32b4b7e126ebec55285c",
+    "bytes": 5229
+  },
+  {
+    "file": "06_RELEASE_RUNBOOK.md",
+    "sha256": "8b4a61b10f8d2c3609a6f4345775a39648a1e65e8aa2c81fcc0bb12e4e132717",
+    "bytes": 1812
+  }
+]
