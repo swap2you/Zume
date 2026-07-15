@@ -1,0 +1,22 @@
+# Optional Selenium lab profile. Internal network only; no secret/candidate mounts.
+services:
+  web-under-test:
+    image: nginx:1.27-alpine
+    networks: [labnet]
+    read_only: true
+  selenium:
+    image: selenium/standalone-chromium:4.25.0
+    networks: [labnet]
+    shm_size: 1gb
+    depends_on: [web-under-test]
+  java-runner:
+    image: eclipse-temurin:17-jdk-jammy
+    networks: [labnet]
+    user: "1000:1000"
+    network_mode: service:selenium
+    depends_on: [selenium]
+    profiles: ["optional"]
+
+networks:
+  labnet:
+    internal: true

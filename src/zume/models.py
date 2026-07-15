@@ -265,6 +265,7 @@ class Candidate(BaseModel):
     override_reasons: list[str] = Field(default_factory=list)
     # Phase 6 — exercises assigned on the first prep; preserved across reruns.
     assigned_exercise_ids: list[str] = Field(default_factory=list)
+    assigned_question_ids: list[str] = Field(default_factory=list)
     rotation_reasons: list[str] = Field(default_factory=list)
     # Lockdown Part 3 — reasons recorded when a finalized candidate is reopened.
     reopen_reasons: list[str] = Field(default_factory=list)
