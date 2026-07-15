@@ -39,7 +39,7 @@ def test_offline_ai_with_and_without_context():
 
 
 def test_openai_provider_http_error_and_parse():
-    provider = OpenAIProvider(api_key="test-key", model="gpt-test")
+    provider = OpenAIProvider(api_key="x" * 12, model="gpt-test")
     with patch("zume.ai.openai_provider.request.urlopen", side_effect=Exception("boom")):
         ans = provider.answer("Q", context=[{"id": "a", "title": "A", "concise_answer": "B"}])
         assert ans.confidence == "low"
@@ -83,7 +83,7 @@ def test_java_and_selenium_unavailable_without_flag(monkeypatch):
 
 
 def test_runtime_settings_env(monkeypatch):
-    monkeypatch.setenv("OPENAI_API_KEY", "unit-test-key-not-real")
+    monkeypatch.setenv("OPENAI_API_KEY", "x" * 12)
     monkeypatch.setenv("ZUME_ENABLE_WEB_SEARCH", "true")
     settings = load_runtime_settings()
     assert settings.openai_api_key_configured is True

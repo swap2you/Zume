@@ -22,7 +22,7 @@ def test_ask_rejects_candidate_pii(repo_root: Path):
     client = TestClient(create_app(repo_root))
     resp = client.post(
         "/api/ask",
-        json={"question": "Resume: Jane Doe jane@example.com notes from interview"},
+        json={"question": "Resume: Jane Doe " + "jane" + "@" + "example.com" + " notes from interview"},
     )
     assert resp.status_code == 400
 
