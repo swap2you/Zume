@@ -26,3 +26,15 @@ Why lockdown commit `bdbfbc7` looked “pushed but not green”:
 - No candidate artifacts uploaded by Actions.
 - No weakening of coverage or test gates to obtain green CI.
 - Fictional demo data only in CI.
+
+## V1.0 release branch CI status (2026-07-15)
+
+| Item | Status | Notes |
+|------|--------|-------|
+| `release/zume-1.0` workflow trigger | **CONFIGURED** | Phase 0 adds branch to `.github/workflows/ci.yml` |
+| Green run on release branch | **PENDING** | Branch push + draft PR not completed at builder report time |
+| Draft PR to `main` | **PENDING** | Builder will push afterward |
+| Inferring green from local tests | **NOT ALLOWED** | 190 passed locally, 80.34% coverage — see `reports/V1_IMPLEMENTATION_REPORT.md` |
+
+Central CI evidence must come from GitHub Actions after push. Clean-room validator
+must inspect workflow runs independently (`reports/V1_CLEAN_ROOM_VALIDATION.md`).

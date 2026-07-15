@@ -60,3 +60,20 @@ plus schedule-subject correction.
 Unconfirmed join email subject must be
 `Proposed Interview Schedule – <candidate>` (body already used “Proposing”).
 Confirmed schedules keep `Interview Confirmation – <candidate>`.
+
+## V1.0 builder evidence index (2026-07-15)
+
+Phase 0 committed at `20ec43b9b8794dc1aee539318c771186ec881e99`. Full builder
+reports (phases 1–12 evidence in working tree; not clean-room proof):
+
+| Report | Path |
+|--------|------|
+| Implementation | `reports/V1_IMPLEMENTATION_REPORT.md` |
+| Library coverage | `reports/V1_LIBRARY_COVERAGE_REPORT.md` |
+| UI visual QA | `reports/V1_UI_VISUAL_QA.md` |
+| Security & privacy | `reports/V1_SECURITY_AND_PRIVACY_REPORT.md` |
+| Lab sandbox | `reports/V1_LAB_SANDBOX_REPORT.md` |
+| Clean-room (NOT RUN) | `reports/V1_CLEAN_ROOM_VALIDATION.md` |
+| Release readiness | `reports/V1_RELEASE_READINESS.md` |
+
+Acceptance contract: `docs/release/v1.0/02_ACCEPTANCE_MATRIX.md`
