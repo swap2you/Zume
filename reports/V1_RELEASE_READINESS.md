@@ -102,3 +102,10 @@ Record defects only; do not treat builder screenshots as substitute for live rev
 
 `docs/release/v1.0/02_ACCEPTANCE_MATRIX.md` — full PASS required from independent
 validator, not from builder reports.
+## Central CI (updated after builder push)
+
+- Draft PR: https://github.com/swap2you/Zume/pull/1 (DRAFT — not merged)
+- Release branch SHA: `bb61ceb65efe49fd3917366477303aea48d330d5`
+- Push CI (success): https://github.com/swap2you/Zume/actions/runs/29441712117
+- PR CI (success): https://github.com/swap2you/Zume/actions/runs/29441716604
+- Jobs: validate (ubuntu/windows × py3.11/3.13) + reproducible install — all pass

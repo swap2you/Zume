@@ -116,3 +116,11 @@ The builder issues **no** verdict above.
 
 - `docs/release/v1.0/00_READ_ME_FIRST.md`
 - `reports/V1_RELEASE_READINESS.md`
+
+## Exact inputs for independent clean-room validator
+
+- Repository path: `C:\Development\Workspace\Zume`
+- Branch: `release/zume-1.0`
+- SHA: `bb61ceb65efe49fd3917366477303aea48d330d5`
+- Contracts: `docs/release/v1.0/02_ACCEPTANCE_MATRIX.md` and `docs/release/v1.0/05_CLEAN_ROOM_VALIDATOR_PROMPT.md`
+- Do not reuse builder chat history or trust builder reports as evidence
