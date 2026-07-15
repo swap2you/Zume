@@ -1,15 +1,18 @@
-# Zume
+# Zume 1.0
 
-Zume is a lightweight, local-first Senior SDET hiring operations toolkit. It
-turns a resume and interviewer notes into a small, consistent set of interview
-documents. Zume is driven primarily from **Cursor**, using two commands:
-`zume intake` (before the interview) and `zume finalize` (after the interview).
+Zume is a local-first hiring CLI and preparation workspace. It turns a resume
+and real interviewer notes into a consistent hiring package, and also provides
+a localhost UI for studying the knowledge library, asking focused questions,
+and running exercises. Zume is driven primarily from **Cursor**.
 
 ## Start here
 
 - **[`CURSOR_START_HERE.md`](CURSOR_START_HERE.md)** — how to run Zume from Cursor.
 - **[`docs/ZUME_DAILY_USE_GUIDE.md`](docs/ZUME_DAILY_USE_GUIDE.md)** — day-to-day use for non-developers.
 - **[`docs/ZUME_TROUBLESHOOTING_GUIDE.md`](docs/ZUME_TROUBLESHOOTING_GUIDE.md)** — common issues and fixes.
+- **[`docs/PREPARATION_WORKSPACE.md`](docs/PREPARATION_WORKSPACE.md)** — the local UI and study workspace.
+- **[`docs/KNOWLEDGE_LIBRARY.md`](docs/KNOWLEDGE_LIBRARY.md)** — library workflow and indexing.
+- **[`docs/SECURITY_AND_SECRETS.md`](docs/SECURITY_AND_SECRETS.md)** — local data and secret-handling rules.
 
 ## Local path
 `C:\Development\Workspace\Zume`
@@ -25,9 +28,9 @@ python -m venv .venv
 The `zume` command is then available at `.venv\Scripts\zume` (or plainly as
 `zume` after activating the venv with `.\.venv\Scripts\Activate.ps1`).
 
-## The two-command workflow
+## Hiring workflow: two commands
 
-Zume uses exactly two operational commands:
+The hiring lifecycle uses exactly two commands:
 
 ```powershell
 # 1. Before the interview — screen the resume and build the full package, then STOP.
@@ -86,7 +89,44 @@ score. It measures how strongly the resume evidences each mandatory skill
 establish technical competency — that is verified only through live assessment.
 The experience gate reports an explicit state: `passed`, `failed`, or `unknown`.
 
-## Lifecycle, database and security utilities
+## Local preparation workspace
+
+Build the optional React UI, then run the localhost-only FastAPI server:
+
+```powershell
+cd apps\web
+npm ci
+npm run build
+cd ..\..
+zume serve
+```
+
+Open `http://127.0.0.1:8787`. The server hosts the UI when
+`apps/web/dist` exists, plus local API documentation at `/docs`. Use
+`zume serve --no-open` to suppress browser launch, and `zume doctor` to report
+runtime/provider readiness without exposing secret values.
+
+The workspace includes question browsing, an interview-plan preview, Ask Zume,
+and exercise labs. See [`docs/PREPARATION_WORKSPACE.md`](docs/PREPARATION_WORKSPACE.md),
+[`docs/ASK_ZUME.md`](docs/ASK_ZUME.md),
+[`docs/AUDIO_AND_VOICE.md`](docs/AUDIO_AND_VOICE.md), and
+[`docs/EXERCISE_LAB.md`](docs/EXERCISE_LAB.md).
+
+## Knowledge commands
+
+```powershell
+zume knowledge validate
+zume knowledge stats
+zume knowledge build-index
+zume knowledge search "contract testing"
+zume knowledge gaps
+zume knowledge research --domain selenium --topic "locator strategy"
+```
+
+The checked-in YAML corpus is the source of truth. SQLite FTS data is generated
+locally and can always be rebuilt.
+
+## Lifecycle, database, and security utilities
 
 ```powershell
 zume candidate list
@@ -113,8 +153,9 @@ zume validate --candidate Mehta_Aarav_2026-07-13
 ## Documentation
 
 - `docs/ARCHITECTURE.md` — modules, data flow, and storage design.
+- `docs/RELEASE_AND_RECOVERY.md` — Windows release build and recovery procedure.
 - `docs/PRIVACY.md` — privacy model, ignore rules, and lifecycle commands.
-- `docs/reference/legacy/` — historical notes on the retired v1 workflow.
+- `docs/reference/legacy/` — historical, separated documentation for retired workflows.
 - `reports/` — audit, risk assessment, render validation, and lockdown reports.
 
 ## Privacy

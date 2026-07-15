@@ -90,6 +90,38 @@ to stop rather than guessing.
 - Activate the venv (`.\.venv\Scripts\Activate.ps1`) or call the shim directly:
   `.\.venv\Scripts\zume`.
 
+## UI does not open or shows no workspace
+
+- Run `.\scripts\start-zume.ps1`, or build the frontend with `npm ci` and
+  `npm run build` in `apps\web`, then run `zume serve`.
+- Open `http://127.0.0.1:8787`; `zume serve --no-open` intentionally does not
+  launch a browser.
+- If the port is unavailable, stop the local process using it or run
+  `zume serve --port <free-port>`.
+
+## Knowledge search has no results
+
+- Confirm the YAML source with `zume knowledge validate`.
+- Rebuild derived search data: `zume knowledge build-index`.
+- The SQLite FTS index is disposable; do not edit it or commit it.
+
+## Ask Zume, audio, or web search is unavailable
+
+- Run `zume doctor` for capability status; it never prints credentials.
+- Offline answers and browser speech remain the default. Web search, hosted AI,
+  TTS, and realtime voice require their explicit runtime settings and a
+  configured credential source.
+- Do not submit resumes, interviewer notes, emails, or phone numbers to Ask
+  Zume. Use intake/finalize for candidate material.
+
+## Exercise lab cannot run
+
+- Check `zume doctor` for runner status.
+- SQL runs locally; the mock API training server may need to be started from
+  `training/mock-api`.
+- Java and Selenium use optional Docker isolation. Install Docker and enable
+  `ZUME_ENABLE_DOCKER_LABS` only when those labs are required.
+
 ## Virtual environment problem
 
 - Recreate it: delete `.venv`, then `python -m venv .venv` and

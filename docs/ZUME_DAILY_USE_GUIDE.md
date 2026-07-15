@@ -17,6 +17,19 @@ you do not need to memorize commands.
 - Open the folder that contains `pyproject.toml` and this `docs/` folder.
 - Confirm the terminal prompt shows the Zume repository path.
 
+## Start the local preparation workspace
+
+The workspace is optional and stays on this machine. Run:
+
+```powershell
+.\scripts\start-zume.ps1
+```
+
+It builds the React UI if necessary, starts `zume serve`, and opens
+`http://127.0.0.1:8787`. The UI lets you browse the question library, preview
+an interview plan, use Ask Zume for non-candidate learning, and run exercises.
+Run `zume doctor` if an optional provider or lab is unavailable.
+
 ## Attach the candidate materials
 
 - Attach the resume as PDF, DOCX, or TXT.
@@ -62,6 +75,15 @@ Send exactly:
 - Share ONLY `04_Candidate_Exercise_Sheet.docx` with a candidate.
 - Everything else is interviewer-only and contains answers, rubrics, or
   reference solutions.
+
+## Knowledge library and practice
+
+- Check the source library: `zume knowledge validate` and `zume knowledge stats`.
+- Build/search its derived local index: `zume knowledge build-index`, then
+  `zume knowledge search "<topic>"`.
+- Use the UI’s Ask Zume and audio features only for non-candidate material.
+- The exercise lab is a preparation tool. Docker-backed Java/Selenium labs are
+  optional; the SQL and local mock API training resources do not require Docker.
 
 ## When the candidate is rejected or conditional
 
