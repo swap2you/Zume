@@ -5,10 +5,11 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import uuid
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from zume import candidate as cand
@@ -75,51 +76,97 @@ def _safe_candidate_root(root: Path, folder_name: str) -> Path:
 def api_knowledge_search(
     q: str = "",
     domain: str | None = None,
+    subdomain: str | None = None,
     level: str | None = None,
     priority: str | None = None,
+    frequency: str | None = None,
+    role: str | None = None,
+    tags: str | None = None,
+    freshness: int | None = None,
+    question_type: str | None = None,
+    status: str | None = "published",
     limit: int = 20,
 ) -> dict[str, Any]:
     results = knowledge_search(_root(), q, limit=max(1, min(limit, 100)), domain=domain)
+    questions = {question.id: question.model_dump() for question in load_all_questions(_root() / "knowledge")}
+    enriched = [{**questions.get(item["id"], {}), **item} for item in results]
+    results = [
+        item for item in enriched
+        if (not level or item.get("level") == level)
+        and (not priority or item.get("priority") == priority)
+        and (not subdomain or item.get("subdomain") == subdomain)
+        and (not frequency or item.get("frequency") == frequency)
+        and (not role or role in item.get("role_tracks", []))
+        and (not tags or tags in item.get("tags", []))
+        and (not freshness or int(item.get("freshness_days", 0)) <= freshness)
+        and (not question_type or item.get("question_type") == question_type)
+        and (not status or item.get("status") == status)
+    ]
+    return {"results": results, "items": results}
+
+
+@router.get("/knowledge/practice")
+def api_knowledge_practice(
+    limit: int = 20,
+    domain: str | None = None,
+    level: str | None = None,
+) -> dict[str, Any]:
+    """Return reviewed published questions with answers for local practice."""
+    questions = [
+        q for q in load_all_questions(_root() / "knowledge")
+        if q.status == "published" and q.review_status == "reviewed"
+    ]
+    if domain:
+        questions = [q for q in questions if q.domain == domain]
     if level:
-        results = [r for r in results if r.get("level") == level]
-    if priority:
-        results = [r for r in results if r.get("priority") == priority]
-    return {"results": results}
+        questions = [q for q in questions if q.level == level]
+    items = [q.model_dump() for q in sorted(questions, key=lambda q: q.id)[:max(1, min(limit, 100))]]
+    return {"items": items, "results": items}
 
 
 @router.get("/knowledge/questions")
 def api_list_questions(
     domain: str | None = None,
+    subdomain: str | None = None,
     level: str | None = None,
     priority: str | None = None,
+    frequency: str | None = None,
+    role: str | None = None,
+    tags: str | None = None,
+    freshness: int | None = None,
+    question_type: str | None = None,
+    status: str | None = "published",
     offset: int = 0,
     limit: int = 50,
 ) -> dict[str, Any]:
-    questions = [q for q in load_all_questions(_root() / "knowledge") if q.status == "published"]
+    questions = [
+        q for q in load_all_questions(_root() / "knowledge")
+        if (not status or q.status == status)
+    ]
     if domain:
         questions = [q for q in questions if q.domain == domain]
     if level:
         questions = [q for q in questions if q.level == level]
     if priority:
         questions = [q for q in questions if q.priority == priority]
+    if subdomain:
+        questions = [q for q in questions if q.subdomain == subdomain]
+    if frequency:
+        questions = [q for q in questions if q.frequency == frequency]
+    if role:
+        questions = [q for q in questions if role in q.role_tracks]
+    if tags:
+        questions = [q for q in questions if tags in q.tags]
+    if freshness:
+        questions = [q for q in questions if q.freshness_days <= freshness]
+    if question_type:
+        questions = [q for q in questions if q.question_type == question_type]
     questions = sorted(questions, key=lambda q: q.id)
     page = questions[offset : offset + max(1, min(limit, 100))]
     return {
         "total": len(questions),
         "offset": offset,
-        "items": [
-            {
-                "id": q.id,
-                "title": q.title,
-                "domain": q.domain,
-                "level": q.level,
-                "priority": q.priority,
-                "frequency": q.frequency,
-                "question": q.question,
-                "tags": q.tags,
-            }
-            for q in page
-        ],
+        "items": [q.model_dump() for q in page],
     }
 
 
@@ -176,12 +223,51 @@ def api_intake(body: IntakeRequest) -> dict[str, Any]:
     }
 
 
+@router.post("/candidates/intake-upload")
+async def api_intake_upload(
+    resume: UploadFile = File(...),
+    schedule_details: str | None = Form(default=None),
+    name: str | None = Form(default=None),
+) -> dict[str, Any]:
+    """Persist a supported resume temporarily then use the canonical intake pipeline."""
+    suffix = Path(resume.filename or "").suffix.lower()
+    if suffix not in {".pdf", ".docx", ".txt"}:
+        raise HTTPException(status_code=400, detail="Resume must be a PDF, DOCX, or TXT file.")
+    payload = await resume.read()
+    if not payload:
+        raise HTTPException(status_code=400, detail="Uploaded resume is empty.")
+    if len(payload) > 20 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail="Uploaded resume exceeds the 20 MB limit.")
+    temporary = _root() / "input" / f"upload-{uuid.uuid4().hex}{suffix}"
+    temporary.parent.mkdir(parents=True, exist_ok=True)
+    temporary.write_bytes(payload)
+    try:
+        result = pipeline.run_intake(
+            _root(), resume_path=temporary, name=name, schedule_details=schedule_details,
+        )
+    except pipeline.WorkflowError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    finally:
+        temporary.unlink(missing_ok=True)
+    return {
+        "folder": result.folder.name,
+        "status": result.status,
+        "decision": result.screening.decision.value,
+        "score_percent": result.screening.score_percent,
+        "deliverables": result.deliverables,
+        "wait_message": pipeline.WAIT_MESSAGE if result.status != pipeline.DO_NOT_PROCEED else None,
+        "validation_errors": result.validation_errors,
+    }
+
+
 @router.post("/candidates/finalize")
 def api_finalize(body: FinalizeRequest) -> dict[str, Any]:
     try:
         result = pipeline.run_finalize(_root(), body.candidate, body.notes)
     except pipeline.WorkflowError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
     # Surface completeness from internal feedback if present.
     feedback_path = result.folder / "_internal" / "feedback.json"
     missing: list[str] = []
@@ -229,8 +315,10 @@ def api_ask(body: AskRequest) -> dict[str, Any]:
     settings = load_runtime_settings()
     enable_web = bool(body.enable_web_search and settings.enable_web_search and settings.openai_api_key_configured)
     answer = provider.answer(body.question, context=context, enable_web_search=enable_web)
-    _append_chat(root, {"question": body.question, "answer": answer.model_dump()})
-    return answer.model_dump()
+    payload = answer.model_dump()
+    payload["model"] = settings.openai_model if settings.openai_api_key_configured else "offline"
+    _append_chat(root, {"question": body.question, "answer": payload})
+    return payload
 
 
 @router.delete("/ask/history")
@@ -263,6 +351,25 @@ def api_labs() -> dict[str, Any]:
     return {"labs": [c.model_dump() for c in list_lab_capabilities()]}
 
 
+@router.get("/labs/exercises")
+def api_lab_exercises(runner: str) -> dict[str, Any]:
+    """Return safe exercise metadata and starter files for the selected runner."""
+    supported = {"sql", "api", "java", "selenium"}
+    if runner not in supported:
+        raise HTTPException(status_code=400, detail="Unsupported lab runner.")
+    items = [
+        {
+            "id": exercise.id,
+            "title": exercise.title,
+            "starter_files": exercise.starter_files,
+            "runner_type": exercise.runner_type,
+        }
+        for exercise in load_all_exercises(_root() / "knowledge")
+        if exercise.status == "published" and exercise.runner_type == runner
+    ]
+    return {"items": items}
+
+
 @router.post("/audio/speak")
 def api_speak(body: SpeakRequest) -> dict[str, Any]:
     if _looks_like_candidate_pii(body.text):
@@ -278,6 +385,12 @@ def api_speak(body: SpeakRequest) -> dict[str, Any]:
         "mode": body.mode,
         "browser_playback": result.provider == "browser",
     }
+
+
+@router.post("/audio/cache/clear")
+def api_clear_audio_cache() -> dict[str, str]:
+    """The browser speech implementation has no server cache; retain a stable UI endpoint."""
+    return {"status": "cleared"}
 
 
 @router.get("/audio/realtime/session")

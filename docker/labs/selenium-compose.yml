@@ -4,18 +4,19 @@ services:
     image: nginx:1.27-alpine
     networks: [labnet]
     read_only: true
+    volumes:
+      - ../../training/web-under-test:/usr/share/nginx/html:ro
   selenium:
     image: selenium/standalone-chromium:4.25.0
     networks: [labnet]
     shm_size: 1gb
     depends_on: [web-under-test]
   java-runner:
-    image: eclipse-temurin:17-jdk-jammy
+    image: curlimages/curl:8.10.1
     networks: [labnet]
-    user: "1000:1000"
-    network_mode: service:selenium
-    depends_on: [selenium]
-    profiles: ["optional"]
+    depends_on: [web-under-test]
+    profiles: ["runner"]
+    command: ["--fail", "--silent", "--show-error", "http://web-under-test/", "--output", "/dev/null"]
 
 networks:
   labnet:

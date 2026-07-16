@@ -29,6 +29,13 @@ def test_selection_profiles_are_sensible(repo_root: Path):
         assert plan["knockout_question_ids"], name
         assert plan["agenda_fit_minutes"] == 180
         assert len(plan["question_ids"]) <= 28
+        assert all(
+            item["reason"].split(":", 1)[0] in {
+                "mandatory-core", "resume-claimed", "missing-evidence",
+                "risk-validation", "role-aligned", "specialty-depth", "rotation",
+            }
+            for item in plan["why"]
+        ), name
         # Every selected question includes answer content for interviewer guide.
         for q in plan["questions"]:
             assert q["recommended_answer"].strip(), q["id"]
@@ -48,3 +55,4 @@ def test_selection_preserves_ids_without_rotation(repo_root: Path):
     )
     assert second["preserved_prior_selection"] is True
     assert second["question_ids"] == first["question_ids"]
+    assert second["exercise_ids"] == first["exercise_ids"]

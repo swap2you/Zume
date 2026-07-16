@@ -11,8 +11,14 @@ from urllib.parse import urlparse
 
 from zume.labs.base import LabCapabilities, LabProvider, LabRunResult, TestCaseResult
 
-ALLOWED_HOSTS = {"127.0.0.1", "localhost"}
 DEFAULT_MOCK_PORT = 8765
+ALLOWED_ORIGIN = f"http://127.0.0.1:{DEFAULT_MOCK_PORT}"
+
+
+class _NoRedirect(request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        del req, fp, code, msg, headers, newurl
+        return None
 
 
 class ApiLabProvider(LabProvider):
@@ -46,9 +52,12 @@ class ApiLabProvider(LabProvider):
         body = payload.get("body")
         url = str(payload.get("url") or f"http://127.0.0.1:{DEFAULT_MOCK_PORT}{path}")
         parsed = urlparse(url)
-        if parsed.hostname not in ALLOWED_HOSTS:
+        if not _is_allowed_url(parsed):
             return LabRunResult(
-                stderr=f"Blocked non-local host: {parsed.hostname!r}. Only localhost mock API is allowed.",
+                stderr=(
+                    f"Blocked URL {url!r}. Only the exact origin {ALLOWED_ORIGIN} is allowed; "
+                    "use http, no credentials or fragment, and port 8765."
+                ),
                 exit_code=3,
                 duration_ms=int((time.perf_counter() - started) * 1000),
             )
@@ -62,7 +71,8 @@ class ApiLabProvider(LabProvider):
             method=method,
         )
         try:
-            with request.urlopen(req, timeout=5) as resp:
+            opener = request.build_opener(_NoRedirect())
+            with opener.open(req, timeout=5) as resp:
                 raw = resp.read().decode("utf-8", errors="replace")
                 return LabRunResult(
                     stdout=raw,
@@ -70,6 +80,17 @@ class ApiLabProvider(LabProvider):
                     duration_ms=int((time.perf_counter() - started) * 1000),
                     extras={"status": resp.status, "url": url},
                 )
+        except error.HTTPError as exc:
+            if 300 <= exc.code < 400:
+                return LabRunResult(
+                    stderr="Redirects are blocked; the mock API must respond directly.",
+                    exit_code=3, duration_ms=int((time.perf_counter() - started) * 1000),
+                    extras={"url": url},
+                )
+            return LabRunResult(
+                stderr=f"Mock API returned HTTP {exc.code}.", exit_code=1,
+                duration_ms=int((time.perf_counter() - started) * 1000), extras={"url": url},
+            )
         except error.URLError as exc:
             # Mock server may be down — return structured failure, not crash.
             return LabRunResult(
@@ -89,3 +110,17 @@ class ApiLabProvider(LabProvider):
         path = Path(workspace)
         if path.exists():
             shutil.rmtree(path, ignore_errors=True)
+
+
+def _is_allowed_url(parsed) -> bool:
+    try:
+        return (
+            parsed.scheme == "http"
+            and parsed.hostname == "127.0.0.1"
+            and parsed.port == DEFAULT_MOCK_PORT
+            and not parsed.username
+            and not parsed.password
+            and not parsed.fragment
+        )
+    except ValueError:
+        return False

@@ -288,10 +288,16 @@ def _enrich_kit_from_knowledge(root, kit, result, candidate, *, rotate: bool):
         load_all_exercises(knowledge_root),
         resume_text="\n".join(resume_bits),
         previous_question_ids=prior_q,
+        previous_exercise_ids=getattr(candidate, "assigned_exercise_ids", None) or [],
         rotate=bool(rotate) or not prior_q,
+        config_root=root,
     )
+    # A partial/unreviewed selection must never replace the established library kit.
+    if len(plan.get("question_ids") or []) < 6 or not plan.get("knockout_question_ids"):
+        return kit
     # Persist IDs (not copied question bodies) for reproducibility.
     candidate.assigned_question_ids = list(plan.get("question_ids") or [])
+    candidate.assigned_exercise_ids = list(plan.get("exercise_ids") or [])
 
     knockout_items: list = []
     sections: dict[str, list] = {}
