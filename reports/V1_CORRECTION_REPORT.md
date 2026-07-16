@@ -3,7 +3,7 @@
 Date: 2026-07-16  
 Branch: `release/zume-1.0`  
 Starting SHA (audit tip): `2dcde4bd189d8c11cfbd560193383a1a17012166`  
-Corrected SHA: `f3fd1be90863d513d37ab8eb31612f797a9e00d0`  
+Corrected SHA: `15e248abddabb7b3eb9cebc6088cfe5ea70f199e`  
 Draft PR: `#1` (remains draft; not merged; no `v1.0.0` tag)
 
 ## Verdict
@@ -24,7 +24,7 @@ hiring workflow, three-folder contract, or seven deliverables.
 | `8548017` | Phase 4–5–9: web workspace, browser speech, Playwright gates |
 | `f9388c6` | Phase 8: expand central CI (frontend, knowledge, labs, release) |
 | `a2e326e` | Align API lab unit test with redirect-disabled opener |
-| `f3fd1be90863d513d37ab8eb31612f797a9e00d0` | Phase 10: regenerate correction release evidence |
+| `15e248abddabb7b3eb9cebc6088cfe5ea70f199e` | Phase 10: regenerate correction release evidence |
 
 ## Audit defect disposition
 
@@ -70,4 +70,4 @@ review promote them.
 
 Run a new clean-room validator chat with
 `docs/release/v1.0-corrections/Zume_1_0_Clean_Room_Validation_Prompt_v2.md`
-against SHA `f3fd1be90863d513d37ab8eb31612f797a9e00d0` after central CI is green.
+against SHA `15e248abddabb7b3eb9cebc6088cfe5ea70f199e` after central CI is green.

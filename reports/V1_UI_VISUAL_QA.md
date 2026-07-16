@@ -2,7 +2,7 @@
 
 Date: 2026-07-16  
 Branch: `release/zume-1.0`  
-SHA: `f3fd1be90863d513d37ab8eb31612f797a9e00d0`
+SHA: `15e248abddabb7b3eb9cebc6088cfe5ea70f199e`
 
 ## Scope
 
