@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { request } from '../api'
 import { PageHeader } from '../components/Layout'
+import { ArrowIcon } from '../components/icons'
 
 type Stats = { questions?: number; exercises?: number; domains?: number; available?: boolean }
 
@@ -24,9 +25,9 @@ export function Home() {
     </div>
     <h2>Start a focused task</h2>
     <div className="action-grid">
-      <Link to="/intake"><b>Bring in a candidate</b><span>Screen resume evidence and build the pre-interview package.</span></Link>
-      <Link to="/builder"><b>Shape an interview</b><span>Preview a three-hour plan before conducting it.</span></Link>
-      <Link to="/library"><b>Explore the library</b><span>Find questions and exercises by skill and depth.</span></Link>
+      <Link to="/intake"><b>Bring in a candidate</b><span>Screen resume evidence and build the pre-interview package.</span><ArrowIcon /></Link>
+      <Link to="/builder"><b>Shape an interview</b><span>Preview a three-hour plan before conducting it.</span><ArrowIcon /></Link>
+      <Link to="/library"><b>Explore the library</b><span>Find questions and exercises by skill and depth.</span><ArrowIcon /></Link>
     </div>
   </section>
 }
