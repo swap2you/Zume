@@ -2,18 +2,18 @@
 
 Date: 2026-07-16  
 Branch: `release/zume-1.0`  
-Corrected SHA: `15e248abddabb7b3eb9cebc6088cfe5ea70f199e`  
+Corrected SHA: see tip after Question Library push  
 Draft PR: `#1`
 
 ## Builder release verdict
 
-**CORRECTIONS COMPLETE LOCALLY — NOT READY FOR PRODUCTION RELEASE**
+**QUESTION LIBRARY CORRECTIONS COMPLETE LOCALLY — NOT READY FOR PRODUCTION RELEASE**
 
-Audit defects addressed on `release/zume-1.0`. Production release still requires:
+Audit + Question Library package addressed on `release/zume-1.0`. Production release still requires:
 
-1. Green expanded central CI against `15e248abddabb7b3eb9cebc6088cfe5ea70f199e`
-2. Clean-room validation using `Zume_1_0_Clean_Room_Validation_Prompt_v2.md`
-3. Human UI review only after clean-room verdict `READY FOR HUMAN UI REVIEW`
+1. Green expanded central CI against the tip SHA after push
+2. Clean-room / Cowork validation using `docs/release/question-library/05_COWORK_VALIDATION_PROMPT.md`
+3. Human UI review only after independent verdict `READY FOR HUMAN UI REVIEW`
 4. Explicit human approval before merge / tag
 
 ## Readiness checklist
@@ -23,7 +23,7 @@ Audit defects addressed on `release/zume-1.0`. Production release still requires
 | Ancestry includes audit tip `2dcde4b` | PASS | Git history |
 | Hiring v2 invariants preserved | PASS (local) | `V1_IMPLEMENTATION_REPORT.md` |
 | Generated filler quarantined to draft | PASS | 1,899 Q / 285 E draft |
-| Published reviewed inventory honest | PASS | 89 Q / 4 E |
+| Published reviewed inventory honest | PASS | 66 gold-core Q / 4 E (89 templates retired) |
 | Gaps do not count drafts | PASS | 148 gaps reported |
 | Correction regressions green | PASS | Phase 0 suite |
 | Python gates + cov ≥ 80% | PASS (local) | 228 passed / 80.00% |
