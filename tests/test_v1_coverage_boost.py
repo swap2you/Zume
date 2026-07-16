@@ -43,7 +43,9 @@ def test_api_lab_success_path(tmp_path: Path):
         def __exit__(self, *args):
             return False
 
-    with patch("zume.labs.api_lab.request.urlopen", return_value=Resp()):
+    opener = MagicMock()
+    opener.open.return_value = Resp()
+    with patch("zume.labs.api_lab.request.build_opener", return_value=opener):
         result = lab.run("e", ws, json.dumps({"method": "GET", "path": "/health"}))
         assert result.exit_code == 0
         tested = lab.test("e", ws, json.dumps({"method": "GET", "path": "/health"}))
