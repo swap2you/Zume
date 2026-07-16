@@ -3,9 +3,14 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import sys
 import zipfile
 from pathlib import Path
+
+# Require a plausible key body so detector source code is not flagged.
+_AWS_ACCESS_KEY = re.compile(r"AK" + r"IA[0-9A-Z]{16}")
+_PRIVATE_KEY_BLOCK = re.compile(r"BEGIN " + r"PRIVATE KEY")
 
 
 def main() -> int:
@@ -35,10 +40,7 @@ def main() -> int:
         for name in names:
             if name.endswith((".py", ".md", ".txt", ".json", ".yml", ".yaml", ".ps1")):
                 text = zf.read(name).decode("utf-8", errors="ignore")
-                # Build needles at runtime so this scanner is not itself flagged.
-                private_key = "BEGIN " + "PRIVATE KEY"
-                access_key_prefix = "AK" + "IA"
-                if private_key in text or access_key_prefix in text:
+                if _PRIVATE_KEY_BLOCK.search(text) or _AWS_ACCESS_KEY.search(text):
                     print(f"secret-like content in {name}", file=sys.stderr)
                     return 1
     print("release scan OK", digest)
