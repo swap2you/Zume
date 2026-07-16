@@ -35,7 +35,10 @@ def main() -> int:
         for name in names:
             if name.endswith((".py", ".md", ".txt", ".json", ".yml", ".yaml", ".ps1")):
                 text = zf.read(name).decode("utf-8", errors="ignore")
-                if "BEGIN PRIVATE KEY" in text or "AKIA" in text:
+                # Build needles at runtime so this scanner is not itself flagged.
+                private_key = "BEGIN " + "PRIVATE KEY"
+                access_key_prefix = "AK" + "IA"
+                if private_key in text or access_key_prefix in text:
                     print(f"secret-like content in {name}", file=sys.stderr)
                     return 1
     print("release scan OK", digest)
