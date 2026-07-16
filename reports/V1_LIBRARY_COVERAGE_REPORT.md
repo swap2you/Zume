@@ -2,7 +2,7 @@
 
 Date: 2026-07-16  
 Branch: `release/zume-1.0`  
-SHA: `CORRECTION_TIP`
+SHA: `f3fd1be90863d513d37ab8eb31612f797a9e00d0`
 
 ## Publication policy
 

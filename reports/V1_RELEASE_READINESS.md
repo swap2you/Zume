@@ -2,7 +2,7 @@
 
 Date: 2026-07-16  
 Branch: `release/zume-1.0`  
-Corrected SHA: `CORRECTION_TIP`  
+Corrected SHA: `f3fd1be90863d513d37ab8eb31612f797a9e00d0`  
 Draft PR: `#1`
 
 ## Builder release verdict
@@ -11,7 +11,7 @@ Draft PR: `#1`
 
 Audit defects addressed on `release/zume-1.0`. Production release still requires:
 
-1. Green expanded central CI against `CORRECTION_TIP`
+1. Green expanded central CI against `f3fd1be90863d513d37ab8eb31612f797a9e00d0`
 2. Clean-room validation using `Zume_1_0_Clean_Room_Validation_Prompt_v2.md`
 3. Human UI review only after clean-room verdict `READY FOR HUMAN UI REVIEW`
 4. Explicit human approval before merge / tag
@@ -52,7 +52,7 @@ Audit defects addressed on `release/zume-1.0`. Production release still requires
 
 ## Next actions
 
-1. Push `release/zume-1.0` tip `CORRECTION_TIP`
+1. Push `release/zume-1.0` tip `f3fd1be90863d513d37ab8eb31612f797a9e00d0`
 2. Confirm expanded CI green; record run ID + artifact checksums
 3. Keep PR `#1` draft
 4. Hand off to clean-room validator (new chat, no builder history)
