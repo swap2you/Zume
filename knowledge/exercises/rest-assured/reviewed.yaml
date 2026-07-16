@@ -13,7 +13,10 @@ records:
   - Keep the solution scoped to the stated contract.
   - Make failures observable.
   - Do not include interviewer guidance.
-  starter_files: {}
+  starter_files:
+    request.json: '{"method":"GET","path":"/health"}
+
+      '
   expected_reasoning: 'Identify the contract from Usage: request specification, use a focused rest-assured
     operation, and explain how the failure evidence narrows the fault.'
   reference_solution: A sound rest-assured solution targets the named contract, checks normal and boundary

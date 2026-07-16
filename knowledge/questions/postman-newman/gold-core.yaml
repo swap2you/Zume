@@ -1,0 +1,103 @@
+version: 1
+records:
+- id: gold-api-005
+  domain: postman-newman
+  subdomain: variables
+  title: Postman variable scopes and a safe secrets strategy
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Explain Postman variable scopes and a safe strategy for secrets, generated data and collection portability.
+  concise_answer: Postman resolves variables in a strict precedence order — local, then data (from a CSV/JSON iteration file),
+    then environment, then collection, then global — so the narrowest scope that satisfies a value should be used to avoid
+    surprising overrides. Secrets belong only in an environment variable marked "secret" type (masked in the UI, excluded
+    from exported collection JSON by default) and injected per environment in CI via Newman's `--env-var`/`-e` flags, never
+    hardcoded into the collection or a committed environment file. Generated data (order IDs, timestamps) should be created
+    explicitly in a pre-request script into a local/collection variable and cleaned up or scoped so it doesn't silently persist
+    and pollute the next run; collection portability improves when the collection references only variable names, never environment-specific
+    literal values.
+  recommended_answer: 'Postman''s variable scopes, from narrowest to broadest, are: global (available across every collection
+    and environment in the workspace — rarely appropriate for anything specific), collection (bundled with the collection,
+    portable when exported), environment (switched per environment — dev/staging/prod — and the natural home for base URLs
+    and secrets), data (injected per-iteration from a CSV/JSON file during a collection run), and local (scoped to a single
+    request/script execution, the narrowest and safest default). When the same variable name exists in multiple scopes, Postman
+    resolves it in that specificity order, so a `local` value always wins over a `global` one — a source of confusing behavior
+    when someone forgets a leftover local variable is shadowing what they expect from environment.
+
+    For secrets, Postman''s "secret" variable type in an environment masks the value in the UI and, critically, is excluded
+    from collection/environment exports and Postman Cloud sync by default, which prevents accidental leakage into a shared/committed
+    file. The safe pattern for CI: never commit a populated environment JSON with real secret values; instead keep a template
+    environment with placeholder keys, and inject actual values via Newman''s `--env-var key=value` or a CI-managed secrets
+    store at run time so the value never touches the filesystem in cleartext longer than the run.
+
+    Generated data — order IDs, idempotency keys, timestamps used across a chained request sequence — should be produced explicitly
+    in a pre-request or test script (`pm.collectionVariables.set(...)` or `pm.variables.set(...)` for local scope) rather
+    than hardcoded, and the scope chosen deliberately: collection-level generated variables persist across the whole run and
+    can leak into a later run if not cleared, so a teardown script (`pm.collectionVariables.unset(...)`) or preferring local/data
+    scope for per-iteration values avoids stale contamination between runs.
+
+    Portability follows from discipline: a collection referencing only `{{baseUrl}}`, `{{apiKey}}` style variable names —
+    never literal environment URLs or values baked into request definitions — can be exported and run against any environment
+    file without editing the collection itself, which is exactly what lets the same collection run in a teammate''s Postman
+    and in a CI Newman job unchanged.'
+  deep_dive: ''
+  key_points:
+  - Understand global, collection, environment, data and local scopes and resolution order.
+  - Prefer the narrowest scope that satisfies the need.
+  - Never commit real secrets; use the secret variable type and inject per environment in CI.
+  - Make generated values explicit and clean them up between runs.
+  - CI should inject environment values safely rather than relying on a committed file.
+  strong_signals:
+  - States the exact scope resolution order and gives an example of shadowing behavior.
+  - Names the "secret" variable type and its export-exclusion behavior specifically.
+  - Distinguishes committing a populated environment file from a template with placeholders.
+  weak_signals:
+  - Knows "use environments for different stages" but not the full scope hierarchy or precedence.
+  - Stores generated test data at global scope without considering cross-run contamination.
+  red_flags:
+  - Hardcodes API keys directly into request headers within the collection JSON.
+  - Commits a populated environment export containing live credentials to version control.
+  common_mistakes:
+  - Leaving a stale local/global variable from a previous debugging session shadowing the intended value.
+  - Not clearing collection-scoped generated variables, causing the next run to reuse stale IDs.
+  - Embedding an environment-specific literal URL directly in a request instead of a variable.
+  follow_ups:
+  - question: How would you migrate a Postman collection into a maintainable CI-owned API regression suite?
+    recommended_answer: Export the collection and environment templates into version control alongside the application code,
+      replace any manual/interactive steps (like relying on the Postman UI's "Runner" ordering) with an explicit Newman invocation
+      and iteration data file, move secrets to CI-managed variables injected via `--env-var` or a secrets manager, add the
+      Newman run as a pipeline stage with JUnit/HTML reporting, and establish a review process so collection changes go through
+      the same PR review as code rather than being edited ad hoc in the Postman app and re-exported inconsistently.
+  examples: []
+  code_examples:
+  - "// Pre-request script: generate and scope explicitly\npm.collectionVariables.set(\"orderId\", pm.variables.replaceIn(\"\
+    {{$guid}}\"));\n\n// Newman CI invocation — secrets injected, never committed\nnewman run collection.json \\\n  -e environment.template.json\
+    \ \\\n  --env-var apiKey=$API_KEY \\\n  --env-var baseUrl=https://staging.example.com"
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - postman
+  - newman
+  - variables
+  - secrets
+  - ci
+  - api-testing
+  estimated_minutes: 6
+  references:
+  - source_id: postman-docs
+    locator: Postman Learning Center — Variables (scopes, precedence) and Managing Secrets (secret variable type)
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept

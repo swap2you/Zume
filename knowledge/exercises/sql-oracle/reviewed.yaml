@@ -13,7 +13,10 @@ records:
   - Keep the solution scoped to the stated contract.
   - Make failures observable.
   - Do not include interviewer guidance.
-  starter_files: {}
+  starter_files:
+    query.sql: 'SELECT 1 AS ok;
+
+      '
   expected_reasoning: 'Identify the contract from SQL Language Reference: joins, use a focused sql-oracle
     operation, and explain how the failure evidence narrows the fault.'
   reference_solution: A sound sql-oracle solution targets the named contract, checks normal and boundary

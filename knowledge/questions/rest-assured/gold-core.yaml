@@ -1,0 +1,98 @@
+version: 1
+records:
+- id: gold-api-003
+  domain: rest-assured
+  subdomain: request-specifications
+  title: Reusable REST Assured specs without hidden coupling
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you structure REST Assured request and response specifications so reuse does not hide test intent or
+    leak state between tests?
+  concise_answer: Keep a RequestSpecification for genuine transport constants only — base URI, default headers, auth scheme,
+    logging filter — built once via RequestSpecBuilder and treated as immutable/shared-safe. Anything scenario-specific —
+    the request body, path/query parameters, and the assertions themselves — is added per test at the call site with `given().spec(baseSpec).body(...)`,
+    never mutated onto the shared spec object. ResponseSpecifications are useful for common expectations (status-code family,
+    content-type) but scenario assertions still belong in the test so failures report intent, not a generic shared check.
+  recommended_answer: 'REST Assured''s RequestSpecBuilder produces a RequestSpecification meant to capture what genuinely
+    doesn''t vary across a group of tests — base URI, default headers like Accept/Content-Type, an auth filter, and a logging/reporting
+    filter for evidence capture on failure. Built once (often in a base test class or a static factory) and applied via `.spec(baseSpec)`,
+    it removes boilerplate without hiding anything, because everything scenario-specific is layered on top per call.
+
+    The coupling risk appears when someone starts mutating the shared spec object per test — e.g. calling `baseSpec.header(...)`
+    inside a test method — because RequestSpecBuilder-built specs are mutable, and a spec mutated by one test can leak into
+    a subsequent test if the object is shared and tests run in an order-dependent or parallel fashion. The safe pattern is
+    to treat the shared spec as read-only after construction and add per-test values via `given().spec(baseSpec).body(x).queryParam(y)`,
+    which composes without touching the shared object, or to build a fresh RequestSpecification per test if any per-test default
+    is needed.
+
+    Auth and logging deserve centralization specifically because getting them wrong is both repetitive and security-sensitive:
+    a single auth filter that fetches/refreshes a token, and a single failure-triggered logging filter (`RequestLoggingFilter`
+    conditioned on `EnableLoggingOfRequestAndResponseIfValidationFails`) so request/response evidence is captured automatically
+    only when a test fails, not logged verbosely (with potential PII/secrets) on every green run.
+
+    Assertions should live at the call site — `then().statusCode(...).body(...)` — using the test''s own expected values,
+    not a shared ResponseSpecification asserting a fixed business value that only happens to be true for one scenario. A shared
+    ResponseSpecification is appropriate only for structural expectations true across the whole group (e.g. "always JSON,
+    always has a requestId field"), not for scenario-specific outcomes.'
+  deep_dive: ''
+  key_points:
+  - Separate transport defaults from scenario-specific data.
+  - Treat shared specifications as immutable; compose per-test values instead of mutating them.
+  - Centralize auth and evidence logging carefully (log on failure only).
+  - Keep scenario assertions near test intent, in the test, not in a shared spec.
+  - Do not store mutable request bodies or state in a globally shared object.
+  strong_signals:
+  - Distinguishes transport-constant fields from scenario-specific fields explicitly.
+  - Flags mutating a shared RequestSpecification as a parallel-test contamination risk.
+  - Scopes logging filters to failure-only to avoid leaking secrets/PII into routine logs.
+  weak_signals:
+  - Builds one giant shared spec with hardcoded body/query values reused across unrelated tests.
+  - Can use RequestSpecBuilder syntactically but not explain why mutation of a shared instance is risky.
+  red_flags:
+  - Stores a mutable request body on a static shared spec and mutates it per test.
+  - Puts business-value assertions (e.g. a specific expected total) into a shared ResponseSpecification.
+  common_mistakes:
+  - Logging full request/response bodies unconditionally, risking secret/PII exposure in CI logs.
+  - Reusing one spec object across parallel tests without verifying it's never mutated.
+  - Duplicating base URI/header setup in every test class instead of a single builder.
+  follow_ups:
+  - question: How would you attach sanitized request/response evidence only when a test fails?
+    recommended_answer: Use REST Assured's conditional logging filters — `RequestLoggingFilter.logRequestIfValidationFails()`
+      and `ResponseLoggingFilter.logResponseIfValidationFails()` — added once to the shared spec, which capture the request/response
+      only when a `then()` validation actually fails, and route through a custom filter or log formatter that redacts authorization
+      headers, tokens and any known-sensitive fields before the evidence is written to the test report or CI log.
+  examples: []
+  code_examples:
+  - "// Shared, effectively immutable transport defaults\nstatic final RequestSpecification baseSpec = new RequestSpecBuilder()\n\
+    \    .setBaseUri(config.apiBaseUrl())\n    .addHeader(\"Accept\", \"application/json\")\n    .addFilter(new AuthTokenFilter())\n\
+    \    .addFilter(RequestLoggingFilter.logRequestIfValidationFails())\n    .build();\n\n// Per-test composition — never\
+    \ mutates baseSpec\ngiven().spec(baseSpec)\n    .body(newOrderPayload)\n.when().post(\"/orders\")\n.then().statusCode(201).body(\"\
+    id\", notNullValue());"
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - rest-assured
+  - api-testing
+  - request-specification
+  - java
+  - test-framework
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: REST Assured documentation — Specification Reuse (RequestSpecBuilder / ResponseSpecBuilder) and Logging filters
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design

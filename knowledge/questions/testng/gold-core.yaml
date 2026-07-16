@@ -1,0 +1,110 @@
+version: 1
+records:
+- id: gold-tool-001
+  domain: testng
+  subdomain: parallelism
+  title: Thread-safety of lifecycle, data providers and listeners under TestNG parallelism
+  level: intermediate
+  priority: P0
+  frequency: common
+  question: TestNG runs methods in parallel and results become inconsistent. Identify the lifecycle, data-provider and listener
+    state that must be thread-safe.
+  concise_answer: With parallel="methods" or parallel="classes" in testng.xml, TestNG can execute test methods from the same
+    class instance concurrently on different threads, so any instance field (a WebDriver, a shared counter, mutable test data)
+    becomes shared mutable state accessed without synchronization — the classic cause of "works sequentially, flaky in parallel."
+    A DataProvider marked parallel="true" supplies rows to multiple threads simultaneously, so the provider method itself
+    and anything it reads (a shared iterator, a mutable file cursor) must be thread-safe or produce duplicate/skipped rows.
+    ITestListener and IReporter implementations are typically singletons invoked from every thread, so any field they accumulate
+    into (a results list, a counter) needs a concurrent collection or explicit synchronization, and any correlation data they
+    write must be tied to the specific test/thread, not a single mutable "current test" field.
+  recommended_answer: 'TestNG''s default instantiation model creates one instance of the test class per <class> tag per XML
+    test, and by default all @Test methods on that instance can be scheduled across threads when parallel="methods" (or "classes"/"instances")
+    is set on <suite> or <test>. That means an instance field — a WebDriver reference, a shared List<Result>, a "currentUser"
+    field set by @BeforeMethod — is read and written from multiple threads that own that same instance concurrently, unless
+    parallel="instances" or a factory guarantees one instance per thread. The fix is to give each test method its own resources:
+    create the driver inside @BeforeMethod into a ThreadLocal<WebDriver> or, cleaner, use TestNG''s dependency-injection parameters
+    (@Test(dataProvider=...) or an ITestContext-scoped object) so state is method-local rather than instance-shared, and guarantee
+    teardown in @AfterMethod regardless of outcome.
+
+    DataProviders declared with (parallel = true) are pulled from a shared queue by the TestNG scheduler and each row is dispatched
+    to a worker thread; the provider method itself runs once but if it lazily reads from a stateful source (a file cursor,
+    a mutable index into a list it also mutates) rather than returning a fully materialized Iterator<Object[]> or Object[][],
+    concurrent consumption of that state is unsafe. The provider should build and return an immutable dataset; consumption
+    ordering across threads is not guaranteed and tests must not depend on order.
+
+    ITestListener, ISuiteListener and IReporter implementations registered in testng.xml or via @Listeners are instantiated
+    once and their callback methods (onTestStart, onTestSuccess, onTestFailure, etc.) fire from whichever thread ran that
+    test — so any listener field accumulating results across the suite must be a thread-safe collection (ConcurrentHashMap,
+    CopyOnWriteArrayList) or use proper synchronization, and any "current test" style mutable field on the listener is a direct
+    race. Correlation should key off ITestResult (which carries the test method, parameters and thread information) rather
+    than listener instance state.'
+  deep_dive: ''
+  key_points:
+  - Understand suite/test/class/method instance lifecycle and default instance sharing across threads.
+  - Avoid shared mutable instance fields; scope driver/data creation to the method via ThreadLocal or injection.
+  - Data providers with parallel=true must return a fully materialized, immutable dataset.
+  - Listeners/reporters are shared singletons; their accumulated state needs thread-safe collections.
+  - Driver and data ownership must match the actual execution unit (thread/method), not the class instance.
+  strong_signals:
+  - Correctly states that TestNG shares one class instance across parallel methods by default.
+  - Distinguishes DataProvider parallel="true" row dispatch from provider-method thread-safety.
+  - Names a concrete thread-safe collection for listener state rather than "make it thread-safe".
+  weak_signals:
+  - Says "add ThreadLocal everywhere" without identifying which fields actually need it.
+  - Assumes parallel="classes" alone solves instance-sharing without checking instance count per class.
+  red_flags:
+  - Believes TestNG automatically creates a new instance per thread with no configuration.
+  - Proposes disabling parallelism as the only acceptable fix.
+  common_mistakes:
+  - A static or instance WebDriver field reused across @Test methods running in parallel.
+  - A DataProvider that mutates a shared index/cursor instead of returning a fixed collection.
+  - An ITestListener accumulating results in a plain ArrayList instead of a concurrent collection.
+  follow_ups:
+  - question: How would factories or dependency injection change test instance ownership?
+    recommended_answer: An @Factory method (or TestNG's native IoC via @Test constructor/parameter injection) can produce
+      one test-class instance per data set or per thread explicitly, which removes the shared-instance problem at its root
+      — each instance owns its own fields with no cross-thread aliasing, so the ThreadLocal workaround becomes unnecessary
+      for that state. The trade-off is that factories shift complexity into instance construction and object lifecycle management,
+      and listener/reporter state is unaffected since those remain suite-scoped singletons regardless of how test instances
+      are created.
+  examples: []
+  code_examples:
+  - "// Unsafe: shared instance field written from every parallel method on this class instance\npublic class CheckoutTests\
+    \ {\n  private WebDriver driver; // race across parallel @Test methods\n\n  @BeforeMethod\n  public void setUp() { driver\
+    \ = new ChromeDriver(); }\n}\n\n// Safer: ThreadLocal scoping, one driver per executing thread\npublic class CheckoutTests\
+    \ {\n  private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();\n\n  @BeforeMethod\n  public void setUp()\
+    \ { DRIVER.set(new ChromeDriver()); }\n\n  @AfterMethod\n  public void tearDown() {\n    DRIVER.get().quit();\n    DRIVER.remove();\n\
+    \  }\n}"
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - testng
+  - parallelism
+  - thread-safety
+  - dataprovider
+  - listeners
+  - threadlocal
+  estimated_minutes: 6
+  references:
+  - source_id: testng-docs
+    locator: TestNG documentation — "Parallelism and Time-outs" chapter, parallel attribute values (methods, classes, instances,
+      tests)
+  - source_id: testng-docs
+    locator: TestNG documentation — "Parameters" chapter, @DataProvider parallel attribute
+  - source_id: testng-docs
+    locator: TestNG documentation — "Test result" and Listeners chapter, ITestListener/IReporter registration
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: troubleshooting

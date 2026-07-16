@@ -1,0 +1,706 @@
+version: 1
+questions:
+- id: gold-sql-001
+  domain: sql-oracle
+  subdomain: joins
+  title: INNER/LEFT/FULL joins and validation-row loss or duplication
+  level: basic
+  priority: P0
+  frequency: very_common
+  question_type: concept
+  question: Given customers and orders, explain the difference between INNER, LEFT and FULL joins and
+    how an incorrect join can silently lose or duplicate validation rows.
+  concise_answer: INNER JOIN returns only customers that have at least one matching order, so a customer
+    with zero orders disappears from the result with no error. LEFT JOIN keeps every customer row and
+    fills order columns with NULL when there is no match, which is required for "all customers" validation.
+    FULL JOIN adds any orders that reference a customer_id that no longer matches a customer row (e.g.
+    an orphan). Because customers-to-orders is one-to-many, any join that includes the orders side multiplies
+    each customer row once per matching order — counting rows with COUNT(*) after such a join overstates
+    the customer count unless you aggregate with COUNT(DISTINCT customer_id) or pre-aggregate orders first.
+  recommended_answer: 'The three joins encode different inclusion semantics, and a reconciliation query
+    that picks the wrong one fails silently rather than erroring. INNER JOIN customers c JOIN orders o
+    ON c.customer_id = o.customer_id keeps only rows where both sides match — a customer who has never
+    ordered is simply absent from the output, which is catastrophic if the query''s job is "prove every
+    customer has a valid record." LEFT JOIN customers c LEFT JOIN orders o ON ... preserves every customer
+    row regardless of match and exposes the no-order case as o.order_id IS NULL, which is the standard
+    test for "find customers with no orders." FULL JOIN (or FULL OUTER JOIN) additionally surfaces orders
+    whose customer_id has no corresponding customer row — an orphan-order case that a LEFT JOIN from the
+    customer side would never reveal because it starts enumeration from customers.
+
+    The cardinality trap is independent of join type: customers to orders is one-to-many, so any join
+    touching the orders table produces one output row per matching order, not one row per customer. A
+    validation query that runs SELECT COUNT(*) FROM customers c LEFT JOIN orders o ON ... is actually
+    counting (customer, order) pairs, and will overstate the customer population by exactly the excess
+    order rows. The fix is either to aggregate orders into one row per customer_id before joining (a derived
+    table with GROUP BY), or to use COUNT(DISTINCT c.customer_id) explicitly rather than COUNT(*) after
+    the join. NULL handling compounds this: NULL never equals NULL in a join predicate or in aggregate
+    comparisons, so a customer_id that is NULL on either side will not match in any join type and must
+    be checked separately with IS NULL logic, not with = NULL.'
+  key_points:
+  - Join type represents inclusion semantics, not just a syntax choice.
+  - One-to-many joins multiply rows; COUNT(*) after the join counts pairs, not entities.
+  - NULL handling in outer joins is the standard way to detect "no match" rows.
+  - Validate expected cardinality (rows per key) before trusting any aggregate.
+  code_examples:
+  - '-- Wrong: silently drops customers with zero orders
+
+    SELECT c.customer_id, COUNT(*) AS order_count
+
+    FROM customers c JOIN orders o ON c.customer_id = o.customer_id
+
+    GROUP BY c.customer_id;
+
+
+    -- Correct: every customer appears, zero-order customers show count 0
+
+    SELECT c.customer_id, COUNT(o.order_id) AS order_count
+
+    FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id
+
+    GROUP BY c.customer_id;
+
+
+    -- Find customers with no orders at all
+
+    SELECT c.customer_id
+
+    FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id
+
+    WHERE o.order_id IS NULL;
+
+
+    -- Find orphan orders (customer_id with no matching customer row)
+
+    SELECT o.order_id, o.customer_id
+
+    FROM customers c FULL JOIN orders o ON c.customer_id = o.customer_id
+
+    WHERE c.customer_id IS NULL;'
+  strong_signals:
+  - Names the specific COUNT(o.order_id) versus COUNT(*) distinction unprompted.
+  - Uses IS NULL on the outer side, not = NULL, to find non-matches.
+  - Distinguishes "customer with no orders" from "orphan order" as separate queries.
+  weak_signals:
+  - Can define the three join types abstractly but not connect them to row multiplication.
+  - Reaches for COUNT(DISTINCT ...) everywhere as a blanket fix without explaining why.
+  red_flags:
+  - Believes LEFT JOIN and INNER JOIN return the same row count "if there's no bug".
+  - Suggests filtering NULLs with WHERE o.customer_id = NULL.
+  common_mistakes:
+  - Using COUNT(*) instead of COUNT(distinct_column) after a one-to-many join.
+  - Filtering an outer join's NULL-producing side in the WHERE clause, which silently converts it back
+    into an inner join.
+  - Assuming FULL JOIN is only needed for "completeness" rather than as an orphan-detection tool.
+  follow_ups:
+  - question: How would you detect an accidental many-to-many join in a reconciliation query?
+    recommended_answer: 'Compare the row count of the join result against the row count of each source
+      table filtered to the same predicate: if the joined result has more rows than either side, at least
+      one side has duplicate join-key values. Concretely, run SELECT customer_id, COUNT(*) FROM orders
+      GROUP BY customer_id HAVING COUNT(*) > 1 on both tables independently before joining, and add a
+      post-join sanity assertion such as "row count after join <= row count of the larger table times
+      the max duplicates per key observed on the smaller table." In practice, a sudden explosion in row
+      count during a reconciliation run is the first symptom, and the root cause is almost always a join
+      key that is not unique on at least one side, often a missing date/version qualifier in the ON clause.'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 2
+  - 10
+  tags:
+  - sql
+  - oracle
+  - joins
+  - null-handling
+  - data-validation
+  - cardinality
+  estimated_minutes: 5
+  references:
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — SELECT statement, "Joins" section (inner, outer and full
+      outer join semantics)
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — Comparison Conditions, NULL semantics ("IS NULL" versus
+      "= NULL")
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  examples: []
+- id: gold-sql-002
+  domain: sql-oracle
+  subdomain: window-functions
+  title: Deterministic "latest row per account" with ROW_NUMBER, RANK and correlated subqueries
+  level: intermediate
+  priority: P1
+  frequency: common
+  question_type: code_review
+  question: Return the latest status row per account while preserving deterministic tie handling. Compare
+    ROW_NUMBER, RANK and a correlated subquery.
+  concise_answer: Partition by the business key (account_id) and order by the effective timestamp, then
+    add a deterministic tie-breaker such as a surrogate id, because two rows can share the exact same
+    timestamp. ROW_NUMBER() always assigns exactly one "1" per partition, so filtering WHERE rn = 1 guarantees
+    a single latest row — but only if the ORDER BY is fully deterministic; if it is not, ROW_NUMBER picks
+    an arbitrary one of the tied rows on each run. RANK() assigns the same rank to ties, so WHERE rnk
+    = 1 can return multiple rows when timestamps tie, which is correct for "show me all leaders" but wrong
+    if the requirement is "exactly one row per account." A correlated subquery (SELECT ... WHERE ts =
+    (SELECT MAX(ts) FROM t2 WHERE t2.account_id = t1.account_id)) has the same multi-row-on-tie problem
+    as RANK and is typically slower without a matching index, though it avoids requiring analytic function
+    support.
+  recommended_answer: 'Correctness starts with an explicit tie-break policy: ORDER BY effective_ts DESC
+    is not deterministic by itself if effective_ts has duplicate values for an account, so the practical
+    pattern is ORDER BY effective_ts DESC, status_id DESC (or a monotonically increasing surrogate key)
+    to guarantee a total order within each partition.
+
+    ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY effective_ts DESC, status_id DESC) numbers rows
+    1..n per partition with no ties possible in the numbering itself — WHERE rn = 1 always returns exactly
+    one row per account_id, which is the right choice when the requirement is "exactly one latest row."
+    RANK() OVER (...) assigns identical ranks to rows that tie on every ORDER BY expression, so if the
+    tie-breaker is incomplete, WHERE rnk = 1 can legitimately return more than one row per account — this
+    is a feature when the domain genuinely allows simultaneous "latest" rows (e.g. two statuses posted
+    in the same transaction and truly indistinguishable), but a defect if the caller expected exactly
+    one row and did not add the tie-breaker.
+
+    The correlated-subquery form (SELECT * FROM status s WHERE s.effective_ts = (SELECT MAX(effective_ts)
+    FROM status s2 WHERE s2.account_id = s.account_id)) reproduces RANK''s tie behavior (multiple max-timestamp
+    rows can come back) and additionally executes the subquery once per outer row, which without an index
+    on (account_id, effective_ts) becomes an O(n) scan per row — analytic functions typically evaluate
+    in a single sorted pass and are the better default in Oracle for this reason. The correlated form
+    remains useful when the target engine lacks window function support or when the "latest" predicate
+    needs to reference columns unavailable to an analytic ORDER BY.'
+  key_points:
+  - Partition by the business key; order by effective timestamp plus a deterministic tie-breaker.
+  - ROW_NUMBER always yields exactly one row per partition; RANK can yield ties.
+  - A correlated MAX subquery has the same tie behavior as RANK, and different performance.
+  - Indexes and the completeness of the ORDER BY affect both correctness and performance.
+  code_examples:
+  - "-- Exactly one latest row per account, ties broken deterministically\nSELECT * FROM (\n  SELECT s.*,\n\
+    \         ROW_NUMBER() OVER (\n           PARTITION BY account_id\n           ORDER BY effective_ts\
+    \ DESC, status_id DESC\n         ) AS rn\n  FROM account_status s\n) WHERE rn = 1;\n\n-- May return\
+    \ multiple rows per account if effective_ts ties\nSELECT * FROM (\n  SELECT s.*,\n         RANK()\
+    \ OVER (PARTITION BY account_id ORDER BY effective_ts DESC) AS rnk\n  FROM account_status s\n) WHERE\
+    \ rnk = 1;\n\n-- Correlated subquery equivalent (same tie behavior as RANK)\nSELECT s.*\nFROM account_status\
+    \ s\nWHERE s.effective_ts = (\n  SELECT MAX(s2.effective_ts) FROM account_status s2\n  WHERE s2.account_id\
+    \ = s.account_id\n);"
+  strong_signals:
+  - Proactively raises the tie-break problem before being asked about it.
+  - Correctly predicts that RANK/correlated-subquery can return more than one row on ties.
+  - Mentions indexing (account_id, effective_ts) as relevant to the subquery's cost.
+  weak_signals:
+  - Treats ROW_NUMBER and RANK as interchangeable "top-1 per group" tools.
+  - Writes ORDER BY effective_ts DESC with no tie-breaker and calls it deterministic.
+  red_flags:
+  - Claims WHERE rnk = 1 with RANK() always returns one row.
+  - Cannot explain why a correlated subquery re-executes per outer row.
+  common_mistakes:
+  - Forgetting the tie-breaker column, producing a query that is correct today and flaky after a data
+    change.
+  - Using DENSE_RANK when the intent was RANK or ROW_NUMBER, changing gap semantics unexpectedly.
+  - Filtering rn = 1 inside the same SELECT as the window function instead of an outer query (not permitted;
+    window functions cannot be filtered in the same query block's WHERE).
+  follow_ups:
+  - question: How would you return both the latest row and the immediately previous row?
+    recommended_answer: Use ROW_NUMBER with the same partition/order and filter WHERE rn <= 2, then distinguish
+      the two with the rn value itself, or use LAG(effective_ts) OVER (PARTITION BY account_id ORDER BY
+      effective_ts DESC, status_id DESC) alongside ROW_NUMBER to pull the previous row's timestamp onto
+      the latest row's line without a self-join. The LAG approach is preferable when the goal is "latest
+      row annotated with what changed", while ROW_NUMBER <= 2 is preferable when both rows need to be
+      returned as separate output rows.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - sql
+  - oracle
+  - window-functions
+  - row_number
+  - rank
+  - deterministic-ordering
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — Analytic Functions, "ROW_NUMBER" and "RANK" specifications
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — Analytic Functions, "LAG" and "LEAD" specifications
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  examples: []
+- id: gold-sql-003
+  domain: sql-oracle
+  subdomain: transactions-acid
+  title: Isolation levels and stale, non-repeatable or phantom data in validation tests
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question_type: troubleshooting
+  question: Explain how transaction isolation can cause a database validation test to see stale, non-repeatable
+    or phantom data.
+  concise_answer: 'Isolation controls what a transaction is allowed to see of concurrent, uncommitted
+    or newly committed changes. Oracle''s default READ COMMITTED means a query only ever sees data committed
+    before the query started, so a validation query that runs immediately after the application writes
+    but before that write''s transaction commits sees stale (pre-write) data — this is not a bug in Oracle,
+    it is the test polling before the fact it depends on was actually committed. Re-running the exact
+    same query twice within one transaction can also return different results (non-repeatable read) because
+    each statement in READ COMMITTED gets its own snapshot; a new row matching the query''s predicate
+    that appears between the two reads is a phantom read. The practical rule for test code: never assume
+    "the write happened" just because the application call returned — poll for the committed business
+    state (e.g. status = ''COMPLETE'') with a timeout, and be explicit about whether the test''s own connection
+    and the application''s connection are in the same transaction or different ones.'
+  recommended_answer: 'Oracle only implements two isolation levels directly: READ COMMITTED (the default)
+    and SERIALIZABLE, both built on multiversion read consistency rather than blocking readers. Under
+    READ COMMITTED, each individual SQL statement sees a snapshot of the data as of the moment that statement
+    began, taken from undo segments if necessary; it never sees uncommitted changes from another session
+    (dirty reads are impossible), but two statements in the same transaction can each get a different
+    snapshot, so the same query issued twice can return different row sets (non-repeatable read) or additional
+    rows that satisfy the predicate but did not exist during the first read (phantom read). SERIALIZABLE
+    instead takes one snapshot for the entire transaction, eliminating non-repeatable and phantom reads
+    within that transaction, at the cost of ORA-08177 "cannot serialize access" when a write conflict
+    is detected at commit.
+
+    For automated validation, the failure mode is almost always about transaction and connection boundaries
+    rather than the isolation level itself: the application performs a write and returns success to the
+    test as soon as its local transaction commits, but the test''s separate connection/session only becomes
+    able to see that data after that commit is visible to new snapshots. If the test queries too early
+    — even a few milliseconds early — it sees the prior state, which looks like "stale data" but is actually
+    a race between the test and the commit. Sleeping a fixed duration is not reliable; the correct pattern
+    is polling with a timeout for the specific committed business condition (e.g. WHERE status = ''COMPLETE''
+    AND updated_at > :start), because that predicate is what the test actually depends on, not wall-clock
+    time. Autocommit also matters: if the test''s own connection is in autocommit mode while it performs
+    setup, each setup statement commits independently, which can itself create interim states that a concurrently
+    running validation query observes as "phantom" rows relative to what the test author had in mind as
+    a single atomic setup.'
+  key_points:
+  - Isolation controls visibility and locking, not correctness of the write itself.
+  - Autocommit boundaries and connection/session separation change what a test observes.
+  - Test setup and the application's write may not be committed together, or committed at all yet.
+  - Poll for the committed business state with a timeout; do not use a fixed sleep.
+  code_examples:
+  - "-- Unreliable: assumes the write is visible immediately after the call returns\napplicationClient.submitOrder(orderId);\n\
+    ResultSet rs = query(\"SELECT status FROM orders WHERE order_id = ?\", orderId);\nassertEquals(\"\
+    SUBMITTED\", rs.getString(\"status\")); -- may see pre-write / stale row\n\n-- Reliable: poll for\
+    \ the committed business condition with a bounded timeout\napplicationClient.submitOrder(orderId);\n\
+    awaitCondition(Duration.ofSeconds(10), () ->\n  \"SUBMITTED\".equals(query(\n    \"SELECT status FROM\
+    \ orders WHERE order_id = ?\", orderId).getString(\"status\")));"
+  strong_signals:
+  - Distinguishes statement-level snapshot from transaction-level snapshot in Oracle.
+  - Identifies the test/application connection and commit-timing race as the real defect, not "the database
+    is inconsistent".
+  - Proposes condition-based polling instead of sleep-based waits.
+  red_flags:
+  - Believes Oracle supports dirty reads under READ COMMITTED.
+  - Adds a longer Thread.sleep as the permanent fix for a flaky validation query.
+  weak_signals:
+  - Can define isolation levels academically but not connect them to the observed test flakiness.
+  - Assumes the test and application always share one transaction without checking.
+  common_mistakes:
+  - Validating immediately after an asynchronous or fire-and-forget call with no wait strategy.
+  - Running setup and validation in autocommit mode without considering interleaving.
+  - Treating a non-repeatable read inside the test's own multi-statement transaction as a database bug.
+  follow_ups:
+  - question: How would you test a lost-update scenario safely?
+    recommended_answer: 'Reproduce it deliberately rather than hoping for a race: open two sessions, have
+      session A read a row, have session B read and then update and commit the same row, then have session
+      A update based on its stale read and commit. Assert that session A''s update either overwrote session
+      B''s change (proving the lost-update risk exists without protection) or was blocked/rejected (proving
+      the protection works) — for example via SELECT ... FOR UPDATE causing session A to block until B
+      commits, or an optimistic version/row-version column causing A''s update to affect zero rows and
+      be detected by the application. The test must control commit ordering explicitly (via synchronization
+      barriers between the two sessions) rather than relying on timing, or it will be flaky.'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - sql
+  - oracle
+  - transactions
+  - isolation
+  - read-committed
+  - flaky-tests
+  - concurrency
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: Database Concepts — "Data Concurrency and Consistency" chapter, read consistency and isolation
+      levels
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — SET TRANSACTION statement, ISOLATION LEVEL clause (READ
+      COMMITTED, SERIALIZABLE)
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  examples: []
+- id: gold-sql-004
+  domain: sql-oracle
+  subdomain: duplicates-data-quality
+  title: SQL checks for duplicates, orphans, invalid ranges and reconciliation mismatches
+  level: intermediate
+  priority: P1
+  frequency: common
+  question_type: framework_design
+  question: Design SQL checks that detect duplicates, orphan records, invalid ranges and cross-table reconciliation
+    mismatches.
+  concise_answer: 'Start from an explicit business key and its expected cardinality (e.g. one row per
+    (account_id, effective_date)). Duplicates: GROUP BY the business key HAVING COUNT(*) > 1. Orphans:
+    a NOT EXISTS or LEFT JOIN ... WHERE right.key IS NULL anti-join from the dependent table to its parent.
+    Invalid ranges: direct predicate checks (end_date < start_date, amount < 0, status NOT IN (...)) surfaced
+    as a row-level report, not just a pass/fail count. Cross-table reconciliation: compare aggregates
+    first (sum, count per key) to localize which keys differ, then drill into row-level differences only
+    for the mismatched keys, with an explicit, documented tolerance for rounding or timing differences
+    rather than exact equality.'
+  recommended_answer: 'Each check needs its business-key and cardinality definition made explicit before
+    writing SQL, because "duplicate" and "orphan" are meaningless without knowing what uniquely identifies
+    a valid row. Duplicates: SELECT key_cols, COUNT(*) FROM t GROUP BY key_cols HAVING COUNT(*) > 1 —
+    returning the offending keys and their counts, not just a boolean, so triage does not require rerunning
+    a broader query. Orphans: an anti-join is more efficient and clearer than NOT IN (which behaves incorrectly
+    if the parent-side column can contain NULL) — SELECT c.* FROM child c LEFT JOIN parent p ON c.parent_id
+    = p.parent_id WHERE p.parent_id IS NULL, or the equivalent NOT EXISTS form, which Oracle typically
+    optimizes to an anti-join plan.
+
+    Invalid ranges and constraint-shaped checks (date ordering, non-negative amounts, enumerated status
+    values, referential date windows) should each be a named, independent predicate returning the violating
+    rows plus the values that violated it, so a report can list "17 rows failed check X" with evidence
+    rather than an aggregate pass/fail. Cross-table reconciliation (e.g. source system total versus warehouse
+    total) should be layered: first compare grouped aggregates per reconciliation key (SUM/COUNT by key)
+    to identify which keys disagree cheaply, then only pull full row-level detail for the disagreeing
+    keys to explain the difference. Tolerances (rounding to two decimal places, a bounded time-window
+    difference) must be explicit constants reviewed with the business, not an accidental byproduct of
+    a JOIN or a CAST.
+
+    All of these checks should be written to report evidence — the specific keys, counts and values involved
+    — because a validation suite that only emits pass/fail forces a second investigative query cycle before
+    anyone can act.'
+  key_points:
+  - Define business keys and expected cardinality before writing any check.
+  - Use GROUP BY/HAVING for duplicates, anti-joins (not NOT IN) for orphans.
+  - Compare aggregates first, then row-level differences, for reconciliation.
+  - Make tolerances explicit and report evidence, not just pass/fail.
+  code_examples:
+  - "-- Duplicates on the business key, with counts\nSELECT account_id, effective_date, COUNT(*) AS dup_count\n\
+    FROM account_status\nGROUP BY account_id, effective_date\nHAVING COUNT(*) > 1;\n\n-- Orphan child\
+    \ rows (anti-join, safe with NULL parent_id)\nSELECT c.*\nFROM orders c\nLEFT JOIN customers p ON\
+    \ c.customer_id = p.customer_id\nWHERE p.customer_id IS NULL;\n\n-- Invalid range check with evidence\n\
+    SELECT order_id, start_date, end_date\nFROM contracts\nWHERE end_date < start_date;\n\n-- Reconciliation:\
+    \ aggregate mismatch first\nSELECT s.account_id, s.total AS source_total, w.total AS warehouse_total,\n\
+    \       ABS(s.total - w.total) AS diff\nFROM source_totals s\nJOIN warehouse_totals w ON s.account_id\
+    \ = w.account_id\nWHERE ABS(s.total - w.total) > 0.01;"
+  strong_signals:
+  - Insists on defining the business key and cardinality before proposing SQL.
+  - Chooses anti-join over NOT IN and explains the NULL-correctness reason.
+  - Designs reconciliation as aggregate-first, then drill-down, not one giant row-diff query.
+  weak_signals:
+  - Writes checks that return only counts, with no way to identify the offending rows.
+  - Uses NOT IN for orphan detection without considering NULLs.
+  red_flags:
+  - Treats "no rows returned" as proof of correctness without validating the check logic itself.
+  - Hardcodes a tolerance without documenting why that value was chosen.
+  common_mistakes:
+  - Comparing floating-point or rounded currency values with exact equality.
+  - Forgetting that a LEFT JOIN anti-join pattern breaks if filters are placed in the ON clause instead
+    of WHERE.
+  - Running duplicate/orphan checks against a table snapshot taken at a different time than the reconciliation
+    source.
+  follow_ups:
+  - question: How would you report enough evidence to investigate without exporting sensitive rows?
+    recommended_answer: Report the business key, the check name, the count and derived/aggregated values
+      (differences, counts, date ranges) rather than full row content; mask or omit PII columns and free-text
+      fields by default. When a human needs full row detail to investigate, provide a narrow, audited
+      lookup path (a query-by-key tool or a time-boxed access grant) rather than including raw rows in
+      the automated report output, and log who accessed the detail and why.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - sql
+  - oracle
+  - data-quality
+  - duplicates
+  - orphans
+  - reconciliation
+  - anti-join
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — GROUP BY and HAVING clause specification
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — "Subqueries" chapter, NOT EXISTS versus NOT IN with nullable
+      columns
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  examples: []
+- id: gold-sql-005
+  domain: sql-oracle
+  subdomain: indexes-execution-plans
+  title: Diagnosing a validation query that times out only at production-like volume
+  level: advanced
+  priority: P2
+  frequency: occasional
+  question_type: troubleshooting
+  question: A validation query works on small data but times out in production-like volumes. Explain how
+    you would inspect its execution plan and improve it without changing correctness.
+  concise_answer: 'Run EXPLAIN PLAN (or capture the actual plan from V$SQL_PLAN / DBMS_XPLAN for the executed
+    statement) and read it for access paths, join methods, cardinality estimates and sort operations.
+    On small data a full table scan and a nested-loop join are cheap, but at production volume they scale
+    linearly or worse per outer row; the plan will typically show a large estimated-versus-actual row-count
+    mismatch (visible via DBMS_XPLAN.DISPLAY_CURSOR with STATISTICS_LAST) pointing at stale optimizer
+    statistics, or a predicate wrapped in a function that disables an otherwise-usable index. Fixes that
+    do not change correctness: add or use an index that matches the actual filter/join columns, rewrite
+    a function-wrapped predicate to a function-based index or an equivalent sargable form, gather fresh
+    statistics on the larger dataset, and re-measure before and after rather than assuming the change
+    helped.'
+  recommended_answer: 'The diagnostic sequence: (1) Get the real plan for the real statement — EXPLAIN
+    PLAN FOR <query> followed by SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY) shows the optimizer''s chosen
+    plan and estimated cardinalities; better, execute the statement with statistics enabled (ALTER SESSION
+    SET STATISTICS_LEVEL = ALL) and pull SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, ''ALLSTATS
+    LAST'')) to compare Estimated Rows against Actual Rows per plan step — a large disagreement is the
+    single most common root cause of "fast on small data, slow at scale." (2) Identify the specific operation
+    that dominates cost — a full table scan feeding a nested loop is fine at hundreds of rows and disastrous
+    at millions, because nested loops cost roughly outer-rows times inner-lookup-cost; the optimizer often
+    switches to nested loops itself when statistics understate the outer row count. (3) Check predicates
+    for sargability: WHERE TRUNC(order_date) = :d or UPPER(customer_name) = :n cannot use a plain b-tree
+    index on order_date or customer_name; either rewrite the predicate to a range (order_date >= :d AND
+    order_date < :d + 1) or create a function-based index matching the exact expression. (4) Verify statistics
+    are representative of the larger dataset — stats gathered against a 100-row dev table do not describe
+    a 50-million-row production table''s data distribution, histograms or clustering factor, and the optimizer
+    will choose a plan optimized for the wrong shape of data.
+
+    None of these changes correctness because they only affect how the same result set is retrieved: adding
+    an index, rewriting a predicate to an equivalent sargable form, or refreshing statistics never changes
+    which rows qualify. Every change must be measured with before/after execution plans and timings on
+    representative data volume — "it looks like it should be faster" is not evidence, and an index added
+    blindly in production can also slow down writes or be ignored by the optimizer if selectivity assumptions
+    are wrong.'
+  key_points:
+  - Check access paths, cardinality estimates (estimated vs actual), join methods, sorts and predicates.
+  - Avoid functions/expressions on indexed columns that prevent index use (sargability).
+  - Use statistics representative of production-like volume, not dev-sized data.
+  - Measure before and after; never add indexes to production without evidence.
+  code_examples:
+  - "-- Capture the real executed plan with actual vs estimated cardinality\nALTER SESSION SET STATISTICS_LEVEL\
+    \ = ALL;\n-- run the query once\nSELECT * FROM TABLE(\n  DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS\
+    \ LAST')\n);\n\n-- Non-sargable predicate that disables an index on order_date\nWHERE TRUNC(order_date)\
+    \ = TO_DATE('2026-07-16','YYYY-MM-DD')\n-- Sargable rewrite that can use a b-tree index on order_date\n\
+    WHERE order_date >= DATE '2026-07-16'\n  AND order_date <  DATE '2026-07-17'"
+  strong_signals:
+  - Goes straight to actual-vs-estimated cardinality as the primary diagnostic signal.
+  - Identifies a function-wrapped predicate as an index-defeating pattern and proposes a sargable rewrite.
+  - Insists on measuring with production-representative statistics before concluding.
+  weak_signals:
+  - Jumps directly to "add an index" without reading the plan first.
+  - Cannot explain why nested-loop cost scales with outer row count.
+  red_flags:
+  - Adds indexes to a production table without measuring impact on writes or existing plans.
+  - Assumes EXPLAIN PLAN's estimated rows are always accurate.
+  common_mistakes:
+  - Testing the fix against the same small dataset that never reproduced the problem.
+  - Wrapping a WHERE column in a function for convenience without considering index usability.
+  - Gathering statistics with default sampling that misses skewed data distributions needing histograms.
+  follow_ups:
+  - question: How can bind-variable behavior or stale statistics change the chosen plan?
+    recommended_answer: 'Bind-variable peeking means the optimizer builds its first plan using the actual
+      value bound on the first execution and then reuses that plan for later executions with different
+      bind values — a plan optimized for a highly selective value can be reused (and be terribly wrong)
+      for a common value, producing inconsistent performance for a query that looks textually identical.
+      Adaptive cursor sharing/SQL plan directives can mitigate this by allowing different plans per bind-value
+      bucket. Stale statistics compound the problem: if the optimizer''s cardinality estimates no longer
+      reflect the table''s actual size or distribution, both the initial plan choice and any bind-sensitive
+      re-planning are based on wrong assumptions, so refreshing statistics (and histograms for skewed
+      columns) is often the fix even when the query text never changed.'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 6
+  - 18
+  tags:
+  - sql
+  - oracle
+  - execution-plans
+  - indexes
+  - performance
+  - sargability
+  - statistics
+  estimated_minutes: 7
+  references:
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — EXPLAIN PLAN statement and DBMS_XPLAN package usage
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — "Conditions" chapter, sargable predicate forms and function-based
+      indexes
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  examples: []
+- id: gold-sql-006
+  domain: sql-oracle
+  subdomain: oracle-functions
+  title: Oracle pitfalls — empty string as NULL, DATE vs TIMESTAMP, time zones, implicit conversion
+  level: advanced
+  priority: P2
+  frequency: occasional
+  question_type: concept
+  question: Explain common Oracle-specific pitfalls involving empty strings, NULL, DATE versus TIMESTAMP,
+    time zones and implicit conversion.
+  concise_answer: Oracle treats a zero-length VARCHAR2/CHAR string as NULL in SQL, so WHERE column = ''
+    never matches anything and INSERT of '' stores NULL, unlike most other databases where empty string
+    is a distinct value from NULL. DATE always stores a time component down to the second (even when only
+    a date is intended), so date-only comparisons need explicit truncation or range predicates or they
+    silently exclude rows with a non-midnight time. TIMESTAMP adds fractional seconds and, in the WITH
+    TIME ZONE/WITH LOCAL TIME ZONE variants, time-zone-aware storage and display that depends on the session's
+    time zone setting — comparing a TIMESTAMP WITH TIME ZONE value across sessions with different time
+    zones can look inconsistent if the display, not the underlying instant, is what changed. Implicit
+    conversion (comparing a VARCHAR2 column to a NUMBER or DATE literal) depends on NLS session settings
+    for date/number format and can throw ORA-01858/ORA-01722 on malformed data or silently misinterpret
+    ambiguous formats — tests should use explicit TO_DATE/TO_TIMESTAMP/TO_NUMBER with an explicit format
+    mask rather than relying on implicit conversion.
+  recommended_answer: 'Empty string versus NULL: Oracle''s SQL engine (unlike the ANSI SQL standard strictly,
+    and unlike PostgreSQL/SQL Server) treats '''' as NULL for VARCHAR2 and CHAR — assigning '''' to a
+    column stores NULL, and any predicate comparing a column to '''' (col = '''') is really comparing
+    to NULL and therefore never true (three-valued logic: NULL comparisons evaluate to unknown, not true).
+    Tests that assert "field was set to empty string" by checking = '''' will always fail silently as
+    "no rows"; the correct check is IS NULL, and application code that relies on distinguishing "explicitly
+    cleared" from "never set" cannot use a plain VARCHAR2 column for that in Oracle.
+
+    DATE versus TIMESTAMP: Oracle''s DATE type always includes hour/minute/second (century to second precision)
+    even when the application only cares about the calendar date — a value inserted as TO_DATE(''2026-07-16'',''YYYY-MM-DD'')
+    is midnight, but any other code path that writes the "same" date with a non-zero time (SYSDATE, for
+    example) will fail an exact equality check even though both represent "July 16". The safe pattern
+    is a half-open range (col >= d AND col < d + 1) or TRUNC(col) = d, being aware TRUNC on an indexed
+    column prevents normal index use unless a function-based index exists. TIMESTAMP adds fractional-second
+    precision and two time-zone-aware variants: TIMESTAMP WITH TIME ZONE stores the UTC offset with the
+    value and always displays it in the stored offset; TIMESTAMP WITH LOCAL TIME ZONE stores in the database''s
+    time zone but displays converted to the querying session''s time zone — the same stored row can render
+    differently to two sessions with different SESSIONTIMEZONE settings, which looks like a data bug but
+    is a display/session artifact.
+
+    Implicit conversion: comparing a VARCHAR2 to a DATE or NUMBER triggers Oracle to apply an implicit
+    TO_DATE/TO_NUMBER using the session''s NLS_DATE_FORMAT or NLS_NUMERIC_CHARACTERS, which differs across
+    sessions, clients and locales; the same query can succeed in one environment and throw ORA-01858 "a
+    non-numeric character was found where a numeric was expected" or silently parse a date as the wrong
+    day/month order in another. Tests and application queries should always convert explicitly with an
+    explicit format mask (TO_DATE(x, ''YYYY-MM-DD''), TO_NUMBER(x, ''999.99'')) so behavior does not depend
+    on session NLS settings, and daylight-saving or time-zone-dependent assertions should normalize to
+    UTC before comparison rather than comparing local wall-clock strings.'
+  key_points:
+  - Oracle treats an empty string as NULL for VARCHAR2/CHAR; use IS NULL, not = ''.
+  - DATE always carries a time component to the second; use ranges, not exact equality, for date-only
+    checks.
+  - TIMESTAMP WITH (LOCAL) TIME ZONE display depends on session time-zone settings, not just stored data.
+  - Implicit conversion depends on NLS session settings; always convert explicitly with a format mask.
+  code_examples:
+  - '-- Never matches, because '''' is stored/compared as NULL
+
+    SELECT * FROM customers WHERE middle_name = '''';
+
+    -- Correct check for "explicitly empty" (which Oracle cannot distinguish from unset)
+
+    SELECT * FROM customers WHERE middle_name IS NULL;
+
+
+    -- Exact-equality DATE check that silently excludes non-midnight rows
+
+    SELECT * FROM orders WHERE order_date = DATE ''2026-07-16'';
+
+    -- Correct half-open range, independent of time-of-day and index-friendly
+
+    SELECT * FROM orders
+
+    WHERE order_date >= DATE ''2026-07-16'' AND order_date < DATE ''2026-07-17'';
+
+
+    -- Implicit conversion depends on session NLS_DATE_FORMAT; can throw or misparse
+
+    SELECT * FROM orders WHERE order_date = ''07/16/2026'';
+
+    -- Explicit conversion is session-independent
+
+    SELECT * FROM orders WHERE order_date = TO_DATE(''2026-07-16'', ''YYYY-MM-DD'');'
+  strong_signals:
+  - States the empty-string-as-NULL behavior unprompted and gives the IS NULL correction.
+  - Proposes a half-open date range instead of exact equality for date-only comparisons.
+  - Distinguishes stored instant from display time zone for TIMESTAMP WITH LOCAL TIME ZONE.
+  weak_signals:
+  - Knows DATE includes time but does not connect it to failed equality assertions.
+  - Uses implicit conversion in test assertions and blames "environment differences" without diagnosing
+    NLS settings.
+  red_flags:
+  - Assumes Oracle behaves like other RDBMSes where '' and NULL are distinct.
+  - Compares TIMESTAMP WITH TIME ZONE values as raw strings across environments.
+  common_mistakes:
+  - Asserting col = '' to verify a field was cleared, and treating a false "no rows" as absence of a bug.
+  - Hardcoding date literals without a time-zone-aware conversion, breaking near daylight-saving transitions.
+  - Relying on default NLS_DATE_FORMAT in CI, which can differ from a developer's local session.
+  follow_ups:
+  - question: How would you make a date/time assertion stable across sessions and daylight-saving changes?
+    recommended_answer: Always convert with an explicit format mask (TO_DATE/TO_TIMESTAMP_TZ with a literal
+      pattern) rather than relying on NLS session defaults, store and compare in UTC (TIMESTAMP WITH TIME
+      ZONE normalized, or explicit AT TIME ZONE 'UTC' conversions) so daylight-saving transitions in a
+      display time zone never affect the underlying comparison, and use half-open ranges for date-only
+      assertions instead of exact equality. In CI, pin the session's NLS_DATE_FORMAT and time zone explicitly
+      at the start of the test run so the assertion does not depend on the executing machine's locale
+      or the database client's defaults.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 4
+  - 15
+  tags:
+  - sql
+  - oracle
+  - empty-string
+  - date
+  - timestamp
+  - time-zone
+  - implicit-conversion
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — Data Types chapter, "Character Datatypes" (empty string
+      treated as NULL)
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — Data Types chapter, "DATE", "TIMESTAMP", "TIMESTAMP WITH
+      TIME ZONE" and "TIMESTAMP WITH LOCAL TIME ZONE"
+  - source_id: oracle-sql
+    locator: Database SQL Language Reference — Data Conversion chapter, implicit conversion rules and
+      NLS format parameters
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  examples: []

@@ -1,0 +1,670 @@
+version: 1
+note: Gold-core expansion (API/Tools) from docs/release/question-library/03_GOLD_CORE_QUESTION_CATALOG.yaml. Draft until critic approval.
+questions:
+- id: gold-api-001
+  domain: api-openapi
+  subdomain: methods-idempotency
+  title: Safety and idempotency across HTTP methods
+  level: basic
+  priority: P0
+  frequency: very_common
+  question_type: concept
+  question: >-
+    Explain safety and idempotency for GET, PUT, POST, PATCH and DELETE. How should
+    those semantics influence retries and automated assertions?
+  concise_answer: >-
+    Safe methods (GET, HEAD, OPTIONS) are defined to not intend any state change on
+    the server, so they can always be retried freely. Idempotent methods (GET, PUT,
+    DELETE) guarantee that N identical requests produce the same server state as one
+    request, even though the response or status code may differ (a second DELETE may
+    return 404 instead of 204). POST is neither safe nor generally idempotent —
+    resubmitting a POST can create a duplicate resource — and PATCH's idempotency
+    depends entirely on the patch semantics used (a "set field to X" patch is
+    idempotent; an "increment field" patch is not). Automated retries should only ever
+    be applied automatically to safe or idempotent operations, or to non-idempotent
+    operations carrying an idempotency key; assertions on POST/PATCH should explicitly
+    test what happens on resubmission rather than assuming safety.
+  recommended_answer: >-
+    RFC 9110 defines these terms precisely, and the distinction matters
+    operationally, not just academically. "Safe" means the client did not request, and
+    the server does not perform, any state-changing action as a result — GET, HEAD
+    and OPTIONS are safe, which is why browsers, proxies and test frameworks can retry
+    or prefetch them without hesitation. "Idempotent" is broader: it means the
+    *intended effect* of N identical requests equals the effect of one, regardless of
+    the exact response returned each time. GET, PUT, DELETE, HEAD and OPTIONS are
+    defined as idempotent; POST is defined as neither safe nor idempotent because its
+    defining purpose is often to create a new subordinate resource, and repeating it
+    typically creates another one.
+
+    PATCH is the interesting case RFC 9110 explicitly leaves open: whether a PATCH
+    request is idempotent depends on the patch document's semantics, not the method
+    itself. `PATCH {"status": "shipped"}` is idempotent (applying it twice yields the
+    same state); `PATCH {"op": "increment", "field": "retryCount"}` is not.
+
+    For automated retries, the rule is: only automatically retry a request whose
+    method is safe or idempotent, or a non-idempotent request explicitly protected by
+    an idempotency key the server deduplicates on (common for POST payment/order
+    APIs). Retrying a bare POST on a timeout without such a key risks a duplicate
+    resource — the client cannot tell whether the original request succeeded
+    server-side before the timeout.
+
+    For automated assertions, idempotency claims should be tested directly, not
+    assumed from the method name: issue the same PUT/DELETE twice and assert the
+    resulting state is identical (accepting that the *status code* of the second call
+    may legitimately differ, e.g. 204 then 404 for a repeated DELETE); issue the same
+    POST twice without a key and assert whether a duplicate was created (documenting
+    the actual behavior even if it's "yes, duplicates are created" so consumers know
+    not to retry blindly).
+  key_points:
+  - Safe means no intended state change; idempotent means repeated identical requests
+    have the same intended effect.
+  - POST is not generally idempotent; PUT and DELETE are intended to be.
+  - PATCH's idempotency depends on the semantics of the patch document, not the verb.
+  - Retries require operation semantics and idempotency keys where supported.
+  examples:
+  - >-
+    Two identical `DELETE /orders/42` calls: the first returns 204 and removes the
+    order; the second returns 404 because the resource no longer exists. The *state*
+    (order 42 absent) is identical after either call — this is idempotent behavior
+    even though the status codes differ.
+  code_examples:
+  - |-
+    // Idempotency-key pattern for a non-idempotent POST
+    given()
+      .header("Idempotency-Key", orderKey)
+      .body(orderPayload)
+    .when().post("/orders")
+    .then().statusCode(201);
+
+    // Repeating with the same key must not create a second order
+    given()
+      .header("Idempotency-Key", orderKey)
+      .body(orderPayload)
+    .when().post("/orders")
+    .then().statusCode(201).body("id", equalTo(firstOrderId));
+  strong_signals:
+  - Distinguishes "same response" from "same intended server-side effect" for idempotency.
+  - Correctly places PATCH's idempotency as payload-semantics-dependent, not method-dependent.
+  - Ties retry policy directly to safe/idempotent/idempotency-key status.
+  weak_signals:
+  - States the method list correctly but cannot explain PATCH's conditional case.
+  - Assumes idempotent means "returns the same response every time".
+  red_flags:
+  - Claims POST is safe to retry automatically without any deduplication mechanism.
+  - Believes idempotent means the method has no side effects at all (confusing with "safe").
+  common_mistakes:
+  - Retrying a timed-out POST automatically and creating duplicate orders/records.
+  - Asserting only the status code of a repeated DELETE instead of the resulting state.
+  - Assuming all PATCH endpoints are idempotent without checking the actual patch semantics.
+  follow_ups:
+  - question: How would you test an idempotency-key implementation under duplicate concurrent requests?
+    recommended_answer: >-
+      Fire two (or more) requests carrying the identical idempotency key at
+      approximately the same time — genuinely concurrently, using parallel threads or
+      an async HTTP client, not sequentially — and assert that exactly one resource
+      was created server-side, that both responses reference the same resource ID,
+      and that the second-arriving request either blocks until the first completes or
+      returns the first's cached result rather than racing past a check-then-create
+      window. This specifically probes the server's deduplication being atomic under
+      concurrency, not just correct when called twice sequentially.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead]
+  years_range: [2, 10]
+  tags: [api, http-methods, idempotency, rest, retries]
+  estimated_minutes: 5
+  references:
+  - source_id: rfc-http
+    locator: "RFC 9110 HTTP Semantics — Section 9.2 Common Method Properties (Safe, Idempotent, Cacheable Methods)"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-api-002
+  domain: api-openapi
+  subdomain: error-contracts
+  title: Testing an API error contract beyond the status code
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question_type: design
+  question: >-
+    Design negative tests for an API error contract. Go beyond checking the status
+    code.
+  concise_answer: >-
+    A complete negative test validates the status code, a stable machine-readable
+    error code/type, the content-type and schema of the error body, that a
+    correlation/request ID is present for support, and that no internal detail (stack
+    trace, SQL, internal hostnames) leaks into the response. It must cover the full
+    input space that provokes errors — malformed JSON, missing required fields, wrong
+    types, unauthorized, forbidden, conflicting state, not-found, and rate-limited —
+    because each maps to a distinct contract the client must branch on differently.
+  recommended_answer: >-
+    Checking only the HTTP status code tests a fraction of the contract a client
+    actually depends on. A thorough negative test asserts: (1) the status code is
+    correct for the failure class (400 vs 422 vs 409 have distinct meanings clients
+    rely on to decide whether to retry, fix input, or escalate); (2) the response has
+    the documented content-type (application/problem+json or the API's own error
+    envelope) and validates against its schema, so a client's error deserializer
+    doesn't break silently; (3) a stable, documented error code or type field is
+    present and matches the specific failure — not just a human-readable message that
+    can change wording without notice; (4) field-level detail is present for
+    validation errors (which field, what constraint was violated) so a UI can
+    highlight the right input; (5) a correlation/request ID is present so a support
+    ticket or automated retry can be tied back to a server-side log entry; (6) the
+    body does not leak internals — stack traces, database error text, internal
+    hostnames or library versions — which is both a security and a stability concern
+    (client code shouldn't parse an internal detail that then breaks on the next
+    deploy).
+
+    The input space to cover systematically: malformed/unparseable body, missing
+    required fields, wrong types or out-of-range values, missing/invalid auth (401),
+    valid auth but insufficient permission (403), referencing a nonexistent resource
+    (404), a request that conflicts with current state — e.g. double-booking, version
+    mismatch (409), and requests exceeding a rate limit (429 with Retry-After). Each
+    of these is a distinct contract, and a suite that only exercises "one 400 case"
+    and "one 404 case" has not actually validated the error contract's completeness.
+  key_points:
+  - Validate stable error code, message policy, field/path details and correlation ID.
+  - Check content type and schema of the error body, not just the status code.
+  - Ensure sensitive internals (stack traces, SQL, hostnames) are not leaked.
+  - Test malformed, missing, unauthorized, forbidden, conflict and rate-limit cases.
+  examples:
+  - >-
+    A validation failure on `POST /users` with an invalid email should return 422
+    with a body like `{"error": "VALIDATION_FAILED", "details": [{"field": "email",
+    "issue": "invalid_format"}], "requestId": "..."}` — not just a 400 with a generic
+    "Bad Request" string.
+  code_examples:
+  - |-
+    given()
+      .body(Map.of("email", "not-an-email"))
+    .when().post("/users")
+    .then()
+      .statusCode(422)
+      .contentType("application/json")
+      .body("error", equalTo("VALIDATION_FAILED"))
+      .body("details[0].field", equalTo("email"))
+      .body("requestId", not(emptyOrNullString()))
+      .body("$", not(containsString("Exception")));
+  strong_signals:
+  - Lists the full set of error-body properties to check (code, schema, correlation ID, leakage) unprompted.
+  - Enumerates the input-space categories (auth, conflict, rate-limit, malformed) systematically.
+  - Explicitly checks for internal-detail leakage as both a security and stability concern.
+  weak_signals:
+  - Checks status code and a generic "error message contains X" substring match only.
+  - Tests one negative case per endpoint and calls the error contract "covered".
+  red_flags:
+  - Asserts on the exact wording of a human-readable message as the pass/fail criterion.
+  - Has no test for what happens when internal errors (500) occur — assumes they can't.
+  common_mistakes:
+  - Coupling assertions to a translatable/changeable message string instead of a stable code.
+  - Never testing the schema of the error body, so a shape change breaks clients silently.
+  - Skipping rate-limit and conflict-state cases because they're harder to set up.
+  follow_ups:
+  - question: Which error fields should remain stable enough for automation, and which should not?
+    recommended_answer: >-
+      Machine-readable fields — the error code/type, HTTP status, field-path
+      identifiers for validation errors, and the presence of a correlation ID —
+      should be part of the documented, versioned contract and are safe for automated
+      assertions to depend on. Human-readable message text should be treated as
+      unstable and excluded from automation entirely (it may be localized, reworded,
+      or expanded without a version bump); tests should assert the message field
+      *exists and is non-empty*, never its exact content.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead]
+  years_range: [3, 12]
+  tags: [api, error-handling, negative-testing, rest, contract-testing]
+  estimated_minutes: 6
+  references:
+  - source_id: rfc-http
+    locator: "RFC 9110 HTTP Semantics — Section 15 Status Codes (4xx Client Error, 5xx Server Error semantics)"
+  - source_id: openapi-spec
+    locator: "OpenAPI Specification — Responses Object and reusable error response/schema components"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-api-003
+  domain: rest-assured
+  subdomain: request-specifications
+  title: Reusable REST Assured specs without hidden coupling
+  level: intermediate
+  priority: P1
+  frequency: common
+  question_type: framework_design
+  question: >-
+    How would you structure REST Assured request and response specifications so
+    reuse does not hide test intent or leak state between tests?
+  concise_answer: >-
+    Keep a RequestSpecification for genuine transport constants only — base URI,
+    default headers, auth scheme, logging filter — built once via RequestSpecBuilder
+    and treated as immutable/shared-safe. Anything scenario-specific — the request
+    body, path/query parameters, and the assertions themselves — is added per test at
+    the call site with `given().spec(baseSpec).body(...)`, never mutated onto the
+    shared spec object. ResponseSpecifications are useful for common expectations
+    (status-code family, content-type) but scenario assertions still belong in the
+    test so failures report intent, not a generic shared check.
+  recommended_answer: >-
+    REST Assured's RequestSpecBuilder produces a RequestSpecification meant to
+    capture what genuinely doesn't vary across a group of tests — base URI, default
+    headers like Accept/Content-Type, an auth filter, and a logging/reporting filter
+    for evidence capture on failure. Built once (often in a base test class or a
+    static factory) and applied via `.spec(baseSpec)`, it removes boilerplate without
+    hiding anything, because everything scenario-specific is layered on top per call.
+
+    The coupling risk appears when someone starts mutating the shared spec object per
+    test — e.g. calling `baseSpec.header(...)` inside a test method — because
+    RequestSpecBuilder-built specs are mutable, and a spec mutated by one test can
+    leak into a subsequent test if the object is shared and tests run in an
+    order-dependent or parallel fashion. The safe pattern is to treat the shared spec
+    as read-only after construction and add per-test values via
+    `given().spec(baseSpec).body(x).queryParam(y)`, which composes without touching
+    the shared object, or to build a fresh RequestSpecification per test if any
+    per-test default is needed.
+
+    Auth and logging deserve centralization specifically because getting them wrong
+    is both repetitive and security-sensitive: a single auth filter that
+    fetches/refreshes a token, and a single failure-triggered logging filter
+    (`RequestLoggingFilter` conditioned on
+    `EnableLoggingOfRequestAndResponseIfValidationFails`) so request/response evidence
+    is captured automatically only when a test fails, not logged verbosely (with
+    potential PII/secrets) on every green run.
+
+    Assertions should live at the call site — `then().statusCode(...).body(...)` —
+    using the test's own expected values, not a shared ResponseSpecification asserting
+    a fixed business value that only happens to be true for one scenario. A shared
+    ResponseSpecification is appropriate only for structural expectations true across
+    the whole group (e.g. "always JSON, always has a requestId field"), not for
+    scenario-specific outcomes.
+  key_points:
+  - Separate transport defaults from scenario-specific data.
+  - Treat shared specifications as immutable; compose per-test values instead of mutating them.
+  - Centralize auth and evidence logging carefully (log on failure only).
+  - Keep scenario assertions near test intent, in the test, not in a shared spec.
+  - Do not store mutable request bodies or state in a globally shared object.
+  code_examples:
+  - |-
+    // Shared, effectively immutable transport defaults
+    static final RequestSpecification baseSpec = new RequestSpecBuilder()
+        .setBaseUri(config.apiBaseUrl())
+        .addHeader("Accept", "application/json")
+        .addFilter(new AuthTokenFilter())
+        .addFilter(RequestLoggingFilter.logRequestIfValidationFails())
+        .build();
+
+    // Per-test composition — never mutates baseSpec
+    given().spec(baseSpec)
+        .body(newOrderPayload)
+    .when().post("/orders")
+    .then().statusCode(201).body("id", notNullValue());
+  strong_signals:
+  - Distinguishes transport-constant fields from scenario-specific fields explicitly.
+  - Flags mutating a shared RequestSpecification as a parallel-test contamination risk.
+  - Scopes logging filters to failure-only to avoid leaking secrets/PII into routine logs.
+  weak_signals:
+  - Builds one giant shared spec with hardcoded body/query values reused across unrelated tests.
+  - Can use RequestSpecBuilder syntactically but not explain why mutation of a shared instance is risky.
+  red_flags:
+  - Stores a mutable request body on a static shared spec and mutates it per test.
+  - Puts business-value assertions (e.g. a specific expected total) into a shared ResponseSpecification.
+  common_mistakes:
+  - Logging full request/response bodies unconditionally, risking secret/PII exposure in CI logs.
+  - Reusing one spec object across parallel tests without verifying it's never mutated.
+  - Duplicating base URI/header setup in every test class instead of a single builder.
+  follow_ups:
+  - question: How would you attach sanitized request/response evidence only when a test fails?
+    recommended_answer: >-
+      Use REST Assured's conditional logging filters —
+      `RequestLoggingFilter.logRequestIfValidationFails()` and
+      `ResponseLoggingFilter.logResponseIfValidationFails()` — added once to the
+      shared spec, which capture the request/response only when a `then()`
+      validation actually fails, and route through a custom filter or log formatter
+      that redacts authorization headers, tokens and any known-sensitive fields
+      before the evidence is written to the test report or CI log.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead]
+  years_range: [3, 12]
+  tags: [rest-assured, api-testing, request-specification, java, test-framework]
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: "REST Assured documentation — Specification Reuse (RequestSpecBuilder / ResponseSpecBuilder) and Logging filters"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-api-004
+  domain: api-openapi
+  subdomain: contract-testing
+  title: Layering schema validation, consumer contracts and integration tests
+  level: advanced
+  priority: P1
+  frequency: common
+  question_type: compare_contrast
+  question: >-
+    Compare OpenAPI schema validation, consumer-driven contract testing and
+    end-to-end integration testing. What defect class does each catch, and what does
+    each miss?
+  concise_answer: >-
+    OpenAPI schema validation checks that requests/responses conform to a documented
+    shape — types, required fields, enums — catching structural drift fast and
+    cheaply, but it says nothing about whether the values are semantically correct or
+    whether the consumer actually needs every field it validates against.
+    Consumer-driven contract testing (e.g. Pact) captures what a specific consumer
+    actually depends on and verifies the provider satisfies exactly that expectation,
+    catching breaking changes to real consumer needs early and independently of
+    deployment order — but it misses anything the contract didn't encode, and only
+    covers relationships that have a written contract. End-to-end integration tests
+    exercise the real deployed interaction and catch environment, infrastructure, and
+    cross-service issues no contract or schema check can see, at the cost of being
+    slow, harder to diagnose, and a poor place to first discover the majority of
+    contract-shape bugs.
+  recommended_answer: >-
+    Schema validation against an OpenAPI document is the fastest, cheapest layer:
+    given the spec, a test (or runtime middleware) confirms a response has the right
+    field names, types, and required-ness. It catches an obvious defect class — a
+    field renamed or removed, a type changed from string to number, a required field
+    dropped — before it ever reaches a consumer. What it cannot catch: whether the
+    *values* are correct (an order total that's structurally a valid number but
+    computed wrong), or whether a change that's schema-compatible (adding an optional
+    field) actually breaks a specific consumer's assumption (e.g. the consumer treats
+    absence of a field as meaningful).
+
+    Consumer-driven contract testing addresses exactly that gap: the consumer records
+    concrete interactions it depends on (specific fields, specific example values, not
+    just types) as a contract, and the provider is verified against that contract
+    independently, without either side needing the other deployed. This catches
+    breaking changes measured against real consumer usage — the provider team gets
+    fast feedback before a release that a change would break a specific downstream
+    consumer — and it scales across many consumer-provider pairs without needing a
+    full integration environment. What it misses: anything not captured in a contract
+    (an undocumented/unused-by-any-consumer field can drift freely), and it does not
+    test the full deployed system — network, infra config, real data — because both
+    sides are verified against the pact file, not each other live.
+
+    End-to-end integration tests exercise the actual deployed provider and consumer
+    (or a close proxy) together, which is the only layer that catches environment
+    misconfiguration, real network/TLS/auth issues, deployment-order problems, and
+    emergent behavior from real infrastructure. It is also the slowest and least
+    diagnostic layer — a failure could be the contract, the environment, a timing
+    issue, or unrelated infra, and pinpointing which requires more investigation than
+    a failed schema or contract check that names the exact field/expectation violated.
+
+    The complementary strategy: use schema validation broadly and cheaply as a first
+    gate, consumer-driven contracts to protect specific known integration
+    relationships with fast, deploy-independent feedback, and a much smaller set of
+    end-to-end tests to validate that the pieces actually work together in a real
+    environment — not as a substitute for either of the faster layers.
+  key_points:
+  - Schema validation checks shape/constraints cheaply and quickly.
+  - Consumer contracts verify provider behavior against real, specific consumer needs.
+  - End-to-end tests validate deployed integration but are slower and less diagnostic.
+  - Use the three layers as complements, not substitutes for each other.
+  strong_signals:
+  - Explains what each layer catches AND what it specifically misses, not just a list of tools.
+  - Distinguishes "schema-compatible" changes from "consumer-breaking" changes with an example.
+  - Proposes a layered strategy with proportions (many schema checks, targeted contracts, few e2e).
+  weak_signals:
+  - Lists the three approaches as equivalent alternatives to choose one from.
+  - Cannot explain why a schema-valid change could still break a real consumer.
+  red_flags:
+  - Claims consumer-driven contracts make end-to-end integration tests unnecessary entirely.
+  - Believes OpenAPI schema validation alone is sufficient contract testing.
+  common_mistakes:
+  - Writing contract tests that just re-assert the OpenAPI schema instead of real consumer usage.
+  - Relying entirely on end-to-end tests for contract-shape bugs that a schema check would catch instantly.
+  - Letting Pact contracts go stale because provider verification isn't run in CI.
+  follow_ups:
+  - question: How would you manage backward compatibility when a provider adds or removes fields?
+    recommended_answer: >-
+      Adding an optional field is backward-compatible by OpenAPI semantics but should
+      still be checked against active consumer contracts, since a consumer using
+      strict schema validation with `additionalProperties: false` would break on an
+      "additive" change — this is exactly the gap contract testing closes. Removing
+      or renaming a field is a breaking change that must be versioned or deprecated
+      with a migration window; the provider's contract-test suite should fail the
+      build if any registered consumer contract still depends on the removed field,
+      giving concrete, attributable feedback before the release rather than a
+      production incident.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, Test/Quality Architect, Solution Architect, Technical Architect]
+  years_range: [6, 18]
+  tags: [api, openapi, contract-testing, pact, integration-testing, backward-compatibility]
+  estimated_minutes: 7
+  references:
+  - source_id: openapi-spec
+    locator: "OpenAPI Specification — Schema Object validation keywords and versioning implications"
+  - source_id: pact-docs
+    locator: "Pact documentation — Consumer-Driven Contract Testing (pact files, provider verification)"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-api-005
+  domain: postman-newman
+  subdomain: variables
+  title: Postman variable scopes and a safe secrets strategy
+  level: intermediate
+  priority: P1
+  frequency: common
+  question_type: concept
+  question: >-
+    Explain Postman variable scopes and a safe strategy for secrets, generated data
+    and collection portability.
+  concise_answer: >-
+    Postman resolves variables in a strict precedence order — local, then data (from
+    a CSV/JSON iteration file), then environment, then collection, then global — so
+    the narrowest scope that satisfies a value should be used to avoid surprising
+    overrides. Secrets belong only in an environment variable marked "secret" type
+    (masked in the UI, excluded from exported collection JSON by default) and
+    injected per environment in CI via Newman's `--env-var`/`-e` flags, never
+    hardcoded into the collection or a committed environment file. Generated data
+    (order IDs, timestamps) should be created explicitly in a pre-request script into
+    a local/collection variable and cleaned up or scoped so it doesn't silently
+    persist and pollute the next run; collection portability improves when the
+    collection references only variable names, never environment-specific literal
+    values.
+  recommended_answer: >-
+    Postman's variable scopes, from narrowest to broadest, are: global (available
+    across every collection and environment in the workspace — rarely appropriate for
+    anything specific), collection (bundled with the collection, portable when
+    exported), environment (switched per environment — dev/staging/prod — and the
+    natural home for base URLs and secrets), data (injected per-iteration from a
+    CSV/JSON file during a collection run), and local (scoped to a single
+    request/script execution, the narrowest and safest default). When the same
+    variable name exists in multiple scopes, Postman resolves it in that specificity
+    order, so a `local` value always wins over a `global` one — a source of confusing
+    behavior when someone forgets a leftover local variable is shadowing what they
+    expect from environment.
+
+    For secrets, Postman's "secret" variable type in an environment masks the value
+    in the UI and, critically, is excluded from collection/environment exports and
+    Postman Cloud sync by default, which prevents accidental leakage into a
+    shared/committed file. The safe pattern for CI: never commit a populated
+    environment JSON with real secret values; instead keep a template environment
+    with placeholder keys, and inject actual values via Newman's `--env-var
+    key=value` or a CI-managed secrets store at run time so the value never touches
+    the filesystem in cleartext longer than the run.
+
+    Generated data — order IDs, idempotency keys, timestamps used across a chained
+    request sequence — should be produced explicitly in a pre-request or test script
+    (`pm.collectionVariables.set(...)` or `pm.variables.set(...)` for local scope)
+    rather than hardcoded, and the scope chosen deliberately: collection-level
+    generated variables persist across the whole run and can leak into a later run if
+    not cleared, so a teardown script (`pm.collectionVariables.unset(...)`) or
+    preferring local/data scope for per-iteration values avoids stale contamination
+    between runs.
+
+    Portability follows from discipline: a collection referencing only `{{baseUrl}}`,
+    `{{apiKey}}` style variable names — never literal environment URLs or values
+    baked into request definitions — can be exported and run against any environment
+    file without editing the collection itself, which is exactly what lets the same
+    collection run in a teammate's Postman and in a CI Newman job unchanged.
+  key_points:
+  - Understand global, collection, environment, data and local scopes and resolution order.
+  - Prefer the narrowest scope that satisfies the need.
+  - Never commit real secrets; use the secret variable type and inject per environment in CI.
+  - Make generated values explicit and clean them up between runs.
+  - CI should inject environment values safely rather than relying on a committed file.
+  code_examples:
+  - |-
+    // Pre-request script: generate and scope explicitly
+    pm.collectionVariables.set("orderId", pm.variables.replaceIn("{{$guid}}"));
+
+    // Newman CI invocation — secrets injected, never committed
+    newman run collection.json \
+      -e environment.template.json \
+      --env-var apiKey=$API_KEY \
+      --env-var baseUrl=https://staging.example.com
+  strong_signals:
+  - States the exact scope resolution order and gives an example of shadowing behavior.
+  - Names the "secret" variable type and its export-exclusion behavior specifically.
+  - Distinguishes committing a populated environment file from a template with placeholders.
+  weak_signals:
+  - Knows "use environments for different stages" but not the full scope hierarchy or precedence.
+  - Stores generated test data at global scope without considering cross-run contamination.
+  red_flags:
+  - Hardcodes API keys directly into request headers within the collection JSON.
+  - Commits a populated environment export containing live credentials to version control.
+  common_mistakes:
+  - Leaving a stale local/global variable from a previous debugging session shadowing the intended value.
+  - Not clearing collection-scoped generated variables, causing the next run to reuse stale IDs.
+  - Embedding an environment-specific literal URL directly in a request instead of a variable.
+  follow_ups:
+  - question: How would you migrate a Postman collection into a maintainable CI-owned API regression suite?
+    recommended_answer: >-
+      Export the collection and environment templates into version control alongside
+      the application code, replace any manual/interactive steps (like relying on the
+      Postman UI's "Runner" ordering) with an explicit Newman invocation and iteration
+      data file, move secrets to CI-managed variables injected via `--env-var` or a
+      secrets manager, add the Newman run as a pipeline stage with JUnit/HTML
+      reporting, and establish a review process so collection changes go through the
+      same PR review as code rather than being edited ad hoc in the Postman app and
+      re-exported inconsistently.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead]
+  years_range: [3, 12]
+  tags: [postman, newman, variables, secrets, ci, api-testing]
+  estimated_minutes: 6
+  references:
+  - source_id: postman-docs
+    locator: "Postman Learning Center — Variables (scopes, precedence) and Managing Secrets (secret variable type)"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-api-006
+  domain: api-openapi
+  subdomain: resilience-rate-limits
+  title: Testing retries, backoff and rate limits without a slow, destructive suite
+  level: advanced
+  priority: P1
+  frequency: common
+  question_type: design
+  question: >-
+    Design tests for retries, backoff, circuit breakers and rate limits without
+    creating a slow or destructive test suite.
+  concise_answer: >-
+    Test resilience logic as a component in isolation, against a controllable fake or
+    fault-injecting mock server that returns scripted failures (500s, timeouts,
+    connection resets) on demand, asserting the retry count, the backoff delay
+    bounds, and the terminal give-up behavior deterministically and fast — never by
+    attacking a real shared environment to force real failures. Rate-limit tests
+    should assert the client honors a `Retry-After` header rather than hammering a
+    real API until a 429 actually occurs; a small, explicitly separate set of
+    environment checks can validate the real rate-limit response shape without being
+    part of the fast component suite.
+  recommended_answer: >-
+    The key design decision is separating deterministic component tests from live
+    environment checks — they answer different questions and have very different
+    cost profiles. For the component tests: stand up a fault-injecting mock
+    (WireMock, MockWebServer, or a hand-rolled stub server) that can be scripted to
+    return a sequence of responses — fail twice with 503, then succeed — and drive the
+    actual retry/backoff/circuit-breaker client code against it. Assert the exact
+    number of attempts made, the delay between attempts falls within the expected
+    backoff bounds (allowing tolerance for jitter), and that the circuit breaker
+    opens after its configured failure threshold and stops issuing calls (rejecting
+    fast) rather than continuing to retry. These tests run in milliseconds because the
+    mock returns instantly and any deliberate delay is faked or accelerated (many
+    backoff implementations accept an injectable clock/scheduler specifically to make
+    this testable without real sleeps).
+
+    For rate limits specifically: the client-side contract to test is honoring
+    `Retry-After` (a delay in seconds or an HTTP date, per RFC 9110) when a 429 is
+    received — again provoked by a mock server, not a real API — asserting the
+    client waits at least that long before retrying and does not simply retry
+    immediately or ignore the header.
+
+    What must not happen: hammering a real shared staging/production API to force an
+    actual rate-limit or failure response as the primary test mechanism. That is
+    slow, non-deterministic (shared environment load varies), and can degrade the
+    environment for other teams or trip real alerting. A small number of
+    environment-level checks — confirming the real API does return a 429 with a
+    Retry-After header under the documented condition — are still valuable, but they
+    belong in a separate, explicitly labeled and infrequently-run suite, not the fast
+    per-commit component tests.
+  key_points:
+  - Use controllable mocks/fault injection rather than attacking real environments.
+  - Assert retry count, delay bounds and terminal (give-up/circuit-open) behavior precisely.
+  - Respect Retry-After semantics specifically when testing rate-limit handling.
+  - Avoid testing resilience by forcing real failures on shared environments.
+  - Separate deterministic component tests from limited, infrequent live environment checks.
+  code_examples:
+  - |-
+    // WireMock stub sequence: fail twice, then succeed
+    stubFor(get("/payments").inScenario("retry")
+        .whenScenarioStateIs(STARTED)
+        .willReturn(serverError()).willSetStateTo("second"));
+    stubFor(get("/payments").inScenario("retry")
+        .whenScenarioStateIs("second")
+        .willReturn(serverError()).willSetStateTo("third"));
+    stubFor(get("/payments").inScenario("retry")
+        .whenScenarioStateIs("third")
+        .willReturn(ok().withBody("{\"status\":\"paid\"}")));
+
+    // Assertion on the client under test
+    Response r = resilientClient.getPayments();
+    assertThat(r.attemptCount()).isEqualTo(3);
+    assertThat(r.totalBackoffMillis()).isBetween(minExpected, maxExpected);
+  strong_signals:
+  - Proposes scripted mock/fault injection as the default mechanism, not a live environment.
+  - Asserts on attempt count, backoff bounds and circuit-breaker open state, not just "it eventually worked".
+  - Explicitly separates fast deterministic tests from a small, labeled live-environment check set.
+  weak_signals:
+  - Tests resilience only by observing that a request "eventually succeeded" with no bound assertions.
+  - Uses a live shared test environment as the primary way to trigger failure scenarios.
+  red_flags:
+  - Proposes intentionally overloading a shared staging environment to trigger real rate limits regularly.
+  - Has no way to test backoff timing without real sleeps that make the suite slow.
+  common_mistakes:
+  - Asserting only that a retried call "eventually returns 200" without checking attempt count or timing.
+  - Ignoring Retry-After and asserting a fixed client-side delay that happens to match by coincidence.
+  - Running fault-injection tests against shared infrastructure, causing noisy-neighbor failures for others.
+  follow_ups:
+  - question: How would you prove that retries do not duplicate a business transaction?
+    recommended_answer: >-
+      Combine the fault-injection mock with a stateful stub that records how many
+      times the underlying create-transaction call actually reached the "business
+      logic" layer, then assert that despite N retries, exactly one transaction was
+      recorded — this directly tests the idempotency-key/deduplication mechanism
+      under the retry path, not just that the client eventually got a success
+      response. It's the same technique as testing idempotency-key handling, applied
+      specifically to the retry code path that would otherwise resend the identical
+      request N times.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, Test/Quality Architect, Solution Architect, Technical Architect]
+  years_range: [6, 18]
+  tags: [api, resilience, retries, backoff, circuit-breaker, rate-limiting, testing-strategy]
+  estimated_minutes: 7
+  references:
+  - source_id: rfc-http
+    locator: "RFC 9110 HTTP Semantics — Section 10.2.3 Retry-After and Section 15.6.4 503 Service Unavailable"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed

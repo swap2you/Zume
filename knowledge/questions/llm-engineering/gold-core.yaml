@@ -1,0 +1,204 @@
+version: 1
+records:
+- id: gold-ai-001
+  domain: llm-engineering
+  subdomain: grounding-citations
+  title: Preventing fabricated or mismatched citations in a grounded answer system
+  level: intermediate
+  priority: P0
+  frequency: common
+  question: Design a grounded answer system that must cite sources. How do you prevent a fluent answer with fabricated or
+    mismatched citations?
+  concise_answer: Retrieve source chunks with stable, traceable IDs, force the model to bind each claim to a retrieved chunk
+    ID rather than generating a citation string from memory, and validate after generation that every cited ID actually exists
+    in the retrieved set and that the cited passage actually supports the claim near it. Require the model to abstain or hedge
+    when retrieval confidence is low instead of answering fluently with no support, and score citation completeness (every
+    non-trivial claim has a citation) separately from citation correctness (the cited source actually supports the claim)
+    — a fluent answer can score well on one and fail the other.
+  recommended_answer: 'The failure mode is that a language model is fluent at producing citation-shaped text regardless of
+    whether it retrieved anything relevant, so citation formatting is not evidence of grounding. The structural fix is to
+    make the citation mechanism impossible to fabricate: retrieve chunks with stable identifiers (document ID plus offset
+    or section anchor) before generation, pass only those identifiers to the model as the allowed citation vocabulary, and
+    instruct — or better, constrain via a structured output schema — the model to attach one or more of those exact IDs to
+    each claim rather than free-text source names or URLs it could invent.
+
+    After generation, validate mechanically: every citation ID in the answer must appear in the retrieved set (catches outright
+    fabrication), and a separate check — either an embedding-similarity or a smaller LLM-as-judge pass — verifies the cited
+    chunk actually entails the adjacent claim (catches a real citation attached to the wrong claim, which is a subtler and
+    more common failure than outright invention). When retrieval returns nothing sufficiently relevant, the system should
+    be instructed and evaluated on abstaining or explicitly flagging insufficient evidence rather than answering fluently
+    from parametric knowledge — a confident wrong answer with a plausible-looking citation is worse for a grounded system
+    than a stated ''I don''t have enough information.''
+
+    Evaluate citation completeness and citation correctness as two separate metrics: an answer can cite everything (complete)
+    while citing the wrong passages (incorrect), or cite one strong source correctly while leaving other claims unsupported.
+    Treating ''has citations'' as a single pass/fail signal hides both failure modes.'
+  deep_dive: ''
+  key_points:
+  - Retrieve traceable source chunks with stable identifiers before generation.
+  - Bind claims to source IDs from a constrained, retrieved vocabulary — not free-text citations the model can invent.
+  - Validate citation IDs exist in the retrieved set and that the cited passage supports the claim.
+  - Require abstention when retrieval confidence or coverage is insufficient.
+  - Evaluate citation completeness and citation correctness as separate metrics.
+  strong_signals:
+  - Proposes constraining citations to a retrieved-ID vocabulary rather than trusting free-text citation output.
+  - Separates completeness and correctness as distinct, independently measured properties.
+  - Designs an explicit abstention path for low-confidence retrieval.
+  weak_signals:
+  - Believes prompting the model to 'always cite sources' is sufficient without mechanical validation.
+  - Treats 'the answer contains a citation' as proof the answer is grounded.
+  red_flags:
+  - No plan to verify that a cited source actually supports the adjacent claim.
+  - Assumes retrieval always returns relevant content and never designs for the empty/low-relevance case.
+  common_mistakes:
+  - Letting the model generate citation text (titles, URLs) instead of picking from retrieved IDs.
+  - Checking only that a citation exists, not that it entails the claim next to it.
+  - Skipping an abstention path, so weak retrieval still produces a fluent, unsupported answer.
+  follow_ups:
+  - question: How would you score citation completeness and citation correctness?
+    recommended_answer: 'Completeness: for every extracted, non-trivial claim in the answer, check whether at least one citation
+      is attached — a simple coverage ratio over claims. Correctness: for every attached citation, check whether the cited
+      chunk''s content entails or directly supports the specific claim it is attached to, using either human review on a sample
+      or an automated entailment/LLM-judge check calibrated against human labels. Report both numbers separately in evaluation
+      dashboards; a system can be complete but incorrect (confidently wrong with citations) or correct but incomplete (a few
+      well-supported claims among many unsupported ones), and only reporting one hides the other failure mode.'
+  examples:
+  - A support assistant answers a refund-policy question fluently and cites 'Refund Policy section 4.2,' but retrieval only
+    returned the shipping policy document. Because the citation vocabulary was free text generated by the model rather than
+    constrained to retrieved chunk IDs, the fabricated section reference passes a naive 'has a citation' check while being
+    entirely unsupported.
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - rag
+  - grounding
+  - citations
+  - hallucination
+  - evaluation
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: OpenAI developer documentation — Structured Outputs guide, constraining model output to a defined schema/vocabulary
+  - source_id: nist-ai-rmf
+    locator: NIST AI Risk Management Framework — MEASURE function, evaluation of generated-content trustworthiness
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-ai-002
+  domain: llm-engineering
+  subdomain: structured-output
+  title: Prompt-only JSON versus JSON mode versus schema-constrained output
+  level: intermediate
+  priority: P0
+  frequency: common
+  question: An LLM must return a typed decision object. Compare prompt-only JSON, JSON mode and schema-constrained structured
+    output.
+  concise_answer: Prompt-only JSON ('respond in JSON') is the least reliable — the model can add prose, use inconsistent field
+    names, or produce invalid JSON, and reliability degrades under schema complexity. JSON mode guarantees syntactically valid
+    JSON but not that it matches any particular shape. Schema-constrained structured output (a supplied JSON Schema with strict
+    mode) constrains decoding so the output is guaranteed to match the schema's types and required fields. None of the three
+    guarantees semantic correctness — a schema-valid object can still contain a wrong or hallucinated value — so business-rule
+    validation after parsing is required regardless of which mode is used.
+  recommended_answer: 'The three approaches trade reliability for constraint at increasing levels of guarantee. Prompt-only
+    JSON relies entirely on instruction-following: the model may wrap the object in explanatory prose, omit a field, invent
+    extra fields, or emit almost-valid JSON (trailing commas, unescaped quotes) that a naive parser rejects. It is the most
+    fragile option and the failure mode is often silent until a parse exception in production.
+
+    JSON mode (a model-level flag that constrains decoding to always produce syntactically valid JSON) removes the parse-failure
+    class entirely, but the shape of the object is still unconstrained — the model can still return valid JSON with the wrong
+    keys, wrong types, or a completely different structure than expected, especially as the schema grows more complex or the
+    model runs many turns.
+
+    Schema-constrained structured output goes further: providing a JSON Schema (with strict mode where the provider supports
+    it) constrains the decoding process itself so every generated token is checked against the schema''s grammar, guaranteeing
+    required fields, correct types, and no additional properties. This removes an entire class of integration bugs — parsing
+    exceptions and shape mismatches — and is the right default for any pipeline that hands the object directly to typed business
+    logic.
+
+    What none of the three modes guarantees is semantic correctness: a schema-valid decision object can still contain a wrong
+    enum value, an internally inconsistent combination of fields, or a hallucinated identifier that happens to be the right
+    type. Business logic must still validate the values — does this ID exist, is this combination of fields legal, is this
+    decision within allowed bounds — treating the model''s output the same way it would treat any untrusted external input.
+    Refusals, truncated output on token limits, and provider schema-version changes also need explicit handling; a schema-constrained
+    call can still fail closed if the schema itself is malformed or the request is refused for policy reasons.'
+  deep_dive: ''
+  key_points:
+  - Prompt-only JSON output is fragile and fails silently on shape and validity.
+  - JSON mode guarantees syntactic validity but not schema shape.
+  - Schema-constrained structured output guarantees shape (types, required fields) via constrained decoding.
+  - Semantic/business-rule validation is still required after parsing regardless of mode.
+  - Handle refusals, truncation and provider schema-version changes explicitly.
+  strong_signals:
+  - Explains that schema constraint is enforced at decode time, not just via a stronger prompt.
+  - Distinguishes syntactic validity (JSON mode) from shape validity (schema-constrained).
+  - Insists on business-rule/semantic validation after parsing regardless of the mode used.
+  weak_signals:
+  - Believes a strongly worded prompt is as reliable as schema constraint.
+  - Assumes schema-valid output means the values are trustworthy.
+  red_flags:
+  - Passes model output directly into business logic with no validation layer at all.
+  - Cannot explain any failure mode of prompt-only JSON beyond 'sometimes it's wrong.'
+  common_mistakes:
+  - Parsing with a permissive/lenient JSON parser that hides malformed output instead of surfacing it.
+  - Skipping enum/range/business-rule validation because 'the schema already enforces it.'
+  - Not handling model refusals or max-token truncation as a distinct failure path.
+  follow_ups:
+  - question: Which validation belongs before the object reaches business logic?
+    recommended_answer: 'Parse and confirm schema conformance defensively even when the provider claims strict mode (defense
+      in depth against provider bugs or version drift), then run semantic checks: referenced IDs exist, enum values are within
+      the currently valid set (which can change independently of the schema), numeric fields are within business-legal ranges,
+      and any cross-field invariants hold (for example, an ''approved'' decision cannot carry a ''blocked'' risk level). Only
+      an object that passes both layers should reach code that acts on it irreversibly.'
+  examples: []
+  code_examples:
+  - "// Schema-constrained request (illustrative)\n{\n  \"response_format\": {\n    \"type\": \"json_schema\",\n    \"json_schema\"\
+    : {\n      \"name\": \"decision\",\n      \"strict\": true,\n      \"schema\": {\n        \"type\": \"object\",\n    \
+    \    \"properties\": {\n          \"approved\": {\"type\": \"boolean\"},\n          \"riskLevel\": {\"type\": \"string\"\
+    , \"enum\": [\"low\", \"medium\", \"high\"]}\n        },\n        \"required\": [\"approved\", \"riskLevel\"],\n     \
+    \   \"additionalProperties\": false\n      }\n    }\n  }\n}"
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - structured-output
+  - json-schema
+  - validation
+  - reliability
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: OpenAI developer documentation — Structured Outputs guide (strict mode, JSON Schema constrained decoding) and
+      function-calling guide
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: compare_contrast

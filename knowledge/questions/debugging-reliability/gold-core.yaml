@@ -1,0 +1,168 @@
+version: 1
+records:
+- id: gold-arch-003
+  domain: debugging-reliability
+  subdomain: failure-classification
+  title: Building an evidence-based failure classification model
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: Create a failure-classification model that distinguishes product defects, automation defects, environment failures,
+    data failures and unknowns.
+  concise_answer: 'Classify from evidence collected at failure time, not from a guess: screenshot/DOM or response body, application
+    logs, environment/version markers and prior history for that test. Product defect means the observed behavior contradicts
+    a specification or prior passing baseline with no automation-side cause found. Automation defect means the framework or
+    locator/logic is wrong while the product behaved correctly. Environment failure means infrastructure (network, service
+    availability, grid capacity) caused it. Data failure means test data was invalid, stale or collided. Unknown is a legitimate,
+    tracked category when evidence is insufficient — not a default dumping ground, and not silently converted into "flaky."'
+  recommended_answer: 'A usable model has categories that are mutually understandable by developers, testers and triagers,
+    each with a required evidence field before it can be assigned: product-defect requires a spec/baseline mismatch citation;
+    automation-defect requires the specific broken assertion, locator or logic; environment-failure requires an infrastructure
+    signal (timeout pattern, node/queue status, dependency outage); data-failure requires the specific invalid/stale/colliding
+    record. If none of those can be evidenced, the failure is classified "unknown" with an owner and a follow-up action —
+    not silently retried away or defaulted to "flaky."
+
+    Attach the classification and its evidence to the failure record itself so it survives triage handoffs, and prevent retries
+    from overwriting the original classification: a test that fails once with a real defect and passes on retry did not stop
+    being a defect — the retry masked it, and the report must show both the first-failure evidence and the retry outcome.'
+  deep_dive: ''
+  key_points:
+  - Classification is driven by required evidence per category, not guesswork.
+  - Categories must be mutually understandable across developers, testers and triagers.
+  - Unknown is a legitimate, owned, tracked state — not a default or a dead end.
+  - Attach classification and evidence to the failure record so it survives handoffs.
+  - Retries must not silently overwrite the original failure's classification.
+  strong_signals:
+  - Requires specific evidence per category before allowing that classification.
+  - Explains why "unknown" must be tracked with an owner rather than discarded.
+  - Flags that retry-to-pass can hide a real classification if not recorded.
+  weak_signals:
+  - Names categories but gives no evidence requirement for assigning them.
+  - Treats every unexplained failure as "flaky" by default.
+  red_flags:
+  - Has no "unknown" category and forces every failure into pass/fail only.
+  - Lets an automatic retry silently erase the first-failure classification.
+  common_mistakes:
+  - Classifying from the error message text alone without checking the actual evidence.
+  - One triage queue for all failure types instead of routing by evidence-backed category.
+  - Measuring "unknown rate" as a team failure instead of a tracked, improvable metric.
+  follow_ups:
+  - question: How would you measure classification accuracy and reduce unknowns?
+    recommended_answer: Sample a set of classified failures and have an independent reviewer re-classify from the same evidence;
+      disagreement rate is your classification accuracy signal. To reduce "unknown," work backward from each unknown case
+      to identify the missing evidence type (usually a log, a network trace, or a DOM/response snapshot) and add that capture
+      to the framework — unknowns shrink by improving evidence collection, not by inventing more categories.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 5
+  - 16
+  tags:
+  - debugging-reliability
+  - failure-classification
+  - triage
+  - evidence
+  - retries
+  estimated_minutes: 6
+  references:
+  - source_id: google-testing-blog
+    locator: Flaky Tests at Google and How We Mitigate Them (2016-05)
+  - source_id: fowler-bliki
+    locator: Eradicating Non-Determinism in Tests — causes and quarantine
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design
+- id: gold-arch-004
+  domain: debugging-reliability
+  subdomain: retry-vs-repair
+  title: Evaluating a blanket "retry every failure twice" policy
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: A team proposes retrying every failed test twice. Evaluate the proposal and design a safer retry policy.
+  concise_answer: 'Blanket retries treat every failure as noise, which is exactly backward: retries can legitimately confirm
+    that a failure was transient, but applied indiscriminately they hide real defects behind a "passed on retry 2" result
+    and quietly normalize non-determinism instead of fixing it. A safer policy limits retries to failure classes known to
+    be retryable (network blip, documented infrastructure flake), preserves the first-failure evidence unconditionally, reports
+    the retry rate per test as a first-class metric, and puts an expiry and an owner on any test allowed to retry — it is
+    a temporary quarantine, not a permanent feature.'
+  recommended_answer: 'Martin Fowler''s guidance on non-deterministic tests is the right frame: quarantine reduces the damage
+    a flaky test does to the rest of the suite''s signal, but quarantine is not a fix, and an unbounded quarantine list is
+    a silently growing risk. Retrying every failed test twice is quarantine-by-default applied to the entire suite, which
+    erases the distinction between "flaky" and "broken."
+
+    The safer design: (1) retries apply only to tests explicitly tagged as known-retryable, with the tag itself requiring
+    a linked investigation ticket and an expiry date; (2) the first failure''s full evidence (screenshot, logs, stack trace)
+    is captured and stored before any retry runs, so a defect is never lost even if the retry passes; (3) the report always
+    shows attempt count and outcome per attempt, so "passed" and "passed after 2 retries" are visibly different results, not
+    indistinguishable green checkmarks; (4) a dashboard tracks retry rate per test over time — a test that keeps needing its
+    retry is not stable, it is failing at a lower rate, and belongs back in active investigation, not permanent quarantine.'
+  deep_dive: ''
+  key_points:
+  - Retries can identify transient behavior but indiscriminate retries hide real defects.
+  - Limit retries to explicitly tagged, known-retryable failure classes.
+  - Always preserve first-failure evidence before any retry executes.
+  - Report retry rate and attempt outcomes as visible, first-class results.
+  - Put an expiry and an owner on every retry exception; it is temporary quarantine.
+  strong_signals:
+  - Distinguishes quarantine (temporary damage control) from a permanent retry policy.
+  - Insists first-failure evidence is captured regardless of retry outcome.
+  - Proposes retry-rate as a tracked metric, not a hidden implementation detail.
+  weak_signals:
+  - Accepts retries as a reasonable default with no expiry or evidence requirement.
+  - Cannot distinguish a flaky test from a legitimately fixed one.
+  red_flags:
+  - Treats "pass on retry" as equivalent to "pass" in the report with no distinction.
+  - Has no mechanism to ever remove a test from the retry-allowed list.
+  common_mistakes:
+  - Applying the same fixed retry count to unit-level and full end-to-end tests alike.
+  - Losing the original failure's stack trace/screenshot once a retry succeeds.
+  - Letting retry-tagged tests accumulate indefinitely with no review cadence.
+  follow_ups:
+  - question: Which failures must never be retried automatically?
+    recommended_answer: Assertion failures that represent a business-rule mismatch, data-integrity violations, and security/permission
+      check failures must never be silently retried — retrying implies "maybe transient," and treating a wrong calculation
+      or an authorization bypass as possibly transient is itself a defect in the retry policy. Anything whose failure could
+      indicate real user-facing harm should fail hard and route directly to investigation.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 5
+  - 16
+  tags:
+  - debugging-reliability
+  - retry-policy
+  - flakiness
+  - quarantine
+  - quality-gates
+  estimated_minutes: 6
+  references:
+  - source_id: fowler-bliki
+    locator: Eradicating Non-Determinism in Tests — quarantine and root-cause treatment
+  - source_id: google-testing-blog
+    locator: Where do our flaky tests come from? (2017-04) — identification, notification, triage, prevention
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design

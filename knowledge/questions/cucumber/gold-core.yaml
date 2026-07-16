@@ -1,0 +1,203 @@
+version: 1
+records:
+- id: gold-tool-002
+  domain: cucumber
+  subdomain: bdd-purpose
+  title: When Cucumber earns its collaboration value versus adding a second language to maintain
+  level: basic
+  priority: P1
+  frequency: common
+  question: When does Cucumber improve collaboration, and when does it merely add a second programming language to maintain?
+  concise_answer: Cucumber earns its cost when Gherkin scenarios are written or reviewed with non-developers (product owners,
+    business analysts, manual QA) as living documentation of business behavior, and when the "given/when/then" phrasing genuinely
+    describes domain rules rather than UI mechanics. It becomes pure overhead when scenarios are written by automation engineers
+    alone, describe "click button, fill field, click submit" at the UI-interaction level, and no business stakeholder ever
+    reads or edits a .feature file — at that point the team maintains Gherkin text, step-definition glue code, and the actual
+    automation, three layers for what a plain test method would express in one.
+  recommended_answer: 'Cucumber implements the Gherkin specification so that examples of behavior, written in a structured
+    natural-language format, can double as executable tests — the entire premise of BDD is discovery and shared understanding
+    through concrete examples before or alongside implementation, not a syntax for writing automation. The value shows up
+    specifically when: business stakeholders, product owners or manual testers actually read, write or review the .feature
+    files as part of defining acceptance criteria; the ubiquitous language in the steps matches how the business talks about
+    the domain, so a scenario reads as a business rule ("Given a customer with an expired membership, When they attempt checkout,
+    Then they are offered a renewal") rather than a script ("Given I am on the login page, When I enter ''user'' in the username
+    field..."); and the scenarios function as living documentation that stays accurate because they run as part of the suite.
+
+    The cost side is real and often underestimated: every scenario requires a Gherkin step, a step-definition method binding
+    to it via a regex/expression, and the underlying automation the step-definition calls — three artifacts to keep synchronized
+    for one behavior. When no non-developer ever opens a .feature file, when steps enumerate UI interactions rather than business
+    outcomes, or when the "collaboration" is actually one engineer writing Gherkin to satisfy a process checkbox, the team
+    is paying Cucumber''s translation and glue-code overhead with none of its stated benefit — a plain JUnit/TestNG method
+    with a descriptive name and clear assertions communicates the same intent to other engineers with one less layer of indirection.'
+  deep_dive: ''
+  key_points:
+  - BDD's value begins with shared discovery and examples, not with the Gherkin syntax itself.
+  - Gherkin steps should express business behavior and domain vocabulary, not UI mechanics.
+  - Low-level UI steps written only by automation engineers add a second-language maintenance cost with no collaboration benefit.
+  - Use Cucumber specifically when non-developer collaboration and living documentation are real, ongoing needs.
+  strong_signals:
+  - Names concrete evidence of collaboration (who reads/edits feature files) as the deciding factor, not team preference.
+  - Can rewrite a UI-mechanics scenario into a behavior-focused one on the spot.
+  - Acknowledges the three-artifact maintenance cost (Gherkin, step defs, automation) honestly.
+  weak_signals:
+  - Treats "Given/When/Then" as sufficient for BDD regardless of who reads it.
+  - Defends Cucumber purely on "readability" without discussing actual stakeholder involvement.
+  red_flags:
+  - Claims Cucumber is required for any acceptance testing regardless of team composition.
+  - Cannot identify a situation where Cucumber would not be the right choice.
+  common_mistakes:
+  - Writing UI-click-level steps and calling the result behavior-driven.
+  - Introducing Cucumber for a team with no business/manual-QA involvement in reviewing scenarios.
+  - Letting step-definition regexes grow so specific that steps cannot be reused, defeating Gherkin's readability goal.
+  follow_ups:
+  - question: Rewrite a brittle click-by-click scenario as a behavior-focused scenario.
+    recommended_answer: 'Original: "Given I navigate to /cart, When I click the ''Apply Coupon'' button, And I type ''SAVE10''
+      into the coupon field, And I click ''Submit'', Then the text ''10% off'' appears." Rewritten: "Given a cart containing
+      items eligible for promotion, When the customer applies a valid 10%-off coupon, Then the cart total reflects the discount."
+      The rewrite removes navigation and element interaction detail (which belongs in step-definition/page-object code), states
+      the business rule (eligible items, valid coupon, discounted total) and remains valid even if the coupon UI moves from
+      a text field to a dropdown of saved codes.'
+  examples:
+  - A UI-mechanics scenario ("Given I am on the login page, When I type 'alice' into the username field, And I type 'pw123'
+    into the password field, And I click the login button, Then I see the dashboard") reads as a recorded macro. Rewritten
+    behaviorally ("Given a registered customer, When they log in with valid credentials, Then they land on their personalized
+    dashboard"), it survives a UI redesign, hides implementation detail from the reader, and states the actual business rule
+    being verified.
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 2
+  - 10
+  tags:
+  - cucumber
+  - bdd
+  - gherkin
+  - collaboration
+  - living-documentation
+  estimated_minutes: 5
+  references:
+  - source_id: cucumber-docs
+    locator: Cucumber documentation — "BDD" guide, purpose of examples and collaboration between roles
+  - source_id: gherkin-reference
+    locator: Gherkin reference — "Given-When-Then" step keywords and guidance on business-readable phrasing
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept
+- id: gold-tool-003
+  domain: cucumber
+  subdomain: state-context
+  title: Scenario-scoped state and dependency injection for parallel Cucumber execution
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design scenario state and dependency injection for parallel Cucumber execution without static globals or hidden
+    coupling between steps.
+  concise_answer: Give every scenario its own context object (a plain class holding the driver, test data and any values steps
+    need to share) constructed fresh per scenario and injected into every step-definition class via Cucumber's dependency
+    injection (PicoContainer or another supported DI module) rather than through static fields. Each step-definition class
+    stays small and receives the shared context and its own collaborators through the constructor; no step reaches into a
+    static holder or a singleton to find "the current driver" or "the last response." Hooks (@Before/@After) own technical
+    setup and teardown — creating and quitting the driver, opening and closing a database connection — while business flow
+    stays entirely inside step definitions, and no scenario is allowed to assume a previous scenario already ran (no order
+    dependence).
+  recommended_answer: 'Cucumber constructs a new object graph per scenario when DI is enabled (Cucumber Picocontainer, Guice,
+    Spring or another supported module) — every class Cucumber needs to instantiate step definitions for that scenario is
+    created once for that scenario''s lifetime and discarded afterward, which is exactly the scope needed for parallel-safe
+    state: as long as steps depend on injected collaborators rather than static/singleton access, two scenarios running on
+    two threads never share an object graph, and shared mutable state (drivers, HTTP clients, accumulated data) is naturally
+    scenario-scoped with zero explicit synchronization.
+
+    A practical shape: one small "ScenarioContext" (or several purpose-specific context classes if one grows too broad) holds
+    cross-step values — the last API response, an entity ID created earlier in the scenario — and is injected by the DI container
+    into every step-definition class constructor that needs it. Step definition classes stay narrow (one feature area each)
+    and receive both the shared context and any single-purpose collaborators (an ApiClient, a PageObject) through their constructors
+    — never through statics, never by reaching into another step class directly. Hooks are the only place technical lifecycle
+    concerns belong: @Before creates the driver/session and stores it in the context (or the DI container creates it directly),
+    @After tears it down unconditionally, and a tagged hook can attach a screenshot on failure using the Scenario object passed
+    into the hook. Business flow — what the scenario is actually verifying — must never live in a hook; a hook that branches
+    on scenario content is a sign business logic leaked out of the step definitions.
+
+    Order independence is a design constraint, not a happy accident: no scenario should rely on state left behind by a previous
+    scenario (a created user, an open connection), because parallel and re-ordered execution will violate that assumption
+    unpredictably. Each scenario''s Background/Given steps should establish everything that scenario needs from a clean baseline.'
+  deep_dive: ''
+  key_points:
+  - Scenario-scoped context, constructed fresh per scenario via Cucumber's DI support.
+  - Explicit constructor injection of context and collaborators into step-definition classes.
+  - No order dependence across scenarios; each scenario establishes its own baseline state.
+  - Hooks manage technical setup/teardown only; business flow stays in step definitions.
+  - Parallel-safe driver/data ownership follows directly from per-scenario object graphs.
+  strong_signals:
+  - Explains that Cucumber's DI creates a new object graph per scenario, and ties that directly to parallel safety.
+  - Draws a firm line between hook responsibilities (technical) and step-definition responsibilities (business flow).
+  - Calls out order independence as a design requirement, not an incidental property.
+  weak_signals:
+  - Proposes "just use ThreadLocal" without recognizing Cucumber's DI already solves scoping.
+  - Puts a static Map<String,Object> "context" behind a service-locator step method.
+  red_flags:
+  - Uses a static/singleton driver holder shared across all scenarios.
+  - Writes hooks that branch on tags to run business setup logic.
+  common_mistakes:
+  - One giant "World"/context class that every step class touches, becoming a hidden coupling point.
+  - Scenarios that depend on data created by a previous scenario in file order.
+  - Step-definition methods calling other step-definition methods directly instead of sharing via context or page objects.
+  follow_ups:
+  - question: How would you split overly broad step-definition classes?
+    recommended_answer: Split by feature/domain area rather than by technical layer — a CheckoutSteps, PaymentSteps and ShippingSteps
+      class, each with a narrow set of steps and only the collaborators it actually needs injected. If a step needs data another
+      area created, share it through the scenario context object rather than one class calling another class's step method
+      directly; that keeps each class independently readable and testable, and avoids the fragile coupling of one step definition
+      silently depending on another's side effects.
+  examples: []
+  code_examples:
+  - "// Shared, scenario-scoped state — no statics\npublic class ScenarioContext {\n  private WebDriver driver;\n  private\
+    \ Response lastResponse;\n  // getters/setters\n}\n\npublic class CheckoutSteps {\n  private final ScenarioContext context;\n\
+    \  private final CheckoutPage checkoutPage;\n\n  public CheckoutSteps(ScenarioContext context, CheckoutPage checkoutPage)\
+    \ {\n    this.context = context;          // injected, not static\n    this.checkoutPage = checkoutPage;\n  }\n\n  @When(\"\
+    the customer applies a valid {int}% coupon\")\n  public void applyCoupon(int percent) {\n    checkoutPage.applyCoupon(percent);\n\
+    \  }\n}\n\npublic class DriverHooks {\n  private final ScenarioContext context;\n  public DriverHooks(ScenarioContext\
+    \ context) { this.context = context; }\n\n  @Before\n  public void setUp() { context.setDriver(new ChromeDriver()); }\n\
+    \n  @After\n  public void tearDown() { context.getDriver().quit(); }\n}"
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 5
+  - 15
+  tags:
+  - cucumber
+  - bdd
+  - dependency-injection
+  - scenario-context
+  - parallel-execution
+  - hooks
+  estimated_minutes: 7
+  references:
+  - source_id: cucumber-docs
+    locator: Cucumber documentation — "Sharing state between steps" guide, dependency injection and scenario scope
+  - source_id: cucumber-docs
+    locator: Cucumber documentation — "Hooks" reference, Before/After scope and tagged hooks
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design

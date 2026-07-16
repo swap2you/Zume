@@ -1,0 +1,91 @@
+version: 1
+records:
+- id: gold-mobile-006
+  domain: browserstack
+  subdomain: local-tunnel
+  title: Network trust and diagnosis changes from a device-cloud local tunnel
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Explain how a device-cloud local tunnel changes network trust, test setup and failure diagnosis.
+  concise_answer: 'A local-testing tunnel (for example the BrowserStack Local binary) opens an outbound connection from your
+    network to the vendor''s cloud so remote devices can reach non-public endpoints - staging, localhost, internal services
+    behind a firewall or VPN - without any inbound port being opened. That changes the trust model: the tunnel, not a firewall
+    rule, now decides what the cloud''s devices can reach, so scope must be constrained explicitly (--only, --include-hosts/--exclude-hosts,
+    or --force-local) rather than left as an open pipe to the whole private network. Tunnel lifecycle (start/stop, credentials)
+    belongs to CI orchestration, not to individual test authors, and failure diagnosis must now separately consider tunnel-down
+    as its own failure class.'
+  recommended_answer: 'Local Testing creates a network tunnel between the private network and the provider''s infrastructure
+    specifically so devices with no direct route to non-public, staging, or firewalled hosts can still reach them; the binary
+    or app running inside the private network is what makes this possible, and no inbound firewall change is required - the
+    connection direction is outbound-only. This is a meaningful trust boundary: whoever runs the binary with a valid access
+    key is effectively bridging cloud devices into the private network, so credential handling and scope restriction matter
+    as much as connectivity.
+
+    Scope control is the primary technical control: flags like --only (limit resolvable host:port:ssl combinations) and --force-local
+    (force all resolution through the tunnel, useful for compliance) constrain what the tunnel can reach, and should be set
+    deliberately rather than defaulted to "resolve everything." Access keys must come from CI secrets, not developer machines''
+    ad hoc runs, and the tunnel''s lifecycle (start before the suite, verified up, stopped after) belongs to the CI job definition
+    so it is not left running or forgotten.
+
+    For diagnosis, a tunnel introduces a failure class that did not exist without it: "tunnel not connected/local console
+    unreachable" must be distinguished from an actual application failure or a cloud-side device failure. Capture the Local
+    binary''s own logs/console alongside the device-cloud session artifacts (video, device logs, network logs) so a triager
+    can tell, from evidence, whether the failure was the app, the cloud infrastructure, or the tunnel itself.'
+  deep_dive: ''
+  key_points:
+  - Tunnel is outbound-only from the private network; no inbound firewall change is required.
+  - Whoever runs the binary with a valid key effectively bridges cloud devices into the network.
+  - Constrain scope explicitly (--only, --force-local, include/exclude hosts) rather than defaulting open.
+  - Tunnel lifecycle and credentials belong to CI orchestration, not ad hoc developer runs.
+  - Diagnosis must separate app failure, cloud-side failure and tunnel failure as distinct classes.
+  strong_signals:
+  - Names specific scope-restriction flags and explains why default-open is the wrong posture.
+  - Treats tunnel credentials and lifecycle as a CI-owned concern, not per-developer.
+  - Adds "tunnel failure" as an explicit fourth failure category in diagnosis.
+  weak_signals:
+  - Describes the tunnel only as "lets tests reach localhost" with no trust/scope discussion.
+  - Has no plan for distinguishing tunnel failure from application failure.
+  red_flags:
+  - Runs the tunnel with unrestricted scope against a production-adjacent network by default.
+  - Stores the access key as a literal in a script or repository.
+  common_mistakes:
+  - Leaving a local tunnel running unattended after a test session ends.
+  - Not capturing the Local binary's own log when triaging a suspicious failure.
+  - Assuming --only is unnecessary because "it's just for testing."
+  follow_ups:
+  - question: How would you prevent tests from reaching unintended internal services?
+    recommended_answer: Enforce --only or --include-hosts/--exclude-hosts in the CI-owned tunnel startup script so the allowed
+      host:port set is explicit and reviewed, treat any change to that list as a reviewable configuration change, and periodically
+      audit the actual hosts contacted during a run (from Local binary logs) against the intended allow-list to catch drift
+      or an overly broad rule before it becomes an incident.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 4
+  - 14
+  tags:
+  - browserstack
+  - local-tunnel
+  - network-security
+  - ci-integration
+  - device-cloud
+  estimated_minutes: 6
+  references:
+  - source_id: browserstack-docs
+    locator: Test your non-public websites using Local Testing in BrowserStack Live
+  - source_id: browserstack-docs
+    locator: Flags for BrowserStack Local - --only, --force-local, --daemon
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design

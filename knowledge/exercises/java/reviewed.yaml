@@ -13,7 +13,9 @@ records:
   - Keep the solution scoped to the stated contract.
   - Make failures observable.
   - Do not include interviewer guidance.
-  starter_files: {}
+  starter_files:
+    Main.java: "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"\
+      ok\");\n  }\n}\n"
   expected_reasoning: 'Identify the contract from Java SE API: java.util.Collection, use a focused java
     operation, and explain how the failure evidence narrows the fault.'
   reference_solution: A sound java solution targets the named contract, checks normal and boundary behavior,

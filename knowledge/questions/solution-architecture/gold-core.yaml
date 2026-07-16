@@ -1,0 +1,184 @@
+version: 1
+records:
+- id: gold-arch-006
+  domain: solution-architecture
+  subdomain: decision-records
+  title: Single framework, multiple specialized frameworks, or a shared adapter platform
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Write the decision criteria for choosing a single framework, multiple specialized frameworks or a shared platform
+    with adapters.
+  concise_answer: 'The decision mirrors the "monolith first" argument in reverse scale: a single framework is right when teams,
+    tech stacks and release cadence are similar enough that shared abstractions describe reality rather than distort it; multiple
+    specialized frameworks are right when teams, channels or release cadences genuinely differ and forcing one framework adds
+    a coordination tax without shared benefit; a shared platform with thin adapters is the middle path — common infrastructure
+    (reporting, CI integration, data management) with channel- or team-specific adapters — justified once duplication cost
+    across independent frameworks exceeds the governance cost of a shared core. Each option has an explicit exit strategy
+    and revisit trigger.'
+  recommended_answer: 'Decision criteria, weighted by evidence rather than preference: (1) Team skills and ownership — can
+    one team realistically own a single framework''s full surface area, or would that concentrate a bottleneck? (2) Product/channel
+    diversity — one web app favors one framework; ten products across web, mobile and API with different release trains favor
+    specialization or a platform. (3) Release cadence — frameworks tied to different deployment rhythms fight each other inside
+    one repo/pipeline. (4) Maintenance and migration cost — estimate cost of the chosen path''s eventual replacement, not
+    just its initial build. (5) Governance versus autonomy — a shared platform requires a real governance function (a maintaining
+    team, an RFC process); without one, "shared platform" becomes an unowned dependency everyone fears to change. (6) Exit
+    strategy and measurable outcomes — define up front what evidence (duplicated defect classes, onboarding time, cross-team
+    blocked-on-platform time) would trigger revisiting the decision.
+
+    This is the same class of decision Fowler''s monolith-first reasoning describes for application architecture: start with
+    the option that carries the least structural premium for your current scale and complexity, and treat the more distributed
+    option (multiple frameworks, or a platform with governance overhead) as something you earn the need for with evidence,
+    not something you adopt on anticipated future scale alone. DORA''s research on loosely coupled teams applies directly
+    here — the platform-with-adapters option only pays off when it lets teams change and release independently; if the platform
+    forces cross-team coordination for every change, it has recreated tight coupling under a different name.'
+  deep_dive: ''
+  key_points:
+  - Weigh team skills/ownership, product diversity and release cadence explicitly.
+  - Estimate migration/maintenance cost of the chosen path, not just initial build cost.
+  - A shared platform requires real governance, or it becomes an unowned liability.
+  - Define measurable evidence and a trigger for revisiting the decision up front.
+  - Prefer the option with the least structural premium for current scale, not future guesses.
+  strong_signals:
+  - Weighs governance cost explicitly against duplication cost for the platform option.
+  - Names concrete evidence that would trigger revisiting the decision later.
+  - Draws the parallel to architectural coupling rather than treating this as pure preference.
+  weak_signals:
+  - Picks an option based on what is currently popular rather than team/product evidence.
+  - No mention of who governs a shared platform or how it evolves.
+  red_flags:
+  - Recommends a shared platform with no owning team or change process.
+  - Treats the decision as permanent with no revisit trigger or exit strategy.
+  common_mistakes:
+  - Building a "universal" shared platform before any second team actually needs it.
+  - Letting each team build a bespoke framework silently, discovering duplication years later.
+  - Confusing "shared platform" with "one team's framework everyone else must adopt."
+  follow_ups:
+  - question: What evidence would trigger revisiting the architecture decision?
+    recommended_answer: Recurring duplicated defect classes fixed independently in each framework, measurable onboarding-time
+      growth for new team members, cross-team work repeatedly blocked waiting on a platform-owning team, or a release cadence
+      mismatch causing frequent conflicts are all concrete triggers. The decision record should name these thresholds in advance
+      so revisiting the architecture is a scheduled, evidence-driven review rather than a reactive scramble.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 8
+  - 20
+  tags:
+  - solution-architecture
+  - decision-records
+  - framework-strategy
+  - governance
+  - dora
+  estimated_minutes: 7
+  references:
+  - source_id: fowler-bliki
+    locator: MonolithFirst — structural premium and staged adoption reasoning
+  - source_id: dora-dev
+    locator: 'DORA Capabilities: Loosely coupled teams'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-lead-005
+  domain: solution-architecture
+  subdomain: trade-offs
+  title: When the technically strongest option is not the right organizational choice
+  level: advanced
+  priority: P0
+  frequency: common
+  question: Present an architecture decision where the technically strongest option is not the best organizational choice.
+  concise_answer: 'A concrete example: choosing a well-understood, "boring" framework the team already operates over a technically
+    superior but unfamiliar one, because the migration cost, hiring/skill availability, and support burden of the stronger
+    option outweigh its technical edge within the decision''s time horizon. The decision should explicitly name the quality
+    attributes traded away (e.g., some performance headroom) against what was gained (lower delivery risk, faster ramp-up),
+    and should be recorded as a reversible step with a stated trigger for revisiting it, not framed as a permanent technical
+    verdict.'
+  recommended_answer: 'A good example: a team evaluates a newer, technically superior contract-testing tool against the REST
+    Assured stack it already runs in production. The new tool wins on isolated technical criteria — faster feedback, better
+    diagnostics — but the team has two people who know it, no CI integration built, and a release in six weeks. The organizationally
+    responsible decision is to stay on the current stack for this cycle, and schedule a bounded pilot of the new tool against
+    a real but non-critical service afterward, rather than adopting mid-cycle on the strength of a spike.
+
+    What makes the decision defensible rather than merely conservative is what gets written down: the specific quality attributes
+    being traded (some diagnostic speed and future maintainability, given up for delivery predictability and available skill),
+    the reversibility of the choice (a pilot is explicitly scoped so the team is not locked in either direction), and a stated
+    trigger for revisiting it (after the release, or if the current stack''s known limitation causes a second incident). This
+    maps directly onto the standard architecture decision record structure — context, decision, and consequences — which exists
+    precisely so a decision that looks conservative in isolation is legible as a considered trade-off in retrospect, with
+    the option to change course recorded as part of the decision itself rather than treated as reversing a mistake.
+
+    The failure mode this avoids is two-sided: picking the "best" technology and ignoring organizational readiness produces
+    a stalled migration and a demoralized team; picking the safe option and calling it final with no revisit trigger produces
+    permanent technical stagnation dressed up as prudence.'
+  deep_dive: ''
+  key_points:
+  - Decisions include skills, ownership, migration cost and support burden, not just technical merit.
+  - State the specific quality attributes being traded away and gained.
+  - Prefer reversible steps (bounded pilots) over irreversible full commitments.
+  - Document consequences and an explicit trigger for revisiting the decision.
+  strong_signals:
+  - Names concrete quality attributes traded, not a vague "we chose stability."
+  - Structures the answer around context/decision/consequences rather than a bare recommendation.
+  - Defines a specific, falsifiable trigger for revisiting the decision later.
+  weak_signals:
+  - Frames the choice as simply "safe versus risky" without naming what was actually traded.
+  - Presents the decision as permanent with no path to reconsider it.
+  red_flags:
+  - Cannot articulate any cost of the "safe" choice — treats it as free.
+  - Confuses conservatism (avoiding change by default) with a reasoned, evidenced trade-off.
+  common_mistakes:
+  - Choosing the technically superior tool without assessing team skill or migration cost.
+  - Recording only the decision, not the context and consequences, so it reads as arbitrary later.
+  - Never setting a revisit trigger, so the decision becomes permanent by inertia.
+  follow_ups:
+  - question: What makes an architecture decision responsible rather than merely conservative?
+    recommended_answer: A responsible decision names the trade-off explicitly (what capability or quality attribute is being
+      given up, and why the org context justifies it now), commits to a reversible or bounded path rather than closing the
+      door permanently, and states the evidence or event that would trigger revisiting it. A merely conservative decision
+      picks the familiar option by default, never names what was given up, and has no mechanism or intention to ever reconsider
+      it — it optimizes for avoiding blame rather than for the organization's actual outcomes.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 8
+  - 20
+  tags:
+  - leadership
+  - solution-architecture
+  - trade-offs
+  - decision-records
+  - adr
+  estimated_minutes: 7
+  references:
+  - source_id: adr-org
+    locator: Architecture Decision Records (Nygard template) — Context, Decision, Consequences structure
+  - source_id: fowler-bliki
+    locator: martinfowler.com bliki — TechnicalDebtQuadrant, framing deliberate versus inadvertent trade-offs
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design

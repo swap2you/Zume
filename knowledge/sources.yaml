@@ -1,35 +1,41 @@
 version: 1
 sources:
   - {id: istqb-glossary, name: "ISTQB glossary", url: "https://glossary.istqb.org/", family: standards}
-  - {id: java-dev, name: "dev.java", url: "https://dev.java/", family: official-project}
-  - {id: java-oracle-docs, name: "Oracle Java API and language documentation", url: "https://docs.oracle.com/en/java/", family: official-vendor}
-  - {id: openjdk-jep, name: "OpenJDK JEPs", url: "https://openjdk.org/jeps/0", family: official-project}
-  - {id: selenium-dev, name: "Selenium documentation", url: "https://www.selenium.dev/documentation/", family: official-project}
+  - {id: java-dev, name: "dev.java", url: "https://dev.java/", family: official_project}
+  - {id: java-oracle-docs, name: "Oracle Java API and language documentation", url: "https://docs.oracle.com/en/java/", family: official_vendor}
+  - {id: openjdk-jep, name: "OpenJDK JEPs", url: "https://openjdk.org/jeps/0", family: official_project}
+  - {id: selenium-dev, name: "Selenium documentation", url: "https://www.selenium.dev/documentation/", family: official_project}
   - {id: w3c-webdriver, name: "W3C WebDriver", url: "https://www.w3.org/TR/webdriver2/", family: standards}
-  - {id: testng-docs, name: "TestNG documentation", url: "https://testng.org/", family: official-project}
-  - {id: cucumber-docs, name: "Cucumber documentation", url: "https://cucumber.io/docs/", family: official-project}
-  - {id: gherkin-reference, name: "Gherkin reference", url: "https://cucumber.io/docs/gherkin/reference/", family: official-project}
+  - {id: testng-docs, name: "TestNG documentation", url: "https://testng.org/", family: official_project}
+  - {id: cucumber-docs, name: "Cucumber documentation", url: "https://cucumber.io/docs/", family: official_project}
+  - {id: gherkin-reference, name: "Gherkin reference", url: "https://cucumber.io/docs/gherkin/reference/", family: official_project}
   - {id: rfc-http, name: "HTTP Semantics RFC 9110", url: "https://www.rfc-editor.org/rfc/rfc9110", family: standards}
   - {id: openapi-spec, name: "OpenAPI Specification", url: "https://spec.openapis.org/oas/latest.html", family: standards}
-  - {id: rest-assured, name: "REST Assured", url: "https://rest-assured.io/", family: official-project}
-  - {id: oracle-sql, name: "Oracle Database SQL Language Reference", url: "https://docs.oracle.com/en/database/oracle/oracle-database/", family: official-vendor}
-  - {id: git-scm, name: "Git documentation", url: "https://git-scm.com/doc", family: official-project}
-  - {id: maven-docs, name: "Apache Maven documentation", url: "https://maven.apache.org/guides/", family: official-project}
-  - {id: github-actions, name: "GitHub Actions documentation", url: "https://docs.github.com/actions", family: official-vendor}
-  - {id: jenkins-docs, name: "Jenkins documentation", url: "https://www.jenkins.io/doc/", family: official-project}
-  - {id: postman-docs, name: "Postman Learning Center", url: "https://learning.postman.com/docs/", family: official-vendor}
-  - {id: appium-docs, name: "Appium documentation", url: "https://appium.io/docs/", family: official-project}
-  - {id: browserstack-docs, name: "BrowserStack documentation", url: "https://www.browserstack.com/docs/", family: official-vendor}
-  - {id: jmeter-docs, name: "Apache JMeter user manual", url: "https://jmeter.apache.org/usermanual/", family: official-project}
-  - {id: grafana-k6, name: "Grafana k6 documentation", url: "https://grafana.com/docs/k6/", family: official-project}
+  - {id: rest-assured, name: "REST Assured", url: "https://rest-assured.io/", family: official_project}
+  - {id: oracle-sql, name: "Oracle Database SQL Language Reference", url: "https://docs.oracle.com/en/database/oracle/oracle-database/", family: official_vendor}
+  - {id: git-scm, name: "Git documentation", url: "https://git-scm.com/doc", family: official_project}
+  - {id: maven-docs, name: "Apache Maven documentation", url: "https://maven.apache.org/guides/", family: official_project}
+  - {id: github-actions, name: "GitHub Actions documentation", url: "https://docs.github.com/actions", family: official_vendor}
+  - {id: jenkins-docs, name: "Jenkins documentation", url: "https://www.jenkins.io/doc/", family: official_project}
+  - {id: postman-docs, name: "Postman Learning Center", url: "https://learning.postman.com/docs/", family: official_vendor}
+  - {id: appium-docs, name: "Appium documentation", url: "https://appium.io/docs/", family: official_project}
+  - {id: browserstack-docs, name: "BrowserStack documentation", url: "https://www.browserstack.com/docs/", family: official_vendor}
+  - {id: jmeter-docs, name: "Apache JMeter user manual", url: "https://jmeter.apache.org/usermanual/", family: official_project}
+  - {id: grafana-k6, name: "Grafana k6 documentation", url: "https://grafana.com/docs/k6/", family: official_project}
   - {id: opentelemetry, name: "OpenTelemetry documentation", url: "https://opentelemetry.io/docs/", family: standards}
   - {id: owasp, name: "OWASP", url: "https://owasp.org/www-project-top-ten/", family: standards}
-  - {id: docker-docs, name: "Docker documentation", url: "https://docs.docker.com/", family: official-project}
-  - {id: kubernetes-docs, name: "Kubernetes documentation", url: "https://kubernetes.io/docs/", family: official-project}
+  - {id: docker-docs, name: "Docker documentation", url: "https://docs.docker.com/", family: official_project}
+  - {id: kubernetes-docs, name: "Kubernetes documentation", url: "https://kubernetes.io/docs/", family: official_project}
   - {id: w3c-wcag, name: "W3C WCAG", url: "https://www.w3.org/WAI/standards-guidelines/wcag/", family: standards}
-  - {id: python-docs, name: "Python documentation", url: "https://docs.python.org/3/", family: official-project}
-  - {id: typescript-docs, name: "TypeScript handbook", url: "https://www.typescriptlang.org/docs/", family: official-project}
-  - {id: pact-docs, name: "Pact documentation", url: "https://docs.pact.io/", family: official-project}
-  - {id: openai-docs, name: "OpenAI developer documentation", url: "https://developers.openai.com/", family: official-vendor}
+  - {id: python-docs, name: "Python documentation", url: "https://docs.python.org/3/", family: official_project}
+  - {id: typescript-docs, name: "TypeScript handbook", url: "https://www.typescriptlang.org/docs/", family: official_project}
+  - {id: pact-docs, name: "Pact documentation", url: "https://docs.pact.io/", family: official_project}
+  - {id: openai-docs, name: "OpenAI developer documentation", url: "https://developers.openai.com/", family: official_vendor}
   - {id: mcp-spec, name: "Model Context Protocol specification", url: "https://modelcontextprotocol.io/specification/", family: standards}
   - {id: nist-ai-rmf, name: "NIST AI Risk Management Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework", family: standards}
+  - {id: fowler-bliki, name: "martinfowler.com articles", url: "https://martinfowler.com/", family: high_quality_reference}
+  - {id: google-testing-blog, name: "Google Testing Blog", url: "https://testing.googleblog.com/", family: high_quality_reference}
+  - {id: dora-dev, name: "DORA research program", url: "https://dora.dev/", family: high_quality_reference}
+  - {id: owasp-genai, name: "OWASP GenAI Security Project (LLM Top 10)", url: "https://genai.owasp.org/", family: standards}
+  - {id: adr-org, name: "Architectural Decision Records", url: "https://adr.github.io/", family: high_quality_reference}
+  - {id: gitlab-handbook, name: "GitLab Engineering Handbook", url: "https://handbook.gitlab.com/handbook/engineering/", family: high_quality_reference}

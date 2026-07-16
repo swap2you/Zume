@@ -1,0 +1,217 @@
+version: 1
+records:
+- id: gold-tool-004
+  domain: git-maven
+  subdomain: maven-lifecycle
+  title: Surefire versus Failsafe — why "mvn test" can pass while "mvn verify" fails
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Explain the Maven lifecycle difference between unit-style tests and integration tests using Surefire and Failsafe.
+  concise_answer: The Maven Surefire Plugin binds to the test phase of the default lifecycle and, by its default naming convention,
+    runs classes matching **/Test*.java, **/*Test.java and **/*Tests.java — these are meant to be fast, isolated unit tests
+    with no external dependencies. The Maven Failsafe Plugin binds to integration-test and verify and, by default, matches
+    **/IT*.java, **/*IT.java and **/*ITCase.java; critically, Failsafe's integration-test goal runs tests but does not fail
+    the build immediately, and the verify goal (run after integration-test, typically after other plugins have torn down test
+    infrastructure such as a started server) is what actually inspects results and fails the build. That separation lets teardown
+    (e.g. stopping an application server) run between test execution and the pass/fail decision, which Surefire alone cannot
+    do inside a single test phase.
+  recommended_answer: 'Maven''s default lifecycle phases run in order: validate, compile, test, package, integration-test,
+    verify, install, deploy. Surefire''s default binding is to the test phase, so mvn test (or any phase up through package)
+    triggers it; it is designed for tests that need no external environment — pure unit tests — and it fails the build immediately
+    when a test fails, which is appropriate because there is no teardown step to protect.
+
+    Failsafe is designed specifically for integration tests, which typically need something started before they run (an embedded
+    server, a database container) and stopped afterward regardless of test outcome. Its integration-test goal executes the
+    tests but deliberately does not fail the build there — if it did, a failed integration test would abort the build before
+    the post-integration-test teardown goal (commonly another plugin bound to post-integration-test, like stopping a Docker
+    container or an app server) ever ran, leaving the environment dangling. The verify goal, bound after post-integration-test,
+    is what reads the recorded results and fails the build if any integration test failed. This is exactly why `mvn test`
+    can succeed (Surefire ran, all unit tests passed, and Surefire never even saw integration tests because of the differing
+    naming convention) while `mvn verify` fails (Failsafe''s later verify goal detects an integration test failure that only
+    becomes visible once the full lifecycle including integration-test has run).
+
+    Discovery for both plugins can be reconfigured via <includes>/<excludes> in the plugin configuration, so relying purely
+    on the default naming convention is fragile — a class named ServiceTest.java that is actually a slow integration test
+    will be picked up by Surefire (wrong phase, wrong failure semantics, possibly no environment yet) unless naming and includes
+    are kept consistent with intent. CI pipelines should invoke the goal that matches what they need — `mvn verify` (or `mvn
+    test` for a fast PR gate that deliberately skips slower integration tests) — rather than assuming `mvn test` alone exercises
+    the full suite.'
+  deep_dive: ''
+  key_points:
+  - Surefire commonly binds to the test phase for fast, isolated tests.
+  - Failsafe binds to integration-test and verify; verify is what actually fails the build, after teardown has run.
+  - Default naming conventions (Test*/*/*IT*) control which plugin discovers which classes.
+  - CI must invoke the lifecycle goal (test vs verify) that matches the intended scope.
+  strong_signals:
+  - Explains why Failsafe splits execution (integration-test) from failure detection (verify) rather than treating them as
+    one step.
+  - Connects the split directly to environment teardown ordering.
+  - Names the default include patterns for both plugins accurately.
+  weak_signals:
+  - Knows "Failsafe is for integration tests" but not why it defers failing the build.
+  - Assumes mvn test always runs the entire test suite regardless of naming.
+  red_flags:
+  - Believes Surefire and Failsafe are interchangeable configuration of the same plugin.
+  - Cannot explain why a failing integration test might not fail `mvn test`.
+  common_mistakes:
+  - Naming a slow integration test class *Test.java, causing Surefire to run it in the wrong phase with no environment.
+  - Running only `mvn test` in CI and believing integration tests were exercised.
+  - Forgetting to bind Failsafe's verify goal, so integration-test failures never fail the build at all.
+  follow_ups:
+  - question: Why can `mvn test` pass while `mvn verify` fails?
+    recommended_answer: Because `mvn test` only executes phases up to and including test, where Surefire runs — it never reaches
+      integration-test or verify, so Failsafe never executes and any integration-test failure is invisible at that point.
+      `mvn verify` runs the full sequence through integration-test and verify; Failsafe executes the IT-named tests there,
+      and its verify goal is where a recorded integration-test failure is finally surfaced as a build failure. A pipeline
+      that only runs `mvn test` for speed is intentionally not exercising Failsafe's tests, which is fine as a fast PR gate
+      but must be paired with a broader `mvn verify` stage before merge or release.
+  examples: []
+  code_examples:
+  - "<!-- Failsafe bound explicitly to integration-test and verify -->\n<plugin>\n  <groupId>org.apache.maven.plugins</groupId>\n\
+    \  <artifactId>maven-failsafe-plugin</artifactId>\n  <executions>\n    <execution>\n      <goals>\n        <goal>integration-test</goal>\n\
+    \        <goal>verify</goal>\n      </goals>\n    </execution>\n  </executions>\n</plugin>"
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 2
+  - 10
+  tags:
+  - maven
+  - surefire
+  - failsafe
+  - lifecycle
+  - integration-tests
+  - ci
+  estimated_minutes: 5
+  references:
+  - source_id: maven-docs
+    locator: Maven Surefire Plugin documentation — default test-phase binding and default test file inclusion patterns
+  - source_id: maven-docs
+    locator: Maven Failsafe Plugin "Usage" page — integration-test/verify goal binding and default IT inclusion patterns
+  - source_id: maven-docs
+    locator: Maven "Introduction to the Build Lifecycle" — default lifecycle phase ordering
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept
+- id: gold-tool-005
+  domain: git-maven
+  subdomain: merge-rebase
+  title: Merge versus rebase for a shared automation repository
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Compare merge and rebase for a shared automation repository. What history and collaboration risks drive the choice?
+  concise_answer: git merge creates a new merge commit that ties two branch histories together, preserving exactly what happened
+    (including the branch topology), at the cost of a history that can be cluttered with merge commits and "merge branch main
+    into feature" noise. git rebase replays a branch's commits onto a new base, producing a linear history that reads cleanly
+    but rewrites commit hashes — doing this to commits that have already been pushed and pulled by teammates (published history)
+    creates duplicate/diverged history for everyone else and should be avoided; rebase is safe and useful for a developer's
+    own not-yet-shared local commits before opening a PR. Conflict resolution during either operation should be verified by
+    re-running the test suite, not just checking that the diff looks reasonable, because a textually clean merge can still
+    combine two changes into a logically broken state.
+  recommended_answer: 'Merge preserves the true branch topology and never rewrites existing commits — every commit that existed
+    on the feature branch keeps its original hash, and a new merge commit records that two histories were joined. This is
+    the only safe option once commits have been pushed to a shared branch that others have already pulled from, because rewriting
+    published history forces every other collaborator to reconcile diverged histories (typically by force-pulling or creating
+    their own confusing merge of the rewritten and original lines).
+
+    Rebase rewrites the feature branch''s commits so they appear to have been made starting from the current tip of the target
+    branch, producing a linear, easy-to-read history with no merge commits — valuable for a developer''s own branch before
+    it is shared, and for keeping a long-lived feature branch up to date with main without the noise of repeated "merge main
+    into feature" commits. The rule most teams converge on (and the one Git''s own documentation warns about) is: never rebase
+    commits that exist in a public/shared branch that other people might have already based work on — doing so silently duplicates
+    commits for anyone who already has the old versions and can produce very confusing, hard-to-untangle divergence.
+
+    For a shared automation repository specifically, the practical convention is: protect main so it only receives merges
+    (often squash-merges) from reviewed pull requests; allow individual contributors to rebase their own feature branches
+    freely before or during review to keep history clean and to resolve conflicts against a moving main; and require that
+    any conflict resolution — merge or rebase — is validated by actually running the test suite against the resolved result,
+    since Git''s conflict markers only flag textual overlap, not whether the combined logic is still correct (e.g. two people
+    editing the same page-object method to fix different locators can merge without a conflict marker while producing a broken
+    locator).'
+  deep_dive: ''
+  key_points:
+  - Merge preserves branch topology and never rewrites existing commit history.
+  - Rebase rewrites commits to produce linear history; safe only before sharing/publishing.
+  - Do not rebase shared, already-published history — it silently diverges everyone else's copy.
+  - Use a documented team convention (e.g. protected main, rebase-before-PR) and protect the main branch.
+  - Resolve conflicts and validate with the test suite, not by reading the diff alone.
+  strong_signals:
+  - States the "never rewrite published/shared history" rule and explains the concrete consequence for teammates.
+  - Ties conflict resolution correctness to re-running tests, not just diff inspection.
+  - Proposes a concrete team convention (protected main, rebase-before-PR) rather than a personal preference.
+  weak_signals:
+  - Has a strong opinion on merge vs rebase without discussing whether the branch is shared.
+  - Treats force-push as routine without discussing the impact on collaborators.
+  red_flags:
+  - Recommends rebasing main or another shared branch directly.
+  - Considers a conflict "resolved" once it compiles, without running tests.
+  common_mistakes:
+  - Force-pushing a rebased branch that other people already pulled, without warning them.
+  - Rebasing to "clean up" a long-lived shared integration branch mid-project.
+  - Resolving a merge conflict by picking one side entirely without checking whether both changes were needed.
+  follow_ups:
+  - question: When would you use revert instead of reset after a bad merge?
+    recommended_answer: Use revert when the bad commit or merge has already been pushed and potentially pulled by others —
+      revert creates a new commit that undoes the change while preserving history, so it is safe to push without rewriting
+      anything anyone else has. Reset (especially --hard combined with a force push) rewrites the branch tip and is only appropriate
+      for commits that are still local/unpublished; using reset on a shared branch has the same "everyone else now diverges"
+      problem as rebasing published history. For a bad merge already on a shared branch, `git revert -m 1 <merge-commit>`
+      is the standard way to undo it without disturbing the branch's public history.
+  examples: []
+  code_examples:
+  - '# Safe: rebase your own not-yet-pushed/not-yet-shared branch onto latest main
+
+    git fetch origin
+
+    git rebase origin/main
+
+
+    # Unsafe once teammates have already pulled feature-branch commits:
+
+    # this rewrites history they already have a copy of
+
+    git rebase origin/main   # on a branch others have already fetched/based work on
+
+    git push --force         # forces the rewritten history onto everyone else'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 2
+  - 12
+  tags:
+  - git
+  - merge
+  - rebase
+  - revert
+  - reset
+  - shared-history
+  - collaboration
+  estimated_minutes: 6
+  references:
+  - source_id: git-scm
+    locator: Git Book — "Git Branching" chapter, "Rebasing" section, "The Perils of Rebasing" (do not rebase published history)
+  - source_id: git-scm
+    locator: git-revert(1) manual page — reverting a merge commit with the -m option
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: compare_contrast

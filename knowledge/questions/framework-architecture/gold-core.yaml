@@ -1,0 +1,205 @@
+version: 1
+records:
+- id: gold-arch-001
+  domain: framework-architecture
+  subdomain: layers
+  title: Layering a multi-channel framework without a universal base class
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a test automation framework that supports UI, API and database validation without making every test depend
+    on every layer.
+  concise_answer: 'Split the framework into independent layers: domain/business intent (what a test asserts), channel adapters
+    (a UI driver, an HTTP client, a database accessor — each independently instantiable and testable), and a thin orchestration
+    layer that wires the adapters a given scenario actually needs. Tests are composed from only the adapters they use, via
+    constructor injection or a builder, never inherited from one "BaseTest" that stands up a browser, an HTTP client and a
+    database connection for every test regardless of what it checks.'
+  recommended_answer: 'The design failure this question targets is a universal base class: a shared superclass that opens
+    a browser, builds a REST client and connects to a database in @Before, so every test pays the cost and risk of every channel.
+    The fix is composition over inheritance. Define a small interface per business capability (for example OrderVerification)
+    and provide channel-specific implementations (UiOrderVerification, ApiOrderVerification, DbOrderVerification) that a test
+    receives through injection based on what it actually needs to prove.
+
+    Layering then looks like: (1) a domain layer expressing intent in business vocabulary with no channel awareness; (2) channel
+    adapters that translate domain calls into UI interactions, HTTP calls or SQL, each with its own lifecycle and failure
+    translation; (3) test-data and configuration providers that are explicit inputs, not static singletons; (4) an orchestration/composition
+    root — a fixture or factory — that assembles exactly the adapters a scenario needs.
+
+    This directly follows test-pyramid economics: the same business rule usually can be verified via API/DB adapters, which
+    are fast and stable, reserving the UI adapter for the small number of tests that must exercise the actual rendered experience.
+    Sharing code across channels should only happen where business semantics are genuinely identical (an "Order" domain model),
+    never for setup convenience.'
+  deep_dive: ''
+  key_points:
+  - Separate domain intent, channel adapters, orchestration and infrastructure.
+  - Use composition and injection, not a universal base class.
+  - Share code only where business semantics truly match across channels.
+  - Match each layer's cost to what it validates — cheap channels for most checks.
+  - Keep every component independently instantiable and testable in isolation.
+  strong_signals:
+  - Proposes per-capability interfaces with channel-specific implementations, not a shared superclass.
+  - Explicitly ties channel choice per test to test-pyramid cost/reliability trade-offs.
+  - Identifies test-data and configuration as explicit inputs rather than static state.
+  weak_signals:
+  - Talks only about page objects and never addresses API or database validation.
+  - Proposes "one framework" without naming a composition mechanism.
+  red_flags:
+  - Defaults to a single BaseTest that instantiates driver, REST client and DB connection for every test.
+  - Cannot explain what would break if a DB-only test inherited UI setup.
+  common_mistakes:
+  - A God base class accumulating every channel's setup "just in case."
+  - Leaking channel-specific types (WebElement, ResultSet) into assertions above the adapter boundary.
+  - Mixing test-data generation logic inside a channel adapter instead of injecting it.
+  follow_ups:
+  - question: Show where authentication, logging and reporting should live and why.
+    recommended_answer: 'Authentication mechanics differ per channel (a UI login flow versus a token endpoint) but should
+      expose one abstraction — an AuthenticatedSession — so tests request "run as user X" without knowing which channel obtained
+      the session. Logging and reporting are cross-cutting concerns: implement them as listeners/decorators wrapped around
+      each adapter boundary, correlated by a shared test/run identifier, rather than duplicating log calls inside every channel
+      implementation or inside test methods themselves.'
+  examples:
+  - A checkout discount rule is verified with an API call that creates the order and a direct SQL check of the applied discount
+    for 40 data variations; only 2 tests drive the same rule through the actual UI to confirm it renders correctly to a user.
+  code_examples:
+  - 'interface OrderVerification { void placeOrder(OrderRequest r); void assertDiscount(String orderId, BigDecimal expected);
+    }
+
+    class ApiOrderVerification implements OrderVerification { /* HTTP client only */ }
+
+    class UiOrderVerification implements OrderVerification { /* WebDriver only */ }
+
+    // Test composes only what it needs:
+
+    OrderVerification checkout = new ApiOrderVerification(httpClient);'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 7
+  - 20
+  tags:
+  - framework-architecture
+  - layering
+  - composition
+  - test-pyramid
+  - multi-channel
+  estimated_minutes: 7
+  references:
+  - source_id: google-testing-blog
+    locator: Just Say No to More End-to-End Tests (2015-04) — test-size/layering rationale
+  - source_id: selenium-dev
+    locator: Page object models
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-arch-002
+  domain: framework-architecture
+  subdomain: parallelism-thread-safety
+  title: Design decisions before scaling a framework to distributed parallel execution
+  level: advanced
+  priority: P0
+  frequency: common
+  question: A framework must scale from one local test to distributed parallel execution. Which design decisions must be made
+    before adding threads?
+  concise_answer: 'Before turning on parallelism, fix five things: who owns each mutable resource (driver, connection, temp
+    file) for the lifetime of one execution unit; how test data is isolated so two workers never collide on the same record;
+    how artifacts (screenshots, logs, reports) get unique, correlatable names; that configuration objects are immutable snapshots
+    rather than shared mutable state; and what the environment''s real concurrency ceiling is (grid nodes, API rate limits,
+    database connection pool size). Adding threads without these decisions turns intermittent contention into "flaky" symptoms
+    that are actually design defects.'
+  recommended_answer: 'Resource ownership: define the smallest scope that creates and destroys a resource — typically the
+    test method or a scenario fixture — and never share that resource reference outside that scope; a Selenium Grid session
+    or JDBC connection must have exactly one owner at a time.
+
+    Data isolation: either partition test data statically (each parallel lane owns a data range) or generate unique data per
+    execution (unique emails, order IDs) so concurrent tests cannot observe or corrupt each other''s state, including in a
+    shared database.
+
+    Artifact naming: every screenshot, log line and report entry must carry a correlation ID (test name plus a run-unique
+    suffix) so failures from concurrent runs are individually traceable, not overwritten or interleaved.
+
+    Configuration immutability: build capability/config objects once per execution unit from an immutable source; never let
+    one thread mutate a capability map another thread is reading.
+
+    Environment limits: parallelism is bounded by the weakest real constraint — Grid node count, cloud-vendor concurrent-session
+    quota, or a downstream API''s rate limit — not by CPU core count alone; exceeding it produces failures that look like
+    flakiness but are actually capacity violations.'
+  deep_dive: ''
+  key_points:
+  - Resource ownership per execution unit, never shared across threads.
+  - Explicit data isolation strategy — partitioned or uniquely generated.
+  - Artifact naming with correlation IDs for concurrent-safe evidence.
+  - Immutable configuration objects, not shared mutable capability maps.
+  - Concurrency ceiling set by environment/vendor limits, not core count.
+  strong_signals:
+  - Names all five decision areas before mentioning a thread count or thread pool.
+  - Ties parallelism ceiling to a measured environment/vendor constraint, not a guess.
+  - Distinguishes static data partitioning from dynamically generated unique data.
+  weak_signals:
+  - Jumps straight to "use TestNG parallel=methods" without ownership/data design.
+  - Assumes more threads always means proportionally more throughput.
+  red_flags:
+  - Cannot name a single resource that must not be shared across threads.
+  - Proposes a shared static WebDriver "for efficiency."
+  common_mistakes:
+  - Reusing one grid session across parallel test methods to save setup time.
+  - Hardcoded test data (fixed usernames, fixed order IDs) that collides under parallelism.
+  - Screenshot files named only by test method name, overwritten across concurrent runs.
+  follow_ups:
+  - question: What measurements determine the useful parallelism ceiling?
+    recommended_answer: 'Run a ramp: increase parallel lanes while tracking wall-clock suite time, per-test failure rate,
+      and environment saturation signals (Grid node queueing, API 429s, database connection-pool wait time). The useful ceiling
+      is the point just before failure rate rises or wall-clock time stops improving — beyond that, added threads buy contention,
+      not throughput. Re-measure after any environment or suite-size change; the ceiling is not a fixed constant.'
+  examples: []
+  code_examples:
+  - '// Unsafe: shared mutable capability map read/written by every thread
+
+    static Map<String,Object> caps = new HashMap<>();
+
+    // Safer: immutable snapshot built once per execution unit
+
+    Capabilities caps = new ImmutableCapabilities(Map.copyOf(baseOptions));'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 7
+  - 20
+  tags:
+  - framework-architecture
+  - parallelism
+  - thread-safety
+  - resource-ownership
+  - scaling
+  estimated_minutes: 7
+  references:
+  - source_id: selenium-dev
+    locator: 'Grid: components'
+  - source_id: github-actions
+    locator: Workflow syntax for GitHub Actions — jobs.<job_id>.strategy.matrix
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design

@@ -1,0 +1,684 @@
+version: 1
+note: >-
+  Gold-core expansion (tools: TestNG, Cucumber, Git/Maven, CI/CD) from docs/release/question-library/03_GOLD_CORE_QUESTION_CATALOG.yaml.
+  Draft until critic approval.
+questions:
+- id: gold-tool-001
+  domain: testng
+  subdomain: parallelism
+  title: Thread-safety across TestNG's parallel execution lifecycle
+  level: intermediate
+  priority: P0
+  frequency: common
+  question_type: troubleshooting
+  question: >-
+    TestNG can run methods, classes, or entire suites in parallel using thread pools. When results become
+    order-dependent or occasionally wrong, which parts of the lifecycle, data providers, and listeners
+    must be made thread-safe, and why?
+  concise_answer: >-
+    TestNG shares one test-class instance across the threads running its methods unless a factory or a
+    per-invocation data provider forces separate instances, so any instance field mutated by a test method
+    is a race. Data providers configured with parallel=true are pulled from multiple worker threads at
+    once, so the provider and anything it reads from must be thread-safe. Listener callbacks (ITestListener,
+    IReporter) fire on whichever worker thread is running the test they report, so listener-held aggregates
+    need synchronized or concurrent collections plus explicit thread/test correlation.
+  recommended_answer: |-
+    TestNG's parallel attribute (methods, classes, tests, instances) combined with thread-count controls how many worker threads execute the suite, but it does not, by itself, isolate the state a test class holds. The default model shares a single instance of a test class across the parallel invocations of its methods, so an instance field such as a WebDriver reference or a mutable counter is read and written concurrently unless the framework intervenes. Two mechanisms restore isolation without disabling parallelism: giving each execution a distinct object via @Factory (or a data-provider-driven factory), or scoping the shared resource per thread with ThreadLocal set in @BeforeMethod and cleared in @AfterMethod.
+
+    Data providers add a second axis. When a @DataProvider is marked parallel=true, TestNG pulls rows for multiple threads concurrently from the same provider method; if the provider reads from a shared iterator, a database cursor, or a mutable cache, that access itself becomes a race independent of the test method's own state. The provider should either be stateless per call or explicitly synchronized at the point it touches shared state.
+
+    Listeners are the third axis and the easiest to overlook. ITestListener/IReporter callbacks such as onTestSuccess or onTestFailure execute on the worker thread of the test they are reporting on, interleaved with callbacks for other tests running on other threads. A listener that appends to a plain ArrayList to build a summary report is corrupting that list under concurrent writes; the fix is a concurrent collection (or synchronized block) plus stamping each entry with the test method name and thread name so results can be correlated correctly after the fact, since callback order across threads is not the same as suite declaration order.
+  key_points:
+  - >-
+    TestNG's default execution model shares one class instance across parallel method invocations unless
+    a factory or per-invocation data provider forces new instances.
+  - >-
+    Data providers marked parallel=true are pulled from multiple worker threads simultaneously, so provider
+    state must not mutate a shared iterator or cursor.
+  - >-
+    Listener callbacks fire on the worker thread of the test they report, so listener-held aggregates
+    need thread-safe collections and explicit test/thread correlation.
+  - >-
+    Prefer ThreadLocal-scoped or constructor-injected resources over instance fields implicitly shared
+    by the framework.
+  - >-
+    @BeforeMethod/@AfterMethod are the right place to create and tear down thread-scoped resources when
+    methods run in parallel.
+  code_examples:
+  - |-
+    public class BaseTest {
+      private static WebDriver driver; // shared across parallel threads - BUG
+      @BeforeMethod
+      public void setup() { driver = new ChromeDriver(); }
+    }
+  - |-
+    public class BaseTest {
+      private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
+      @BeforeMethod
+      public void setup() { DRIVER.set(new ChromeDriver()); }
+      protected WebDriver driver() { return DRIVER.get(); }
+      @AfterMethod
+      public void teardown() { DRIVER.get().quit(); DRIVER.remove(); }
+    }
+  strong_signals:
+  - >-
+    Names the default TestNG instance-sharing behavior unprompted, before being asked about a specific
+    symptom.
+  - Distinguishes dataProviderThreadCount from suite-level thread-count.
+  - Proposes ThreadLocal with an explicit remove() in teardown, not just set().
+  - >-
+    Knows listener callbacks run on worker threads and require correlation, not just locking.
+  weak_signals:
+  - Says 'add @Test(threadPoolSize=...)' without discussing instance sharing.
+  - Assumes every @Test method always gets a fresh class instance.
+  red_flags:
+  - Claims TestNG automatically thread-isolates instance fields.
+  - >-
+    Recommends synchronizing the entire test method to fix 'flakiness' without diagnosing which state
+    is actually shared.
+  common_mistakes:
+  - Static or instance driver fields reused across parallel methods.
+  - A data provider reading from a shared, non-thread-safe iterator or cursor.
+  - Report listeners appending to a plain ArrayList without synchronization.
+  - Forgetting ThreadLocal.remove(), so thread-pool reuse leaks state into the next test.
+  follow_ups:
+  - question: >-
+      How would using @Factory or per-instance data providers change test-instance ownership compared
+      to a shared base class?
+    recommended_answer: >-
+      @Factory creates a new instance of the test class per factory-supplied parameter, so instance fields
+      become naturally test-scoped instead of shared; combined with dataProviderThreadCount, each thread
+      gets both a distinct instance and a distinct data row, removing the need for ThreadLocal for that
+      data. The trade-off is more objects and more constructor-time setup cost, and shared expensive resources
+      such as a connection pool still need explicit, thread-safe pooling, because instance-per-test does
+      not imply resource-per-test at scale.
+  - question: >-
+      How would you prove, in CI, that a suspected shared-state race is actually the cause of an intermittent
+      parallel failure?
+    recommended_answer: >-
+      Run the same suite at thread-count=1 and thread-count=N several times; if failures appear only at
+      N>1, add thread name and test-method name to every log line and driver session ID as a correlation
+      key, then reproduce with a stress run that repeats the suite many times at high N and inspect logs
+      for two threads referencing the same resource ID at overlapping timestamps. A thread dump captured
+      at the moment of failure confirms which field or listener collection was accessed concurrently.
+  role_tracks: &id001
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - testng
+  - parallelism
+  - thread-safety
+  - threadlocal
+  - listeners
+  - data-providers
+  estimated_minutes: 6
+  references:
+  - source_id: testng-docs
+    locator: >-
+      TestNG documentation — parallel execution (parallel attribute, thread-count, dataProviderThreadCount)
+  - source_id: java-oracle-docs
+    locator: java.lang.ThreadLocal API — per-thread values and remove() lifecycle
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-tool-002
+  domain: cucumber
+  subdomain: bdd-purpose
+  title: When Cucumber earns its cost versus adds a second language to maintain
+  level: basic
+  priority: P1
+  frequency: common
+  question_type: concept
+  question: >-
+    When does adopting Cucumber/Gherkin genuinely improve collaboration between business and engineering,
+    and when does it merely add a second language, Gherkin plus step-definition code, that the team must
+    maintain without a matching benefit?
+  concise_answer: >-
+    Cucumber earns its cost when scenarios are discovered collaboratively, written in business vocabulary,
+    and read by non-developers as living documentation that stays in sync with behavior because it is
+    executable. It becomes overhead when steps describe UI mechanics such as clicking a button or entering
+    text in a named field rather than behavior, when no non-developer ever reads the feature files, or
+    when the team treats Gherkin as a syntax wrapper around what is really a page-object test script;
+    at that point the team pays parsing and step-matching cost for zero collaboration benefit.
+  recommended_answer: |-
+    Cucumber's own value proposition is specification by example and living documentation: business stakeholders, product owners, and engineers agree on behavior before implementation, expressed as executable examples that never drift from the code because the suite fails when they diverge. That value only materializes when the collaboration actually happens.
+
+    Signals of good fit: business stakeholders actively write or review scenarios; the domain has meaningful branching business rules worth naming explicitly; scenarios are stable enough to double as regression documentation that a product owner would recognize. Signals of poor fit: the team consists purely of engineers writing both the feature files and the step definitions with no external readership; scenarios are effectively one-to-one with UI test scripts; step text parameterizes CSS selectors or field IDs instead of user actions.
+
+    Warning signs that a team is paying for a second language without the benefit: step definitions carry all of the logic while feature files are thin glue around them; near-duplicate step text with trivial variations accumulates because nobody is curating a shared vocabulary; feature files receive no traffic outside engineering pull requests. The practical recommendation is to write Given/When/Then at the level of business rules and intent, push technical detail into step implementations and page objects, and periodically re-check whether non-developers still read or rely on the feature files — if they do not, the team should seriously consider whether a plain test framework would cost less for the same coverage.
+  key_points:
+  - Cucumber's value is collaborative discovery and living documentation, not test syntax.
+  - Gherkin should express business behavior and rules, not click-by-click UI mechanics.
+  - >-
+    If no non-developer reads or reviews feature files, the collaboration benefit is not being realized.
+  - >-
+    Low-level, implementation-coupled steps duplicate page-object test scripts in a second language.
+  - Periodically re-validate that BDD is still earning its maintenance cost for the team.
+  code_examples:
+  - |-
+    Scenario: Login
+      Given the user navigates to "/login"
+      When the user enters "alice" in the "username" field
+      And the user enters "secret" in the "password" field
+      And the user clicks the "Submit" button
+      Then the text "Welcome" is displayed
+  - |-
+    Scenario: A registered user signs in successfully
+      Given Alice has a registered account
+      When Alice signs in with valid credentials
+      Then she sees her personalized dashboard
+  strong_signals:
+  - >-
+    Distinguishes behavior-level Gherkin from UI-script Gherkin and can rewrite one into the other on
+    the spot.
+  - Asks who actually reads the feature files before recommending BDD adoption.
+  - >-
+    Identifies duplicated, near-identical step text as a maintenance smell worth curating away.
+  weak_signals:
+  - >-
+    Treats Cucumber as simply 'a way to write tests in English' without discussing collaboration.
+  - Cannot articulate a realistic scenario where BDD would not be worth adopting.
+  red_flags:
+  - Insists every project should use Cucumber regardless of stakeholder involvement.
+  - Equates 'readable to an engineer' with 'business-facing'.
+  common_mistakes:
+  - Writing step definitions per UI element instead of per business action.
+  - Letting scenario count explode through combinatorial UI paths instead of business cases.
+  - Keeping Gherkin after business stakeholders stop reading it, purely from inertia.
+  follow_ups:
+  - question: >-
+      Rewrite a brittle click-by-click login scenario as a behavior-focused scenario, and explain what
+      each rewritten line buys you.
+    recommended_answer: >-
+      Given Alice has a registered account establishes a business precondition instead of a navigation
+      step, so page objects and URLs can change without touching the scenario. When Alice signs in with
+      valid credentials names the user's intent instead of the mechanic sequence, so one step covers whatever
+      UI flow is currently required to achieve it. Then she sees her personalized dashboard asserts an
+      outcome meaningful to the business rather than a text fragment, making the scenario resilient to
+      copy changes and readable by a product owner who has never opened the step-definition code.
+  - question: >-
+      How would you decide, for an existing suite, whether to keep Cucumber or migrate the scenarios to
+      a plain test framework?
+    recommended_answer: >-
+      Survey who actually opens feature files over a recent period, including PR reviewers and anyone
+      outside engineering; audit a representative sample of scenarios for UI-mechanic leakage versus business-rule
+      framing; then weigh the incremental cost, step-definition maintenance, duplicated step matching,
+      and Cucumber-specific build time, against evidence of actual collaboration value. If feature files
+      are engineer-only and largely one-to-one with UI paths, migrating to a plain test framework with
+      well-named test methods usually reduces cost without losing anything, because the living-documentation
+      benefit was never realized in practice.
+  role_tracks: *id001
+  years_range:
+  - 2
+  - 10
+  tags:
+  - cucumber
+  - gherkin
+  - bdd
+  - collaboration
+  - living-documentation
+  estimated_minutes: 5
+  references:
+  - source_id: cucumber-docs
+    locator: Cucumber documentation — Behaviour-Driven Development and collaboration guidance
+  - source_id: gherkin-reference
+    locator: Gherkin reference — Given/When/Then structure and scenario style guidance
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-tool-003
+  domain: cucumber
+  subdomain: state-context
+  title: Scenario-scoped state and dependency injection for parallel Cucumber runs
+  level: advanced
+  priority: P1
+  frequency: common
+  question_type: framework_design
+  question: >-
+    Design scenario state and dependency injection for parallel Cucumber execution without static globals
+    or hidden coupling between step-definition classes.
+  concise_answer: >-
+    Give every scenario its own object graph, created and torn down by the DI container's scenario scope,
+    such as PicoContainer, Guice, or cucumber-spring's scenario scope. Step-definition classes receive
+    collaborators, driver, data context, API client, through constructor injection from that scenario-scoped
+    container, never through static fields or singletons. Hooks create and dispose of technical resources
+    for the scenario and must not encode business flow. When Cucumber runs scenarios in parallel, each
+    thread gets its own container instance, so no scenario can observe another scenario's state, and step
+    classes can be split by responsibility without worrying about execution order across scenarios.
+  recommended_answer: |-
+    Cucumber-JVM ships a scenario-scoped dependency-injection model by default (PicoContainer), and integrates with Guice or Spring's cucumber-spring module for teams with existing DI conventions. The key property to preserve, regardless of which container is used, is scenario scope: the container constructs a fresh object graph for each scenario and discards it afterward, so any object registered in that graph is naturally isolated from every other scenario running concurrently.
+
+    The practical pattern is a scenario-scoped context or 'World' object holding technical state, the driver session, an API client, a map of scenario-local test data, injected via constructor into every step-definition class that needs it. Step classes never instantiate their own collaborators and never reach for static fields; they declare what they need in their constructor and the container wires the same shared-within-scenario instance to every class that asks for it, which is how state flows between, for example, a login-steps class and an assertion-steps class without a global variable.
+
+    Hooks, @Before and @After, are strictly technical: create the driver session or open a database connection in @Before, close and release it in @After. Business sequencing belongs in Given steps, not in hooks, because hooks run for every scenario regardless of tags or content and mixing business logic into them creates implicit, undocumented coupling.
+
+    For parallel execution, Cucumber's parallel configuration (cucumber.execution.parallel.enabled plus a strategy, or a parallel JUnit/TestNG runner) gives each worker thread its own container instance automatically when scope is respected; the only remaining risk is a shared, mutable resource declared outside scenario scope, for example a static test-data cache, which must either be made immutable and safely shareable or moved into scenario scope.
+  key_points:
+  - Bind a scenario-scoped context or container so every scenario gets its own object graph.
+  - >-
+    Inject collaborators via constructors; never reach for static globals or singletons for scenario state.
+  - Hooks manage only technical setup and teardown, not business sequencing.
+  - >-
+    Split step-definition classes by responsibility, sharing state through the injected context, not static
+    fields.
+  - Verify true isolation by running the same scenario set in random order and in parallel.
+  code_examples:
+  - |-
+    public class ScenarioContext {
+      private WebDriver driver;
+      private final Map<String, Object> data = new HashMap<>();
+      public void setDriver(WebDriver d) { driver = d; }
+      public WebDriver driver() { return driver; }
+      public void put(String key, Object value) { data.put(key, value); }
+    }
+
+    public class NavigationSteps {
+      private final ScenarioContext context;
+      public NavigationSteps(ScenarioContext context) { this.context = context; }
+
+      @Given("Alice has a registered account")
+      public void aliceHasAccount() { context.put("user", userFactory.create()); }
+    }
+  strong_signals:
+  - >-
+    Names scenario-scope DI, PicoContainer, Guice, or cucumber-spring, explicitly and unprompted.
+  - >-
+    Distinguishes hook responsibility, technical setup, from business flow, which belongs in Given steps.
+  - Flags cross-scenario order dependence as a specific defect class worth testing for.
+  weak_signals:
+  - >-
+    Uses a single monolithic step-definition class holding all state as instance fields without discussing
+    DI.
+  - Is unaware Cucumber ships a dependency-injection container by default.
+  red_flags:
+  - Uses a static 'World' class shared across scenarios.
+  - >-
+    Relies on scenario execution order, for example scenario two depends on data created by scenario one.
+  common_mistakes:
+  - Static WebDriver or static test-data maps shared across scenarios.
+  - >-
+    Step classes instantiating their own collaborators instead of receiving them via injection, defeating
+    scenario scoping.
+  - Hooks that perform assertions or business setup that belongs in Given steps.
+  follow_ups:
+  - question: >-
+      How would you split an overly broad step-definition class without breaking the injected scenario
+      context?
+    recommended_answer: >-
+      Identify the class's distinct responsibilities, navigation, form-filling, API setup, assertions,
+      and extract one step class per responsibility, each taking the same scenario-scoped context, or
+      a narrower interface view of it, via constructor injection; the DI container wires all of them to
+      the same instance per scenario, so state still flows correctly even though step text is spread across
+      files. Keep step text and glue thin, and push any nontrivial logic into page objects or service
+      clients the context exposes.
+  - question: >-
+      How would you verify, in CI, that scenarios have no hidden order dependence once running in parallel?
+    recommended_answer: >-
+      Run the suite twice with different explicit orderings, for example alphabetical versus a randomized
+      seed, and with parallel execution enabled at a thread count greater than one, then compare pass
+      and fail sets; any scenario that only fails under one ordering or thread count indicates shared
+      or leaked state. Add a scenario-scope assertion in a @Before hook that the context starts empty,
+      which converts silent contamination into an immediate, attributable failure.
+  role_tracks: &id002
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 5
+  - 15
+  tags:
+  - cucumber
+  - gherkin
+  - dependency-injection
+  - parallelism
+  - scenario-scope
+  - state-management
+  estimated_minutes: 7
+  references:
+  - source_id: cucumber-docs
+    locator: >-
+      Cucumber documentation — Dependency Injection (PicoContainer, scenario scope) and Parallel execution
+  - source_id: gherkin-reference
+    locator: Gherkin reference — Background and hook semantics relative to scenario execution
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-tool-004
+  domain: git-maven
+  subdomain: maven-lifecycle
+  title: Surefire versus Failsafe across the Maven build lifecycle
+  level: basic
+  priority: P1
+  frequency: very_common
+  question_type: concept
+  question: >-
+    Explain the Maven build-lifecycle difference between unit-style tests and integration tests using
+    Surefire and Failsafe, and why `mvn test` can pass while `mvn verify` fails.
+  concise_answer: >-
+    Maven's default lifecycle runs phases in order through validate, compile, test, package, verify, install,
+    and deploy. The Surefire plugin binds to the test phase and runs fast, isolated unit tests, by default
+    classes named *Test, *Tests, or *TestCase. The Failsafe plugin binds separately to integration-test
+    and verify, by default classes named *IT, *ITCase, or IT*, precisely so a failing integration test
+    does not abort the build before post-integration-test cleanup runs; Failsafe records failures during
+    integration-test and only fails the build at the verify goal. `mvn test` only executes phases up through
+    test, so it never reaches Failsafe at all; a broken integration test stays invisible until `mvn verify`
+    or `mvn install` runs.
+  recommended_answer: |-
+    The default Maven lifecycle orders phases as validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, test, package, pre-integration-test, integration-test, post-integration-test, verify, install, and deploy. Surefire binds its test goal to the test phase, so it runs before packaging, against compiled classes without needing a packaged artifact.
+
+    Failsafe is deliberately split into two goals bound to two later phases: integration-test, which runs the *IT-named tests, and verify, which checks their results and fails the build if any test failed. That split exists so pre-integration-test and post-integration-test hooks, for example starting and stopping a packaged application, a Testcontainers instance, or a database, always run regardless of whether the integration tests themselves failed; if Failsafe failed the build immediately at integration-test, cleanup would be skipped and environments would leak. Surefire has no equivalent split, so a Surefire failure aborts the build at the test phase unless testFailureIgnore is set, which is discouraged because it hides failures rather than deferring their teardown.
+
+    Because `mvn test` only executes phases up to and including test, it never triggers the integration-test or verify phases at all, so it is structurally incapable of running or failing on Failsafe-managed tests. A team that only ever runs `mvn test` in its pipeline is not exercising its integration-test suite, regardless of how well-written that suite is; only `mvn verify` or a later phase actually invokes Failsafe's integration-test and verify goals in sequence.
+  key_points:
+  - Surefire binds to the test phase and runs fast unit-style tests by naming convention.
+  - >-
+    Failsafe splits into integration-test, run, and verify, check and fail, so teardown runs even on failure.
+  - >-
+    `mvn test` never reaches the integration-test or verify phases, so it cannot run or fail on Failsafe
+    tests.
+  - >-
+    Naming conventions, *Test versus *IT, determine which plugin picks up a class by default.
+  - >-
+    CI pipelines must explicitly invoke verify, or a later phase, to exercise integration coverage.
+  code_examples:
+  - |-
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-failsafe-plugin</artifactId>
+      <executions>
+        <execution>
+          <goals>
+            <goal>integration-test</goal>
+            <goal>verify</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  strong_signals:
+  - >-
+    States the exact phase-binding difference and explains why it matters for teardown-before-failure.
+  - Correctly predicts that `mvn test` cannot fail on an *IT class.
+  weak_signals:
+  - >-
+    Says 'Failsafe is just Surefire for integration tests' without explaining the two-goal split or phase
+    timing.
+  red_flags:
+  - Believes `mvn test` runs the full lifecycle including integration tests.
+  - >-
+    Suggests renaming integration tests to *Test so Surefire 'catches them too', without understanding
+    the teardown implication.
+  common_mistakes:
+  - >-
+    Naming integration tests with the unit-test suffix so they run, and abort, during the test phase,
+    skipping environment teardown.
+  - Running only `mvn test` in CI and assuming integration coverage is exercised.
+  - Setting testFailureIgnore=true to 'fix' a red pipeline instead of triaging failures.
+  follow_ups:
+  - question: >-
+      Why can `mvn test` pass while `mvn verify` fails, and what does that tell an on-call engineer about
+      which suite regressed?
+    recommended_answer: >-
+      `mvn test` only runs phases through test, so a green result says nothing about integration coverage;
+      a subsequent `mvn verify` failure means the regression is isolated to code paths only exercised
+      with real collaborators wired up, a database, an external service, or a packaged artifact, rather
+      than to logic covered by fast unit tests. The on-call engineer should inspect the Failsafe reports
+      specifically and check what changed in configuration, test fixtures, or downstream service contracts,
+      not the code already covered by the passing unit suite.
+  - question: >-
+      How would you keep the PR pipeline fast while still catching integration regressions before merge?
+    recommended_answer: >-
+      Run `mvn test`, Surefire, on every PR for fast feedback, and run a scoped `mvn verify` invocation
+      limited to integration tests affected by the change, or a nightly full `mvn verify`; critical integration
+      paths that gate releases should still run on every PR even if slower, while broader integration
+      coverage can run less frequently, with clear ownership for triaging Failsafe-only failures separately
+      from Surefire ones.
+  role_tracks: *id001
+  years_range:
+  - 2
+  - 10
+  tags:
+  - maven
+  - surefire
+  - failsafe
+  - build-lifecycle
+  - integration-tests
+  - ci
+  estimated_minutes: 5
+  references:
+  - source_id: maven-docs
+    locator: >-
+      Apache Maven documentation — Introduction to the Build Lifecycle (phase ordering and plugin bindings)
+  - source_id: maven-docs
+    locator: Apache Maven documentation — Maven Failsafe Plugin (integration-test and verify goals)
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-tool-005
+  domain: git-maven
+  subdomain: merge-rebase
+  title: Merge versus rebase, and revert versus reset, in a shared repository
+  level: intermediate
+  priority: P1
+  frequency: common
+  question_type: compare_contrast
+  question: >-
+    Compare merge and rebase for a shared automation repository. What history and collaboration risks
+    drive the choice, and when would you use revert instead of reset after a bad merge?
+  concise_answer: >-
+    Merge preserves the true topology of history, every branch point and integration stays visible, commits
+    keep their original identity, and it is always safe on shared or published branches because it never
+    rewrites existing commits. Rebase rewrites history, new commit hashes replayed on a new base, to produce
+    a linear log; it is valuable on a private, not-yet-pushed branch to clean up before review, but rebasing
+    a branch others have already pulled forces everyone downstream to reconcile diverged history. The
+    team convention should be: rebase freely on your own unpublished branch, never rebase shared history,
+    and protect main so history rewrites there are impossible.
+  recommended_answer: |-
+    A true merge creates a merge commit with two parents, leaving every existing commit's SHA untouched and the branch topology visible in the log; a fast-forward merge simply moves the pointer when there is no divergence. Rebase instead replays a branch's commits one by one onto a new base, which changes every replayed commit's hash. That single fact drives the risk: any reference to the old commits, other branches built on top, open pull requests, tags, becomes stale, and anyone who already pulled the pre-rebase branch will see a diverged history when they fetch, forcing a disruptive reconciliation. This is Git's own documented golden rule: never rebase a branch that other people have already based work on.
+
+    For a shared automation repository specifically, a comprehensible history matters beyond aesthetics: diagnosing when a flaky test regression was introduced relies on `git bisect` walking a log that accurately reflects what was built and tested at each point, and a force-pushed rebase of a shared branch can strand collaborators' local branches or silently drop commits if done carelessly, especially during an interactive rebase that reorders or squashes commits. Conflict resolution itself should never be trusted from a clean text merge alone; two branches can each adjust the same wait timeout or the same test-data fixture to different, now-incompatible values with no textual conflict at all, so the affected test suite should be re-run after any merge or rebase, not just visually reviewed.
+
+    Once a bad merge has already been pushed and pulled by others, the safe fix is revert, which creates a new commit undoing the previous change while leaving history intact, rather than reset, which moves a branch pointer and can discard commits that others may have already fetched. Reset is appropriate only for local, unpublished cleanup before anyone else has seen the commits.
+  key_points:
+  - Merge preserves topology and commit identity; it is always safe on shared branches.
+  - >-
+    Rebase rewrites commit hashes and is safe only on branches nobody else has already pulled.
+  - 'The golden rule is: never rebase branches with public or shared history.'
+  - >-
+    Resolve merge or rebase conflicts by re-running tests, not just trusting a clean text merge.
+  - >-
+    Use revert, a new undo commit, rather than reset, which rewrites shared history, once a bad merge
+    is already shared.
+  code_examples:
+  - |-
+    # Safe: rebase your own unpublished feature branch before opening a PR
+    git checkout feature/flaky-fix
+    git fetch origin
+    git rebase origin/main
+
+    # Undo a bad merge already pushed to shared main:
+    git revert -m 1 <merge-commit-sha>
+  strong_signals:
+  - 'Articulates the golden rule precisely: rebase only unpublished history.'
+  - >-
+    Explains why SHAs change on rebase and what that breaks, open PRs, other branches, bisect.
+  - >-
+    Distinguishes revert, safe and additive, from reset, rewrites shared history, for undoing a pushed
+    bad merge.
+  weak_signals:
+  - Prefers rebase 'because it's cleaner' without addressing the shared-history risk.
+  - Conflates revert and reset.
+  red_flags:
+  - Recommends force-pushing a rebased shared branch as routine practice.
+  - >-
+    Would use `reset --hard` on a shared branch to 'fix' a bad merge that others have already pulled.
+  common_mistakes:
+  - Rebasing main or another long-lived shared branch.
+  - Resolving a merge conflict by picking one side without re-running tests.
+  - Using `reset --hard` on a pushed branch instead of revert.
+  follow_ups:
+  - question: When would you use revert instead of reset after a bad merge?
+    recommended_answer: >-
+      Use revert whenever the bad merge, or any commit, has already been pushed and potentially pulled
+      by others, because revert adds a new commit undoing the change without altering existing history,
+      so everyone's local branches remain consistent with the remote; reset is appropriate only for undoing
+      local, unpublished commits before anyone else has fetched them. For a merge commit specifically,
+      `git revert -m 1 <sha>` is needed to tell Git which parent's history to treat as the mainline being
+      restored.
+  - question: >-
+      How would you protect a shared automation repository so an accidental rebase-and-force-push cannot
+      happen?
+    recommended_answer: >-
+      Enable branch protection on main, and other shared long-lived branches, requiring pull-request merges,
+      disallowing force pushes and history rewrites, and requiring status checks to pass; combine that
+      with a team convention, documented for contributors, that rebase is for private branches only, and
+      never configure `pull --rebase` as a global default against protected branches.
+  role_tracks: *id001
+  years_range:
+  - 3
+  - 12
+  tags:
+  - git
+  - merge
+  - rebase
+  - revert
+  - reset
+  - branch-protection
+  - collaboration
+  estimated_minutes: 5
+  references:
+  - source_id: git-scm
+    locator: 'Git documentation — Git Branching: Rebasing, including ''The Perils of Rebasing'''
+  - source_id: git-scm
+    locator: Git documentation — git-revert and git-reset reference pages
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-tool-006
+  domain: cicd
+  subdomain: quality-gates
+  title: Layered PR, nightly, and release quality gates without a blanket rerun policy
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question_type: framework_design
+  question: >-
+    Design PR, nightly, and release quality gates for an automation platform. Explain which failures block
+    immediately and which create follow-up work instead of blocking.
+  concise_answer: >-
+    PR gates must be fast and deterministic: unit tests, lint and type checks, and a small, curated smoke
+    or critical-path suite, all of which block merge on failure because they are trusted, low-latency
+    signals. Nightly gates run the broader regression and integration suite against a stable environment;
+    failures there create triaged follow-up rather than blocking anyone's in-flight PR. Release gates
+    add environment-specific checks, smoke against the release candidate, contract or compatibility checks,
+    performance and security gates, and these do block the release itself. The dividing line is trust
+    and latency: block immediately only on fast, low-flake, high-confidence checks, route everything else
+    to owned follow-up with visible trend metrics, and never adopt a blanket rerun-to-green policy that
+    launders real failures into passes.
+  recommended_answer: |-
+    A PR gate exists to give a developer fast, trustworthy feedback before merge, which means it must stay under roughly ten to fifteen minutes, be deterministic, and have a low false-positive rate; every flaky or slow test admitted into that gate erodes developer trust in the signal, and once developers stop trusting a red build they stop waiting for it. The PR gate therefore holds unit tests, static analysis, and a small, deliberately curated smoke or critical-invariant suite, and any failure there blocks the merge.
+
+    A nightly gate exists to provide broader coverage, cross-service integration, longer-running regression, without imposing that latency on every PR. Nightly failures should not block in-flight PRs, but they should block a 'green build' designation used to decide deploy eligibility, so the distinction is not blocking versus non-blocking in absolute terms but blocking what, PR merge versus deploy readiness.
+
+    A release gate is the last blocking checkpoint before production and can justifiably be slower and stricter: smoke tests against the actual release artifact, security scanning, performance-regression thresholds, and, for high-risk changes, an explicit manual sign-off. Because it gates production, its failures block the release outright.
+
+    Across all three tiers, failures need to be routed by classified cause, not lumped into one triage queue: flaky-test failures get a bounded, tracked quarantine with an explicit owner and expiry date rather than a silent, permanent skip; infrastructure failures, grid down, environment unreachable, get an infrastructure ticket, not a code revert; confirmed product-defect failures get a bug and block the release if severity warrants. Every gate should publish pass and fail trend history, flake rate, and mean time to fix, visible to the team, so deferred failures stay visible rather than becoming invisible technical debt. A blanket 'rerun every failure until green' policy is explicitly dangerous here, because it converts real, intermittent defects into statistically likely passes, destroying the pipeline's signal value at exactly the tier where the team most needs to trust it.
+  key_points:
+  - >-
+    PR gates must be fast, deterministic, and few enough that developers trust and wait for them.
+  - >-
+    Nightly gates provide broader coverage but should not block in-flight PRs; they gate deploy eligibility
+    instead.
+  - >-
+    Release gates add environment- and artifact-specific checks and are the last blocking checkpoint before
+    production.
+  - >-
+    Route flaky, infrastructure, and product-defect failures to distinct, owned follow-up rather than
+    one triage queue.
+  - >-
+    Publish trend metrics and quarantine expiry so deferred failures stay visible instead of becoming
+    invisible debt.
+  code_examples:
+  - |-
+    jobs:
+      pr-fast-gate:
+        steps: [unit-tests, lint, smoke-suite]   # blocks merge
+      nightly-full-regression:
+        if: github.event_name == 'schedule'
+        steps: [full-regression, integration-suite]  # gates deploy tag, not PRs
+      release-gate:
+        if: startsWith(github.ref, 'refs/tags/release-')
+        steps: [rc-smoke, security-scan, perf-regression-check]  # blocks release
+  strong_signals:
+  - Explicitly ties gate speed and determinism to developer trust in the signal.
+  - Distinguishes 'blocks the PR' from 'blocks the deploy tag' from 'blocks the release'.
+  - Proposes quarantine with an expiry date and owner rather than a permanent silent skip.
+  weak_signals:
+  - >-
+    Proposes running the entire regression suite on every PR 'to be safe' without addressing latency or
+    flake cost.
+  - Treats all failures the same regardless of cause.
+  red_flags:
+  - Recommends a blanket rerun-until-green retry policy as the primary flake strategy.
+  - Has no plan for surfacing quarantined tests, letting them accumulate silently.
+  common_mistakes:
+  - Putting slow or flaky suites in the PR gate, training developers to ignore red builds.
+  - Never revisiting quarantined tests because there is no expiry or owner.
+  - Conflating an infrastructure outage with a product regression in the same triage bucket.
+  follow_ups:
+  - question: How would you prevent a permanently quarantined test suite from becoming invisible debt?
+    recommended_answer: >-
+      Require every quarantine to carry an owner, a reason, a linked ticket, and an expiry date; run a
+      scheduled report listing quarantined tests past their expiry and escalate them; block new quarantines
+      past a team-level cap so the practice cannot silently grow unbounded, and periodically audit quarantined
+      tests for ones that are actually deterministic product defects mislabeled as flaky.
+  - question: How would you decide whether a nightly-only failure should block the next release?
+    recommended_answer: >-
+      Classify the failure first, product defect, infrastructure, test-data, or automation defect, using
+      reproducible evidence; if it is a confirmed product defect in a code path shipping in the release,
+      it blocks regardless of when it was detected; if it is an environment or automation issue unrelated
+      to the shipped code, it is tracked but does not block, provided the release gate's own smoke and
+      compatibility checks still pass on the actual release candidate.
+  role_tracks: *id002
+  years_range:
+  - 5
+  - 16
+  tags:
+  - cicd
+  - quality-gates
+  - github-actions
+  - jenkins
+  - flakiness
+  - release-management
+  estimated_minutes: 7
+  references:
+  - source_id: github-actions
+    locator: >-
+      GitHub Actions documentation — workflow triggers and job conditions, schedule and tag-based release
+      gates
+  - source_id: dora-dev
+    locator: >-
+      DORA research program — deployment frequency and change failure rate as release-gate signals
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 180
