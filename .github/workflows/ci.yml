@@ -234,12 +234,18 @@ jobs:
           for i in $(seq 1 60); do
             if curl -fsS http://127.0.0.1:8787/api/health >/dev/null; then
               echo "server ready"
-              exit 0
+              break
             fi
             sleep 1
+            if [ "$i" -eq 60 ]; then
+              echo "server failed to start"
+              exit 1
+            fi
           done
-          echo "server failed to start"
-          exit 1
+          # Warm knowledge loaders so first Playwright page is not cold-start slow.
+          curl -fsS "http://127.0.0.1:8787/api/knowledge/practice?limit=1" >/dev/null
+          curl -fsS -X POST "http://127.0.0.1:8787/api/interview/preview" \
+            -H "content-type: application/json" -d '{}' >/dev/null
       - name: Playwright workflows
         working-directory: apps/web
         env:
@@ -258,7 +264,7 @@ jobs:
           const browser = await chromium.launch();
           const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
           const routes = [['home','/'],['library','/library'],['practice','/practice'],
-            ['interview-builder','/interview-builder'],['intake','/intake'],['finalize','/finalize'],
+            ['interview-builder','/builder'],['intake','/intake'],['finalize','/finalize'],
             ['lab','/lab'],['ask','/ask'],['settings','/settings']];
           for (const [name, route] of routes) {
             await page.goto('http://127.0.0.1:8787' + route, { waitUntil: 'networkidle' });
@@ -295,7 +301,7 @@ jobs:
           python-version: '3.13'
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.19'
           cache: npm
           cache-dependency-path: apps/web/package-lock.json
       - name: Install and build package
@@ -304,29 +310,7 @@ jobs:
           python -m pip install -e ".[dev]" -c constraints.txt
           python scripts/build_windows_release.py
       - name: Scan release ZIP
-        run: |
-          python - <<'PY'
-          import hashlib, zipfile
-          from pathlib import Path
-          zip_path = Path("releases/Zume-v1.0.0-Windows.zip")
-          assert zip_path.exists(), "release zip missing"
-          digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
-          Path("releases/Zume-v1.0.0-Windows.zip.sha256").write_text(
-              f"{digest}  {zip_path.name}\n", encoding="utf-8")
-          forbidden = ("candidates/", ".venv", "node_modules/", "OPENAI_API_KEY",
-                       "AarohanSecrets", "data/chat/", "data/audio-cache/")
-          with zipfile.ZipFile(zip_path) as zf:
-              names = zf.namelist()
-              bad = [n for n in names if any(f in n.replace("\\", "/") for f in forbidden)]
-              assert not bad, bad
-              # Sample text members for secret-like patterns
-              for name in names:
-                  if name.endswith((".py", ".md", ".txt", ".json", ".yml", ".yaml", ".ps1")):
-                      text = zf.read(name).decode("utf-8", errors="ignore")
-                      assert "BEGIN PRIVATE KEY" not in text
-                      assert "AKIA" not in text
-          print("release scan OK", digest)
-          PY
+        run: python scripts/scan_release_zip.py
       - name: Upload release candidate
         uses: actions/upload-artifact@v4
         with:

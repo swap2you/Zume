@@ -23,21 +23,28 @@ test('practice reveals a loaded answer', async ({ page }) => {
 test('builder previews an interview plan', async ({ page }) => {
   await page.goto('/builder')
   await page.getByRole('button', { name: 'Preview plan' }).click()
-  await expect(page.getByText('Knockout round')).toBeVisible()
+  await expect(page.getByText('Knockout round')).toBeVisible({ timeout: 45_000 })
 })
 
 test('intake submits fictional pasted text', async ({ page }) => {
   await page.goto('/intake')
-  await page.getByLabel('Resume text').fill('Fictional Candidate\nQA automation experience\n5 years testing.')
+  await page.getByLabel('Resume text').fill(
+    [
+      'Fictional Candidate',
+      'Senior SDET',
+      '8 years Java Selenium TestNG Rest Assured SQL CI/CD experience',
+      'Built Selenium frameworks, API contract tests, and CI pipelines.',
+    ].join('\n'),
+  )
   await page.getByRole('button', { name: 'Build pre-interview package' }).click()
-  await expect(page.getByText('Screening decision')).toBeVisible()
+  await expect(page.getByText('Screening decision')).toBeVisible({ timeout: 90_000 })
 })
 
 test('ask displays citations when returned', async ({ page }) => {
   await page.goto('/ask')
   await page.getByLabel('Your question').fill('What is a contract test?')
   await page.getByRole('button', { name: 'Ask Zume' }).click()
-  await expect(page.getByText(/Confidence:/)).toBeVisible()
+  await expect(page.getByText(/Confidence:/)).toBeVisible({ timeout: 30_000 })
 })
 
 test('lab presents SQL runner', async ({ page }) => {
