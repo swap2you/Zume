@@ -58,8 +58,11 @@ records:
     locator: consumer contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-02
   domain: contract-events
   subdomain: provider-contracts
@@ -118,8 +121,11 @@ records:
     locator: provider contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-03
   domain: contract-events
   subdomain: schema-evolution
@@ -178,8 +184,11 @@ records:
     locator: schema evolution
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-04
   domain: contract-events
   subdomain: events
@@ -236,8 +245,11 @@ records:
     locator: events
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-05
   domain: contract-events
   subdomain: idempotency
@@ -291,8 +303,11 @@ records:
     locator: idempotency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-06
   domain: contract-events
   subdomain: observability
@@ -347,8 +362,11 @@ records:
     locator: observability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-07
   domain: contract-events
   subdomain: consumer-contracts
@@ -402,8 +420,11 @@ records:
     locator: consumer contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-08
   domain: contract-events
   subdomain: provider-contracts
@@ -457,8 +478,11 @@ records:
     locator: provider contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: contract-events-a-09
   domain: contract-events
   subdomain: schema-evolution
@@ -512,5 +536,8 @@ records:
     locator: schema evolution
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

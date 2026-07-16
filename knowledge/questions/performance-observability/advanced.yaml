@@ -59,8 +59,11 @@ records:
     locator: performance types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-02
   domain: performance-observability
   subdomain: workload-models
@@ -120,8 +123,11 @@ records:
     locator: workload models
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-03
   domain: performance-observability
   subdomain: percentiles
@@ -181,8 +187,11 @@ records:
     locator: percentiles
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-04
   domain: performance-observability
   subdomain: throughput-errors
@@ -241,8 +250,11 @@ records:
     locator: throughput errors
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-05
   domain: performance-observability
   subdomain: bottlenecks
@@ -301,8 +313,11 @@ records:
     locator: bottlenecks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-06
   domain: performance-observability
   subdomain: jmeter-gatling-k6
@@ -362,8 +377,11 @@ records:
     locator: jmeter gatling k6
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-07
   domain: performance-observability
   subdomain: traces-metrics-logs
@@ -423,8 +441,11 @@ records:
     locator: traces metrics logs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-08
   domain: performance-observability
   subdomain: performance-types
@@ -479,8 +500,11 @@ records:
     locator: performance types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-09
   domain: performance-observability
   subdomain: workload-models
@@ -535,8 +559,11 @@ records:
     locator: workload models
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-10
   domain: performance-observability
   subdomain: percentiles
@@ -591,8 +618,11 @@ records:
     locator: percentiles
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-11
   domain: performance-observability
   subdomain: throughput-errors
@@ -648,8 +678,11 @@ records:
     locator: throughput errors
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-12
   domain: performance-observability
   subdomain: bottlenecks
@@ -704,8 +737,11 @@ records:
     locator: bottlenecks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-13
   domain: performance-observability
   subdomain: jmeter-gatling-k6
@@ -760,8 +796,11 @@ records:
     locator: jmeter gatling k6
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-14
   domain: performance-observability
   subdomain: traces-metrics-logs
@@ -817,8 +856,11 @@ records:
     locator: traces metrics logs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: performance-observability-a-15
   domain: performance-observability
   subdomain: performance-types
@@ -873,5 +915,8 @@ records:
     locator: performance types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

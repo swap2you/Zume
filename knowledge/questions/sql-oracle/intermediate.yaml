@@ -58,8 +58,11 @@ records:
     locator: select filter sort
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-02
   domain: sql-oracle
   subdomain: joins
@@ -117,8 +120,11 @@ records:
     locator: joins
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-03
   domain: sql-oracle
   subdomain: aggregation
@@ -177,8 +183,11 @@ records:
     locator: aggregation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-04
   domain: sql-oracle
   subdomain: ctes
@@ -236,8 +245,11 @@ records:
     locator: ctes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-05
   domain: sql-oracle
   subdomain: window-functions
@@ -296,8 +308,11 @@ records:
     locator: window functions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-06
   domain: sql-oracle
   subdomain: set-operations
@@ -356,8 +371,11 @@ records:
     locator: set operations
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-07
   domain: sql-oracle
   subdomain: constraints
@@ -416,8 +434,11 @@ records:
     locator: constraints
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-08
   domain: sql-oracle
   subdomain: transactions-isolation
@@ -477,8 +498,11 @@ records:
     locator: transactions isolation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-09
   domain: sql-oracle
   subdomain: indexes-plans
@@ -537,8 +561,11 @@ records:
     locator: indexes plans
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-10
   domain: sql-oracle
   subdomain: normalization
@@ -597,8 +624,11 @@ records:
     locator: normalization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-11
   domain: sql-oracle
   subdomain: latest-records
@@ -657,8 +687,11 @@ records:
     locator: latest records
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-12
   domain: sql-oracle
   subdomain: data-quality
@@ -717,8 +750,11 @@ records:
     locator: data quality
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-13
   domain: sql-oracle
   subdomain: oracle-functions
@@ -773,8 +809,11 @@ records:
     locator: oracle functions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-14
   domain: sql-oracle
   subdomain: sequences
@@ -828,8 +867,11 @@ records:
     locator: sequences
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-15
   domain: sql-oracle
   subdomain: plsql
@@ -883,8 +925,11 @@ records:
     locator: plsql
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-16
   domain: sql-oracle
   subdomain: database-test-design
@@ -939,8 +984,11 @@ records:
     locator: database test design
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-17
   domain: sql-oracle
   subdomain: reconciliation
@@ -995,8 +1043,11 @@ records:
     locator: reconciliation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-18
   domain: sql-oracle
   subdomain: locking-performance
@@ -1051,8 +1102,11 @@ records:
     locator: locking performance
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-19
   domain: sql-oracle
   subdomain: select-filter-sort
@@ -1107,8 +1161,11 @@ records:
     locator: select filter sort
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-20
   domain: sql-oracle
   subdomain: joins
@@ -1162,8 +1219,11 @@ records:
     locator: joins
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-21
   domain: sql-oracle
   subdomain: aggregation
@@ -1218,8 +1278,11 @@ records:
     locator: aggregation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-22
   domain: sql-oracle
   subdomain: ctes
@@ -1273,8 +1336,11 @@ records:
     locator: ctes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-23
   domain: sql-oracle
   subdomain: window-functions
@@ -1329,8 +1395,11 @@ records:
     locator: window functions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-i-24
   domain: sql-oracle
   subdomain: set-operations
@@ -1385,5 +1454,8 @@ records:
     locator: set operations
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

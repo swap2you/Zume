@@ -57,8 +57,11 @@ records:
     locator: layers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-02
   domain: framework-architecture
   subdomain: factories
@@ -116,8 +119,11 @@ records:
     locator: factories
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-03
   domain: framework-architecture
   subdomain: configuration
@@ -176,8 +182,11 @@ records:
     locator: configuration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-04
   domain: framework-architecture
   subdomain: dependency-injection
@@ -236,8 +245,11 @@ records:
     locator: dependency injection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-05
   domain: framework-architecture
   subdomain: data-management
@@ -296,8 +308,11 @@ records:
     locator: data management
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-06
   domain: framework-architecture
   subdomain: objects
@@ -355,8 +370,11 @@ records:
     locator: objects
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-07
   domain: framework-architecture
   subdomain: cross-channel-integration
@@ -415,8 +433,11 @@ records:
     locator: cross channel integration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-08
   domain: framework-architecture
   subdomain: logging-reporting
@@ -476,8 +497,11 @@ records:
     locator: logging reporting
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-09
   domain: framework-architecture
   subdomain: retries
@@ -535,8 +559,11 @@ records:
     locator: retries
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-10
   domain: framework-architecture
   subdomain: parallelism
@@ -595,8 +622,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-11
   domain: framework-architecture
   subdomain: environments
@@ -655,8 +685,11 @@ records:
     locator: environments
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-12
   domain: framework-architecture
   subdomain: extensibility
@@ -715,8 +748,11 @@ records:
     locator: extensibility
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-13
   domain: framework-architecture
   subdomain: packaging
@@ -770,8 +806,11 @@ records:
     locator: packaging
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-14
   domain: framework-architecture
   subdomain: testability
@@ -826,8 +865,11 @@ records:
     locator: testability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-15
   domain: framework-architecture
   subdomain: governance
@@ -882,8 +924,11 @@ records:
     locator: governance
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-16
   domain: framework-architecture
   subdomain: migration
@@ -937,8 +982,11 @@ records:
     locator: migration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-17
   domain: framework-architecture
   subdomain: maintenance-cost
@@ -993,8 +1041,11 @@ records:
     locator: maintenance cost
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-18
   domain: framework-architecture
   subdomain: layers
@@ -1048,8 +1099,11 @@ records:
     locator: layers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-19
   domain: framework-architecture
   subdomain: factories
@@ -1103,8 +1157,11 @@ records:
     locator: factories
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-20
   domain: framework-architecture
   subdomain: configuration
@@ -1159,8 +1216,11 @@ records:
     locator: configuration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-21
   domain: framework-architecture
   subdomain: dependency-injection
@@ -1215,8 +1275,11 @@ records:
     locator: dependency injection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-22
   domain: framework-architecture
   subdomain: data-management
@@ -1271,8 +1334,11 @@ records:
     locator: data management
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-23
   domain: framework-architecture
   subdomain: objects
@@ -1326,8 +1392,11 @@ records:
     locator: objects
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-i-24
   domain: framework-architecture
   subdomain: cross-channel-integration
@@ -1383,5 +1452,8 @@ records:
     locator: cross channel integration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

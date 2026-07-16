@@ -57,7 +57,7 @@ records:
     locator: bdd purpose
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -68,6 +68,9 @@ records:
   - bdd-purpose
   - exercise
   variant_family: cucumber-bdd-purpose
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-exercise-i-02
   domain: cucumber
   subdomain: discovery
@@ -125,7 +128,7 @@ records:
     locator: discovery
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -136,6 +139,9 @@ records:
   - discovery
   - exercise
   variant_family: cucumber-discovery
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-exercise-i-03
   domain: cucumber
   subdomain: gherkin
@@ -193,7 +199,7 @@ records:
     locator: gherkin
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -204,6 +210,9 @@ records:
   - gherkin
   - exercise
   variant_family: cucumber-gherkin
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-exercise-i-04
   domain: cucumber
   subdomain: scenarios-outlines-tables
@@ -261,7 +270,7 @@ records:
     locator: scenarios outlines tables
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -272,3 +281,6 @@ records:
   - scenarios-outlines-tables
   - exercise
   variant_family: cucumber-scenarios-outlines-tables
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

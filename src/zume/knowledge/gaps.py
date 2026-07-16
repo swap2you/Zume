@@ -25,8 +25,16 @@ def _domain_metas(taxonomy: dict[str, Any]) -> dict[str, dict[str, Any]]:
 def collect_gaps(root: Path) -> dict[str, Any]:
     taxonomy = load_taxonomy(root / "knowledge")
     domain_metas = _domain_metas(taxonomy)
-    questions = [q for q in load_all_questions(root / "knowledge") if q.status == "published"]
-    exercises = [e for e in load_all_exercises(root / "knowledge") if e.status == "published"]
+    all_questions = load_all_questions(root / "knowledge")
+    all_exercises = load_all_exercises(root / "knowledge")
+    questions = [
+        q for q in all_questions
+        if q.status == "published" and q.review_status == "reviewed"
+    ]
+    exercises = [
+        e for e in all_exercises
+        if e.status == "published" and e.review_status == "reviewed"
+    ]
 
     q_counts: dict[tuple[str, str], int] = defaultdict(int)
     for q in questions:
@@ -67,6 +75,8 @@ def collect_gaps(root: Path) -> dict[str, Any]:
             )
     return {
         "published_questions": len(questions),
+        "draft_questions": sum(1 for q in all_questions if q.status == "draft"),
+        "reviewed_published_questions": len(questions),
         "published_exercises": len(exercises),
         "gaps": gaps,
         "complete_claim": False,

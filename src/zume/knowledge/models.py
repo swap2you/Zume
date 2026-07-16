@@ -10,6 +10,8 @@ Level = Literal["basic", "intermediate", "advanced"]
 Priority = Literal["P0", "P1", "P2", "P3"]
 Frequency = Literal["very_common", "common", "occasional", "emerging"]
 PublishStatus = Literal["published", "draft", "retired"]
+QualityOrigin = Literal["hand_authored", "researched", "generated_proposal"]
+ReviewStatus = Literal["unreviewed", "reviewed", "rejected"]
 
 
 class Reference(BaseModel):
@@ -50,6 +52,10 @@ class QuestionRecord(BaseModel):
     last_verified: str
     freshness_days: int = 365
     status: PublishStatus = "published"
+    quality_origin: QualityOrigin = "generated_proposal"
+    review_status: ReviewStatus = "unreviewed"
+    reviewed_at: str | None = None
+    review_notes: list[str] = Field(default_factory=list)
     question_type: str = "concept"
 
     @field_validator("id")
@@ -92,6 +98,10 @@ class ExerciseRecord(BaseModel):
     last_verified: str = "2026-07-15"
     freshness_days: int = 365
     status: PublishStatus = "published"
+    quality_origin: QualityOrigin = "generated_proposal"
+    review_status: ReviewStatus = "unreviewed"
+    reviewed_at: str | None = None
+    review_notes: list[str] = Field(default_factory=list)
     role_tracks: list[str] = Field(default_factory=list)
     tags: list[str] = Field(default_factory=list)
     variant_family: str = ""

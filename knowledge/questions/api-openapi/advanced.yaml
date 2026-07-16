@@ -58,8 +58,11 @@ records:
     locator: http
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-02
   domain: api-openapi
   subdomain: rest-constraints
@@ -120,8 +123,11 @@ records:
     locator: rest constraints
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-03
   domain: api-openapi
   subdomain: methods-idempotency
@@ -182,8 +188,11 @@ records:
     locator: methods idempotency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-04
   domain: api-openapi
   subdomain: status-codes
@@ -243,8 +252,11 @@ records:
     locator: status codes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-05
   domain: api-openapi
   subdomain: headers-negotiation
@@ -304,8 +316,11 @@ records:
     locator: headers negotiation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-06
   domain: api-openapi
   subdomain: authn-authz
@@ -366,8 +381,11 @@ records:
     locator: authn authz
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-07
   domain: api-openapi
   subdomain: payloads
@@ -426,8 +444,11 @@ records:
     locator: payloads
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-08
   domain: api-openapi
   subdomain: pagination
@@ -487,8 +508,11 @@ records:
     locator: pagination
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-09
   domain: api-openapi
   subdomain: error-contracts
@@ -548,8 +572,11 @@ records:
     locator: error contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-10
   domain: api-openapi
   subdomain: schema-validation
@@ -609,8 +636,11 @@ records:
     locator: schema validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-11
   domain: api-openapi
   subdomain: openapi
@@ -669,8 +699,11 @@ records:
     locator: openapi
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-12
   domain: api-openapi
   subdomain: contract-testing
@@ -730,8 +763,11 @@ records:
     locator: contract testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-13
   domain: api-openapi
   subdomain: negative-security
@@ -787,8 +823,11 @@ records:
     locator: negative security
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-14
   domain: api-openapi
   subdomain: resiliency
@@ -844,8 +883,11 @@ records:
     locator: resiliency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-15
   domain: api-openapi
   subdomain: async-events
@@ -901,8 +943,11 @@ records:
     locator: async events
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-16
   domain: api-openapi
   subdomain: observability
@@ -958,8 +1003,11 @@ records:
     locator: observability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-17
   domain: api-openapi
   subdomain: test-data
@@ -1014,8 +1062,11 @@ records:
     locator: test data
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-18
   domain: api-openapi
   subdomain: http
@@ -1070,8 +1121,11 @@ records:
     locator: http
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-19
   domain: api-openapi
   subdomain: rest-constraints
@@ -1127,8 +1181,11 @@ records:
     locator: rest constraints
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-20
   domain: api-openapi
   subdomain: methods-idempotency
@@ -1185,8 +1242,11 @@ records:
     locator: methods idempotency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-21
   domain: api-openapi
   subdomain: status-codes
@@ -1242,8 +1302,11 @@ records:
     locator: status codes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-22
   domain: api-openapi
   subdomain: headers-negotiation
@@ -1299,8 +1362,11 @@ records:
     locator: headers negotiation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-23
   domain: api-openapi
   subdomain: authn-authz
@@ -1356,8 +1422,11 @@ records:
     locator: authn authz
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-a-24
   domain: api-openapi
   subdomain: payloads
@@ -1412,5 +1481,8 @@ records:
     locator: payloads
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

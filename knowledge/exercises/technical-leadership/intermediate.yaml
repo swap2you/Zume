@@ -56,7 +56,7 @@ records:
     locator: mentoring
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Quality Engineering Lead
@@ -67,6 +67,9 @@ records:
   - mentoring
   - exercise
   variant_family: technical-leadership-mentoring
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-exercise-i-02
   domain: technical-leadership
   subdomain: delegation
@@ -123,7 +126,7 @@ records:
     locator: delegation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Quality Engineering Lead
@@ -134,3 +137,6 @@ records:
   - delegation
   - exercise
   variant_family: technical-leadership-delegation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

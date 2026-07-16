@@ -56,8 +56,11 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-02
   domain: javascript-typescript
   subdomain: async
@@ -113,8 +116,11 @@ records:
     locator: async
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-03
   domain: javascript-typescript
   subdomain: types
@@ -170,8 +176,11 @@ records:
     locator: types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-04
   domain: javascript-typescript
   subdomain: test-runners
@@ -228,8 +237,11 @@ records:
     locator: test runners
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-05
   domain: javascript-typescript
   subdomain: browser-automation
@@ -282,8 +294,11 @@ records:
     locator: browser automation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-06
   domain: javascript-typescript
   subdomain: tooling
@@ -335,8 +350,11 @@ records:
     locator: tooling
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-07
   domain: javascript-typescript
   subdomain: language-basics
@@ -389,8 +407,11 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-08
   domain: javascript-typescript
   subdomain: async
@@ -442,8 +463,11 @@ records:
     locator: async
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: javascript-typescript-b-09
   domain: javascript-typescript
   subdomain: types
@@ -495,5 +519,8 @@ records:
     locator: types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -56,7 +56,7 @@ records:
     locator: git model
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -67,6 +67,9 @@ records:
   - git-model
   - exercise
   variant_family: git-maven-git-model
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-exercise-a-02
   domain: git-maven
   subdomain: merge-rebase
@@ -123,7 +126,7 @@ records:
     locator: merge rebase
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -134,6 +137,9 @@ records:
   - merge-rebase
   - exercise
   variant_family: git-maven-merge-rebase
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-exercise-a-03
   domain: git-maven
   subdomain: conflicts
@@ -190,7 +196,7 @@ records:
     locator: conflicts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -201,6 +207,9 @@ records:
   - conflicts
   - exercise
   variant_family: git-maven-conflicts
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-exercise-a-04
   domain: git-maven
   subdomain: reset-revert-restore
@@ -257,7 +266,7 @@ records:
     locator: reset revert restore
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -268,3 +277,6 @@ records:
   - reset-revert-restore
   - exercise
   variant_family: git-maven-reset-revert-restore
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

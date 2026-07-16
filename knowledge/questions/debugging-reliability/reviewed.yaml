@@ -1,0 +1,251 @@
+version: 1
+records:
+- id: debugging-reliability-reviewed-01
+  domain: debugging-reliability
+  subdomain: flaky-tests
+  title: flaky tests in debugging-reliability
+  level: basic
+  priority: P1
+  frequency: common
+  question: In debugging-reliability, explain the purpose and failure boundary of flaky tests. How would
+    you verify that it behaves as intended?
+  concise_answer: flaky tests should be chosen for its documented semantics, then verified against the
+    observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For flaky tests, begin with the contract described at Test practices: flaky tests.
+    State the input, expected state transition or result, and the specific evidence collected when it
+    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
+    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
+    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete debugging-reliability example involving flaky tests, including how the
+    candidate would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented flaky tests semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that flaky tests is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from flaky
+      tests, and correlated logs or traces. Compare that evidence with the documented contract before
+      changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused flaky tests case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - flaky-tests
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'Test practices: flaky tests'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: debugging-reliability-reviewed-02
+  domain: debugging-reliability
+  subdomain: waits
+  title: waits in debugging-reliability
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In debugging-reliability, explain the purpose and failure boundary of waits. How would you
+    verify that it behaves as intended?
+  concise_answer: waits should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For waits, begin with the contract described at WebDriver: waits. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and
+    report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete debugging-reliability example involving waits, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented waits semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that waits is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from waits,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused waits case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - waits
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'WebDriver: waits'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: debugging-reliability-reviewed-03
+  domain: debugging-reliability
+  subdomain: logging
+  title: logging in debugging-reliability
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In debugging-reliability, explain the purpose and failure boundary of logging. How would you
+    verify that it behaves as intended?
+  concise_answer: logging should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For logging, begin with the contract described at WebDriver: logging. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use
+    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies,
+    and report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete debugging-reliability example involving logging, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented logging semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that logging is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from logging,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused logging case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - logging
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'WebDriver: logging'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: debugging-reliability-reviewed-04
+  domain: debugging-reliability
+  subdomain: observability
+  title: observability in debugging-reliability
+  level: basic
+  priority: P1
+  frequency: common
+  question: In debugging-reliability, explain the purpose and failure boundary of observability. How would
+    you verify that it behaves as intended?
+  concise_answer: observability should be chosen for its documented semantics, then verified against the
+    observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For observability, begin with the contract described at Grid: observability. State
+    the input, expected state transition or result, and the specific evidence collected when it fails.
+    Use the smallest deterministic check that exercises that contract, isolate external timing or data
+    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
+    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
+    case.'
+  deep_dive: Ask for a concrete debugging-reliability example involving observability, including how the
+    candidate would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented observability semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that observability is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from observability,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused observability case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - debugging-reliability
+  - observability
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'Grid: observability'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario

@@ -58,8 +58,11 @@ records:
     locator: data lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-02
   domain: test-data-environments
   subdomain: isolation
@@ -117,8 +120,11 @@ records:
     locator: isolation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-03
   domain: test-data-environments
   subdomain: environment-config
@@ -177,8 +183,11 @@ records:
     locator: environment config
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-04
   domain: test-data-environments
   subdomain: mocks
@@ -236,8 +245,11 @@ records:
     locator: mocks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-05
   domain: test-data-environments
   subdomain: virtualization
@@ -296,8 +308,11 @@ records:
     locator: virtualization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-06
   domain: test-data-environments
   subdomain: contracts
@@ -355,8 +370,11 @@ records:
     locator: contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-07
   domain: test-data-environments
   subdomain: data-lifecycle
@@ -415,8 +433,11 @@ records:
     locator: data lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-08
   domain: test-data-environments
   subdomain: isolation
@@ -470,8 +491,11 @@ records:
     locator: isolation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-09
   domain: test-data-environments
   subdomain: environment-config
@@ -526,8 +550,11 @@ records:
     locator: environment config
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-10
   domain: test-data-environments
   subdomain: mocks
@@ -581,8 +608,11 @@ records:
     locator: mocks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-11
   domain: test-data-environments
   subdomain: virtualization
@@ -637,8 +667,11 @@ records:
     locator: virtualization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-12
   domain: test-data-environments
   subdomain: contracts
@@ -692,8 +725,11 @@ records:
     locator: contracts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-13
   domain: test-data-environments
   subdomain: data-lifecycle
@@ -748,8 +784,11 @@ records:
     locator: data lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-14
   domain: test-data-environments
   subdomain: isolation
@@ -803,8 +842,11 @@ records:
     locator: isolation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-b-15
   domain: test-data-environments
   subdomain: environment-config
@@ -859,5 +901,8 @@ records:
     locator: environment config
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

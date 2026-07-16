@@ -56,7 +56,7 @@ records:
     locator: stages
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Quality Platform Engineer
@@ -67,6 +67,9 @@ records:
   - stages
   - exercise
   variant_family: cicd-stages
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-exercise-b-02
   domain: cicd
   subdomain: trigger-strategy
@@ -123,7 +126,7 @@ records:
     locator: trigger strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Quality Platform Engineer
@@ -134,6 +137,9 @@ records:
   - trigger-strategy
   - exercise
   variant_family: cicd-trigger-strategy
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-exercise-b-03
   domain: cicd
   subdomain: github-actions
@@ -190,7 +196,7 @@ records:
     locator: github actions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Quality Platform Engineer
@@ -201,6 +207,9 @@ records:
   - github-actions
   - exercise
   variant_family: cicd-github-actions
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-exercise-b-04
   domain: cicd
   subdomain: jenkins
@@ -257,7 +266,7 @@ records:
     locator: jenkins
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Quality Platform Engineer
@@ -268,3 +277,6 @@ records:
   - jenkins
   - exercise
   variant_family: cicd-jenkins
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

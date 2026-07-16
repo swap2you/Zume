@@ -59,8 +59,11 @@ records:
     locator: reproduce isolate
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-02
   domain: debugging-reliability
   subdomain: artifacts
@@ -118,8 +121,11 @@ records:
     locator: artifacts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-03
   domain: debugging-reliability
   subdomain: synchronization
@@ -179,8 +185,11 @@ records:
     locator: synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-04
   domain: debugging-reliability
   subdomain: environments-data
@@ -240,8 +249,11 @@ records:
     locator: environments data
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-05
   domain: debugging-reliability
   subdomain: races
@@ -299,8 +311,11 @@ records:
     locator: races
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-06
   domain: debugging-reliability
   subdomain: nondeterminism
@@ -360,8 +375,11 @@ records:
     locator: nondeterminism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-07
   domain: debugging-reliability
   subdomain: retries-repair
@@ -421,8 +439,11 @@ records:
     locator: retries repair
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-08
   domain: debugging-reliability
   subdomain: quarantines
@@ -481,8 +502,11 @@ records:
     locator: quarantines
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-09
   domain: debugging-reliability
   subdomain: classification
@@ -542,8 +566,11 @@ records:
     locator: classification
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-10
   domain: debugging-reliability
   subdomain: root-cause
@@ -602,8 +629,11 @@ records:
     locator: root cause
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-11
   domain: debugging-reliability
   subdomain: observability
@@ -663,8 +693,11 @@ records:
     locator: observability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-12
   domain: debugging-reliability
   subdomain: ci-only
@@ -722,8 +755,11 @@ records:
     locator: ci only
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-13
   domain: debugging-reliability
   subdomain: browser-network-database
@@ -779,8 +815,11 @@ records:
     locator: browser network database
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-14
   domain: debugging-reliability
   subdomain: incidents
@@ -834,8 +873,11 @@ records:
     locator: incidents
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-15
   domain: debugging-reliability
   subdomain: reliability-metrics
@@ -891,8 +933,11 @@ records:
     locator: reliability metrics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-16
   domain: debugging-reliability
   subdomain: reproduce-isolate
@@ -948,8 +993,11 @@ records:
     locator: reproduce isolate
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-17
   domain: debugging-reliability
   subdomain: artifacts
@@ -1003,8 +1051,11 @@ records:
     locator: artifacts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-18
   domain: debugging-reliability
   subdomain: synchronization
@@ -1060,8 +1111,11 @@ records:
     locator: synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-19
   domain: debugging-reliability
   subdomain: environments-data
@@ -1117,8 +1171,11 @@ records:
     locator: environments data
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-20
   domain: debugging-reliability
   subdomain: races
@@ -1172,8 +1229,11 @@ records:
     locator: races
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-21
   domain: debugging-reliability
   subdomain: nondeterminism
@@ -1229,8 +1289,11 @@ records:
     locator: nondeterminism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-22
   domain: debugging-reliability
   subdomain: retries-repair
@@ -1286,8 +1349,11 @@ records:
     locator: retries repair
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-23
   domain: debugging-reliability
   subdomain: quarantines
@@ -1342,8 +1408,11 @@ records:
     locator: quarantines
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: debugging-reliability-b-24
   domain: debugging-reliability
   subdomain: classification
@@ -1399,5 +1468,8 @@ records:
     locator: classification
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

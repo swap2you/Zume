@@ -1,0 +1,192 @@
+version: 1
+records:
+- id: ai-for-qa-reviewed-01
+  domain: ai-for-qa
+  subdomain: evaluations
+  title: evaluations in ai-for-qa
+  level: basic
+  priority: P1
+  frequency: common
+  question: In ai-for-qa, explain the purpose and failure boundary of evaluations. How would you verify
+    that it behaves as intended?
+  concise_answer: evaluations should be chosen for its documented semantics, then verified against the
+    observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For evaluations, begin with the contract described at OpenAI: evaluations. State
+    the input, expected state transition or result, and the specific evidence collected when it fails.
+    Use the smallest deterministic check that exercises that contract, isolate external timing or data
+    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
+    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
+    case. For a QA evaluation, keep a versioned golden set and inspect disagreement slices rather than
+    relying only on a single aggregate score.'
+  deep_dive: Ask for a concrete ai-for-qa example involving evaluations, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented evaluations semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that evaluations is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from evaluations,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused evaluations case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-for-qa
+  - evaluations
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: openai-docs
+    locator: 'OpenAI: evaluations'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: ai-for-qa-reviewed-02
+  domain: ai-for-qa
+  subdomain: prompt-engineering
+  title: prompt engineering in ai-for-qa
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In ai-for-qa, explain the purpose and failure boundary of prompt engineering. How would you
+    verify that it behaves as intended?
+  concise_answer: prompt engineering should be chosen for its documented semantics, then verified against
+    the observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For prompt engineering, begin with the contract described at OpenAI: prompt engineering.
+    State the input, expected state transition or result, and the specific evidence collected when it
+    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
+    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
+    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case. Prompt changes should be compared against a fixed regression set, with failures
+    grouped by task and instruction sensitivity before accepting the change.'
+  deep_dive: Ask for a concrete ai-for-qa example involving prompt engineering, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented prompt engineering semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that prompt engineering is the source of a failure rather than
+      a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from prompt
+      engineering, and correlated logs or traces. Compare that evidence with the documented contract before
+      changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused prompt engineering case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-for-qa
+  - prompt-engineering
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: openai-docs
+    locator: 'OpenAI: prompt engineering'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: ai-for-qa-reviewed-03
+  domain: ai-for-qa
+  subdomain: safety
+  title: safety in ai-for-qa
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In ai-for-qa, explain the purpose and failure boundary of safety. How would you verify that
+    it behaves as intended?
+  concise_answer: safety should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For safety, begin with the contract described at OpenAI: safety. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and
+    report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete ai-for-qa example involving safety, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented safety semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that safety is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from safety,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused safety case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-for-qa
+  - safety
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: openai-docs
+    locator: 'OpenAI: safety'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario

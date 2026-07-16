@@ -56,7 +56,7 @@ records:
     locator: test generation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI QA Engineer
   - AI Test Engineer
@@ -67,6 +67,9 @@ records:
   - test-generation
   - exercise
   variant_family: ai-quality-test-generation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-exercise-i-02
   domain: ai-quality
   subdomain: requirements-analysis
@@ -123,7 +126,7 @@ records:
     locator: requirements analysis
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI QA Engineer
   - AI Test Engineer
@@ -134,6 +137,9 @@ records:
   - requirements-analysis
   - exercise
   variant_family: ai-quality-requirements-analysis
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-exercise-i-03
   domain: ai-quality
   subdomain: locator-claims
@@ -190,7 +196,7 @@ records:
     locator: locator claims
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI QA Engineer
   - AI Test Engineer
@@ -201,6 +207,9 @@ records:
   - locator-claims
   - exercise
   variant_family: ai-quality-locator-claims
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-exercise-i-04
   domain: ai-quality
   subdomain: api-schema-generation
@@ -257,7 +266,7 @@ records:
     locator: api schema generation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI QA Engineer
   - AI Test Engineer
@@ -268,3 +277,6 @@ records:
   - api-schema-generation
   - exercise
   variant_family: ai-quality-api-schema-generation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

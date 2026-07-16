@@ -60,8 +60,11 @@ records:
     locator: agents workflows
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-02
   domain: agentic-ai
   subdomain: planning-tools
@@ -122,8 +125,11 @@ records:
     locator: planning tools
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-03
   domain: agentic-ai
   subdomain: state-memory
@@ -184,8 +190,11 @@ records:
     locator: state memory
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-04
   domain: agentic-ai
   subdomain: handoffs
@@ -244,8 +253,11 @@ records:
     locator: handoffs
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-05
   domain: agentic-ai
   subdomain: tool-schemas
@@ -305,8 +317,11 @@ records:
     locator: tool schemas
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-06
   domain: agentic-ai
   subdomain: mcp
@@ -365,8 +380,11 @@ records:
     locator: mcp
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-07
   domain: agentic-ai
   subdomain: permissions
@@ -426,8 +444,11 @@ records:
     locator: permissions
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-08
   domain: agentic-ai
   subdomain: sandboxing
@@ -487,8 +508,11 @@ records:
     locator: sandboxing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-09
   domain: agentic-ai
   subdomain: prompt-injection
@@ -548,8 +572,11 @@ records:
     locator: prompt injection
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-10
   domain: agentic-ai
   subdomain: web-search
@@ -609,8 +636,11 @@ records:
     locator: web search
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-11
   domain: agentic-ai
   subdomain: computer-code-tools
@@ -672,8 +702,11 @@ records:
     locator: computer code tools
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-12
   domain: agentic-ai
   subdomain: tracing
@@ -732,8 +765,11 @@ records:
     locator: tracing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-13
   domain: agentic-ai
   subdomain: evals
@@ -788,8 +824,11 @@ records:
     locator: evals
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-14
   domain: agentic-ai
   subdomain: recovery
@@ -844,8 +883,11 @@ records:
     locator: recovery
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-15
   domain: agentic-ai
   subdomain: human-approval
@@ -901,8 +943,11 @@ records:
     locator: human approval
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-16
   domain: agentic-ai
   subdomain: multi-agent
@@ -958,8 +1003,11 @@ records:
     locator: multi agent
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-17
   domain: agentic-ai
   subdomain: agents-workflows
@@ -1015,8 +1063,11 @@ records:
     locator: agents workflows
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-18
   domain: agentic-ai
   subdomain: planning-tools
@@ -1072,8 +1123,11 @@ records:
     locator: planning tools
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-19
   domain: agentic-ai
   subdomain: state-memory
@@ -1129,8 +1183,11 @@ records:
     locator: state memory
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-20
   domain: agentic-ai
   subdomain: handoffs
@@ -1185,8 +1242,11 @@ records:
     locator: handoffs
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-21
   domain: agentic-ai
   subdomain: tool-schemas
@@ -1242,8 +1302,11 @@ records:
     locator: tool schemas
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-22
   domain: agentic-ai
   subdomain: mcp
@@ -1298,8 +1361,11 @@ records:
     locator: mcp
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-23
   domain: agentic-ai
   subdomain: permissions
@@ -1355,8 +1421,11 @@ records:
     locator: permissions
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-a-24
   domain: agentic-ai
   subdomain: sandboxing
@@ -1412,5 +1481,8 @@ records:
     locator: sandboxing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

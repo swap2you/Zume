@@ -62,8 +62,11 @@ records:
     locator: testing principles
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-02
   domain: testing-fundamentals
   subdomain: test-levels-types
@@ -126,8 +129,11 @@ records:
     locator: test levels types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-03
   domain: testing-fundamentals
   subdomain: risk-based-testing
@@ -190,8 +196,11 @@ records:
     locator: risk based testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-04
   domain: testing-fundamentals
   subdomain: test-design
@@ -253,8 +262,11 @@ records:
     locator: test design
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-05
   domain: testing-fundamentals
   subdomain: sdlc-stlc
@@ -315,8 +327,11 @@ records:
     locator: sdlc stlc
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-06
   domain: testing-fundamentals
   subdomain: shift-left-right
@@ -380,8 +395,11 @@ records:
     locator: shift left right
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-07
   domain: testing-fundamentals
   subdomain: test-pyramids
@@ -444,8 +462,11 @@ records:
     locator: test pyramids
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-08
   domain: testing-fundamentals
   subdomain: exploratory-testing
@@ -509,8 +530,11 @@ records:
     locator: exploratory testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-09
   domain: testing-fundamentals
   subdomain: defect-lifecycle
@@ -573,8 +597,11 @@ records:
     locator: defect lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-10
   domain: testing-fundamentals
   subdomain: quality-gates
@@ -637,8 +664,11 @@ records:
     locator: quality gates
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-11
   domain: testing-fundamentals
   subdomain: traceability
@@ -700,8 +730,11 @@ records:
     locator: traceability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-12
   domain: testing-fundamentals
   subdomain: metrics-coverage
@@ -765,8 +798,11 @@ records:
     locator: metrics coverage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-13
   domain: testing-fundamentals
   subdomain: release-readiness
@@ -825,8 +861,11 @@ records:
     locator: release readiness
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-14
   domain: testing-fundamentals
   subdomain: production-validation
@@ -885,8 +924,11 @@ records:
     locator: production validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-15
   domain: testing-fundamentals
   subdomain: testing-principles
@@ -945,8 +987,11 @@ records:
     locator: testing principles
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-16
   domain: testing-fundamentals
   subdomain: test-levels-types
@@ -1005,8 +1050,11 @@ records:
     locator: test levels types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-17
   domain: testing-fundamentals
   subdomain: risk-based-testing
@@ -1065,8 +1113,11 @@ records:
     locator: risk based testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-18
   domain: testing-fundamentals
   subdomain: test-design
@@ -1124,8 +1175,11 @@ records:
     locator: test design
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-19
   domain: testing-fundamentals
   subdomain: sdlc-stlc
@@ -1182,8 +1236,11 @@ records:
     locator: sdlc stlc
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-20
   domain: testing-fundamentals
   subdomain: shift-left-right
@@ -1242,8 +1299,11 @@ records:
     locator: shift left right
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-21
   domain: testing-fundamentals
   subdomain: test-pyramids
@@ -1302,8 +1362,11 @@ records:
     locator: test pyramids
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-22
   domain: testing-fundamentals
   subdomain: exploratory-testing
@@ -1362,8 +1425,11 @@ records:
     locator: exploratory testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-23
   domain: testing-fundamentals
   subdomain: defect-lifecycle
@@ -1422,8 +1488,11 @@ records:
     locator: defect lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-i-24
   domain: testing-fundamentals
   subdomain: quality-gates
@@ -1482,5 +1551,8 @@ records:
     locator: quality gates
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

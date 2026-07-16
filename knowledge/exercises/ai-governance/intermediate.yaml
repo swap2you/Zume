@@ -56,7 +56,7 @@ records:
     locator: business case
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - Engineering Manager
   - Quality Engineering Manager
@@ -67,6 +67,9 @@ records:
   - business-case
   - exercise
   variant_family: ai-governance-business-case
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-exercise-i-02
   domain: ai-governance
   subdomain: build-buy
@@ -123,7 +126,7 @@ records:
     locator: build buy
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - Engineering Manager
   - Quality Engineering Manager
@@ -134,3 +137,6 @@ records:
   - build-buy
   - exercise
   variant_family: ai-governance-build-buy
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

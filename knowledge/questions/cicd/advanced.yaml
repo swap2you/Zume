@@ -58,8 +58,11 @@ records:
     locator: stages
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-02
   domain: cicd
   subdomain: trigger-strategy
@@ -120,8 +123,11 @@ records:
     locator: trigger strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-03
   domain: cicd
   subdomain: github-actions
@@ -182,8 +188,11 @@ records:
     locator: github actions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-04
   domain: cicd
   subdomain: jenkins
@@ -242,8 +251,11 @@ records:
     locator: jenkins
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-05
   domain: cicd
   subdomain: azure-devops
@@ -303,8 +315,11 @@ records:
     locator: azure devops
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-06
   domain: cicd
   subdomain: caching
@@ -364,8 +379,11 @@ records:
     locator: caching
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-07
   domain: cicd
   subdomain: matrices-sharding
@@ -425,8 +443,11 @@ records:
     locator: matrices sharding
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-08
   domain: cicd
   subdomain: artifacts
@@ -485,8 +506,11 @@ records:
     locator: artifacts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-09
   domain: cicd
   subdomain: secrets
@@ -545,8 +569,11 @@ records:
     locator: secrets
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-10
   domain: cicd
   subdomain: environments
@@ -606,8 +633,11 @@ records:
     locator: environments
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-11
   domain: cicd
   subdomain: quality-gates
@@ -668,8 +698,11 @@ records:
     locator: quality gates
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-12
   domain: cicd
   subdomain: flakes
@@ -728,8 +761,11 @@ records:
     locator: flakes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-13
   domain: cicd
   subdomain: reruns
@@ -784,8 +820,11 @@ records:
     locator: reruns
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-14
   domain: cicd
   subdomain: selection
@@ -840,8 +879,11 @@ records:
     locator: selection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-15
   domain: cicd
   subdomain: parallelism
@@ -897,8 +939,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-16
   domain: cicd
   subdomain: deployment-validation
@@ -954,8 +999,11 @@ records:
     locator: deployment validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-17
   domain: cicd
   subdomain: rollback
@@ -1010,8 +1058,11 @@ records:
     locator: rollback
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-18
   domain: cicd
   subdomain: supply-chain
@@ -1067,8 +1118,11 @@ records:
     locator: supply chain
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-19
   domain: cicd
   subdomain: cost-throughput
@@ -1124,8 +1178,11 @@ records:
     locator: cost throughput
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-20
   domain: cicd
   subdomain: stages
@@ -1180,8 +1237,11 @@ records:
     locator: stages
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-21
   domain: cicd
   subdomain: trigger-strategy
@@ -1237,8 +1297,11 @@ records:
     locator: trigger strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-22
   domain: cicd
   subdomain: github-actions
@@ -1294,8 +1357,11 @@ records:
     locator: github actions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-23
   domain: cicd
   subdomain: jenkins
@@ -1350,8 +1416,11 @@ records:
     locator: jenkins
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cicd-a-24
   domain: cicd
   subdomain: azure-devops
@@ -1407,5 +1476,8 @@ records:
     locator: azure devops
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

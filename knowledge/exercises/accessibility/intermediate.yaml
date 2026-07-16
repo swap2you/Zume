@@ -55,7 +55,7 @@ records:
     locator: wcag
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Quality Engineering Lead
@@ -65,6 +65,9 @@ records:
   - wcag
   - exercise
   variant_family: accessibility-wcag
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-exercise-i-02
   domain: accessibility
   subdomain: keyboard
@@ -121,7 +124,7 @@ records:
     locator: keyboard
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Quality Engineering Lead
@@ -131,3 +134,6 @@ records:
   - keyboard
   - exercise
   variant_family: accessibility-keyboard
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

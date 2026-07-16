@@ -57,8 +57,11 @@ records:
     locator: git model
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-02
   domain: git-maven
   subdomain: merge-rebase
@@ -117,8 +120,11 @@ records:
     locator: merge rebase
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-03
   domain: git-maven
   subdomain: conflicts
@@ -176,8 +182,11 @@ records:
     locator: conflicts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-04
   domain: git-maven
   subdomain: reset-revert-restore
@@ -236,8 +245,11 @@ records:
     locator: reset revert restore
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-05
   domain: git-maven
   subdomain: cherry-pick
@@ -296,8 +308,11 @@ records:
     locator: cherry pick
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-06
   domain: git-maven
   subdomain: releases
@@ -355,8 +370,11 @@ records:
     locator: releases
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-07
   domain: git-maven
   subdomain: hooks
@@ -414,8 +432,11 @@ records:
     locator: hooks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-08
   domain: git-maven
   subdomain: branching
@@ -473,8 +494,11 @@ records:
     locator: branching
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-09
   domain: git-maven
   subdomain: maven-lifecycle
@@ -533,8 +557,11 @@ records:
     locator: maven lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-10
   domain: git-maven
   subdomain: pom-dependencies
@@ -593,8 +620,11 @@ records:
     locator: pom dependencies
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-11
   domain: git-maven
   subdomain: plugins-profiles
@@ -653,8 +683,11 @@ records:
     locator: plugins profiles
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-12
   domain: git-maven
   subdomain: surefire-failsafe
@@ -713,8 +746,11 @@ records:
     locator: surefire failsafe
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-13
   domain: git-maven
   subdomain: multi-module
@@ -769,8 +805,11 @@ records:
     locator: multi module
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-14
   domain: git-maven
   subdomain: dependency-convergence
@@ -825,8 +864,11 @@ records:
     locator: dependency convergence
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-15
   domain: git-maven
   subdomain: reproducibility
@@ -881,8 +923,11 @@ records:
     locator: reproducibility
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-16
   domain: git-maven
   subdomain: secrets-artifacts
@@ -937,8 +982,11 @@ records:
     locator: secrets artifacts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-17
   domain: git-maven
   subdomain: git-model
@@ -992,8 +1040,11 @@ records:
     locator: git model
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-18
   domain: git-maven
   subdomain: merge-rebase
@@ -1048,8 +1099,11 @@ records:
     locator: merge rebase
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-19
   domain: git-maven
   subdomain: conflicts
@@ -1103,8 +1157,11 @@ records:
     locator: conflicts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-20
   domain: git-maven
   subdomain: reset-revert-restore
@@ -1159,8 +1216,11 @@ records:
     locator: reset revert restore
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-21
   domain: git-maven
   subdomain: cherry-pick
@@ -1215,8 +1275,11 @@ records:
     locator: cherry pick
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-22
   domain: git-maven
   subdomain: releases
@@ -1270,8 +1333,11 @@ records:
     locator: releases
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-23
   domain: git-maven
   subdomain: hooks
@@ -1325,8 +1391,11 @@ records:
     locator: hooks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: git-maven-b-24
   domain: git-maven
   subdomain: branching
@@ -1380,5 +1449,8 @@ records:
     locator: branching
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

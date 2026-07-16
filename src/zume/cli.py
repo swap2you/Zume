@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 import shutil
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import typer
 from rich.console import Console
@@ -516,6 +516,110 @@ def knowledge_stats_cmd() -> None:
 
     stats = collect_stats(_root())
     console.print(stats)
+
+
+@knowledge_app.command("content-quality")
+def knowledge_content_quality_cmd() -> None:
+    """Fail when published material has editorial-quality defects."""
+    from zume.knowledge.content_quality import scan_content_quality
+
+    errors = scan_content_quality(_root())
+    if errors:
+        for error in errors:
+            console.print(f"[red]FAIL[/] {error}")
+        raise typer.Exit(code=1)
+    console.print("[green]PASS[/] published knowledge content quality")
+
+
+@knowledge_app.command("critique")
+def knowledge_critique_cmd(
+    domain: str = typer.Option(..., "--domain"),
+    output: Path = typer.Option(..., "--output"),
+) -> None:
+    """Write a review stub; critique never changes publication status."""
+    from datetime import date
+    from zume.knowledge.loader import load_all_questions
+
+    root = _root()
+    records = [q for q in load_all_questions(root / "knowledge") if q.domain == domain]
+    if not records:
+        raise typer.BadParameter(f"No question records for domain {domain!r}.")
+    target = output if output.is_absolute() else root / output
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        "# Zume knowledge review\n\n"
+        f"Domain: `{domain}`\nDate: {date.today().isoformat()}\n\n"
+        "Status: PENDING\n\n"
+        "## Findings\n- [ ] Check technical accuracy against each cited locator.\n"
+        "- [ ] Check the answer is specific to the question and domain.\n"
+        "- [ ] Check P0/P1 follow-ups and recommended answers.\n"
+        "- [ ] Check candidate-facing exercise projections for answer leakage.\n\n"
+        "## Decision\nWrite `APPROVED` on a separate line only after every finding is resolved.\n",
+        encoding="utf-8",
+    )
+    console.print(f"[green]Wrote critique stub[/] -> {target}")
+
+
+@knowledge_app.command("promote")
+def knowledge_promote_cmd(
+    proposal: Path = typer.Option(..., "--proposal"),
+    review_file: Path = typer.Option(..., "--review-file"),
+) -> None:
+    """Promote approved, schema-valid proposals after editorial quality checks."""
+    from datetime import date
+    import yaml
+    from zume.knowledge.content_quality import scan_content_quality
+    from zume.knowledge.loader import clear_loader_cache
+    from zume.knowledge.models import ExerciseRecord, QuestionRecord
+
+    root = _root()
+    proposal_path = proposal if proposal.is_absolute() else root / proposal
+    review_path = review_file if review_file.is_absolute() else root / review_file
+    if not review_path.exists() or "APPROVED" not in review_path.read_text(encoding="utf-8").splitlines():
+        raise typer.BadParameter("Review file must contain APPROVED on its own line.")
+    raw = yaml.safe_load(proposal_path.read_text(encoding="utf-8")) or {}
+    question_raw = raw.get("questions", raw.get("records", [])) if isinstance(raw, dict) else []
+    exercise_raw = raw.get("exercises", []) if isinstance(raw, dict) else []
+    if not isinstance(question_raw, list) or not isinstance(exercise_raw, list):
+        raise typer.BadParameter("Proposal must contain list-valued questions/records and exercises.")
+    stamp = date.today().isoformat()
+    questions = []
+    exercises = []
+    for item in question_raw:
+        if not isinstance(item, dict):
+            raise typer.BadParameter("Question proposal entries must be mappings.")
+        item.update(status="published", review_status="reviewed", reviewed_at=stamp,
+                    quality_origin="researched")
+        questions.append(QuestionRecord.model_validate(item).model_dump(mode="json"))
+    for item in exercise_raw:
+        if not isinstance(item, dict):
+            raise typer.BadParameter("Exercise proposal entries must be mappings.")
+        item.update(status="published", review_status="reviewed", reviewed_at=stamp,
+                    quality_origin="researched")
+        exercises.append(ExerciseRecord.model_validate(item).model_dump(mode="json"))
+    if not questions and not exercises:
+        raise typer.BadParameter("Proposal contains no records to promote.")
+    for records, dirname in ((questions, "questions"), (exercises, "exercises")):
+        for record in records:
+            path = root / "knowledge" / dirname / record["domain"] / f"promoted-{stamp}.yaml"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            existing_raw = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else None
+            existing: dict[str, Any]
+            if isinstance(existing_raw, dict):
+                existing = existing_raw
+            else:
+                existing = {"version": 1, "records": []}
+            records_list = existing.setdefault("records", [])
+            if not isinstance(records_list, list):
+                records_list = []
+                existing["records"] = records_list
+            records_list.append(record)
+            path.write_text(yaml.safe_dump(existing, sort_keys=False, allow_unicode=True), encoding="utf-8")
+    clear_loader_cache()
+    errors = scan_content_quality(root)
+    if errors:
+        raise typer.BadParameter("Promotion introduced content-quality errors: " + "; ".join(errors[:3]))
+    console.print(f"[green]Promoted[/] {len(questions)} questions and {len(exercises)} exercises")
 
 
 @knowledge_app.command("build-index")

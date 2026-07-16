@@ -57,8 +57,11 @@ records:
     locator: specifications
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-02
   domain: rest-assured
   subdomain: assertions
@@ -116,8 +119,11 @@ records:
     locator: assertions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-03
   domain: rest-assured
   subdomain: serialization
@@ -175,8 +181,11 @@ records:
     locator: serialization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-04
   domain: rest-assured
   subdomain: authentication
@@ -234,8 +243,11 @@ records:
     locator: authentication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-05
   domain: rest-assured
   subdomain: filters-logging
@@ -293,8 +305,11 @@ records:
     locator: filters logging
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-06
   domain: rest-assured
   subdomain: json-xml-path
@@ -352,8 +367,11 @@ records:
     locator: json xml path
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-07
   domain: rest-assured
   subdomain: schema-validation
@@ -411,8 +429,11 @@ records:
     locator: schema validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-08
   domain: rest-assured
   subdomain: chaining
@@ -469,8 +490,11 @@ records:
     locator: chaining
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-09
   domain: rest-assured
   subdomain: parameterization
@@ -528,8 +552,11 @@ records:
     locator: parameterization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-10
   domain: rest-assured
   subdomain: reusable-clients
@@ -587,8 +614,11 @@ records:
     locator: reusable clients
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-11
   domain: rest-assured
   subdomain: error-handling
@@ -646,8 +676,11 @@ records:
     locator: error handling
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-12
   domain: rest-assured
   subdomain: parallelism
@@ -705,8 +738,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-13
   domain: rest-assured
   subdomain: testng-cucumber
@@ -760,8 +796,11 @@ records:
     locator: testng cucumber
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-14
   domain: rest-assured
   subdomain: reporting
@@ -814,8 +853,11 @@ records:
     locator: reporting
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-15
   domain: rest-assured
   subdomain: framework-design
@@ -869,8 +911,11 @@ records:
     locator: framework design
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-16
   domain: rest-assured
   subdomain: specifications
@@ -924,8 +969,11 @@ records:
     locator: specifications
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-17
   domain: rest-assured
   subdomain: assertions
@@ -979,8 +1027,11 @@ records:
     locator: assertions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-18
   domain: rest-assured
   subdomain: serialization
@@ -1034,8 +1085,11 @@ records:
     locator: serialization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-19
   domain: rest-assured
   subdomain: authentication
@@ -1089,8 +1143,11 @@ records:
     locator: authentication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-20
   domain: rest-assured
   subdomain: filters-logging
@@ -1144,8 +1201,11 @@ records:
     locator: filters logging
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-21
   domain: rest-assured
   subdomain: json-xml-path
@@ -1199,8 +1259,11 @@ records:
     locator: json xml path
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-22
   domain: rest-assured
   subdomain: schema-validation
@@ -1254,8 +1317,11 @@ records:
     locator: schema validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-23
   domain: rest-assured
   subdomain: chaining
@@ -1308,8 +1374,11 @@ records:
     locator: chaining
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: rest-assured-i-24
   domain: rest-assured
   subdomain: parameterization
@@ -1363,5 +1432,8 @@ records:
     locator: parameterization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

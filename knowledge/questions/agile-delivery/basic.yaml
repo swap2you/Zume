@@ -56,8 +56,11 @@ records:
     locator: planning
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-02
   domain: agile-delivery
   subdomain: estimation
@@ -115,8 +118,11 @@ records:
     locator: estimation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-03
   domain: agile-delivery
   subdomain: refinement
@@ -174,8 +180,11 @@ records:
     locator: refinement
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-04
   domain: agile-delivery
   subdomain: delivery
@@ -232,8 +241,11 @@ records:
     locator: delivery
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-05
   domain: agile-delivery
   subdomain: feedback
@@ -286,8 +298,11 @@ records:
     locator: feedback
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-06
   domain: agile-delivery
   subdomain: risk
@@ -340,8 +355,11 @@ records:
     locator: risk
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-07
   domain: agile-delivery
   subdomain: planning
@@ -394,8 +412,11 @@ records:
     locator: planning
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-08
   domain: agile-delivery
   subdomain: estimation
@@ -449,8 +470,11 @@ records:
     locator: estimation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agile-delivery-b-09
   domain: agile-delivery
   subdomain: refinement
@@ -504,5 +528,8 @@ records:
     locator: refinement
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

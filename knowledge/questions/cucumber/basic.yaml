@@ -58,8 +58,11 @@ records:
     locator: bdd purpose
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-02
   domain: cucumber
   subdomain: discovery
@@ -117,8 +120,11 @@ records:
     locator: discovery
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-03
   domain: cucumber
   subdomain: gherkin
@@ -176,8 +182,11 @@ records:
     locator: gherkin
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-04
   domain: cucumber
   subdomain: scenarios-outlines-tables
@@ -236,8 +245,11 @@ records:
     locator: scenarios outlines tables
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-05
   domain: cucumber
   subdomain: hooks
@@ -295,8 +307,11 @@ records:
     locator: hooks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-06
   domain: cucumber
   subdomain: tags
@@ -354,8 +369,11 @@ records:
     locator: tags
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-07
   domain: cucumber
   subdomain: step-definitions
@@ -414,8 +432,11 @@ records:
     locator: step definitions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-08
   domain: cucumber
   subdomain: parameter-types
@@ -474,8 +495,11 @@ records:
     locator: parameter types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-09
   domain: cucumber
   subdomain: dependency-injection
@@ -534,8 +558,11 @@ records:
     locator: dependency injection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-10
   domain: cucumber
   subdomain: state-context
@@ -594,8 +621,11 @@ records:
     locator: state context
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-11
   domain: cucumber
   subdomain: maintainability
@@ -654,8 +684,11 @@ records:
     locator: maintainability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-12
   domain: cucumber
   subdomain: living-documentation
@@ -714,8 +747,11 @@ records:
     locator: living documentation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-13
   domain: cucumber
   subdomain: reporting
@@ -769,8 +805,11 @@ records:
     locator: reporting
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-14
   domain: cucumber
   subdomain: parallelism
@@ -825,8 +864,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-15
   domain: cucumber
   subdomain: suitability
@@ -881,8 +923,11 @@ records:
     locator: suitability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-16
   domain: cucumber
   subdomain: bdd-purpose
@@ -937,8 +982,11 @@ records:
     locator: bdd purpose
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-17
   domain: cucumber
   subdomain: discovery
@@ -992,8 +1040,11 @@ records:
     locator: discovery
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-18
   domain: cucumber
   subdomain: gherkin
@@ -1047,8 +1098,11 @@ records:
     locator: gherkin
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-19
   domain: cucumber
   subdomain: scenarios-outlines-tables
@@ -1103,8 +1157,11 @@ records:
     locator: scenarios outlines tables
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-20
   domain: cucumber
   subdomain: hooks
@@ -1158,8 +1215,11 @@ records:
     locator: hooks
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-21
   domain: cucumber
   subdomain: tags
@@ -1213,8 +1273,11 @@ records:
     locator: tags
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-22
   domain: cucumber
   subdomain: step-definitions
@@ -1269,8 +1332,11 @@ records:
     locator: step definitions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-23
   domain: cucumber
   subdomain: parameter-types
@@ -1325,8 +1391,11 @@ records:
     locator: parameter types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: cucumber-b-24
   domain: cucumber
   subdomain: dependency-injection
@@ -1381,5 +1450,8 @@ records:
     locator: dependency injection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

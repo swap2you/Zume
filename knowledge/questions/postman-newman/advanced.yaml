@@ -59,8 +59,11 @@ records:
     locator: collections
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-02
   domain: postman-newman
   subdomain: environments
@@ -120,8 +123,11 @@ records:
     locator: environments
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-03
   domain: postman-newman
   subdomain: scripts
@@ -179,8 +185,11 @@ records:
     locator: scripts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-04
   domain: postman-newman
   subdomain: data-files
@@ -239,8 +248,11 @@ records:
     locator: data files
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-05
   domain: postman-newman
   subdomain: cli-runs
@@ -298,8 +310,11 @@ records:
     locator: cli runs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-06
   domain: postman-newman
   subdomain: reporting
@@ -358,8 +373,11 @@ records:
     locator: reporting
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-07
   domain: postman-newman
   subdomain: collections
@@ -418,8 +436,11 @@ records:
     locator: collections
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-08
   domain: postman-newman
   subdomain: environments
@@ -474,8 +495,11 @@ records:
     locator: environments
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-09
   domain: postman-newman
   subdomain: scripts
@@ -529,8 +553,11 @@ records:
     locator: scripts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-10
   domain: postman-newman
   subdomain: data-files
@@ -585,8 +612,11 @@ records:
     locator: data files
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-11
   domain: postman-newman
   subdomain: cli-runs
@@ -640,8 +670,11 @@ records:
     locator: cli runs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-12
   domain: postman-newman
   subdomain: reporting
@@ -695,8 +728,11 @@ records:
     locator: reporting
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-13
   domain: postman-newman
   subdomain: collections
@@ -751,8 +787,11 @@ records:
     locator: collections
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-14
   domain: postman-newman
   subdomain: environments
@@ -807,8 +846,11 @@ records:
     locator: environments
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: postman-newman-a-15
   domain: postman-newman
   subdomain: scripts
@@ -862,5 +904,8 @@ records:
     locator: scripts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -57,7 +57,7 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -69,6 +69,9 @@ records:
   - language-basics
   - exercise
   variant_family: java-language-basics
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-exercise-a-02
   domain: java
   subdomain: oop
@@ -125,7 +128,7 @@ records:
     locator: oop
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -137,6 +140,9 @@ records:
   - oop
   - exercise
   variant_family: java-oop
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-exercise-a-03
   domain: java
   subdomain: strings-immutability
@@ -194,7 +200,7 @@ records:
     locator: strings immutability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -206,6 +212,9 @@ records:
   - strings-immutability
   - exercise
   variant_family: java-strings-immutability
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-exercise-a-04
   domain: java
   subdomain: equals-hashcode
@@ -263,7 +272,7 @@ records:
     locator: equals hashcode
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -275,3 +284,6 @@ records:
   - equals-hashcode
   - exercise
   variant_family: java-equals-hashcode
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

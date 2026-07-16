@@ -56,7 +56,7 @@ records:
     locator: strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - QA Manager
   - Quality Engineering Manager
@@ -66,6 +66,9 @@ records:
   - strategy
   - exercise
   variant_family: qa-strategy-governance-strategy
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-exercise-b-02
   domain: qa-strategy-governance
   subdomain: prioritization
@@ -122,7 +125,7 @@ records:
     locator: prioritization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - QA Manager
   - Quality Engineering Manager
@@ -132,3 +135,6 @@ records:
   - prioritization
   - exercise
   variant_family: qa-strategy-governance-prioritization
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

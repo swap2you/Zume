@@ -56,7 +56,7 @@ records:
     locator: agents workflows
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - LLM/Agent Engineer
   - AI Engineer
@@ -67,6 +67,9 @@ records:
   - agents-workflows
   - exercise
   variant_family: agentic-ai-agents-workflows
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-exercise-a-02
   domain: agentic-ai
   subdomain: planning-tools
@@ -123,7 +126,7 @@ records:
     locator: planning tools
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - LLM/Agent Engineer
   - AI Engineer
@@ -134,6 +137,9 @@ records:
   - planning-tools
   - exercise
   variant_family: agentic-ai-planning-tools
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-exercise-a-03
   domain: agentic-ai
   subdomain: state-memory
@@ -190,7 +196,7 @@ records:
     locator: state memory
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - LLM/Agent Engineer
   - AI Engineer
@@ -201,6 +207,9 @@ records:
   - state-memory
   - exercise
   variant_family: agentic-ai-state-memory
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: agentic-ai-exercise-a-04
   domain: agentic-ai
   subdomain: handoffs
@@ -257,7 +266,7 @@ records:
     locator: handoffs
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - LLM/Agent Engineer
   - AI Engineer
@@ -268,3 +277,6 @@ records:
   - handoffs
   - exercise
   variant_family: agentic-ai-handoffs
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

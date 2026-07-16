@@ -56,7 +56,7 @@ records:
     locator: learning types
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI Engineer
   - AI QA Engineer
@@ -66,6 +66,9 @@ records:
   - learning-types
   - exercise
   variant_family: ml-fundamentals-learning-types
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-exercise-a-02
   domain: ml-fundamentals
   subdomain: validation
@@ -122,7 +125,7 @@ records:
     locator: validation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI Engineer
   - AI QA Engineer
@@ -132,3 +135,6 @@ records:
   - validation
   - exercise
   variant_family: ml-fundamentals-validation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -57,8 +57,11 @@ records:
     locator: authentication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-02
   domain: security-owasp
   subdomain: sessions
@@ -115,8 +118,11 @@ records:
     locator: sessions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-03
   domain: security-owasp
   subdomain: input-validation
@@ -174,8 +180,11 @@ records:
     locator: input validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-04
   domain: security-owasp
   subdomain: api-security
@@ -233,8 +242,11 @@ records:
     locator: api security
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-05
   domain: security-owasp
   subdomain: owasp
@@ -291,8 +303,11 @@ records:
     locator: owasp
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-06
   domain: security-owasp
   subdomain: secrets
@@ -349,8 +364,11 @@ records:
     locator: secrets
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-07
   domain: security-owasp
   subdomain: dependency-risk
@@ -408,8 +426,11 @@ records:
     locator: dependency risk
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-08
   domain: security-owasp
   subdomain: safe-testing
@@ -463,8 +484,11 @@ records:
     locator: safe testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-09
   domain: security-owasp
   subdomain: authentication
@@ -518,8 +542,11 @@ records:
     locator: authentication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-10
   domain: security-owasp
   subdomain: sessions
@@ -572,8 +599,11 @@ records:
     locator: sessions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-11
   domain: security-owasp
   subdomain: input-validation
@@ -627,8 +657,11 @@ records:
     locator: input validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-12
   domain: security-owasp
   subdomain: api-security
@@ -682,8 +715,11 @@ records:
     locator: api security
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-13
   domain: security-owasp
   subdomain: owasp
@@ -736,8 +772,11 @@ records:
     locator: owasp
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-14
   domain: security-owasp
   subdomain: secrets
@@ -790,8 +829,11 @@ records:
     locator: secrets
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: security-owasp-b-15
   domain: security-owasp
   subdomain: dependency-risk
@@ -845,5 +887,8 @@ records:
     locator: dependency risk
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

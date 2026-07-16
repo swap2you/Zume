@@ -56,8 +56,11 @@ records:
     locator: slo sli
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-02
   domain: sre-resilience
   subdomain: resilience
@@ -115,8 +118,11 @@ records:
     locator: resilience
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-03
   domain: sre-resilience
   subdomain: chaos
@@ -173,8 +179,11 @@ records:
     locator: chaos
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-04
   domain: sre-resilience
   subdomain: incident-response
@@ -233,8 +242,11 @@ records:
     locator: incident response
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-05
   domain: sre-resilience
   subdomain: capacity
@@ -287,8 +299,11 @@ records:
     locator: capacity
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-06
   domain: sre-resilience
   subdomain: production-validation
@@ -343,8 +358,11 @@ records:
     locator: production validation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-07
   domain: sre-resilience
   subdomain: slo-sli
@@ -397,8 +415,11 @@ records:
     locator: slo sli
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-08
   domain: sre-resilience
   subdomain: resilience
@@ -452,8 +473,11 @@ records:
     locator: resilience
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sre-resilience-b-09
   domain: sre-resilience
   subdomain: chaos
@@ -506,5 +530,8 @@ records:
     locator: chaos
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

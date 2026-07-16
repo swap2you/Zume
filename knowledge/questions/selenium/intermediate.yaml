@@ -59,8 +59,11 @@ records:
     locator: webdriver architecture
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-02
   domain: selenium
   subdomain: driver-management
@@ -119,8 +122,11 @@ records:
     locator: driver management
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-03
   domain: selenium
   subdomain: locators
@@ -178,8 +184,11 @@ records:
     locator: locators
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-04
   domain: selenium
   subdomain: waits-synchronization
@@ -238,8 +247,11 @@ records:
     locator: waits synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-05
   domain: selenium
   subdomain: elements-interactions
@@ -298,8 +310,11 @@ records:
     locator: elements interactions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-06
   domain: selenium
   subdomain: frames-windows-alerts
@@ -359,8 +374,11 @@ records:
     locator: frames windows alerts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-07
   domain: selenium
   subdomain: actions
@@ -418,8 +436,11 @@ records:
     locator: actions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-08
   domain: selenium
   subdomain: javascript
@@ -478,8 +499,11 @@ records:
     locator: javascript
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-09
   domain: selenium
   subdomain: file-transfer
@@ -538,8 +562,11 @@ records:
     locator: file transfer
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-10
   domain: selenium
   subdomain: page-components
@@ -598,8 +625,11 @@ records:
     locator: page components
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-11
   domain: selenium
   subdomain: grid-parallelism
@@ -658,8 +688,11 @@ records:
     locator: grid parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-12
   domain: selenium
   subdomain: bidi-cdp
@@ -717,8 +750,11 @@ records:
     locator: bidi cdp
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-13
   domain: selenium
   subdomain: observability
@@ -773,8 +809,11 @@ records:
     locator: observability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-14
   domain: selenium
   subdomain: flaky-diagnosis
@@ -829,8 +868,11 @@ records:
     locator: flaky diagnosis
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-15
   domain: selenium
   subdomain: anti-patterns
@@ -885,8 +927,11 @@ records:
     locator: anti patterns
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-16
   domain: selenium
   subdomain: accessibility-browser
@@ -941,8 +986,11 @@ records:
     locator: accessibility browser
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-17
   domain: selenium
   subdomain: webdriver-architecture
@@ -997,8 +1045,11 @@ records:
     locator: webdriver architecture
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-18
   domain: selenium
   subdomain: driver-management
@@ -1053,8 +1104,11 @@ records:
     locator: driver management
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-19
   domain: selenium
   subdomain: locators
@@ -1108,8 +1162,11 @@ records:
     locator: locators
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-20
   domain: selenium
   subdomain: waits-synchronization
@@ -1164,8 +1221,11 @@ records:
     locator: waits synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-21
   domain: selenium
   subdomain: elements-interactions
@@ -1220,8 +1280,11 @@ records:
     locator: elements interactions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-22
   domain: selenium
   subdomain: frames-windows-alerts
@@ -1276,8 +1339,11 @@ records:
     locator: frames windows alerts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-23
   domain: selenium
   subdomain: actions
@@ -1331,8 +1397,11 @@ records:
     locator: actions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-i-24
   domain: selenium
   subdomain: javascript
@@ -1387,5 +1456,8 @@ records:
     locator: javascript
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

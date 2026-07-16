@@ -58,8 +58,11 @@ records:
     locator: containers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-02
   domain: containers-cloud
   subdomain: kubernetes
@@ -118,8 +121,11 @@ records:
     locator: kubernetes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-03
   domain: containers-cloud
   subdomain: identity
@@ -177,8 +183,11 @@ records:
     locator: identity
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-04
   domain: containers-cloud
   subdomain: networking
@@ -237,8 +246,11 @@ records:
     locator: networking
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-05
   domain: containers-cloud
   subdomain: storage
@@ -296,8 +308,11 @@ records:
     locator: storage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-06
   domain: containers-cloud
   subdomain: compute
@@ -355,8 +370,11 @@ records:
     locator: compute
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-07
   domain: containers-cloud
   subdomain: serverless
@@ -415,8 +433,11 @@ records:
     locator: serverless
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-08
   domain: containers-cloud
   subdomain: cloud-observability
@@ -471,8 +492,11 @@ records:
     locator: cloud observability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-09
   domain: containers-cloud
   subdomain: containers
@@ -527,8 +551,11 @@ records:
     locator: containers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-10
   domain: containers-cloud
   subdomain: kubernetes
@@ -583,8 +610,11 @@ records:
     locator: kubernetes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-11
   domain: containers-cloud
   subdomain: identity
@@ -638,8 +668,11 @@ records:
     locator: identity
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-12
   domain: containers-cloud
   subdomain: networking
@@ -694,8 +727,11 @@ records:
     locator: networking
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-13
   domain: containers-cloud
   subdomain: storage
@@ -749,8 +785,11 @@ records:
     locator: storage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-14
   domain: containers-cloud
   subdomain: compute
@@ -804,8 +843,11 @@ records:
     locator: compute
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: containers-cloud-i-15
   domain: containers-cloud
   subdomain: serverless
@@ -860,5 +902,8 @@ records:
     locator: serverless
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

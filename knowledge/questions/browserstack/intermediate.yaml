@@ -58,8 +58,11 @@ records:
     locator: capability matrix
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-02
   domain: browserstack
   subdomain: device-clouds
@@ -118,8 +121,11 @@ records:
     locator: device clouds
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-03
   domain: browserstack
   subdomain: browser-coverage
@@ -178,8 +184,11 @@ records:
     locator: browser coverage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-04
   domain: browserstack
   subdomain: parallelism
@@ -237,8 +246,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-05
   domain: browserstack
   subdomain: artifacts
@@ -295,8 +307,11 @@ records:
     locator: artifacts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-06
   domain: browserstack
   subdomain: triage
@@ -353,8 +368,11 @@ records:
     locator: triage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-07
   domain: browserstack
   subdomain: capability-matrix
@@ -413,8 +431,11 @@ records:
     locator: capability matrix
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-08
   domain: browserstack
   subdomain: device-clouds
@@ -469,8 +490,11 @@ records:
     locator: device clouds
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-09
   domain: browserstack
   subdomain: browser-coverage
@@ -525,8 +549,11 @@ records:
     locator: browser coverage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-10
   domain: browserstack
   subdomain: parallelism
@@ -580,8 +607,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-11
   domain: browserstack
   subdomain: artifacts
@@ -634,8 +664,11 @@ records:
     locator: artifacts
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-12
   domain: browserstack
   subdomain: triage
@@ -688,8 +721,11 @@ records:
     locator: triage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-13
   domain: browserstack
   subdomain: capability-matrix
@@ -744,8 +780,11 @@ records:
     locator: capability matrix
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-14
   domain: browserstack
   subdomain: device-clouds
@@ -800,8 +839,11 @@ records:
     locator: device clouds
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: browserstack-i-15
   domain: browserstack
   subdomain: browser-coverage
@@ -856,5 +898,8 @@ records:
     locator: browser coverage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

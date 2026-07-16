@@ -58,8 +58,11 @@ records:
     locator: test generation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-02
   domain: ai-quality
   subdomain: requirements-analysis
@@ -118,8 +121,11 @@ records:
     locator: requirements analysis
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-03
   domain: ai-quality
   subdomain: locator-claims
@@ -178,8 +184,11 @@ records:
     locator: locator claims
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-04
   domain: ai-quality
   subdomain: api-schema-generation
@@ -238,8 +247,11 @@ records:
     locator: api schema generation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-05
   domain: ai-quality
   subdomain: failure-triage
@@ -298,8 +310,11 @@ records:
     locator: failure triage
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-06
   domain: ai-quality
   subdomain: synthetic-data
@@ -358,8 +373,11 @@ records:
     locator: synthetic data
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-07
   domain: ai-quality
   subdomain: visual-testing
@@ -418,8 +436,11 @@ records:
     locator: visual testing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-08
   domain: ai-quality
   subdomain: risk-selection
@@ -478,8 +499,11 @@ records:
     locator: risk selection
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-09
   domain: ai-quality
   subdomain: autonomous-testing
@@ -538,8 +562,11 @@ records:
     locator: autonomous testing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-10
   domain: ai-quality
   subdomain: ai-system-testing
@@ -598,8 +625,11 @@ records:
     locator: ai system testing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-11
   domain: ai-quality
   subdomain: nondeterminism
@@ -658,8 +688,11 @@ records:
     locator: nondeterminism
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-12
   domain: ai-quality
   subdomain: evals
@@ -717,8 +750,11 @@ records:
     locator: evals
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-13
   domain: ai-quality
   subdomain: prompt-injection
@@ -773,8 +809,11 @@ records:
     locator: prompt injection
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-14
   domain: ai-quality
   subdomain: drift
@@ -828,8 +867,11 @@ records:
     locator: drift
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-15
   domain: ai-quality
   subdomain: adversarial-testing
@@ -884,8 +926,11 @@ records:
     locator: adversarial testing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-16
   domain: ai-quality
   subdomain: governance
@@ -940,8 +985,11 @@ records:
     locator: governance
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-17
   domain: ai-quality
   subdomain: human-review
@@ -996,8 +1044,11 @@ records:
     locator: human review
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-18
   domain: ai-quality
   subdomain: test-generation
@@ -1052,8 +1103,11 @@ records:
     locator: test generation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-19
   domain: ai-quality
   subdomain: requirements-analysis
@@ -1108,8 +1162,11 @@ records:
     locator: requirements analysis
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-20
   domain: ai-quality
   subdomain: locator-claims
@@ -1164,8 +1221,11 @@ records:
     locator: locator claims
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-21
   domain: ai-quality
   subdomain: api-schema-generation
@@ -1220,8 +1280,11 @@ records:
     locator: api schema generation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-22
   domain: ai-quality
   subdomain: failure-triage
@@ -1276,8 +1339,11 @@ records:
     locator: failure triage
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-23
   domain: ai-quality
   subdomain: synthetic-data
@@ -1332,8 +1398,11 @@ records:
     locator: synthetic data
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-quality-i-24
   domain: ai-quality
   subdomain: visual-testing
@@ -1388,5 +1457,8 @@ records:
     locator: visual testing
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

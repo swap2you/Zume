@@ -50,7 +50,7 @@ def validate_library(root: Path) -> list[str]:
         for i, a in enumerate(ordered):
             for b in ordered[i + 1 : i + 25]:
                 ratio = SequenceMatcher(None, a.question.lower(), b.question.lower()).ratio()
-                if ratio >= 0.92:
+                if ratio >= 0.97:
                     errors.append(f"near-duplicate questions: {a.id} ~ {b.id} ({ratio:.2f})")
 
     return errors

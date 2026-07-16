@@ -57,7 +57,7 @@ records:
     locator: select filter sort
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -68,6 +68,9 @@ records:
   - select-filter-sort
   - exercise
   variant_family: sql-oracle-select-filter-sort
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-exercise-b-02
   domain: sql-oracle
   subdomain: joins
@@ -124,7 +127,7 @@ records:
     locator: joins
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -135,6 +138,9 @@ records:
   - joins
   - exercise
   variant_family: sql-oracle-joins
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-exercise-b-03
   domain: sql-oracle
   subdomain: aggregation
@@ -192,7 +198,7 @@ records:
     locator: aggregation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -203,6 +209,9 @@ records:
   - aggregation
   - exercise
   variant_family: sql-oracle-aggregation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: sql-oracle-exercise-b-04
   domain: sql-oracle
   subdomain: ctes
@@ -259,7 +268,7 @@ records:
     locator: ctes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -270,3 +279,6 @@ records:
   - ctes
   - exercise
   variant_family: sql-oracle-ctes
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

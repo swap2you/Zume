@@ -59,8 +59,11 @@ records:
     locator: learning types
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-02
   domain: ml-fundamentals
   subdomain: validation
@@ -120,8 +123,11 @@ records:
     locator: validation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-03
   domain: ml-fundamentals
   subdomain: overfitting
@@ -181,8 +187,11 @@ records:
     locator: overfitting
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-04
   domain: ml-fundamentals
   subdomain: metrics
@@ -240,8 +249,11 @@ records:
     locator: metrics
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-05
   domain: ml-fundamentals
   subdomain: data-quality
@@ -300,8 +312,11 @@ records:
     locator: data quality
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-06
   domain: ml-fundamentals
   subdomain: inference
@@ -360,8 +375,11 @@ records:
     locator: inference
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-07
   domain: ml-fundamentals
   subdomain: drift
@@ -419,8 +437,11 @@ records:
     locator: drift
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-08
   domain: ml-fundamentals
   subdomain: explainability
@@ -475,8 +496,11 @@ records:
     locator: explainability
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-09
   domain: ml-fundamentals
   subdomain: responsible-ai
@@ -531,8 +555,11 @@ records:
     locator: responsible ai
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-10
   domain: ml-fundamentals
   subdomain: learning-types
@@ -587,8 +614,11 @@ records:
     locator: learning types
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-11
   domain: ml-fundamentals
   subdomain: validation
@@ -643,8 +673,11 @@ records:
     locator: validation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-12
   domain: ml-fundamentals
   subdomain: overfitting
@@ -699,8 +732,11 @@ records:
     locator: overfitting
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-13
   domain: ml-fundamentals
   subdomain: metrics
@@ -754,8 +790,11 @@ records:
     locator: metrics
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-14
   domain: ml-fundamentals
   subdomain: data-quality
@@ -810,8 +849,11 @@ records:
     locator: data quality
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ml-fundamentals-a-15
   domain: ml-fundamentals
   subdomain: inference
@@ -865,5 +907,8 @@ records:
     locator: inference
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

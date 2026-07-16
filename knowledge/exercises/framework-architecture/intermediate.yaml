@@ -56,7 +56,7 @@ records:
     locator: layers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Test Automation Architect
@@ -67,6 +67,9 @@ records:
   - layers
   - exercise
   variant_family: framework-architecture-layers
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-exercise-i-02
   domain: framework-architecture
   subdomain: factories
@@ -123,7 +126,7 @@ records:
     locator: factories
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Test Automation Architect
@@ -134,6 +137,9 @@ records:
   - factories
   - exercise
   variant_family: framework-architecture-factories
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-exercise-i-03
   domain: framework-architecture
   subdomain: configuration
@@ -190,7 +196,7 @@ records:
     locator: configuration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Test Automation Architect
@@ -201,6 +207,9 @@ records:
   - configuration
   - exercise
   variant_family: framework-architecture-configuration
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: framework-architecture-exercise-i-04
   domain: framework-architecture
   subdomain: dependency-injection
@@ -257,7 +266,7 @@ records:
     locator: dependency injection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Lead SDET
   - Test Automation Architect
@@ -268,3 +277,6 @@ records:
   - dependency-injection
   - exercise
   variant_family: framework-architecture-dependency-injection
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

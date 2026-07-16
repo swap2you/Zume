@@ -57,7 +57,7 @@ records:
     locator: webdriver architecture
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -68,6 +68,9 @@ records:
   - webdriver-architecture
   - exercise
   variant_family: selenium-webdriver-architecture
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-exercise-a-02
   domain: selenium
   subdomain: driver-management
@@ -125,7 +128,7 @@ records:
     locator: driver management
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -136,6 +139,9 @@ records:
   - driver-management
   - exercise
   variant_family: selenium-driver-management
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-exercise-a-03
   domain: selenium
   subdomain: locators
@@ -193,7 +199,7 @@ records:
     locator: locators
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -204,6 +210,9 @@ records:
   - locators
   - exercise
   variant_family: selenium-locators
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: selenium-exercise-a-04
   domain: selenium
   subdomain: waits-synchronization
@@ -261,7 +270,7 @@ records:
     locator: waits synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -272,3 +281,6 @@ records:
   - waits-synchronization
   - exercise
   variant_family: selenium-waits-synchronization
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

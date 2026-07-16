@@ -56,7 +56,7 @@ records:
     locator: ownership
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - QA Manager
   - Quality Engineering Manager
@@ -67,6 +67,9 @@ records:
   - ownership
   - exercise
   variant_family: behavioral-ownership
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-exercise-a-02
   domain: behavioral
   subdomain: communication
@@ -123,7 +126,7 @@ records:
     locator: communication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - QA Manager
   - Quality Engineering Manager
@@ -134,3 +137,6 @@ records:
   - communication
   - exercise
   variant_family: behavioral-communication
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

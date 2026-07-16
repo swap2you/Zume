@@ -58,8 +58,11 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-02
   domain: python-automation
   subdomain: pytest
@@ -117,8 +120,11 @@ records:
     locator: pytest
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-03
   domain: python-automation
   subdomain: fixtures
@@ -175,8 +181,11 @@ records:
     locator: fixtures
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-04
   domain: python-automation
   subdomain: http-clients
@@ -234,8 +243,11 @@ records:
     locator: http clients
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-05
   domain: python-automation
   subdomain: concurrency
@@ -289,8 +301,11 @@ records:
     locator: concurrency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-06
   domain: python-automation
   subdomain: packaging
@@ -344,8 +359,11 @@ records:
     locator: packaging
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-07
   domain: python-automation
   subdomain: language-basics
@@ -399,8 +417,11 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-08
   domain: python-automation
   subdomain: pytest
@@ -453,8 +474,11 @@ records:
     locator: pytest
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: python-automation-a-09
   domain: python-automation
   subdomain: fixtures
@@ -507,5 +531,8 @@ records:
     locator: fixtures
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

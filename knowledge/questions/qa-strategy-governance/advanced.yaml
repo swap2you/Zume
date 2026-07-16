@@ -57,8 +57,11 @@ records:
     locator: strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-02
   domain: qa-strategy-governance
   subdomain: prioritization
@@ -119,8 +122,11 @@ records:
     locator: prioritization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-03
   domain: qa-strategy-governance
   subdomain: metrics
@@ -178,8 +184,11 @@ records:
     locator: metrics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-04
   domain: qa-strategy-governance
   subdomain: governance
@@ -238,8 +247,11 @@ records:
     locator: governance
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-05
   domain: qa-strategy-governance
   subdomain: roadmap
@@ -297,8 +309,11 @@ records:
     locator: roadmap
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-06
   domain: qa-strategy-governance
   subdomain: budgets
@@ -357,8 +372,11 @@ records:
     locator: budgets
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-07
   domain: qa-strategy-governance
   subdomain: strategy
@@ -416,8 +434,11 @@ records:
     locator: strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-08
   domain: qa-strategy-governance
   subdomain: prioritization
@@ -473,8 +494,11 @@ records:
     locator: prioritization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-09
   domain: qa-strategy-governance
   subdomain: metrics
@@ -528,8 +552,11 @@ records:
     locator: metrics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-10
   domain: qa-strategy-governance
   subdomain: governance
@@ -584,8 +611,11 @@ records:
     locator: governance
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-11
   domain: qa-strategy-governance
   subdomain: roadmap
@@ -639,8 +669,11 @@ records:
     locator: roadmap
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-12
   domain: qa-strategy-governance
   subdomain: budgets
@@ -694,8 +727,11 @@ records:
     locator: budgets
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-13
   domain: qa-strategy-governance
   subdomain: strategy
@@ -749,8 +785,11 @@ records:
     locator: strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-14
   domain: qa-strategy-governance
   subdomain: prioritization
@@ -806,8 +845,11 @@ records:
     locator: prioritization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: qa-strategy-governance-a-15
   domain: qa-strategy-governance
   subdomain: metrics
@@ -861,5 +903,8 @@ records:
     locator: metrics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

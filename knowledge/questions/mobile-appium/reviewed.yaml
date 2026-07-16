@@ -1,0 +1,255 @@
+version: 1
+records:
+- id: mobile-appium-reviewed-01
+  domain: mobile-appium
+  subdomain: locator-strategies
+  title: locator strategies in mobile-appium
+  level: basic
+  priority: P1
+  frequency: common
+  question: In mobile-appium, explain the purpose and failure boundary of locator strategies. How would
+    you verify that it behaves as intended?
+  concise_answer: locator strategies should be chosen for its documented semantics, then verified against
+    the observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For locator strategies, begin with the contract described at Appium: locator strategies.
+    State the input, expected state transition or result, and the specific evidence collected when it
+    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
+    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
+    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete mobile-appium example involving locator strategies, including how the
+    candidate would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented locator strategies semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that locator strategies is the source of a failure rather than
+      a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from locator
+      strategies, and correlated logs or traces. Compare that evidence with the documented contract before
+      changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused locator strategies case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - mobile-appium
+  - locator-strategies
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: appium-docs
+    locator: 'Appium: locator strategies'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: mobile-appium-reviewed-02
+  domain: mobile-appium
+  subdomain: desired-capabilities
+  title: desired capabilities in mobile-appium
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In mobile-appium, explain the purpose and failure boundary of desired capabilities. How would
+    you verify that it behaves as intended?
+  concise_answer: desired capabilities should be chosen for its documented semantics, then verified against
+    the observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For desired capabilities, begin with the contract described at Appium: desired
+    capabilities. State the input, expected state transition or result, and the specific evidence collected
+    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
+    timing or data dependencies, and report the failing condition rather than masking it with a retry.
+    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete mobile-appium example involving desired capabilities, including how the
+    candidate would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented desired capabilities semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that desired capabilities is the source of a failure rather than
+      a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from desired
+      capabilities, and correlated logs or traces. Compare that evidence with the documented contract
+      before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused desired capabilities case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - mobile-appium
+  - desired-capabilities
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: appium-docs
+    locator: 'Appium: desired capabilities'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: mobile-appium-reviewed-03
+  domain: mobile-appium
+  subdomain: gestures
+  title: gestures in mobile-appium
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In mobile-appium, explain the purpose and failure boundary of gestures. How would you verify
+    that it behaves as intended?
+  concise_answer: gestures should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For gestures, begin with the contract described at Appium: gestures. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use
+    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies,
+    and report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete mobile-appium example involving gestures, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented gestures semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that gestures is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from gestures,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused gestures case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - mobile-appium
+  - gestures
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: appium-docs
+    locator: 'Appium: gestures'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: mobile-appium-reviewed-04
+  domain: mobile-appium
+  subdomain: session-lifecycle
+  title: session lifecycle in mobile-appium
+  level: basic
+  priority: P1
+  frequency: common
+  question: In mobile-appium, explain the purpose and failure boundary of session lifecycle. How would
+    you verify that it behaves as intended?
+  concise_answer: session lifecycle should be chosen for its documented semantics, then verified against
+    the observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For session lifecycle, begin with the contract described at Appium: session lifecycle.
+    State the input, expected state transition or result, and the specific evidence collected when it
+    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
+    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
+    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete mobile-appium example involving session lifecycle, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented session lifecycle semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that session lifecycle is the source of a failure rather than a
+      downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from session
+      lifecycle, and correlated logs or traces. Compare that evidence with the documented contract before
+      changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused session lifecycle case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - mobile-appium
+  - session-lifecycle
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: appium-docs
+    locator: 'Appium: session lifecycle'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario

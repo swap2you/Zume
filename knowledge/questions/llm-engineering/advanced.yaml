@@ -60,8 +60,11 @@ records:
     locator: tokens context
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-02
   domain: llm-engineering
   subdomain: prompting
@@ -121,8 +124,11 @@ records:
     locator: prompting
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-03
   domain: llm-engineering
   subdomain: structured-output
@@ -183,8 +189,11 @@ records:
     locator: structured output
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-04
   domain: llm-engineering
   subdomain: tool-calling
@@ -244,8 +253,11 @@ records:
     locator: tool calling
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-05
   domain: llm-engineering
   subdomain: embeddings
@@ -305,8 +317,11 @@ records:
     locator: embeddings
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-06
   domain: llm-engineering
   subdomain: retrieval
@@ -366,8 +381,11 @@ records:
     locator: retrieval
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-07
   domain: llm-engineering
   subdomain: rag
@@ -426,8 +444,11 @@ records:
     locator: rag
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-08
   domain: llm-engineering
   subdomain: grounding-citations
@@ -487,8 +508,11 @@ records:
     locator: grounding citations
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-09
   domain: llm-engineering
   subdomain: evaluation
@@ -548,8 +572,11 @@ records:
     locator: evaluation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-10
   domain: llm-engineering
   subdomain: latency-cost
@@ -609,8 +636,11 @@ records:
     locator: latency cost
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-11
   domain: llm-engineering
   subdomain: caching
@@ -669,8 +699,11 @@ records:
     locator: caching
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-12
   domain: llm-engineering
   subdomain: safety
@@ -729,8 +762,11 @@ records:
     locator: safety
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-13
   domain: llm-engineering
   subdomain: privacy
@@ -785,8 +821,11 @@ records:
     locator: privacy
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-14
   domain: llm-engineering
   subdomain: model-selection
@@ -842,8 +881,11 @@ records:
     locator: model selection
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-15
   domain: llm-engineering
   subdomain: hallucinations
@@ -899,8 +941,11 @@ records:
     locator: hallucinations
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-16
   domain: llm-engineering
   subdomain: multimodal
@@ -956,8 +1001,11 @@ records:
     locator: multimodal
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-17
   domain: llm-engineering
   subdomain: tokens-context
@@ -1013,8 +1061,11 @@ records:
     locator: tokens context
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-18
   domain: llm-engineering
   subdomain: prompting
@@ -1069,8 +1120,11 @@ records:
     locator: prompting
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-19
   domain: llm-engineering
   subdomain: structured-output
@@ -1126,8 +1180,11 @@ records:
     locator: structured output
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-20
   domain: llm-engineering
   subdomain: tool-calling
@@ -1184,8 +1241,11 @@ records:
     locator: tool calling
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-21
   domain: llm-engineering
   subdomain: embeddings
@@ -1241,8 +1301,11 @@ records:
     locator: embeddings
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-22
   domain: llm-engineering
   subdomain: retrieval
@@ -1297,8 +1360,11 @@ records:
     locator: retrieval
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-23
   domain: llm-engineering
   subdomain: rag
@@ -1353,8 +1419,11 @@ records:
     locator: rag
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-a-24
   domain: llm-engineering
   subdomain: grounding-citations
@@ -1411,5 +1480,8 @@ records:
     locator: grounding citations
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

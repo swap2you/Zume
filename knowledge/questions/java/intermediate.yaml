@@ -59,8 +59,11 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-02
   domain: java
   subdomain: oop
@@ -119,8 +122,11 @@ records:
     locator: oop
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-03
   domain: java
   subdomain: strings-immutability
@@ -180,8 +186,11 @@ records:
     locator: strings immutability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-04
   domain: java
   subdomain: equals-hashcode
@@ -241,8 +250,11 @@ records:
     locator: equals hashcode
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-05
   domain: java
   subdomain: collections
@@ -302,8 +314,11 @@ records:
     locator: collections
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-06
   domain: java
   subdomain: generics
@@ -362,8 +377,11 @@ records:
     locator: generics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-07
   domain: java
   subdomain: exceptions
@@ -423,8 +441,11 @@ records:
     locator: exceptions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-08
   domain: java
   subdomain: streams-lambdas
@@ -485,8 +506,11 @@ records:
     locator: streams lambdas
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-09
   domain: java
   subdomain: modern-language-features
@@ -546,8 +570,11 @@ records:
     locator: modern language features
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-10
   domain: java
   subdomain: concurrency
@@ -607,8 +634,11 @@ records:
     locator: concurrency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-11
   domain: java
   subdomain: virtual-threads
@@ -668,8 +698,11 @@ records:
     locator: virtual threads
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-12
   domain: java
   subdomain: jvm-memory-gc
@@ -729,8 +762,11 @@ records:
     locator: jvm memory gc
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-13
   domain: java
   subdomain: io-nio
@@ -785,8 +821,11 @@ records:
     locator: io nio
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-14
   domain: java
   subdomain: reflection-annotations
@@ -842,8 +881,11 @@ records:
     locator: reflection annotations
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-15
   domain: java
   subdomain: design-patterns
@@ -899,8 +941,11 @@ records:
     locator: design patterns
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-16
   domain: java
   subdomain: clean-code
@@ -956,8 +1001,11 @@ records:
     locator: clean code
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-17
   domain: java
   subdomain: testing-java
@@ -1013,8 +1061,11 @@ records:
     locator: testing java
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-18
   domain: java
   subdomain: debugging-performance
@@ -1070,8 +1121,11 @@ records:
     locator: debugging performance
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-19
   domain: java
   subdomain: language-basics
@@ -1127,8 +1181,11 @@ records:
     locator: language basics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-20
   domain: java
   subdomain: oop
@@ -1183,8 +1240,11 @@ records:
     locator: oop
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-21
   domain: java
   subdomain: strings-immutability
@@ -1240,8 +1300,11 @@ records:
     locator: strings immutability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-22
   domain: java
   subdomain: equals-hashcode
@@ -1297,8 +1360,11 @@ records:
     locator: equals hashcode
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-23
   domain: java
   subdomain: collections
@@ -1354,8 +1420,11 @@ records:
     locator: collections
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: java-i-24
   domain: java
   subdomain: generics
@@ -1410,5 +1479,8 @@ records:
     locator: generics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

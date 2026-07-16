@@ -57,7 +57,7 @@ records:
     locator: lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -67,6 +67,9 @@ records:
   - lifecycle
   - exercise
   variant_family: testng-lifecycle
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-exercise-i-02
   domain: testng
   subdomain: assertions
@@ -124,7 +127,7 @@ records:
     locator: assertions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -134,6 +137,9 @@ records:
   - assertions
   - exercise
   variant_family: testng-assertions
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-exercise-i-03
   domain: testng
   subdomain: data-providers
@@ -191,7 +197,7 @@ records:
     locator: data providers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -201,6 +207,9 @@ records:
   - data-providers
   - exercise
   variant_family: testng-data-providers
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-exercise-i-04
   domain: testng
   subdomain: parameters
@@ -258,7 +267,7 @@ records:
     locator: parameters
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -268,3 +277,6 @@ records:
   - parameters
   - exercise
   variant_family: testng-parameters
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

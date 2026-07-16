@@ -56,8 +56,11 @@ records:
     locator: lineage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-02
   domain: data-etl
   subdomain: transformations
@@ -116,8 +119,11 @@ records:
     locator: transformations
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-03
   domain: data-etl
   subdomain: reconciliation
@@ -176,8 +182,11 @@ records:
     locator: reconciliation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-04
   domain: data-etl
   subdomain: quality
@@ -234,8 +243,11 @@ records:
     locator: quality
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-05
   domain: data-etl
   subdomain: incremental-loads
@@ -289,8 +301,11 @@ records:
     locator: incremental loads
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-06
   domain: data-etl
   subdomain: warehouse
@@ -344,8 +359,11 @@ records:
     locator: warehouse
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-07
   domain: data-etl
   subdomain: lineage
@@ -398,8 +416,11 @@ records:
     locator: lineage
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-08
   domain: data-etl
   subdomain: transformations
@@ -453,8 +474,11 @@ records:
     locator: transformations
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: data-etl-a-09
   domain: data-etl
   subdomain: reconciliation
@@ -508,5 +532,8 @@ records:
     locator: reconciliation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

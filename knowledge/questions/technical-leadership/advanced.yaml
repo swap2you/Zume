@@ -59,8 +59,11 @@ records:
     locator: mentoring
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-02
   domain: technical-leadership
   subdomain: delegation
@@ -122,8 +125,11 @@ records:
     locator: delegation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-03
   domain: technical-leadership
   subdomain: stakeholder-alignment
@@ -185,8 +191,11 @@ records:
     locator: stakeholder alignment
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-04
   domain: technical-leadership
   subdomain: conflict
@@ -246,8 +255,11 @@ records:
     locator: conflict
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-05
   domain: technical-leadership
   subdomain: feedback
@@ -307,8 +319,11 @@ records:
     locator: feedback
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-06
   domain: technical-leadership
   subdomain: influence
@@ -369,8 +384,11 @@ records:
     locator: influence
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-07
   domain: technical-leadership
   subdomain: mentoring
@@ -430,8 +448,11 @@ records:
     locator: mentoring
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-08
   domain: technical-leadership
   subdomain: delegation
@@ -488,8 +509,11 @@ records:
     locator: delegation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-09
   domain: technical-leadership
   subdomain: stakeholder-alignment
@@ -546,8 +570,11 @@ records:
     locator: stakeholder alignment
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-10
   domain: technical-leadership
   subdomain: conflict
@@ -603,8 +630,11 @@ records:
     locator: conflict
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-11
   domain: technical-leadership
   subdomain: feedback
@@ -660,8 +690,11 @@ records:
     locator: feedback
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-12
   domain: technical-leadership
   subdomain: influence
@@ -717,8 +750,11 @@ records:
     locator: influence
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-13
   domain: technical-leadership
   subdomain: mentoring
@@ -774,8 +810,11 @@ records:
     locator: mentoring
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-14
   domain: technical-leadership
   subdomain: delegation
@@ -832,8 +871,11 @@ records:
     locator: delegation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: technical-leadership-a-15
   domain: technical-leadership
   subdomain: stakeholder-alignment
@@ -890,5 +932,8 @@ records:
     locator: stakeholder alignment
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

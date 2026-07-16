@@ -56,8 +56,11 @@ records:
     locator: selection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-02
   domain: vendor-economics
   subdomain: total-cost
@@ -115,8 +118,11 @@ records:
     locator: total cost
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-03
   domain: vendor-economics
   subdomain: security
@@ -173,8 +179,11 @@ records:
     locator: security
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-04
   domain: vendor-economics
   subdomain: adoption
@@ -231,8 +240,11 @@ records:
     locator: adoption
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-05
   domain: vendor-economics
   subdomain: measurement
@@ -286,8 +298,11 @@ records:
     locator: measurement
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-06
   domain: vendor-economics
   subdomain: exit-strategy
@@ -342,8 +357,11 @@ records:
     locator: exit strategy
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-07
   domain: vendor-economics
   subdomain: selection
@@ -396,8 +414,11 @@ records:
     locator: selection
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-08
   domain: vendor-economics
   subdomain: total-cost
@@ -451,8 +472,11 @@ records:
     locator: total cost
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: vendor-economics-b-09
   domain: vendor-economics
   subdomain: security
@@ -505,5 +529,8 @@ records:
     locator: security
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

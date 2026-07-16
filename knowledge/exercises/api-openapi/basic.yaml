@@ -55,7 +55,7 @@ records:
     locator: http
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -66,6 +66,9 @@ records:
   - http
   - exercise
   variant_family: api-openapi-http
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-exercise-b-02
   domain: api-openapi
   subdomain: rest-constraints
@@ -122,7 +125,7 @@ records:
     locator: rest constraints
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -133,6 +136,9 @@ records:
   - rest-constraints
   - exercise
   variant_family: api-openapi-rest-constraints
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-exercise-b-03
   domain: api-openapi
   subdomain: methods-idempotency
@@ -189,7 +195,7 @@ records:
     locator: methods idempotency
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -200,6 +206,9 @@ records:
   - methods-idempotency
   - exercise
   variant_family: api-openapi-methods-idempotency
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: api-openapi-exercise-b-04
   domain: api-openapi
   subdomain: status-codes
@@ -256,7 +265,7 @@ records:
     locator: status codes
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -267,3 +276,6 @@ records:
   - status-codes
   - exercise
   variant_family: api-openapi-status-codes
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -56,7 +56,7 @@ records:
     locator: testing principles
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -70,6 +70,9 @@ records:
   - testing-principles
   - exercise
   variant_family: testing-fundamentals-testing-principles
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-exercise-b-02
   domain: testing-fundamentals
   subdomain: test-levels-types
@@ -126,7 +129,7 @@ records:
     locator: test levels types
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -140,6 +143,9 @@ records:
   - test-levels-types
   - exercise
   variant_family: testing-fundamentals-test-levels-types
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-exercise-b-03
   domain: testing-fundamentals
   subdomain: risk-based-testing
@@ -196,7 +202,7 @@ records:
     locator: risk based testing
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -210,6 +216,9 @@ records:
   - risk-based-testing
   - exercise
   variant_family: testing-fundamentals-risk-based-testing
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testing-fundamentals-exercise-b-04
   domain: testing-fundamentals
   subdomain: test-design
@@ -266,7 +275,7 @@ records:
     locator: test design
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -280,3 +289,6 @@ records:
   - test-design
   - exercise
   variant_family: testing-fundamentals-test-design
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

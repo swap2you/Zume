@@ -1,0 +1,254 @@
+version: 1
+records:
+- id: cicd-reviewed-01
+  domain: cicd
+  subdomain: workflow-syntax
+  title: workflow syntax in cicd
+  level: basic
+  priority: P1
+  frequency: common
+  question: In cicd, explain the purpose and failure boundary of workflow syntax. How would you verify
+    that it behaves as intended?
+  concise_answer: workflow syntax should be chosen for its documented semantics, then verified against
+    the observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For workflow syntax, begin with the contract described at Actions: workflow syntax.
+    State the input, expected state transition or result, and the specific evidence collected when it
+    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
+    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
+    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete cicd example involving workflow syntax, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented workflow syntax semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that workflow syntax is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from workflow
+      syntax, and correlated logs or traces. Compare that evidence with the documented contract before
+      changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused workflow syntax case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cicd
+  - workflow-syntax
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: github-actions
+    locator: 'Actions: workflow syntax'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: cicd-reviewed-02
+  domain: cicd
+  subdomain: dependency-caching
+  title: dependency caching in cicd
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In cicd, explain the purpose and failure boundary of dependency caching. How would you verify
+    that it behaves as intended?
+  concise_answer: dependency caching should be chosen for its documented semantics, then verified against
+    the observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For dependency caching, begin with the contract described at Actions: dependency
+    caching. State the input, expected state transition or result, and the specific evidence collected
+    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
+    timing or data dependencies, and report the failing condition rather than masking it with a retry.
+    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cicd example involving dependency caching, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented dependency caching semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that dependency caching is the source of a failure rather than
+      a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from dependency
+      caching, and correlated logs or traces. Compare that evidence with the documented contract before
+      changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused dependency caching case with an explicit expected result and one invalid or boundary
+    input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cicd
+  - dependency-caching
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: github-actions
+    locator: 'Actions: dependency caching'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: cicd-reviewed-03
+  domain: cicd
+  subdomain: artifacts
+  title: artifacts in cicd
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In cicd, explain the purpose and failure boundary of artifacts. How would you verify that
+    it behaves as intended?
+  concise_answer: artifacts should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For artifacts, begin with the contract described at Actions: artifacts. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use
+    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies,
+    and report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cicd example involving artifacts, including how the candidate would distinguish
+    a product defect from a test or environment fault.
+  key_points:
+  - uses documented artifacts semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that artifacts is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from artifacts,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused artifacts case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cicd
+  - artifacts
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: github-actions
+    locator: 'Actions: artifacts'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: cicd-reviewed-04
+  domain: cicd
+  subdomain: concurrency
+  title: concurrency in cicd
+  level: basic
+  priority: P1
+  frequency: common
+  question: In cicd, explain the purpose and failure boundary of concurrency. How would you verify that
+    it behaves as intended?
+  concise_answer: concurrency should be chosen for its documented semantics, then verified against the
+    observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For concurrency, begin with the contract described at Actions: concurrency. State
+    the input, expected state transition or result, and the specific evidence collected when it fails.
+    Use the smallest deterministic check that exercises that contract, isolate external timing or data
+    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
+    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
+    case.'
+  deep_dive: Ask for a concrete cicd example involving concurrency, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented concurrency semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that concurrency is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from concurrency,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused concurrency case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cicd
+  - concurrency
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: github-actions
+    locator: 'Actions: concurrency'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario

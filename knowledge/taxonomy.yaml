@@ -75,6 +75,11 @@ domains:
     tier: A
     subdomains: [test-generation, requirements-analysis, locator-claims, api-schema-generation, failure-triage, synthetic-data, visual-testing, risk-selection, autonomous-testing, ai-system-testing, nondeterminism, evals, prompt-injection, drift, adversarial-testing, governance, human-review]
     role_tracks: [AI QA Engineer, AI Test Engineer, Quality Engineering Lead, LLM/Agent Engineer]
+  - id: ai-for-qa
+    label: Applied AI for QA workflows
+    tier: B
+    subdomains: [evaluation-datasets, prompt-regression, safety-testing]
+    role_tracks: [AI QA Engineer, AI Test Engineer, Quality Engineering Lead]
   - id: postman-newman
     label: Postman, Newman, and API tooling
     tier: B

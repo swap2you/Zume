@@ -1,0 +1,187 @@
+version: 1
+records:
+- id: solution-architecture-reviewed-01
+  domain: solution-architecture
+  subdomain: api-design
+  title: API design in solution-architecture
+  level: basic
+  priority: P1
+  frequency: common
+  question: In solution-architecture, explain the purpose and failure boundary of API design. How would
+    you verify that it behaves as intended?
+  concise_answer: API design should be chosen for its documented semantics, then verified against the
+    observable result it is responsible for. A test should make the relevant precondition and failure
+    mode visible.
+  recommended_answer: 'For API design, begin with the contract described at OpenAPI: API design. State
+    the input, expected state transition or result, and the specific evidence collected when it fails.
+    Use the smallest deterministic check that exercises that contract, isolate external timing or data
+    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
+    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
+    case.'
+  deep_dive: Ask for a concrete solution-architecture example involving API design, including how the
+    candidate would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented API design semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that API design is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from API design,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused API design case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - api-design
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: openapi-spec
+    locator: 'OpenAPI: API design'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: solution-architecture-reviewed-02
+  domain: solution-architecture
+  subdomain: callbacks
+  title: callbacks in solution-architecture
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In solution-architecture, explain the purpose and failure boundary of callbacks. How would
+    you verify that it behaves as intended?
+  concise_answer: callbacks should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For callbacks, begin with the contract described at OpenAPI: callbacks. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use
+    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies,
+    and report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete solution-architecture example involving callbacks, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented callbacks semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that callbacks is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from callbacks,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused callbacks case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - callbacks
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: openapi-spec
+    locator: 'OpenAPI: callbacks'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario
+- id: solution-architecture-reviewed-03
+  domain: solution-architecture
+  subdomain: links
+  title: links in solution-architecture
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In solution-architecture, explain the purpose and failure boundary of links. How would you
+    verify that it behaves as intended?
+  concise_answer: links should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For links, begin with the contract described at OpenAPI: links. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and
+    report the failing condition rather than masking it with a retry. The correct implementation depends
+    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete solution-architecture example involving links, including how the candidate
+    would distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented links semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that links is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from links,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing
+      timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused links case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - links
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: openapi-spec
+    locator: 'OpenAPI: links'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  question_type: scenario

@@ -56,7 +56,7 @@ records:
     locator: tokens context
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI Engineer
   - LLM/Agent Engineer
@@ -67,6 +67,9 @@ records:
   - tokens-context
   - exercise
   variant_family: llm-engineering-tokens-context
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-exercise-a-02
   domain: llm-engineering
   subdomain: prompting
@@ -123,7 +126,7 @@ records:
     locator: prompting
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI Engineer
   - LLM/Agent Engineer
@@ -134,6 +137,9 @@ records:
   - prompting
   - exercise
   variant_family: llm-engineering-prompting
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-exercise-a-03
   domain: llm-engineering
   subdomain: structured-output
@@ -190,7 +196,7 @@ records:
     locator: structured output
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI Engineer
   - LLM/Agent Engineer
@@ -201,6 +207,9 @@ records:
   - structured-output
   - exercise
   variant_family: llm-engineering-structured-output
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: llm-engineering-exercise-a-04
   domain: llm-engineering
   subdomain: tool-calling
@@ -257,7 +266,7 @@ records:
     locator: tool calling
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   role_tracks:
   - AI Engineer
   - LLM/Agent Engineer
@@ -268,3 +277,6 @@ records:
   - tool-calling
   - exercise
   variant_family: llm-engineering-tool-calling
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

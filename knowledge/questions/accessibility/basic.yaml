@@ -56,8 +56,11 @@ records:
     locator: wcag
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-02
   domain: accessibility
   subdomain: keyboard
@@ -114,8 +117,11 @@ records:
     locator: keyboard
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-03
   domain: accessibility
   subdomain: semantics
@@ -172,8 +178,11 @@ records:
     locator: semantics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-04
   domain: accessibility
   subdomain: screen-readers
@@ -231,8 +240,11 @@ records:
     locator: screen readers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-05
   domain: accessibility
   subdomain: automation
@@ -290,8 +302,11 @@ records:
     locator: automation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-06
   domain: accessibility
   subdomain: remediation
@@ -349,8 +364,11 @@ records:
     locator: remediation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-07
   domain: accessibility
   subdomain: wcag
@@ -407,8 +425,11 @@ records:
     locator: wcag
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-08
   domain: accessibility
   subdomain: keyboard
@@ -461,8 +482,11 @@ records:
     locator: keyboard
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-09
   domain: accessibility
   subdomain: semantics
@@ -515,8 +539,11 @@ records:
     locator: semantics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-10
   domain: accessibility
   subdomain: screen-readers
@@ -570,8 +597,11 @@ records:
     locator: screen readers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-11
   domain: accessibility
   subdomain: automation
@@ -625,8 +655,11 @@ records:
     locator: automation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-12
   domain: accessibility
   subdomain: remediation
@@ -680,8 +713,11 @@ records:
     locator: remediation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-13
   domain: accessibility
   subdomain: wcag
@@ -734,8 +770,11 @@ records:
     locator: wcag
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-14
   domain: accessibility
   subdomain: keyboard
@@ -788,8 +827,11 @@ records:
     locator: keyboard
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: accessibility-b-15
   domain: accessibility
   subdomain: semantics
@@ -842,5 +884,8 @@ records:
     locator: semantics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -56,7 +56,7 @@ records:
     locator: requirements
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Test/Quality Architect
   - Solution Architect
@@ -66,6 +66,9 @@ records:
   - requirements
   - exercise
   variant_family: solution-architecture-requirements
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-exercise-b-02
   domain: solution-architecture
   subdomain: trade-offs
@@ -122,7 +125,7 @@ records:
     locator: trade offs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Test/Quality Architect
   - Solution Architect
@@ -132,3 +135,6 @@ records:
   - trade-offs
   - exercise
   variant_family: solution-architecture-trade-offs
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

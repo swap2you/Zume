@@ -58,8 +58,11 @@ records:
     locator: business case
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-02
   domain: ai-governance
   subdomain: build-buy
@@ -117,8 +120,11 @@ records:
     locator: build buy
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-03
   domain: ai-governance
   subdomain: privacy
@@ -176,8 +182,11 @@ records:
     locator: privacy
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-04
   domain: ai-governance
   subdomain: vendor-risk
@@ -236,8 +245,11 @@ records:
     locator: vendor risk
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-05
   domain: ai-governance
   subdomain: governance
@@ -296,8 +308,11 @@ records:
     locator: governance
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-06
   domain: ai-governance
   subdomain: roi
@@ -355,8 +370,11 @@ records:
     locator: roi
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-07
   domain: ai-governance
   subdomain: change-management
@@ -415,8 +433,11 @@ records:
     locator: change management
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-08
   domain: ai-governance
   subdomain: capability
@@ -471,8 +492,11 @@ records:
     locator: capability
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-09
   domain: ai-governance
   subdomain: responsible-use
@@ -527,8 +551,11 @@ records:
     locator: responsible use
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-10
   domain: ai-governance
   subdomain: evaluation
@@ -583,8 +610,11 @@ records:
     locator: evaluation
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-11
   domain: ai-governance
   subdomain: incidents
@@ -638,8 +668,11 @@ records:
     locator: incidents
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-12
   domain: ai-governance
   subdomain: cost
@@ -693,8 +726,11 @@ records:
     locator: cost
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-13
   domain: ai-governance
   subdomain: workforce
@@ -748,8 +784,11 @@ records:
     locator: workforce
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-14
   domain: ai-governance
   subdomain: executive-communication
@@ -805,8 +844,11 @@ records:
     locator: executive communication
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: ai-governance-b-15
   domain: ai-governance
   subdomain: business-case
@@ -861,5 +903,8 @@ records:
     locator: business case
   last_verified: '2026-07-15'
   freshness_days: 90
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

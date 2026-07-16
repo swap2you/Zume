@@ -56,7 +56,7 @@ records:
     locator: data lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -66,6 +66,9 @@ records:
   - data-lifecycle
   - exercise
   variant_family: test-data-environments-data-lifecycle
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: test-data-environments-exercise-i-02
   domain: test-data-environments
   subdomain: isolation
@@ -122,7 +125,7 @@ records:
     locator: isolation
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   role_tracks:
   - Senior SDET
   - Lead SDET
@@ -132,3 +135,6 @@ records:
   - isolation
   - exercise
   variant_family: test-data-environments-isolation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

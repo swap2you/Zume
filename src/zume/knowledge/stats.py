@@ -20,6 +20,8 @@ def collect_stats(root: Path) -> dict[str, Any]:
             "by_level": {},
             "by_priority": {},
             "published_questions": 0,
+            "draft_questions": 0,
+            "reviewed_published_questions": 0,
             "published_exercises": 0,
         }
     from zume.knowledge.loader import load_all_exercises, load_all_questions
@@ -27,12 +29,16 @@ def collect_stats(root: Path) -> dict[str, Any]:
     questions = load_all_questions(knowledge_root)
     exercises = load_all_exercises(knowledge_root)
     published_q = [q for q in questions if q.status == "published"]
+    draft_q = [q for q in questions if q.status == "draft"]
+    reviewed_published_q = [q for q in published_q if q.review_status == "reviewed"]
     published_e = [e for e in exercises if e.status == "published"]
     return {
         "available": True,
         "questions": len(questions),
         "exercises": len(exercises),
         "published_questions": len(published_q),
+        "draft_questions": len(draft_q),
+        "reviewed_published_questions": len(reviewed_published_q),
         "published_exercises": len(published_e),
         "by_domain": dict(Counter(q.domain for q in published_q)),
         "by_level": dict(Counter(q.level for q in published_q)),

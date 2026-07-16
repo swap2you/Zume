@@ -57,8 +57,11 @@ records:
     locator: lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-02
   domain: testng
   subdomain: assertions
@@ -118,8 +121,11 @@ records:
     locator: assertions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-03
   domain: testng
   subdomain: data-providers
@@ -179,8 +185,11 @@ records:
     locator: data providers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-04
   domain: testng
   subdomain: parameters
@@ -239,8 +248,11 @@ records:
     locator: parameters
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-05
   domain: testng
   subdomain: groups-dependencies
@@ -299,8 +311,11 @@ records:
     locator: groups dependencies
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-06
   domain: testng
   subdomain: listeners
@@ -359,8 +374,11 @@ records:
     locator: listeners
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-07
   domain: testng
   subdomain: retries
@@ -418,8 +436,11 @@ records:
     locator: retries
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-08
   domain: testng
   subdomain: parallelism
@@ -478,8 +499,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-09
   domain: testng
   subdomain: factories
@@ -537,8 +561,11 @@ records:
     locator: factories
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-10
   domain: testng
   subdomain: suites-xml
@@ -597,8 +624,11 @@ records:
     locator: suites xml
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-11
   domain: testng
   subdomain: reporting
@@ -656,8 +686,11 @@ records:
     locator: reporting
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-12
   domain: testng
   subdomain: maven-ci
@@ -715,8 +748,11 @@ records:
     locator: maven ci
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-13
   domain: testng
   subdomain: thread-safety
@@ -771,8 +807,11 @@ records:
     locator: thread safety
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-14
   domain: testng
   subdomain: anti-patterns
@@ -827,8 +866,11 @@ records:
     locator: anti patterns
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-15
   domain: testng
   subdomain: lifecycle
@@ -882,8 +924,11 @@ records:
     locator: lifecycle
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-16
   domain: testng
   subdomain: assertions
@@ -938,8 +983,11 @@ records:
     locator: assertions
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-17
   domain: testng
   subdomain: data-providers
@@ -994,8 +1042,11 @@ records:
     locator: data providers
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-18
   domain: testng
   subdomain: parameters
@@ -1050,8 +1101,11 @@ records:
     locator: parameters
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-19
   domain: testng
   subdomain: groups-dependencies
@@ -1106,8 +1160,11 @@ records:
     locator: groups dependencies
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-20
   domain: testng
   subdomain: listeners
@@ -1161,8 +1218,11 @@ records:
     locator: listeners
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-21
   domain: testng
   subdomain: retries
@@ -1216,8 +1276,11 @@ records:
     locator: retries
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-22
   domain: testng
   subdomain: parallelism
@@ -1272,8 +1335,11 @@ records:
     locator: parallelism
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-23
   domain: testng
   subdomain: factories
@@ -1327,8 +1393,11 @@ records:
     locator: factories
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: testng-a-24
   domain: testng
   subdomain: suites-xml
@@ -1383,5 +1452,8 @@ records:
     locator: suites xml
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

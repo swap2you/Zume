@@ -57,8 +57,11 @@ records:
     locator: ownership
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-02
   domain: behavioral
   subdomain: communication
@@ -118,8 +121,11 @@ records:
     locator: communication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-03
   domain: behavioral
   subdomain: conflict
@@ -177,8 +183,11 @@ records:
     locator: conflict
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-04
   domain: behavioral
   subdomain: feedback
@@ -236,8 +245,11 @@ records:
     locator: feedback
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-05
   domain: behavioral
   subdomain: prioritization
@@ -297,8 +309,11 @@ records:
     locator: prioritization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-06
   domain: behavioral
   subdomain: ethics
@@ -356,8 +371,11 @@ records:
     locator: ethics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-07
   domain: behavioral
   subdomain: ownership
@@ -415,8 +433,11 @@ records:
     locator: ownership
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-08
   domain: behavioral
   subdomain: communication
@@ -472,8 +493,11 @@ records:
     locator: communication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-09
   domain: behavioral
   subdomain: conflict
@@ -527,8 +551,11 @@ records:
     locator: conflict
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-10
   domain: behavioral
   subdomain: feedback
@@ -582,8 +609,11 @@ records:
     locator: feedback
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-11
   domain: behavioral
   subdomain: prioritization
@@ -639,8 +669,11 @@ records:
     locator: prioritization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-12
   domain: behavioral
   subdomain: ethics
@@ -694,8 +727,11 @@ records:
     locator: ethics
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-13
   domain: behavioral
   subdomain: ownership
@@ -749,8 +785,11 @@ records:
     locator: ownership
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-14
   domain: behavioral
   subdomain: communication
@@ -806,8 +845,11 @@ records:
     locator: communication
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: behavioral-b-15
   domain: behavioral
   subdomain: conflict
@@ -861,5 +903,8 @@ records:
     locator: conflict
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

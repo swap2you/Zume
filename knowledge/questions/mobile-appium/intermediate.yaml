@@ -57,8 +57,11 @@ records:
     locator: architecture
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-02
   domain: mobile-appium
   subdomain: options
@@ -115,8 +118,11 @@ records:
     locator: options
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-03
   domain: mobile-appium
   subdomain: android-ios-engines
@@ -174,8 +180,11 @@ records:
     locator: android ios engines
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-04
   domain: mobile-appium
   subdomain: gestures
@@ -232,8 +241,11 @@ records:
     locator: gestures
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-05
   domain: mobile-appium
   subdomain: synchronization
@@ -291,8 +303,11 @@ records:
     locator: synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-06
   domain: mobile-appium
   subdomain: hybrid-apps
@@ -350,8 +365,11 @@ records:
     locator: hybrid apps
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-07
   domain: mobile-appium
   subdomain: device-matrix
@@ -409,8 +427,11 @@ records:
     locator: device matrix
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-08
   domain: mobile-appium
   subdomain: cloud-execution
@@ -464,8 +485,11 @@ records:
     locator: cloud execution
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-09
   domain: mobile-appium
   subdomain: architecture
@@ -519,8 +543,11 @@ records:
     locator: architecture
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-10
   domain: mobile-appium
   subdomain: options
@@ -573,8 +600,11 @@ records:
     locator: options
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-11
   domain: mobile-appium
   subdomain: android-ios-engines
@@ -628,8 +658,11 @@ records:
     locator: android ios engines
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-12
   domain: mobile-appium
   subdomain: gestures
@@ -682,8 +715,11 @@ records:
     locator: gestures
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-13
   domain: mobile-appium
   subdomain: synchronization
@@ -737,8 +773,11 @@ records:
     locator: synchronization
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-14
   domain: mobile-appium
   subdomain: hybrid-apps
@@ -792,8 +831,11 @@ records:
     locator: hybrid apps
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: mobile-appium-i-15
   domain: mobile-appium
   subdomain: device-matrix
@@ -847,5 +889,8 @@ records:
     locator: device matrix
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -57,8 +57,11 @@ records:
     locator: requirements
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-02
   domain: solution-architecture
   subdomain: trade-offs
@@ -116,8 +119,11 @@ records:
     locator: trade offs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-03
   domain: solution-architecture
   subdomain: scalability
@@ -175,8 +181,11 @@ records:
     locator: scalability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-04
   domain: solution-architecture
   subdomain: reliability
@@ -234,8 +243,11 @@ records:
     locator: reliability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-05
   domain: solution-architecture
   subdomain: integration
@@ -293,8 +305,11 @@ records:
     locator: integration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-06
   domain: solution-architecture
   subdomain: evolution
@@ -351,8 +366,11 @@ records:
     locator: evolution
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-07
   domain: solution-architecture
   subdomain: requirements
@@ -410,8 +428,11 @@ records:
     locator: requirements
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-08
   domain: solution-architecture
   subdomain: trade-offs
@@ -465,8 +486,11 @@ records:
     locator: trade offs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-09
   domain: solution-architecture
   subdomain: scalability
@@ -520,8 +544,11 @@ records:
     locator: scalability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-10
   domain: solution-architecture
   subdomain: reliability
@@ -575,8 +602,11 @@ records:
     locator: reliability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-11
   domain: solution-architecture
   subdomain: integration
@@ -630,8 +660,11 @@ records:
     locator: integration
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-12
   domain: solution-architecture
   subdomain: evolution
@@ -684,8 +717,11 @@ records:
     locator: evolution
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-13
   domain: solution-architecture
   subdomain: requirements
@@ -739,8 +775,11 @@ records:
     locator: requirements
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-14
   domain: solution-architecture
   subdomain: trade-offs
@@ -794,8 +833,11 @@ records:
     locator: trade offs
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
 - id: solution-architecture-i-15
   domain: solution-architecture
   subdomain: scalability
@@ -849,5 +891,8 @@ records:
     locator: scalability
   last_verified: '2026-07-15'
   freshness_days: 365
-  status: published
+  status: draft
   question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

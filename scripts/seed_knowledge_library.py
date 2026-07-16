@@ -258,7 +258,8 @@ def make_question(domain: dict[str, Any], level: str, index: int) -> dict[str, A
         "role_tracks": list(domain["role_tracks"]), "years_range": [3, 15] if level != "basic" else [1, 8],
         "tags": [domain["id"], slug(concept_name), level], "estimated_minutes": 4 if level == "basic" else 6,
         "references": [{"source_id": SOURCE_BY_DOMAIN.get(domain["id"], "istqb-glossary"), "locator": concept_name}],
-        "last_verified": VERIFIED, "freshness_days": 90 if fresh else 365, "status": "published",
+        "last_verified": VERIFIED, "freshness_days": 90 if fresh else 365, "status": "draft",
+        "review_status": "unreviewed", "quality_origin": "generated_proposal",
         "question_type": "scenario" if level != "basic" else "concept",
     }
     record.update(HAND_AUTHORED.get(record_id, {}))
@@ -298,7 +299,8 @@ def make_exercise(domain: dict[str, Any], level: str, index: int, total: int) ->
         "runner_type": runner, "allowed_languages": ["Java"] if runner == "java" else (["SQL"] if runner == "sql" else []),
         "runtime_limits": {"minutes": 30 if level == "advanced" else 20},
         "references": [{"source_id": SOURCE_BY_DOMAIN.get(domain["id"], "istqb-glossary"), "locator": concept_name}],
-        "last_verified": VERIFIED, "freshness_days": 90 if fresh else 365, "status": "published",
+        "last_verified": VERIFIED, "freshness_days": 90 if fresh else 365, "status": "draft",
+        "review_status": "unreviewed", "quality_origin": "generated_proposal",
         "role_tracks": list(domain["role_tracks"]), "tags": [domain["id"], slug(concept_name), "exercise"],
         "variant_family": f"{domain['id']}-{slug(concept_name)}",
     }
@@ -335,8 +337,8 @@ def main() -> None:
             dump_yaml(ROOT / "knowledge" / "exercises" / domain["id"] / f"{level}.yaml", {"version": 1, "records": exercises})
             all_questions.extend(questions)
             all_exercises.extend(exercises)
-    print(f"Published questions: {len(all_questions)}")
-    print(f"Published exercises: {len(all_exercises)}")
+    print(f"Draft questions: {len(all_questions)}")
+    print(f"Draft exercises: {len(all_exercises)}")
     for domain_id, count in sorted(Counter(item["domain"] for item in all_questions).items()):
         levels = Counter(item["level"] for item in all_questions if item["domain"] == domain_id)
         exercise_total = sum(1 for item in all_exercises if item["domain"] == domain_id)
