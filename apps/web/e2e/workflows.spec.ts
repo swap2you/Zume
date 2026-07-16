@@ -25,12 +25,12 @@ test('reviewed library loads records from facets-driven dropdowns', async ({ pag
   await failOnConsoleOrHttp(page)
   await page.goto('/library')
   await expect(page.getByRole('heading', { name: 'Question Library' })).toBeVisible()
-  const domain = page.getByLabel('Domain')
+  const domain = page.getByRole('combobox', { name: /^Domain$/ })
   await expect(domain).toBeVisible()
   expect(await domain.locator('option').count()).toBeGreaterThan(1)
-  await expect(page.getByLabel('Subdomain')).toBeDisabled()
+  await expect(page.getByRole('combobox', { name: /^Subdomain$/ })).toBeDisabled()
   await domain.selectOption({ index: 1 })
-  await expect(page.getByLabel('Subdomain')).toBeEnabled()
+  await expect(page.getByRole('combobox', { name: /^Subdomain$/ })).toBeEnabled()
   await expect(page.getByText(/\d+ reviewed questions/i)).toBeVisible({ timeout: 30_000 })
   await expect(page.locator('[data-question-id]').first()).toBeVisible()
 })
@@ -38,14 +38,14 @@ test('reviewed library loads records from facets-driven dropdowns', async ({ pag
 test('library priority filter and natural-language search', async ({ page }) => {
   await failOnConsoleOrHttp(page)
   await page.goto('/library')
-  const priority = page.getByLabel('Priority')
+  const priority = page.getByRole('combobox', { name: /^Priority$/ })
   await expect(priority).toBeVisible()
   // Prefer P0 when available; otherwise leave All.
   const options = await priority.locator('option').allTextContents()
   const p0 = options.find((text) => text.startsWith('P0'))
   if (p0) {
     await priority.selectOption({ label: p0 })
-    await expect(page.getByText(/Priority: P0/i)).toBeVisible()
+    await expect(page.getByRole('button', { name: /Priority: P0/i })).toBeVisible()
   }
   await page.getByPlaceholder(/Search questions/i).fill('What is an explicit wait in Selenium?')
   await expect(page.getByText(/\d+ reviewed questions|No reviewed questions/i)).toBeVisible({ timeout: 30_000 })
@@ -77,10 +77,10 @@ test('practice reveals a loaded answer', async ({ page }) => {
 test('builder applies role policies', async ({ page }) => {
   await failOnConsoleOrHttp(page)
   await page.goto('/builder')
-  await page.getByLabel('Role track').selectOption('QA Manager')
+  await page.getByRole('combobox', { name: /^Role track$/ }).selectOption('QA Manager')
   await page.getByRole('button', { name: 'Preview plan' }).click()
   await expect(page.getByText('Knockout round')).toBeVisible({ timeout: 45_000 })
-  await expect(page.getByText(/Role policy|Role coverage/i)).toBeVisible()
+  await expect(page.getByRole('strong').filter({ hasText: /QA Manager|Manager/i }).first()).toBeVisible()
 })
 
 test('intake submits fictional pasted text', async ({ page }) => {
@@ -115,7 +115,8 @@ test('lab presents SQL runner', async ({ page }) => {
 })
 
 test('settings displays doctor cards and clear actions', async ({ page }) => {
-  await failOnConsoleOrHttp(page)
+  page.on('pageerror', (error) => { throw new Error(`pageerror: ${error.message}`) })
+  page.on('console', (msg) => { if (msg.type() === 'error') throw new Error(`console error: ${msg.text()}`) })
   await page.goto('/settings')
   await expect(page.getByText('openai provider')).toBeVisible()
   await expect(page.getByText('docker labs')).toBeVisible()

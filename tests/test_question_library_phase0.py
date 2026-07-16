@@ -196,8 +196,15 @@ def test_natural_language_search_has_fallback(repo_root: Path):
 # 8. Release ZIP bytes must be deterministic
 # ---------------------------------------------------------------------------
 
-def test_release_zip_bytes_are_deterministic(tmp_path: Path):
-    from scripts.package_release import zip_directory_deterministic
+def test_release_zip_bytes_are_deterministic(tmp_path: Path, repo_root: Path):
+    import importlib.util
+
+    module_path = repo_root / "scripts" / "package_release.py"
+    spec = importlib.util.spec_from_file_location("package_release", module_path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    zip_directory_deterministic = module.zip_directory_deterministic
 
     stage_a = tmp_path / "a" / "Zume-pkg"
     stage_b = tmp_path / "b" / "Zume-pkg"

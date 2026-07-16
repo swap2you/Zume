@@ -121,7 +121,16 @@ export function Lab() {
 }
 
 export function Settings() {
-  const [doctor, setDoctor] = useState<Record<string, string> | null>(null); const [error, setError] = useState(''); const [notice, setNotice] = useState(''); useEffect(() => { request<Record<string, string>>('/api/doctor').then(setDoctor).catch(e => setError((e as Error).message)) }, [])
-  const clear = async (path: string) => { try { await post(path, {}); setNotice('Local data cleared.') } catch (e) { setNotice((e as Error).message) } }
-  return <section><PageHeader eyebrow="Local checks" title="Settings & doctor"><p className="lede">Diagnostic information only. Secrets and credentials are intentionally never displayed here.</p></PageHeader>{error ? <p className="error">{error}</p> : <div className="summary-cards">{['openai_provider', 'web_search', 'tts', 'docker_labs', 'secrets_source'].map(key => <article key={key}><b>{key.replaceAll('_', ' ')}</b><p>{doctor?.[key] ?? 'Checking…'}</p></article>)}</div>}<div className="pagination"><button onClick={() => void clear('/api/ask/history')}>Clear Ask history</button><button onClick={() => void clear('/api/audio/cache/clear')}>Clear audio cache</button></div>{notice && <p className="muted">{notice}</p>}</section>
+  const [doctor, setDoctor] = useState<Record<string, string> | null>(null)
+  const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
+  useEffect(() => { request<Record<string, string>>('/api/doctor').then(setDoctor).catch(e => setError((e as Error).message)) }, [])
+  const clear = async (path: string, method: 'DELETE' | 'POST') => {
+    try {
+      if (method === 'DELETE') await request(path, { method: 'DELETE' })
+      else await post(path, {})
+      setNotice('Local data cleared.')
+    } catch (e) { setNotice((e as Error).message) }
+  }
+  return <section><PageHeader eyebrow="Local checks" title="Settings & doctor"><p className="lede">Diagnostic information only. Secrets and credentials are intentionally never displayed here.</p></PageHeader>{error ? <p className="error">{error}</p> : <div className="summary-cards">{['openai_provider', 'web_search', 'tts', 'docker_labs', 'secrets_source'].map(key => <article key={key}><b>{key.replaceAll('_', ' ')}</b><p>{doctor?.[key] ?? 'Checking…'}</p></article>)}</div>}<div className="pagination"><button onClick={() => void clear('/api/ask/history', 'DELETE')}>Clear Ask history</button><button onClick={() => void clear('/api/audio/cache/clear', 'POST')}>Clear audio cache</button></div>{notice && <p className="muted">{notice}</p>}</section>
 }

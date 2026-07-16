@@ -16,6 +16,16 @@ from pathlib import Path
 
 
 REVIEW_MARKER = ".zume-review-mode"
+# Never deep-copy apps/web (node_modules) into the review workspace.
+SHARED_LINKS = (
+    "knowledge",
+    "config",
+    "examples",
+    "docs",
+    "src",
+    "pyproject.toml",
+    "apps/web/dist",
+)
 
 
 def review_workspace(root: Path) -> Path:
@@ -31,21 +41,25 @@ def prepare_review_workspace(root: Path, *, reset: bool = False) -> Path:
     (workspace / REVIEW_MARKER).write_text("review\n", encoding="utf-8")
     for name in ("candidates", "input", "output", "data"):
         (workspace / name).mkdir(parents=True, exist_ok=True)
-    # Point the review workspace at the shared knowledge/config trees via links or copies.
-    for shared in ("knowledge", "config", "examples", "apps", "docs", "src", "pyproject.toml"):
+    for shared in SHARED_LINKS:
         source = root / shared
         target = workspace / shared
+        if not source.exists():
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
         if target.exists() or target.is_symlink():
             continue
-        if source.is_dir():
-            try:
-                target.symlink_to(source, target_is_directory=True)
-            except OSError:
-                shutil.copytree(source, target, dirs_exist_ok=True)
-        elif source.is_file():
-            try:
-                target.symlink_to(source)
-            except OSError:
+        try:
+            target.symlink_to(source, target_is_directory=source.is_dir())
+        except OSError:
+            if source.is_dir():
+                shutil.copytree(
+                    source,
+                    target,
+                    dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("node_modules", ".git", "__pycache__"),
+                )
+            else:
                 shutil.copy2(source, target)
     return workspace
 
