@@ -1,9 +1,10 @@
 export type ApiError = Error & { status?: number }
 
 export async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const isFormData = init?.body instanceof FormData
   const response = await fetch(path, {
     ...init,
-    headers: { 'Content-Type': 'application/json', ...init?.headers },
+    headers: { ...(isFormData ? {} : { 'Content-Type': 'application/json' }), ...init?.headers },
   })
   if (!response.ok) {
     const body = await response.json().catch(() => ({}))
