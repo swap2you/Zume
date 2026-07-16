@@ -1,0 +1,112 @@
+# Role-family interview policies.
+#
+# Each policy defines the mandatory core, role depth, knockout applicability,
+# exercise runners, leadership/architecture weighting, and the behavior when
+# reviewed content is insufficient. Selection must never silently pretend a
+# plan is role-complete: when coverage is missing the plan carries a warning.
+#
+# Invariants: 180-minute interview, 20-minute knockout round where applicable.
+
+version: 1
+default_policy: senior-sdet
+
+policies:
+  senior-sdet:
+    label: Senior SDET
+    role_tracks: [Senior SDET]
+    mandatory_core: [java, selenium, rest-assured, sql-oracle, api-openapi, debugging-reliability]
+    depth_domains: [framework-architecture, testng, cucumber, cicd, git-maven]
+    knockout:
+      applicable: true
+      minutes: 20
+      domains: [java, selenium, sql-oracle, api-openapi]
+    exercises: [sql, api, java, selenium]
+    leadership_weight: low
+    architecture_weight: medium
+    insufficient_reviewed_content: warn
+
+  lead-sdet:
+    label: Lead SDET / QE Lead
+    role_tracks: [Lead SDET, Quality Engineering Lead]
+    mandatory_core: [java, selenium, sql-oracle, api-openapi, debugging-reliability, framework-architecture]
+    depth_domains: [cicd, technical-leadership, qa-strategy-governance, git-maven]
+    knockout:
+      applicable: true
+      minutes: 20
+      domains: [java, selenium, framework-architecture, debugging-reliability]
+    exercises: [sql, api, java]
+    leadership_weight: medium
+    architecture_weight: medium
+    insufficient_reviewed_content: warn
+
+  mobile-automation:
+    label: Mobile Automation Engineer
+    role_tracks: [Mobile Automation Engineer]
+    mandatory_core: [mobile-appium, java, api-openapi, debugging-reliability]
+    depth_domains: [browserstack, selenium, sql-oracle, cicd]
+    knockout:
+      applicable: true
+      minutes: 20
+      domains: [mobile-appium, java, api-openapi]
+    exercises: [api, java, sql]
+    leadership_weight: low
+    architecture_weight: medium
+    insufficient_reviewed_content: warn
+
+  performance:
+    label: Performance Engineer
+    role_tracks: [Performance Engineer]
+    mandatory_core: [performance-observability, sql-oracle, api-openapi, debugging-reliability]
+    depth_domains: [cicd, framework-architecture, containers-cloud]
+    knockout:
+      applicable: true
+      minutes: 20
+      domains: [performance-observability, sql-oracle, api-openapi]
+    exercises: [sql, api]
+    leadership_weight: low
+    architecture_weight: medium
+    insufficient_reviewed_content: warn
+
+  ai-qa:
+    label: AI QA / AI Test Engineer
+    role_tracks: [AI QA Engineer, AI Test Engineer, AI Engineer, LLM/Agent Engineer]
+    mandatory_core: [ai-quality, llm-engineering, agentic-ai, api-openapi]
+    depth_domains: [debugging-reliability, ai-governance, sql-oracle, cicd]
+    knockout:
+      applicable: true
+      minutes: 20
+      domains: [ai-quality, llm-engineering, agentic-ai, api-openapi]
+    exercises: [api, sql]
+    leadership_weight: low
+    architecture_weight: medium
+    insufficient_reviewed_content: warn
+
+  automation-architect:
+    label: Test Automation Architect
+    role_tracks: [Test Automation Architect, Test/Quality Architect, Solution Architect, Technical Architect]
+    mandatory_core: [framework-architecture, solution-architecture, java, selenium, api-openapi, debugging-reliability]
+    depth_domains: [cicd, sql-oracle, technical-leadership, git-maven]
+    knockout:
+      applicable: true
+      minutes: 20
+      domains: [framework-architecture, solution-architecture, java, selenium]
+    exercises: [java, api, sql]
+    leadership_weight: medium
+    architecture_weight: high
+    insufficient_reviewed_content: warn
+
+  qa-manager:
+    label: QA Manager / QE Manager
+    role_tracks: [QA Manager, Quality Engineering Manager, Engineering Manager]
+    mandatory_core: [qa-strategy-governance, technical-leadership, debugging-reliability, behavioral]
+    depth_domains: [cicd, ai-governance, solution-architecture, performance-observability]
+    knockout:
+      applicable: true
+      minutes: 20
+      # Deliberately NOT the Java/Selenium knockout: managers are gated on
+      # strategy, leadership, and reliability judgment.
+      domains: [qa-strategy-governance, technical-leadership, debugging-reliability]
+    exercises: [sql]
+    leadership_weight: high
+    architecture_weight: medium
+    insufficient_reviewed_content: warn

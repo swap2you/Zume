@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In cicd, explain the purpose and failure boundary of workflow syntax. How would you verify
-    that it behaves as intended?
-  concise_answer: workflow syntax should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For workflow syntax, begin with the contract described at Actions: workflow syntax.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete cicd example involving workflow syntax, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In cicd, explain the purpose and failure boundary of workflow syntax. How would you verify that it behaves as
+    intended?
+  concise_answer: workflow syntax should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For workflow syntax, begin with the contract described at Actions: workflow syntax. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cicd example involving workflow syntax, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented workflow syntax semantics
   - checks a meaningful negative path
@@ -34,14 +32,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that workflow syntax is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from workflow
-      syntax, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that workflow syntax is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from workflow syntax, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused workflow syntax case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused workflow syntax case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +52,13 @@ records:
     locator: 'Actions: workflow syntax'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: cicd-reviewed-02
   domain: cicd
@@ -71,19 +67,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In cicd, explain the purpose and failure boundary of dependency caching. How would you verify
-    that it behaves as intended?
-  concise_answer: dependency caching should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For dependency caching, begin with the contract described at Actions: dependency
-    caching. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete cicd example involving dependency caching, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In cicd, explain the purpose and failure boundary of dependency caching. How would you verify that it behaves
+    as intended?
+  concise_answer: dependency caching should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For dependency caching, begin with the contract described at Actions: dependency caching. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cicd example involving dependency caching, including how the candidate would distinguish a
+    product defect from a test or environment fault.
   key_points:
   - uses documented dependency caching semantics
   - checks a meaningful negative path
@@ -98,14 +92,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that dependency caching is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from dependency
-      caching, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that dependency caching is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from dependency caching, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused dependency caching case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused dependency caching case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -121,12 +112,13 @@ records:
     locator: 'Actions: dependency caching'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: cicd-reviewed-03
   domain: cicd
@@ -135,17 +127,16 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In cicd, explain the purpose and failure boundary of artifacts. How would you verify that
-    it behaves as intended?
-  concise_answer: artifacts should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For artifacts, begin with the contract described at Actions: artifacts. State the
-    input, expected state transition or result, and the specific evidence collected when it fails. Use
-    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies,
-    and report the failing condition rather than masking it with a retry. The correct implementation depends
-    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete cicd example involving artifacts, including how the candidate would distinguish
-    a product defect from a test or environment fault.
+  question: In cicd, explain the purpose and failure boundary of artifacts. How would you verify that it behaves as intended?
+  concise_answer: artifacts should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For artifacts, begin with the contract described at Actions: artifacts. State the input, expected state
+    transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises
+    that contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with
+    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete cicd example involving artifacts, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented artifacts semantics
   - checks a meaningful negative path
@@ -160,11 +151,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that artifacts is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from artifacts,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that artifacts is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from artifacts, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused artifacts case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -182,12 +171,13 @@ records:
     locator: 'Actions: artifacts'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: cicd-reviewed-04
   domain: cicd
@@ -196,19 +186,16 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In cicd, explain the purpose and failure boundary of concurrency. How would you verify that
-    it behaves as intended?
-  concise_answer: concurrency should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For concurrency, begin with the contract described at Actions: concurrency. State
-    the input, expected state transition or result, and the specific evidence collected when it fails.
-    Use the smallest deterministic check that exercises that contract, isolate external timing or data
-    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
-    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
-    case.'
-  deep_dive: Ask for a concrete cicd example involving concurrency, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In cicd, explain the purpose and failure boundary of concurrency. How would you verify that it behaves as intended?
+  concise_answer: concurrency should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For concurrency, begin with the contract described at Actions: concurrency. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cicd example involving concurrency, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented concurrency semantics
   - checks a meaningful negative path
@@ -223,11 +210,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that concurrency is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from concurrency,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that concurrency is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from concurrency, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused concurrency case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -245,10 +230,11 @@ records:
     locator: 'Actions: concurrency'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

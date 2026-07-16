@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In api-openapi, explain the purpose and failure boundary of Paths and Operations. How would
-    you verify that it behaves as intended?
-  concise_answer: Paths and Operations should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For Paths and Operations, begin with the contract described at OpenAPI 3.1: Paths
-    and Operations. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete api-openapi example involving Paths and Operations, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In api-openapi, explain the purpose and failure boundary of Paths and Operations. How would you verify that it
+    behaves as intended?
+  concise_answer: Paths and Operations should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Paths and Operations, begin with the contract described at OpenAPI 3.1: Paths and Operations. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete api-openapi example involving Paths and Operations, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented Paths and Operations semantics
   - checks a meaningful negative path
@@ -34,14 +32,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Paths and Operations is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Paths
-      and Operations, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that Paths and Operations is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Paths and Operations, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused Paths and Operations case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused Paths and Operations case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +53,13 @@ records:
     locator: 'OpenAPI 3.1: Paths and Operations'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: api-openapi-reviewed-02
   domain: api-openapi
@@ -71,19 +68,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In api-openapi, explain the purpose and failure boundary of Schema Object. How would you verify
-    that it behaves as intended?
-  concise_answer: Schema Object should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For Schema Object, begin with the contract described at OpenAPI 3.1: Schema Object.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete api-openapi example involving Schema Object, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In api-openapi, explain the purpose and failure boundary of Schema Object. How would you verify that it behaves
+    as intended?
+  concise_answer: Schema Object should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Schema Object, begin with the contract described at OpenAPI 3.1: Schema Object. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete api-openapi example involving Schema Object, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented Schema Object semantics
   - checks a meaningful negative path
@@ -98,14 +93,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Schema Object is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Schema
-      Object, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that Schema Object is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Schema Object, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused Schema Object case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused Schema Object case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -121,12 +113,13 @@ records:
     locator: 'OpenAPI 3.1: Schema Object'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: api-openapi-reviewed-03
   domain: api-openapi
@@ -135,18 +128,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In api-openapi, explain the purpose and failure boundary of Responses. How would you verify
-    that it behaves as intended?
-  concise_answer: Responses should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For Responses, begin with the contract described at OpenAPI 3.1: Responses. State
-    the input, expected state transition or result, and the specific evidence collected when it fails.
-    Use the smallest deterministic check that exercises that contract, isolate external timing or data
-    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
-    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
-    case.'
-  deep_dive: Ask for a concrete api-openapi example involving Responses, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In api-openapi, explain the purpose and failure boundary of Responses. How would you verify that it behaves as
+    intended?
+  concise_answer: Responses should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Responses, begin with the contract described at OpenAPI 3.1: Responses. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete api-openapi example involving Responses, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented Responses semantics
   - checks a meaningful negative path
@@ -161,11 +153,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Responses is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Responses,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that Responses is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Responses, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused Responses case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -183,12 +173,13 @@ records:
     locator: 'OpenAPI 3.1: Responses'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: api-openapi-reviewed-04
   domain: api-openapi
@@ -197,19 +188,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In api-openapi, explain the purpose and failure boundary of Security Scheme Object. How would
-    you verify that it behaves as intended?
-  concise_answer: Security Scheme Object should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For Security Scheme Object, begin with the contract described at OpenAPI 3.1: Security
-    Scheme Object. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete api-openapi example involving Security Scheme Object, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In api-openapi, explain the purpose and failure boundary of Security Scheme Object. How would you verify that
+    it behaves as intended?
+  concise_answer: Security Scheme Object should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Security Scheme Object, begin with the contract described at OpenAPI 3.1: Security Scheme Object.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete api-openapi example involving Security Scheme Object, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented Security Scheme Object semantics
   - checks a meaningful negative path
@@ -224,14 +213,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Security Scheme Object is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Security
-      Scheme Object, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that Security Scheme Object is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Security Scheme Object, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused Security Scheme Object case with an explicit expected result and one invalid or
-    boundary input.
+  - Create one focused Security Scheme Object case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -247,12 +234,13 @@ records:
     locator: 'OpenAPI 3.1: Security Scheme Object'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: api-openapi-reviewed-05
   domain: api-openapi
@@ -261,19 +249,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In api-openapi, explain the purpose and failure boundary of Discriminator Object. How would
-    you verify that it behaves as intended?
-  concise_answer: Discriminator Object should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For Discriminator Object, begin with the contract described at OpenAPI 3.1: Discriminator
-    Object. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete api-openapi example involving Discriminator Object, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In api-openapi, explain the purpose and failure boundary of Discriminator Object. How would you verify that it
+    behaves as intended?
+  concise_answer: Discriminator Object should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Discriminator Object, begin with the contract described at OpenAPI 3.1: Discriminator Object. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete api-openapi example involving Discriminator Object, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented Discriminator Object semantics
   - checks a meaningful negative path
@@ -288,14 +274,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Discriminator Object is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Discriminator
-      Object, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that Discriminator Object is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Discriminator Object, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused Discriminator Object case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused Discriminator Object case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -311,12 +295,13 @@ records:
     locator: 'OpenAPI 3.1: Discriminator Object'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: api-openapi-reviewed-06
   domain: api-openapi
@@ -325,19 +310,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In api-openapi, explain the purpose and failure boundary of Specification Extensions. How
-    would you verify that it behaves as intended?
-  concise_answer: Specification Extensions should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For Specification Extensions, begin with the contract described at OpenAPI 3.1:
-    Specification Extensions. State the input, expected state transition or result, and the specific evidence
-    collected when it fails. Use the smallest deterministic check that exercises that contract, isolate
-    external timing or data dependencies, and report the failing condition rather than masking it with
-    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
-    trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete api-openapi example involving Specification Extensions, including how
-    the candidate would distinguish a product defect from a test or environment fault.
+  question: In api-openapi, explain the purpose and failure boundary of Specification Extensions. How would you verify that
+    it behaves as intended?
+  concise_answer: Specification Extensions should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Specification Extensions, begin with the contract described at OpenAPI 3.1: Specification Extensions.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete api-openapi example involving Specification Extensions, including how the candidate would
+    distinguish a product defect from a test or environment fault.
   key_points:
   - uses documented Specification Extensions semantics
   - checks a meaningful negative path
@@ -352,14 +335,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Specification Extensions is the source of a failure rather
-      than a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Specification
-      Extensions, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that Specification Extensions is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Specification Extensions,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries,
+      or unrelated code.
   examples:
-  - Create one focused Specification Extensions case with an explicit expected result and one invalid
-    or boundary input.
+  - Create one focused Specification Extensions case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -375,10 +356,11 @@ records:
     locator: 'OpenAPI 3.1: Specification Extensions'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

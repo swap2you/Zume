@@ -7,18 +7,16 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In cucumber, explain the purpose and failure boundary of scenarios. How would you verify that
-    it behaves as intended?
-  concise_answer: scenarios should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For scenarios, begin with the contract described at Gherkin reference: scenarios.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete cucumber example involving scenarios, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In cucumber, explain the purpose and failure boundary of scenarios. How would you verify that it behaves as intended?
+  concise_answer: scenarios should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For scenarios, begin with the contract described at Gherkin reference: scenarios. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cucumber example involving scenarios, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented scenarios semantics
   - checks a meaningful negative path
@@ -33,11 +31,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that scenarios is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from scenarios,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that scenarios is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from scenarios, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused scenarios case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -55,12 +51,13 @@ records:
     locator: 'Gherkin reference: scenarios'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: cucumber-reviewed-02
   domain: cucumber
@@ -69,19 +66,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In cucumber, explain the purpose and failure boundary of backgrounds. How would you verify
-    that it behaves as intended?
-  concise_answer: backgrounds should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For backgrounds, begin with the contract described at Gherkin reference: backgrounds.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete cucumber example involving backgrounds, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In cucumber, explain the purpose and failure boundary of backgrounds. How would you verify that it behaves as
+    intended?
+  concise_answer: backgrounds should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For backgrounds, begin with the contract described at Gherkin reference: backgrounds. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cucumber example involving backgrounds, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented backgrounds semantics
   - checks a meaningful negative path
@@ -96,11 +91,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that backgrounds is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from backgrounds,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that backgrounds is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from backgrounds, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused backgrounds case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -118,12 +111,13 @@ records:
     locator: 'Gherkin reference: backgrounds'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: cucumber-reviewed-03
   domain: cucumber
@@ -132,19 +126,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In cucumber, explain the purpose and failure boundary of step definitions. How would you verify
-    that it behaves as intended?
-  concise_answer: step definitions should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For step definitions, begin with the contract described at Cucumber: step definitions.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete cucumber example involving step definitions, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In cucumber, explain the purpose and failure boundary of step definitions. How would you verify that it behaves
+    as intended?
+  concise_answer: step definitions should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For step definitions, begin with the contract described at Cucumber: step definitions. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete cucumber example involving step definitions, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented step definitions semantics
   - checks a meaningful negative path
@@ -159,14 +151,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that step definitions is the source of a failure rather than a
-      downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from step
-      definitions, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that step definitions is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from step definitions, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused step definitions case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused step definitions case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -182,12 +171,13 @@ records:
     locator: 'Cucumber: step definitions'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: cucumber-reviewed-04
   domain: cucumber
@@ -196,17 +186,16 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In cucumber, explain the purpose and failure boundary of hooks. How would you verify that
-    it behaves as intended?
-  concise_answer: hooks should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For hooks, begin with the contract described at Cucumber: hooks. State the input,
-    expected state transition or result, and the specific evidence collected when it fails. Use the smallest
-    deterministic check that exercises that contract, isolate external timing or data dependencies, and
-    report the failing condition rather than masking it with a retry. The correct implementation depends
-    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete cucumber example involving hooks, including how the candidate would distinguish
-    a product defect from a test or environment fault.
+  question: In cucumber, explain the purpose and failure boundary of hooks. How would you verify that it behaves as intended?
+  concise_answer: hooks should be chosen for its documented semantics, then verified against the observable result it is responsible
+    for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For hooks, begin with the contract described at Cucumber: hooks. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete cucumber example involving hooks, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented hooks semantics
   - checks a meaningful negative path
@@ -221,11 +210,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that hooks is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from hooks,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that hooks is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from hooks, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused hooks case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -243,10 +230,11 @@ records:
     locator: 'Cucumber: hooks'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

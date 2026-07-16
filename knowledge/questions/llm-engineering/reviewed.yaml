@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In llm-engineering, explain the purpose and failure boundary of prompt engineering. How would
-    you verify that it behaves as intended?
-  concise_answer: prompt engineering should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For prompt engineering, begin with the contract described at OpenAI: prompt engineering.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete llm-engineering example involving prompt engineering, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In llm-engineering, explain the purpose and failure boundary of prompt engineering. How would you verify that
+    it behaves as intended?
+  concise_answer: prompt engineering should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For prompt engineering, begin with the contract described at OpenAI: prompt engineering. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete llm-engineering example involving prompt engineering, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented prompt engineering semantics
   - checks a meaningful negative path
@@ -34,14 +32,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that prompt engineering is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from prompt
-      engineering, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that prompt engineering is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from prompt engineering, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused prompt engineering case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused prompt engineering case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +52,13 @@ records:
     locator: 'OpenAI: prompt engineering'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: llm-engineering-reviewed-02
   domain: llm-engineering
@@ -71,19 +67,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In llm-engineering, explain the purpose and failure boundary of structured outputs. How would
-    you verify that it behaves as intended?
-  concise_answer: structured outputs should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For structured outputs, begin with the contract described at OpenAI: structured
-    outputs. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete llm-engineering example involving structured outputs, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In llm-engineering, explain the purpose and failure boundary of structured outputs. How would you verify that
+    it behaves as intended?
+  concise_answer: structured outputs should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For structured outputs, begin with the contract described at OpenAI: structured outputs. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete llm-engineering example involving structured outputs, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented structured outputs semantics
   - checks a meaningful negative path
@@ -98,14 +92,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that structured outputs is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from structured
-      outputs, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that structured outputs is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from structured outputs, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused structured outputs case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused structured outputs case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -121,12 +112,13 @@ records:
     locator: 'OpenAI: structured outputs'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: llm-engineering-reviewed-03
   domain: llm-engineering
@@ -135,20 +127,18 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In llm-engineering, explain the purpose and failure boundary of evaluations. How would you
-    verify that it behaves as intended?
-  concise_answer: evaluations should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For evaluations, begin with the contract described at OpenAI: evaluations. State
-    the input, expected state transition or result, and the specific evidence collected when it fails.
-    Use the smallest deterministic check that exercises that contract, isolate external timing or data
-    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
-    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
-    case. Production evaluation additionally needs representative traffic sampling, evaluator-version
+  question: In llm-engineering, explain the purpose and failure boundary of evaluations. How would you verify that it behaves
+    as intended?
+  concise_answer: evaluations should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For evaluations, begin with the contract described at OpenAI: evaluations. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case. Production evaluation additionally needs representative traffic sampling, evaluator-version
     tracking, and a decision threshold tied to the deployment risk.'
-  deep_dive: Ask for a concrete llm-engineering example involving evaluations, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  deep_dive: Ask for a concrete llm-engineering example involving evaluations, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented evaluations semantics
   - checks a meaningful negative path
@@ -163,11 +153,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that evaluations is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from evaluations,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that evaluations is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from evaluations, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused evaluations case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -185,12 +173,13 @@ records:
     locator: 'OpenAI: evaluations'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: llm-engineering-reviewed-04
   domain: llm-engineering
@@ -199,19 +188,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In llm-engineering, explain the purpose and failure boundary of rate limits. How would you
-    verify that it behaves as intended?
-  concise_answer: rate limits should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For rate limits, begin with the contract described at OpenAI: rate limits. State
-    the input, expected state transition or result, and the specific evidence collected when it fails.
-    Use the smallest deterministic check that exercises that contract, isolate external timing or data
-    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
-    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
-    case.'
-  deep_dive: Ask for a concrete llm-engineering example involving rate limits, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In llm-engineering, explain the purpose and failure boundary of rate limits. How would you verify that it behaves
+    as intended?
+  concise_answer: rate limits should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For rate limits, begin with the contract described at OpenAI: rate limits. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete llm-engineering example involving rate limits, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented rate limits semantics
   - checks a meaningful negative path
@@ -226,11 +213,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that rate limits is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from rate
-      limits, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that rate limits is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from rate limits, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused rate limits case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -248,10 +233,11 @@ records:
     locator: 'OpenAI: rate limits'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

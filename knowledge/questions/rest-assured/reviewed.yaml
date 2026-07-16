@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In rest-assured, explain the purpose and failure boundary of request specification. How would
-    you verify that it behaves as intended?
-  concise_answer: request specification should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For request specification, begin with the contract described at Usage: request
-    specification. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete rest-assured example involving request specification, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In rest-assured, explain the purpose and failure boundary of request specification. How would you verify that
+    it behaves as intended?
+  concise_answer: request specification should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For request specification, begin with the contract described at Usage: request specification. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete rest-assured example involving request specification, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented request specification semantics
   - checks a meaningful negative path
@@ -34,14 +32,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that request specification is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from request
-      specification, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that request specification is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from request specification, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused request specification case with an explicit expected result and one invalid or
-    boundary input.
+  - Create one focused request specification case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +53,13 @@ records:
     locator: 'Usage: request specification'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: rest-assured-reviewed-02
   domain: rest-assured
@@ -71,19 +68,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In rest-assured, explain the purpose and failure boundary of response validation. How would
-    you verify that it behaves as intended?
-  concise_answer: response validation should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For response validation, begin with the contract described at Usage: response validation.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete rest-assured example involving response validation, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In rest-assured, explain the purpose and failure boundary of response validation. How would you verify that it
+    behaves as intended?
+  concise_answer: response validation should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For response validation, begin with the contract described at Usage: response validation. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete rest-assured example involving response validation, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented response validation semantics
   - checks a meaningful negative path
@@ -98,14 +93,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that response validation is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from response
-      validation, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that response validation is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from response validation, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused response validation case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused response validation case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -121,12 +114,13 @@ records:
     locator: 'Usage: response validation'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: rest-assured-reviewed-03
   domain: rest-assured
@@ -135,19 +129,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In rest-assured, explain the purpose and failure boundary of authentication. How would you
-    verify that it behaves as intended?
-  concise_answer: authentication should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For authentication, begin with the contract described at Usage: authentication.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete rest-assured example involving authentication, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In rest-assured, explain the purpose and failure boundary of authentication. How would you verify that it behaves
+    as intended?
+  concise_answer: authentication should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For authentication, begin with the contract described at Usage: authentication. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete rest-assured example involving authentication, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented authentication semantics
   - checks a meaningful negative path
@@ -162,14 +154,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that authentication is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from authentication,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that authentication is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from authentication, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused authentication case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused authentication case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -185,12 +174,13 @@ records:
     locator: 'Usage: authentication'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: rest-assured-reviewed-04
   domain: rest-assured
@@ -199,19 +189,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In rest-assured, explain the purpose and failure boundary of object mapping. How would you
-    verify that it behaves as intended?
-  concise_answer: object mapping should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For object mapping, begin with the contract described at Usage: object mapping.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete rest-assured example involving object mapping, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In rest-assured, explain the purpose and failure boundary of object mapping. How would you verify that it behaves
+    as intended?
+  concise_answer: object mapping should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For object mapping, begin with the contract described at Usage: object mapping. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete rest-assured example involving object mapping, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented object mapping semantics
   - checks a meaningful negative path
@@ -226,14 +214,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that object mapping is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from object
-      mapping, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that object mapping is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from object mapping, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused object mapping case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused object mapping case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -249,12 +234,13 @@ records:
     locator: 'Usage: object mapping'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: rest-assured-reviewed-05
   domain: rest-assured
@@ -263,17 +249,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In rest-assured, explain the purpose and failure boundary of filters. How would you verify
-    that it behaves as intended?
-  concise_answer: filters should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For filters, begin with the contract described at Usage: filters. State the input,
-    expected state transition or result, and the specific evidence collected when it fails. Use the smallest
-    deterministic check that exercises that contract, isolate external timing or data dependencies, and
-    report the failing condition rather than masking it with a retry. The correct implementation depends
-    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete rest-assured example involving filters, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In rest-assured, explain the purpose and failure boundary of filters. How would you verify that it behaves as
+    intended?
+  concise_answer: filters should be chosen for its documented semantics, then verified against the observable result it is
+    responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For filters, begin with the contract described at Usage: filters. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete rest-assured example involving filters, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented filters semantics
   - checks a meaningful negative path
@@ -288,11 +274,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that filters is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from filters,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that filters is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from filters, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused filters case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -310,12 +294,13 @@ records:
     locator: 'Usage: filters'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: rest-assured-reviewed-06
   domain: rest-assured
@@ -324,17 +309,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In rest-assured, explain the purpose and failure boundary of logging. How would you verify
-    that it behaves as intended?
-  concise_answer: logging should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For logging, begin with the contract described at Usage: logging. State the input,
-    expected state transition or result, and the specific evidence collected when it fails. Use the smallest
-    deterministic check that exercises that contract, isolate external timing or data dependencies, and
-    report the failing condition rather than masking it with a retry. The correct implementation depends
-    on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete rest-assured example involving logging, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In rest-assured, explain the purpose and failure boundary of logging. How would you verify that it behaves as
+    intended?
+  concise_answer: logging should be chosen for its documented semantics, then verified against the observable result it is
+    responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For logging, begin with the contract described at Usage: logging. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete rest-assured example involving logging, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented logging semantics
   - checks a meaningful negative path
@@ -349,11 +334,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that logging is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from logging,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that logging is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from logging, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused logging case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -371,10 +354,11 @@ records:
     locator: 'Usage: logging'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

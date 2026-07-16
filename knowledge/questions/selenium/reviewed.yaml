@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of waiting strategies. How would you
-    verify that it behaves as intended?
-  concise_answer: waiting strategies should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For waiting strategies, begin with the contract described at WebDriver: waiting
-    strategies. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete selenium example involving waiting strategies, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of waiting strategies. How would you verify that it behaves
+    as intended?
+  concise_answer: waiting strategies should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For waiting strategies, begin with the contract described at WebDriver: waiting strategies. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving waiting strategies, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented waiting strategies semantics
   - checks a meaningful negative path
@@ -34,14 +32,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that waiting strategies is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from waiting
-      strategies, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that waiting strategies is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from waiting strategies, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused waiting strategies case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused waiting strategies case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +52,13 @@ records:
     locator: 'WebDriver: waiting strategies'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-02
   domain: selenium
@@ -71,19 +67,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of locating elements. How would you
-    verify that it behaves as intended?
-  concise_answer: locating elements should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For locating elements, begin with the contract described at WebDriver: locating
-    elements. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete selenium example involving locating elements, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of locating elements. How would you verify that it behaves
+    as intended?
+  concise_answer: locating elements should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For locating elements, begin with the contract described at WebDriver: locating elements. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving locating elements, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented locating elements semantics
   - checks a meaningful negative path
@@ -98,14 +92,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that locating elements is the source of a failure rather than a
-      downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from locating
-      elements, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that locating elements is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from locating elements, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused locating elements case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused locating elements case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -121,12 +112,13 @@ records:
     locator: 'WebDriver: locating elements'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-03
   domain: selenium
@@ -135,19 +127,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of Page object models. How would you
-    verify that it behaves as intended?
-  concise_answer: Page object models should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: For Page object models, begin with the contract described at Page object models.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.
-  deep_dive: Ask for a concrete selenium example involving Page object models, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of Page object models. How would you verify that it behaves
+    as intended?
+  concise_answer: Page object models should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: For Page object models, begin with the contract described at Page object models. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.
+  deep_dive: Ask for a concrete selenium example involving Page object models, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented Page object models semantics
   - checks a meaningful negative path
@@ -162,14 +152,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that Page object models is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from Page
-      object models, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that Page object models is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Page object models, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused Page object models case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused Page object models case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -185,12 +172,13 @@ records:
     locator: Page object models
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-04
   domain: selenium
@@ -199,19 +187,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of discouraged flaky tests. How would
-    you verify that it behaves as intended?
-  concise_answer: discouraged flaky tests should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For discouraged flaky tests, begin with the contract described at Test practices:
-    discouraged flaky tests. State the input, expected state transition or result, and the specific evidence
-    collected when it fails. Use the smallest deterministic check that exercises that contract, isolate
-    external timing or data dependencies, and report the failing condition rather than masking it with
-    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
-    trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete selenium example involving discouraged flaky tests, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of discouraged flaky tests. How would you verify that it
+    behaves as intended?
+  concise_answer: discouraged flaky tests should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For discouraged flaky tests, begin with the contract described at Test practices: discouraged flaky
+    tests. State the input, expected state transition or result, and the specific evidence collected when it fails. Use the
+    smallest deterministic check that exercises that contract, isolate external timing or data dependencies, and report the
+    failing condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the
+    reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving discouraged flaky tests, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented discouraged flaky tests semantics
   - checks a meaningful negative path
@@ -226,14 +212,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that discouraged flaky tests is the source of a failure rather
-      than a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from discouraged
-      flaky tests, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that discouraged flaky tests is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from discouraged flaky tests,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries,
+      or unrelated code.
   examples:
-  - Create one focused discouraged flaky tests case with an explicit expected result and one invalid or
-    boundary input.
+  - Create one focused discouraged flaky tests case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -249,12 +233,13 @@ records:
     locator: 'Test practices: discouraged flaky tests'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-05
   domain: selenium
@@ -263,19 +248,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of element interactability. How would
-    you verify that it behaves as intended?
-  concise_answer: element interactability should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For element interactability, begin with the contract described at WebDriver: element
-    interactability. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete selenium example involving element interactability, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of element interactability. How would you verify that it
+    behaves as intended?
+  concise_answer: element interactability should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For element interactability, begin with the contract described at WebDriver: element interactability.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving element interactability, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented element interactability semantics
   - checks a meaningful negative path
@@ -290,14 +273,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that element interactability is the source of a failure rather
-      than a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from element
-      interactability, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that element interactability is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from element interactability,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries,
+      or unrelated code.
   examples:
-  - Create one focused element interactability case with an explicit expected result and one invalid or
-    boundary input.
+  - Create one focused element interactability case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -313,12 +294,13 @@ records:
     locator: 'WebDriver: element interactability'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-06
   domain: selenium
@@ -327,19 +309,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of frames and windows. How would you
-    verify that it behaves as intended?
-  concise_answer: frames and windows should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For frames and windows, begin with the contract described at WebDriver: frames
-    and windows. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete selenium example involving frames and windows, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of frames and windows. How would you verify that it behaves
+    as intended?
+  concise_answer: frames and windows should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For frames and windows, begin with the contract described at WebDriver: frames and windows. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving frames and windows, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented frames and windows semantics
   - checks a meaningful negative path
@@ -354,14 +334,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that frames and windows is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from frames
-      and windows, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that frames and windows is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from frames and windows, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused frames and windows case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused frames and windows case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -377,12 +354,13 @@ records:
     locator: 'WebDriver: frames and windows'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-07
   domain: selenium
@@ -391,19 +369,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of stale element references. How would
-    you verify that it behaves as intended?
-  concise_answer: stale element references should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For stale element references, begin with the contract described at WebDriver: stale
-    element references. State the input, expected state transition or result, and the specific evidence
-    collected when it fails. Use the smallest deterministic check that exercises that contract, isolate
-    external timing or data dependencies, and report the failing condition rather than masking it with
-    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
-    trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete selenium example involving stale element references, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of stale element references. How would you verify that it
+    behaves as intended?
+  concise_answer: stale element references should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For stale element references, begin with the contract described at WebDriver: stale element references.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving stale element references, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented stale element references semantics
   - checks a meaningful negative path
@@ -418,14 +394,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that stale element references is the source of a failure rather
-      than a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from stale
-      element references, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that stale element references is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from stale element references,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries,
+      or unrelated code.
   examples:
-  - Create one focused stale element references case with an explicit expected result and one invalid
-    or boundary input.
+  - Create one focused stale element references case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -441,12 +415,13 @@ records:
     locator: 'WebDriver: stale element references'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: selenium-reviewed-08
   domain: selenium
@@ -455,19 +430,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In selenium, explain the purpose and failure boundary of parallel execution. How would you
-    verify that it behaves as intended?
-  concise_answer: parallel execution should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For parallel execution, begin with the contract described at Grid: parallel execution.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete selenium example involving parallel execution, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In selenium, explain the purpose and failure boundary of parallel execution. How would you verify that it behaves
+    as intended?
+  concise_answer: parallel execution should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For parallel execution, begin with the contract described at Grid: parallel execution. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete selenium example involving parallel execution, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented parallel execution semantics
   - checks a meaningful negative path
@@ -482,14 +455,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that parallel execution is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from parallel
-      execution, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that parallel execution is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from parallel execution, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused parallel execution case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused parallel execution case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -505,10 +475,11 @@ records:
     locator: 'Grid: parallel execution'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

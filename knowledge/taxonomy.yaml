@@ -1,187 +1,846 @@
-version: 1
+version: 2
+note: Canonical taxonomy. Domains/subdomains and facet vocabularies imported from the binding Question Library taxonomy (docs/release/question-library/02_QUESTION_LIBRARY_TAXONOMY.yaml).
+modes:
+- value: reviewed
+  label: Reviewed Library
+  default: true
+- value: draft
+  label: Draft Research
+  default: false
+- value: gaps
+  label: Coverage & Gaps
+  default: false
+levels:
+- value: basic
+  label: Basic
+- value: intermediate
+  label: Intermediate
+- value: advanced
+  label: Advanced
+priorities:
+- value: P0
+  label: P0 — knockout / must know
+- value: P1
+  label: P1 — frequently asked / important
+- value: P2
+  label: P2 — depth differentiator
+- value: P3
+  label: P3 — niche / emerging / legacy
+frequencies:
+- value: very_common
+  label: Very common
+- value: common
+  label: Common
+- value: occasional
+  label: Occasional
+- value: emerging
+  label: Emerging
+question_types:
+- concept
+- compare_contrast
+- coding
+- debugging
+- framework_design
+- system_design
+- scenario
+- troubleshooting
+- code_review
+- test_strategy
+- leadership
+- behavioral
+- estimation_planning
+- incident_postmortem
+- current_emerging
+- hands_on_exercise
+role_tracks:
+- Senior SDET
+- Lead SDET
+- Test Automation Architect
+- Quality Engineering Lead
+- QA Manager
+- Quality Engineering Manager
+- Test/Quality Architect
+- Solution Architect
+- Technical Architect
+- Engineering Manager
+- AI QA Engineer
+- AI Test Engineer
+- AI Engineer
+- LLM/Agent Engineer
+- Quality Platform Engineer
+- DevOps/CI Quality Engineer
+- Mobile Automation Engineer
+- Performance Engineer
+freshness_states:
+- value: current
+  label: Current
+- value: due_soon
+  label: Due for review soon
+- value: stale
+  label: Stale / blocked
+source_families:
+- standards
+- official_project
+- official_vendor
+- rfc
+- primary_repository
+- high_quality_reference
 domains:
-  - id: testing-fundamentals
-    label: Testing fundamentals and quality engineering
-    tier: A
-    subdomains: [testing-principles, test-levels-types, risk-based-testing, test-design, sdlc-stlc, shift-left-right, test-pyramids, exploratory-testing, defect-lifecycle, quality-gates, traceability, metrics-coverage, release-readiness, production-validation]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, QA Manager, Quality Engineering Manager, Test/Quality Architect]
-  - id: java
-    label: Java
-    tier: A
-    subdomains: [language-basics, oop, strings-immutability, equals-hashcode, collections, generics, exceptions, streams-lambdas, modern-language-features, concurrency, virtual-threads, jvm-memory-gc, io-nio, reflection-annotations, design-patterns, clean-code, testing-java, debugging-performance]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Solution Architect, Technical Architect]
-  - id: selenium
-    label: Selenium WebDriver
-    tier: A
-    subdomains: [webdriver-architecture, driver-management, locators, waits-synchronization, elements-interactions, frames-windows-alerts, actions, javascript, file-transfer, page-components, grid-parallelism, bidi-cdp, observability, flaky-diagnosis, anti-patterns, accessibility-browser]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Platform Engineer]
-  - id: testng
-    label: TestNG and Java test execution
-    tier: A
-    subdomains: [lifecycle, assertions, data-providers, parameters, groups-dependencies, listeners, retries, parallelism, factories, suites-xml, reporting, maven-ci, thread-safety, anti-patterns]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect]
-  - id: cucumber
-    label: Cucumber, Gherkin, and BDD
-    tier: A
-    subdomains: [bdd-purpose, discovery, gherkin, scenarios-outlines-tables, hooks, tags, step-definitions, parameter-types, dependency-injection, state-context, maintainability, living-documentation, reporting, parallelism, suitability]
-    role_tracks: [Senior SDET, Lead SDET, Quality Engineering Lead, QA Manager]
-  - id: api-openapi
-    label: API testing fundamentals and OpenAPI
-    tier: A
-    subdomains: [http, rest-constraints, methods-idempotency, status-codes, headers-negotiation, authn-authz, payloads, pagination, error-contracts, schema-validation, openapi, contract-testing, negative-security, resiliency, async-events, observability, test-data]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Solution Architect]
-  - id: rest-assured
-    label: REST Assured
-    tier: A
-    subdomains: [specifications, assertions, serialization, authentication, filters-logging, json-xml-path, schema-validation, chaining, parameterization, reusable-clients, error-handling, parallelism, testng-cucumber, reporting, framework-design]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect]
-  - id: sql-oracle
-    label: SQL, Oracle, and database testing
-    tier: A
-    subdomains: [select-filter-sort, joins, aggregation, ctes, window-functions, set-operations, constraints, transactions-isolation, indexes-plans, normalization, latest-records, data-quality, oracle-functions, sequences, plsql, database-test-design, reconciliation, locking-performance]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Platform Engineer]
-  - id: framework-architecture
-    label: Automation framework architecture
-    tier: A
-    subdomains: [layers, factories, configuration, dependency-injection, data-management, objects, cross-channel-integration, logging-reporting, retries, parallelism, environments, extensibility, packaging, testability, governance, migration, maintenance-cost]
-    role_tracks: [Lead SDET, Test Automation Architect, Test/Quality Architect, Quality Platform Engineer]
-  - id: debugging-reliability
-    label: Debugging, reliability, and flaky-test engineering
-    tier: A
-    subdomains: [reproduce-isolate, artifacts, synchronization, environments-data, races, nondeterminism, retries-repair, quarantines, classification, root-cause, observability, ci-only, browser-network-database, incidents, reliability-metrics]
-    role_tracks: [Senior SDET, Lead SDET, Quality Platform Engineer, DevOps/CI Quality Engineer]
-  - id: git-maven
-    label: Git, Maven, and build engineering
-    tier: A
-    subdomains: [git-model, merge-rebase, conflicts, reset-revert-restore, cherry-pick, releases, hooks, branching, maven-lifecycle, pom-dependencies, plugins-profiles, surefire-failsafe, multi-module, dependency-convergence, reproducibility, secrets-artifacts]
-    role_tracks: [Senior SDET, Lead SDET, DevOps/CI Quality Engineer, Quality Platform Engineer]
-  - id: cicd
-    label: CI/CD and quality pipelines
-    tier: A
-    subdomains: [stages, trigger-strategy, github-actions, jenkins, azure-devops, caching, matrices-sharding, artifacts, secrets, environments, quality-gates, flakes, reruns, selection, parallelism, deployment-validation, rollback, supply-chain, cost-throughput]
-    role_tracks: [Lead SDET, Quality Platform Engineer, DevOps/CI Quality Engineer, Quality Engineering Lead]
-  - id: llm-engineering
-    label: LLM and generative-AI engineering
-    tier: A
-    subdomains: [tokens-context, prompting, structured-output, tool-calling, embeddings, retrieval, rag, grounding-citations, evaluation, latency-cost, caching, safety, privacy, model-selection, hallucinations, multimodal]
-    role_tracks: [AI Engineer, LLM/Agent Engineer, AI QA Engineer, AI Test Engineer]
-  - id: agentic-ai
-    label: Agentic AI, tools, MCP, and orchestration
-    tier: A
-    subdomains: [agents-workflows, planning-tools, state-memory, handoffs, tool-schemas, mcp, permissions, sandboxing, prompt-injection, web-search, computer-code-tools, tracing, evals, recovery, human-approval, multi-agent]
-    role_tracks: [LLM/Agent Engineer, AI Engineer, AI QA Engineer, AI Test Engineer]
-  - id: ai-quality
-    label: AI for quality engineering
-    tier: A
-    subdomains: [test-generation, requirements-analysis, locator-claims, api-schema-generation, failure-triage, synthetic-data, visual-testing, risk-selection, autonomous-testing, ai-system-testing, nondeterminism, evals, prompt-injection, drift, adversarial-testing, governance, human-review]
-    role_tracks: [AI QA Engineer, AI Test Engineer, Quality Engineering Lead, LLM/Agent Engineer]
-  - id: ai-for-qa
-    label: Applied AI for QA workflows
-    tier: B
-    subdomains: [evaluation-datasets, prompt-regression, safety-testing]
-    role_tracks: [AI QA Engineer, AI Test Engineer, Quality Engineering Lead]
-  - id: postman-newman
-    label: Postman, Newman, and API tooling
-    tier: B
-    subdomains: [collections, environments, scripts, data-files, cli-runs, reporting]
-    role_tracks: [Senior SDET, Lead SDET, DevOps/CI Quality Engineer]
-  - id: mobile-appium
-    label: Mobile testing and Appium
-    tier: B
-    subdomains: [architecture, options, android-ios-engines, gestures, synchronization, hybrid-apps, device-matrix, cloud-execution]
-    role_tracks: [Mobile Automation Engineer, Senior SDET, Lead SDET]
-  - id: browserstack
-    label: BrowserStack, device clouds, and cross-browser strategy
-    tier: B
-    subdomains: [capability-matrix, device-clouds, browser-coverage, parallelism, artifacts, triage]
-    role_tracks: [Mobile Automation Engineer, Senior SDET, Quality Engineering Lead]
-  - id: performance-observability
-    label: Performance testing and APM/observability
-    tier: B
-    subdomains: [performance-types, workload-models, percentiles, throughput-errors, bottlenecks, jmeter-gatling-k6, traces-metrics-logs]
-    role_tracks: [Performance Engineer, Quality Platform Engineer, Senior SDET]
-  - id: security-owasp
-    label: Security testing and OWASP fundamentals
-    tier: B
-    subdomains: [authentication, sessions, input-validation, api-security, owasp, secrets, dependency-risk, safe-testing]
-    role_tracks: [Senior SDET, Test Automation Architect, DevOps/CI Quality Engineer]
-  - id: containers-cloud
-    label: Docker, Kubernetes, and cloud fundamentals for quality engineers
-    tier: B
-    subdomains: [containers, kubernetes, identity, networking, storage, compute, serverless, cloud-observability]
-    role_tracks: [Quality Platform Engineer, DevOps/CI Quality Engineer, Lead SDET]
-  - id: test-data-environments
-    label: Test data, environment management, mocks, and service virtualization
-    tier: B
-    subdomains: [data-lifecycle, isolation, environment-config, mocks, virtualization, contracts]
-    role_tracks: [Senior SDET, Lead SDET, Test Automation Architect]
-  - id: accessibility
-    label: Accessibility testing
-    tier: B
-    subdomains: [wcag, keyboard, semantics, screen-readers, automation, remediation]
-    role_tracks: [Senior SDET, Quality Engineering Lead, Test/Quality Architect]
-  - id: qa-strategy-governance
-    label: QA strategy, metrics, management, and governance
-    tier: B
-    subdomains: [strategy, prioritization, metrics, governance, roadmap, budgets]
-    role_tracks: [QA Manager, Quality Engineering Manager, Quality Engineering Lead]
-  - id: technical-leadership
-    label: Technical leadership, mentoring, and stakeholder management
-    tier: B
-    subdomains: [mentoring, delegation, stakeholder-alignment, conflict, feedback, influence]
-    role_tracks: [Lead SDET, Quality Engineering Lead, Engineering Manager, QA Manager]
-  - id: solution-architecture
-    label: Solution/test architecture and system-design scenarios
-    tier: B
-    subdomains: [requirements, trade-offs, scalability, reliability, integration, evolution]
-    role_tracks: [Test/Quality Architect, Solution Architect, Technical Architect]
-  - id: behavioral
-    label: Behavioral, HR, communication, conflict, and ownership
-    tier: B
-    subdomains: [ownership, communication, conflict, feedback, prioritization, ethics]
-    role_tracks: [QA Manager, Quality Engineering Manager, Engineering Manager, Lead SDET]
-  - id: ml-fundamentals
-    label: AI and machine-learning fundamentals
-    tier: B
-    subdomains: [learning-types, validation, overfitting, metrics, data-quality, inference, drift, explainability, responsible-ai]
-    role_tracks: [AI Engineer, AI QA Engineer, AI Test Engineer]
-  - id: ai-governance
-    label: AI leadership, governance, and adoption
-    tier: B
-    subdomains: [business-case, build-buy, privacy, vendor-risk, governance, roi, change-management, capability, responsible-use, evaluation, incidents, cost, workforce, executive-communication]
-    role_tracks: [Engineering Manager, Quality Engineering Manager, AI Engineer, LLM/Agent Engineer]
-  - id: python-automation
-    label: Python for automation
-    tier: C
-    subdomains: [language-basics, pytest, fixtures, http-clients, concurrency, packaging]
-    role_tracks: [Senior SDET, Quality Platform Engineer]
-  - id: javascript-typescript
-    label: JavaScript/TypeScript for automation
-    tier: C
-    subdomains: [language-basics, async, types, test-runners, browser-automation, tooling]
-    role_tracks: [Senior SDET, Quality Platform Engineer]
-  - id: contract-events
-    label: Contract testing and event-driven systems
-    tier: C
-    subdomains: [consumer-contracts, provider-contracts, schema-evolution, events, idempotency, observability]
-    role_tracks: [Senior SDET, Test Automation Architect]
-  - id: data-etl
-    label: Data/ETL/warehouse testing
-    tier: C
-    subdomains: [lineage, transformations, reconciliation, quality, incremental-loads, warehouse]
-    role_tracks: [Senior SDET, Quality Platform Engineer]
-  - id: sre-resilience
-    label: SRE, resilience, chaos, and production quality
-    tier: C
-    subdomains: [slo-sli, resilience, chaos, incident-response, capacity, production-validation]
-    role_tracks: [Quality Platform Engineer, DevOps/CI Quality Engineer, Performance Engineer]
-  - id: agile-delivery
-    label: Agile/product delivery and estimation
-    tier: C
-    subdomains: [planning, estimation, refinement, delivery, feedback, risk]
-    role_tracks: [Lead SDET, QA Manager, Engineering Manager]
-  - id: vendor-economics
-    label: Vendor/tool evaluation and quality economics
-    tier: C
-    subdomains: [selection, total-cost, security, adoption, measurement, exit-strategy]
-    role_tracks: [QA Manager, Quality Engineering Manager, Quality Engineering Lead]
+- id: testing-fundamentals
+  label: Testing fundamentals & quality engineering
+  tier: A
+  subdomains:
+  - testing-principles
+  - test-design
+  - risk-based-testing
+  - test-pyramid
+  - exploratory-testing
+  - defect-lifecycle
+  - quality-gates
+  - traceability
+  - metrics
+  - release-readiness
+  - production-validation
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+- id: java
+  label: Java
+  tier: A
+  subdomains:
+  - language-basics
+  - oop
+  - strings-immutability
+  - equals-hashcode
+  - collections
+  - generics
+  - exceptions
+  - streams-lambdas
+  - records-sealed-patterns
+  - concurrency
+  - virtual-threads
+  - jvm-memory-gc
+  - io-nio
+  - reflection-annotations
+  - design-patterns
+  - clean-code
+  - debugging-performance
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+- id: selenium
+  label: Selenium WebDriver
+  tier: A
+  subdomains:
+  - webdriver-architecture
+  - driver-management
+  - locators
+  - waits-synchronization
+  - interactions
+  - frames-windows-alerts
+  - actions
+  - javascript
+  - downloads-uploads
+  - page-components
+  - grid-parallelism
+  - bidi-cdp
+  - observability
+  - flakiness
+  - anti-patterns
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+- id: testng
+  label: TestNG
+  tier: A
+  subdomains:
+  - annotations-lifecycle
+  - assertions
+  - data-providers
+  - parameters
+  - groups-dependencies
+  - listeners
+  - retries
+  - parallelism
+  - factories
+  - suite-xml
+  - reporting
+  - thread-safety
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+- id: cucumber
+  label: Cucumber, Gherkin & BDD
+  tier: A
+  subdomains:
+  - bdd-purpose
+  - discovery
+  - gherkin
+  - scenario-outlines
+  - data-tables
+  - hooks
+  - tags
+  - step-definitions
+  - parameter-types
+  - dependency-injection
+  - state-context
+  - living-documentation
+  - parallelism
+  - anti-patterns
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+- id: api-openapi
+  label: API testing, HTTP & OpenAPI
+  tier: A
+  subdomains:
+  - http-semantics
+  - rest-constraints
+  - methods-idempotency
+  - status-codes
+  - headers-content-negotiation
+  - authentication-authorization
+  - json-xml
+  - pagination-filtering
+  - error-contracts
+  - schema-validation
+  - openapi
+  - contract-testing
+  - negative-security
+  - resilience-rate-limits
+  - async-events
+  - observability
+  - test-data
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+- id: rest-assured
+  label: REST Assured
+  tier: A
+  subdomains:
+  - request-specifications
+  - response-specifications
+  - assertions
+  - serialization
+  - authentication
+  - filters-logging
+  - jsonpath-xmlpath
+  - schema-validation
+  - correlation
+  - parameterization
+  - reusable-clients
+  - parallelism
+  - testng-cucumber-integration
+  - reporting
+  - framework-design
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+- id: sql-oracle
+  label: SQL, Oracle & database testing
+  tier: A
+  subdomains:
+  - select-filter-sort
+  - joins
+  - aggregation
+  - subqueries-ctes
+  - window-functions
+  - set-operations
+  - constraints
+  - transactions-acid
+  - isolation-locking
+  - indexes-execution-plans
+  - normalization
+  - latest-record
+  - duplicates-data-quality
+  - oracle-functions
+  - sequences
+  - plsql
+  - reconciliation
+  - performance
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+- id: framework-architecture
+  label: Automation framework architecture
+  tier: A
+  subdomains:
+  - layers
+  - factories
+  - configuration
+  - dependency-injection
+  - test-data
+  - page-component-service-objects
+  - multi-channel-integration
+  - logging-reporting
+  - retry-policy
+  - parallelism-thread-safety
+  - environment-management
+  - extensibility
+  - packaging
+  - governance
+  - migration
+  - cost-maintenance
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+- id: debugging-reliability
+  label: Debugging, reliability & flaky tests
+  tier: A
+  subdomains:
+  - reproduction
+  - logs-artifacts
+  - synchronization
+  - environment
+  - test-data
+  - race-conditions
+  - nondeterminism
+  - retry-vs-repair
+  - quarantine
+  - failure-classification
+  - root-cause
+  - observability
+  - ci-only-failures
+  - incident-handling
+  - reliability-metrics
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+- id: git-maven
+  label: Git, Maven & build engineering
+  tier: A
+  subdomains:
+  - git-object-model
+  - branching
+  - merge-rebase
+  - conflict-resolution
+  - reset-revert-restore
+  - cherry-pick
+  - tags-releases
+  - hooks
+  - maven-lifecycle
+  - pom-dependencies
+  - scopes
+  - plugins-profiles
+  - surefire-failsafe
+  - multi-module
+  - dependency-convergence
+  - reproducible-builds
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+  - Quality Platform Engineer
+- id: cicd
+  label: CI/CD & quality pipelines
+  tier: A
+  subdomains:
+  - pipeline-stages
+  - pr-nightly-release
+  - github-actions
+  - jenkins
+  - azure-devops
+  - caching
+  - matrix-sharding
+  - artifacts-reports
+  - secrets
+  - environments
+  - quality-gates
+  - flaky-handling
+  - test-selection
+  - parallelism
+  - deployment-validation
+  - rollback
+  - supply-chain
+  - cost-throughput
+  role_tracks:
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Quality Engineering Lead
+- id: postman-newman
+  label: Postman & Newman
+  tier: B
+  subdomains:
+  - collections
+  - environments
+  - variables
+  - pre-request-scripts
+  - tests
+  - auth
+  - chaining
+  - schemas
+  - mock-servers
+  - monitors
+  - newman
+  - reporters
+  - ci-integration
+  - governance
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - DevOps/CI Quality Engineer
+- id: mobile-appium
+  label: Mobile testing & Appium
+  tier: B
+  subdomains:
+  - mobile-strategy
+  - appium-architecture
+  - capabilities-options
+  - android-uiautomator2
+  - ios-xcuitest
+  - locators
+  - gestures
+  - synchronization
+  - hybrid-apps
+  - real-devices-emulators
+  - device-matrix
+  - cloud-execution
+  - permissions-notifications
+  - deep-links
+  - performance
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+- id: browserstack
+  label: BrowserStack & device clouds
+  tier: B
+  subdomains:
+  - browser-matrix
+  - device-selection
+  - capabilities
+  - parallelism
+  - local-tunnel
+  - artifacts
+  - network-profiles
+  - geolocation
+  - cost-controls
+  - security
+  - vendor-evaluation
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+- id: performance-observability
+  label: Performance testing, APM & observability
+  tier: B
+  subdomains:
+  - performance-types
+  - workload-models
+  - percentiles
+  - throughput
+  - errors
+  - bottleneck-analysis
+  - jmeter
+  - k6
+  - gatling
+  - apm
+  - traces-metrics-logs
+  - opentelemetry
+  - capacity
+  - soak-spike
+  - performance-gates
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+- id: security-owasp
+  label: Security testing & OWASP
+  tier: B
+  subdomains:
+  - authentication
+  - authorization
+  - sessions
+  - input-validation
+  - api-security
+  - injection
+  - xss
+  - csrf
+  - ssrf
+  - secrets
+  - dependencies
+  - threat-modeling
+  - safe-testing
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+- id: containers-cloud
+  label: Docker, Kubernetes & cloud
+  tier: B
+  subdomains:
+  - containers
+  - images
+  - networks
+  - volumes
+  - security
+  - compose
+  - kubernetes-workloads
+  - services-ingress
+  - config-secrets
+  - identity
+  - cloud-networking
+  - storage
+  - serverless
+  - observability
+  - cost
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+- id: test-data-environments
+  label: Test data, environments, mocks & virtualization
+  tier: B
+  subdomains:
+  - data-generation
+  - masking
+  - synthetic-data
+  - cleanup
+  - environment-parity
+  - configuration-drift
+  - mocks-stubs-fakes
+  - service-virtualization
+  - contract-fixtures
+  - ephemeral-environments
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+- id: accessibility
+  label: Accessibility testing
+  tier: B
+  subdomains:
+  - wcag
+  - semantic-html
+  - keyboard
+  - focus
+  - screen-readers
+  - contrast
+  - forms
+  - dynamic-content
+  - automation-vs-manual
+  - mobile-accessibility
+  role_tracks:
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test/Quality Architect
+- id: qa-strategy-governance
+  label: QA strategy, metrics & governance
+  tier: B
+  subdomains:
+  - strategy
+  - risk
+  - roadmap
+  - coverage
+  - metrics
+  - quality-gates
+  - operating-model
+  - backlog-intake
+  - definition-of-done
+  - budget
+  - vendor-management
+  - executive-reporting
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+- id: technical-leadership
+  label: Technical leadership & stakeholder management
+  tier: B
+  subdomains:
+  - mentoring
+  - delegation
+  - conflict
+  - influence
+  - stakeholder-management
+  - prioritization
+  - decision-making
+  - incident-leadership
+  - communication
+  - performance-coaching
+  - team-capability
+  role_tracks:
+  - Lead SDET
+  - Quality Engineering Lead
+  - Engineering Manager
+  - QA Manager
+- id: solution-architecture
+  label: Solution and test architecture
+  tier: B
+  subdomains:
+  - requirements-to-architecture
+  - quality-attributes
+  - integration-boundaries
+  - data-flow
+  - security
+  - resilience
+  - observability
+  - deployment
+  - trade-offs
+  - decision-records
+  - migration
+  - cost
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+- id: behavioral
+  label: Behavioral, HR & ownership
+  tier: B
+  subdomains:
+  - ownership
+  - conflict
+  - failure
+  - ambiguity
+  - delivery-pressure
+  - feedback
+  - collaboration
+  - ethics
+  - learning
+  - career-motivation
+  - leadership-examples
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Lead SDET
+- id: ml-fundamentals
+  label: AI and machine-learning fundamentals
+  tier: B
+  subdomains:
+  - supervised-unsupervised
+  - training-validation-test
+  - overfitting
+  - bias-variance
+  - metrics
+  - data-quality
+  - inference
+  - drift
+  - explainability
+  - responsible-ai
+  role_tracks:
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+- id: llm-engineering
+  label: LLM and generative-AI engineering
+  tier: A
+  subdomains:
+  - tokens-context
+  - prompting
+  - structured-output
+  - tool-calling
+  - embeddings
+  - retrieval
+  - rag
+  - grounding-citations
+  - evaluation
+  - latency-cost
+  - caching
+  - safety
+  - privacy
+  - model-selection
+  - hallucinations
+  - multimodal
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+- id: agentic-ai
+  label: Agentic AI, tools & MCP
+  tier: A
+  subdomains:
+  - agents-vs-workflows
+  - planning
+  - tool-choice
+  - state-memory
+  - handoffs
+  - tool-schemas
+  - mcp
+  - permissions
+  - sandboxing
+  - prompt-injection
+  - web-search
+  - computer-tools
+  - tracing
+  - evals
+  - recovery
+  - human-approval
+  - multi-agent
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+- id: ai-quality
+  label: AI for quality engineering
+  tier: A
+  subdomains:
+  - requirements-analysis
+  - test-generation
+  - locator-healing
+  - api-generation
+  - failure-triage
+  - synthetic-data
+  - visual-testing
+  - risk-selection
+  - autonomous-testing
+  - llm-testing
+  - nondeterminism
+  - evals
+  - prompt-injection
+  - drift
+  - adversarial-testing
+  - governance
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - Quality Engineering Lead
+  - LLM/Agent Engineer
+- id: ai-governance
+  label: AI leadership, governance & adoption
+  tier: B
+  subdomains:
+  - business-case
+  - build-buy
+  - data-privacy
+  - vendor-risk
+  - governance
+  - roi
+  - change-management
+  - capability-development
+  - responsible-use
+  - evaluation-standards
+  - incident-response
+  - cost-controls
+  - workforce-impact
+  role_tracks:
+  - Engineering Manager
+  - Quality Engineering Manager
+  - AI Engineer
+  - LLM/Agent Engineer
+- id: python-automation
+  label: Python for automation
+  tier: C
+  subdomains:
+  - language
+  - pytest
+  - requests
+  - typing
+  - async
+  - packaging
+  - frameworks
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+- id: javascript-typescript
+  label: JavaScript/TypeScript for automation
+  tier: C
+  subdomains:
+  - language
+  - typescript
+  - promises
+  - node
+  - playwright
+  - testing
+  - tooling
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+- id: contract-events
+  label: Contract testing & event-driven systems
+  tier: C
+  subdomains:
+  - consumer-contracts
+  - provider-verification
+  - schema-evolution
+  - queues
+  - events
+  - idempotency
+  - eventual-consistency
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+- id: data-etl
+  label: Data, ETL & warehouse testing
+  tier: C
+  subdomains:
+  - source-target
+  - transformations
+  - reconciliation
+  - data-quality
+  - incremental-loads
+  - late-data
+  - warehouses
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+- id: sre-resilience
+  label: SRE, resilience & production quality
+  tier: C
+  subdomains:
+  - sli-slo
+  - error-budgets
+  - resilience
+  - chaos
+  - observability
+  - incident-response
+  - postmortems
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+- id: agile-delivery
+  label: Agile delivery & estimation
+  tier: C
+  subdomains:
+  - planning
+  - refinement
+  - estimation
+  - definition-of-ready
+  - definition-of-done
+  - release-planning
+  - dependencies
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+- id: vendor-economics
+  label: Vendor evaluation & quality economics
+  tier: C
+  subdomains:
+  - tool-selection
+  - tco
+  - licensing
+  - roi
+  - proof-of-concept
+  - exit-strategy
+  - governance
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead

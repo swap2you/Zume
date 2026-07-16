@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-import hashlib
 import shutil
 import subprocess
 import sys
-import zipfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from package_release import zip_directory_deterministic  # noqa: E402
 
 
 VERSION = "1.0.0"
@@ -73,11 +74,7 @@ def assert_clean_stage() -> None:
 
 def write_archive() -> None:
     RELEASES.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(ARCHIVE, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for path in sorted(STAGE.rglob("*")):
-            if path.is_file():
-                archive.write(path, path.relative_to(STAGING_ROOT))
-    digest = hashlib.sha256(ARCHIVE.read_bytes()).hexdigest()
+    digest = zip_directory_deterministic(STAGE, ARCHIVE)
     CHECKSUM.write_text(f"{digest}  {ARCHIVE.name}\n", encoding="ascii")
 
 

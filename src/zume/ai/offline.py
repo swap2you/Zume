@@ -39,12 +39,18 @@ class OfflineAIProvider(AIProvider):
             concise = str(item.get("concise_answer") or item.get("recommended_answer") or "").strip()
             if concise:
                 parts.append(f"**{title}**: {concise}")
+            references = item.get("references") or []
+            first_url = next(
+                (str(ref.get("source_url")) for ref in references
+                 if isinstance(ref, dict) and str(ref.get("source_url", "")).startswith("https://")),
+                "",
+            )
             citations.append(
                 Citation(
                     source_id=str(item.get("id") or ""),
                     title=title,
                     locator=str(item.get("domain") or ""),
-                    url="",
+                    url=first_url,
                 )
             )
         answer = (

@@ -7,18 +7,16 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In sql-oracle, explain the purpose and failure boundary of joins. How would you verify that
-    it behaves as intended?
-  concise_answer: joins should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For joins, begin with the contract described at SQL Language Reference: joins.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete sql-oracle example involving joins, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In sql-oracle, explain the purpose and failure boundary of joins. How would you verify that it behaves as intended?
+  concise_answer: joins should be chosen for its documented semantics, then verified against the observable result it is responsible
+    for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For joins, begin with the contract described at SQL Language Reference: joins. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete sql-oracle example involving joins, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented joins semantics
   - checks a meaningful negative path
@@ -33,11 +31,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that joins is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from joins,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that joins is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from joins, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused joins case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -55,12 +51,13 @@ records:
     locator: 'SQL Language Reference: joins'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: sql-oracle-reviewed-02
   domain: sql-oracle
@@ -69,18 +66,16 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In sql-oracle, explain the purpose and failure boundary of GROUP BY. How would you verify
-    that it behaves as intended?
-  concise_answer: GROUP BY should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For GROUP BY, begin with the contract described at SQL Language Reference: GROUP
-    BY. State the input, expected state transition or result, and the specific evidence collected when
-    it fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete sql-oracle example involving GROUP BY, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In sql-oracle, explain the purpose and failure boundary of GROUP BY. How would you verify that it behaves as intended?
+  concise_answer: GROUP BY should be chosen for its documented semantics, then verified against the observable result it is
+    responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For GROUP BY, begin with the contract described at SQL Language Reference: GROUP BY. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete sql-oracle example involving GROUP BY, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented GROUP BY semantics
   - checks a meaningful negative path
@@ -95,11 +90,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that GROUP BY is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from GROUP
-      BY, and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that GROUP BY is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from GROUP BY, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused GROUP BY case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -117,12 +110,13 @@ records:
     locator: 'SQL Language Reference: GROUP BY'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: sql-oracle-reviewed-03
   domain: sql-oracle
@@ -131,19 +125,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In sql-oracle, explain the purpose and failure boundary of NULL conditions. How would you
-    verify that it behaves as intended?
-  concise_answer: NULL conditions should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For NULL conditions, begin with the contract described at SQL Language Reference:
-    NULL conditions. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete sql-oracle example involving NULL conditions, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In sql-oracle, explain the purpose and failure boundary of NULL conditions. How would you verify that it behaves
+    as intended?
+  concise_answer: NULL conditions should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For NULL conditions, begin with the contract described at SQL Language Reference: NULL conditions.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete sql-oracle example involving NULL conditions, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented NULL conditions semantics
   - checks a meaningful negative path
@@ -158,14 +150,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that NULL conditions is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from NULL
-      conditions, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that NULL conditions is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from NULL conditions, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused NULL conditions case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused NULL conditions case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -181,12 +170,13 @@ records:
     locator: 'SQL Language Reference: NULL conditions'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: sql-oracle-reviewed-04
   domain: sql-oracle
@@ -195,19 +185,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In sql-oracle, explain the purpose and failure boundary of analytic functions. How would you
-    verify that it behaves as intended?
-  concise_answer: analytic functions should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For analytic functions, begin with the contract described at SQL Language Reference:
-    analytic functions. State the input, expected state transition or result, and the specific evidence
-    collected when it fails. Use the smallest deterministic check that exercises that contract, isolate
-    external timing or data dependencies, and report the failing condition rather than masking it with
-    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
-    trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete sql-oracle example involving analytic functions, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In sql-oracle, explain the purpose and failure boundary of analytic functions. How would you verify that it behaves
+    as intended?
+  concise_answer: analytic functions should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For analytic functions, begin with the contract described at SQL Language Reference: analytic functions.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete sql-oracle example involving analytic functions, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented analytic functions semantics
   - checks a meaningful negative path
@@ -222,14 +210,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that analytic functions is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from analytic
-      functions, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that analytic functions is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from analytic functions, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused analytic functions case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused analytic functions case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -245,12 +230,13 @@ records:
     locator: 'SQL Language Reference: analytic functions'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: sql-oracle-reviewed-05
   domain: sql-oracle
@@ -259,19 +245,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In sql-oracle, explain the purpose and failure boundary of transaction processing. How would
-    you verify that it behaves as intended?
-  concise_answer: transaction processing should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For transaction processing, begin with the contract described at SQL Language Reference:
-    transaction processing. State the input, expected state transition or result, and the specific evidence
-    collected when it fails. Use the smallest deterministic check that exercises that contract, isolate
-    external timing or data dependencies, and report the failing condition rather than masking it with
-    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
-    trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete sql-oracle example involving transaction processing, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In sql-oracle, explain the purpose and failure boundary of transaction processing. How would you verify that it
+    behaves as intended?
+  concise_answer: transaction processing should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For transaction processing, begin with the contract described at SQL Language Reference: transaction
+    processing. State the input, expected state transition or result, and the specific evidence collected when it fails. Use
+    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies, and report
+    the failing condition rather than masking it with a retry. The correct implementation depends on the domain boundary,
+    so the reviewer should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete sql-oracle example involving transaction processing, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented transaction processing semantics
   - checks a meaningful negative path
@@ -286,14 +270,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that transaction processing is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from transaction
-      processing, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that transaction processing is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from transaction processing, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused transaction processing case with an explicit expected result and one invalid or
-    boundary input.
+  - Create one focused transaction processing case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -309,12 +291,13 @@ records:
     locator: 'SQL Language Reference: transaction processing'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: sql-oracle-reviewed-06
   domain: sql-oracle
@@ -323,19 +306,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In sql-oracle, explain the purpose and failure boundary of date data types. How would you
-    verify that it behaves as intended?
-  concise_answer: date data types should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For date data types, begin with the contract described at SQL Language Reference:
-    date data types. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete sql-oracle example involving date data types, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In sql-oracle, explain the purpose and failure boundary of date data types. How would you verify that it behaves
+    as intended?
+  concise_answer: date data types should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For date data types, begin with the contract described at SQL Language Reference: date data types.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete sql-oracle example involving date data types, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented date data types semantics
   - checks a meaningful negative path
@@ -350,14 +331,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that date data types is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from date
-      data types, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that date data types is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from date data types, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused date data types case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused date data types case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -373,10 +351,11 @@ records:
     locator: 'SQL Language Reference: date data types'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

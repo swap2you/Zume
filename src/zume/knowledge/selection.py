@@ -45,6 +45,71 @@ _DOMAIN_NORMALIZATION = {
 }
 
 
+def load_role_policy(config_root: Path, role_track: str) -> dict[str, Any]:
+    """Resolve the role-family policy for a role track (explicit fallback)."""
+    path = config_root / "config" / "role-policies.yaml"
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError):
+        data = {}
+    policies = data.get("policies") or {}
+    default_id = str(data.get("default_policy") or "senior-sdet")
+    chosen_id = default_id
+    for policy_id, policy in policies.items():
+        if role_track in (policy.get("role_tracks") or []):
+            chosen_id = str(policy_id)
+            break
+    policy = dict(policies.get(chosen_id) or {})
+    policy.setdefault("label", role_track)
+    policy.setdefault("mandatory_core", list(MANDATORY_DOMAINS))
+    policy.setdefault("depth_domains", [])
+    policy.setdefault("knockout", {"applicable": True, "minutes": 20,
+                                   "domains": list(policy["mandatory_core"])})
+    policy.setdefault("exercises", ["sql", "api", "java", "selenium"])
+    policy["policy_id"] = chosen_id
+    policy["is_default_fallback"] = chosen_id == default_id and role_track not in (
+        policy.get("role_tracks") or []
+    )
+    return policy
+
+
+def _role_coverage(
+    policy: dict[str, Any], reviewed_q: list[QuestionRecord], role_track: str,
+) -> dict[str, Any]:
+    """Honest reviewed-coverage report for the selected role policy."""
+    reviewed_domains = {_canonical_domain(q.domain) for q in reviewed_q}
+    required = [str(d) for d in policy.get("mandatory_core", [])]
+    depth = [str(d) for d in policy.get("depth_domains", [])]
+    missing_core = [d for d in required if d not in reviewed_domains]
+    missing_depth = [d for d in depth if d not in reviewed_domains]
+    role_matched = sum(1 for q in reviewed_q if role_track in q.role_tracks)
+    sufficient = not missing_core and role_matched >= 8
+    warning = None
+    if missing_core:
+        warning = (
+            f"Reviewed library does not cover mandatory {policy.get('label')} domains: "
+            + ", ".join(missing_core)
+            + ". The plan is NOT role-complete."
+        )
+    elif role_matched < 8:
+        warning = (
+            f"Only {role_matched} reviewed questions are mapped to {role_track}; "
+            "role depth is limited."
+        )
+    return {
+        "policy_id": policy.get("policy_id"),
+        "policy_label": policy.get("label"),
+        "role_track": role_track,
+        "required_domains": required,
+        "depth_domains": depth,
+        "missing_core_domains": missing_core,
+        "missing_depth_domains": missing_depth,
+        "reviewed_role_questions": role_matched,
+        "sufficient": sufficient,
+        "warning": warning,
+    }
+
+
 def select_interview_plan(
     questions: list[QuestionRecord],
     exercises: list[ExerciseRecord],
@@ -56,11 +121,28 @@ def select_interview_plan(
     rotate: bool = False,
     config_root: Path | None = None,
 ) -> dict[str, Any]:
-    """Select a compact plan from reviewed records, with curated fallback only."""
+    """Select a role-policy-driven plan from reviewed records, curated fallback only."""
+    config_root = config_root or Path.cwd()
+    policy = load_role_policy(config_root, role_track)
+    mandatory = tuple(str(d) for d in policy["mandatory_core"])
+    depth_domains = tuple(str(d) for d in policy["depth_domains"])
+    knockout_domains = tuple(str(d) for d in (policy["knockout"].get("domains") or mandatory))
+
     reviewed_q = [q for q in questions if _is_reviewed(q)]
     reviewed_e = [e for e in exercises if _is_reviewed(e)]
-    if _insufficient_core(reviewed_q):
-        reviewed_q, reviewed_e = _load_curated_library(config_root or Path.cwd())
+    used_curated_fallback = False
+    if _insufficient_core(reviewed_q, mandatory):
+        curated_q, curated_e = _load_curated_library(config_root)
+        if curated_q:
+            reviewed_q, reviewed_e = curated_q, curated_e
+            used_curated_fallback = True
+
+    coverage = _role_coverage(policy, reviewed_q, role_track)
+    if used_curated_fallback:
+        coverage["warning"] = (
+            (coverage["warning"] + " ") if coverage["warning"] else ""
+        ) + "Selection fell back to the curated configuration library."
+        coverage["sufficient"] = False
 
     by_id = {q.id: q for q in reviewed_q}
     ex_by_id = {e.id: e for e in reviewed_e}
@@ -69,23 +151,32 @@ def select_interview_plan(
         kept = [by_id[item_id] for item_id in previous_question_ids if item_id in by_id]
         if kept:
             kept_ex = [ex_by_id[item_id] for item_id in (previous_exercise_ids or []) if item_id in ex_by_id]
-            return _plan_from(kept, kept_ex, role_track, tags, preserved=True)
+            return _plan_from(kept, kept_ex, role_track, tags, policy, coverage, preserved=True)
+
+    def _domain_rank(question: QuestionRecord) -> int:
+        domain = _canonical_domain(question.domain)
+        if domain in mandatory:
+            return 0
+        if domain in depth_domains:
+            return 1
+        return 2
 
     scored = sorted(
         reviewed_q,
         key=lambda q: (
-            0 if _canonical_domain(q.domain) in MANDATORY_DOMAINS else 1,
+            _domain_rank(q),
             0 if _domain_matches_resume(q.domain, tags) else 1,
             0 if role_track in q.role_tracks else 1,
             {"P0": 0, "P1": 1, "P2": 2, "P3": 3}.get(q.priority, 4),
             q.id,
         ),
     )
-    knockout = [q for q in scored if q.priority == "P0" and (
-        _canonical_domain(q.domain) in MANDATORY_DOMAINS or _domain_matches_resume(q.domain, tags)
-    )][:6]
+    knockout = [
+        q for q in scored
+        if q.priority == "P0" and _canonical_domain(q.domain) in knockout_domains
+    ][:6]
     if not knockout:
-        knockout = [q for q in scored if _canonical_domain(q.domain) in MANDATORY_DOMAINS][:6]
+        knockout = [q for q in scored if _canonical_domain(q.domain) in mandatory][:6]
     selected = list(knockout)
     selected_ids = {q.id for q in selected}
     by_domain: dict[str, list[QuestionRecord]] = defaultdict(list)
@@ -93,8 +184,10 @@ def select_interview_plan(
         if question.id not in selected_ids:
             by_domain[_canonical_domain(question.domain)].append(question)
     preferred = list(dict.fromkeys(
-        [domain for domain in MANDATORY_DOMAINS if domain in by_domain]
-        + sorted(tags) + list(by_domain)
+        [domain for domain in mandatory if domain in by_domain]
+        + sorted(tags)
+        + [domain for domain in depth_domains if domain in by_domain]
+        + list(by_domain)
     ))
     for domain in preferred:
         for level in ("basic", "intermediate", "advanced"):
@@ -107,49 +200,77 @@ def select_interview_plan(
         if len(selected) >= 28:
             break
     selected = selected[:28]
+    allowed_runners = {str(r) for r in policy["exercises"]}
+    exercise_pool = [e for e in reviewed_e if not allowed_runners or e.runner_type in allowed_runners or e.runner_type == "none"]
     selected_ex: list[ExerciseRecord] = []
+    seen_ex = set()
     for domain in preferred:
-        exercise = next((e for e in reviewed_e if _canonical_domain(e.domain) == domain), None)
+        exercise = next(
+            (e for e in exercise_pool if _canonical_domain(e.domain) == domain and e.id not in seen_ex),
+            None,
+        )
         if exercise is not None:
             selected_ex.append(exercise)
+            seen_ex.add(exercise.id)
         if len(selected_ex) >= 4:
             break
-    return _plan_from(selected, selected_ex, role_track, tags, preserved=False)
+    return _plan_from(selected, selected_ex, role_track, tags, policy, coverage, preserved=False)
 
 
 def _is_reviewed(record: QuestionRecord | ExerciseRecord) -> bool:
     return record.status == "published" and getattr(record, "review_status", None) == "reviewed"
 
 
-def _insufficient_core(questions: list[QuestionRecord]) -> bool:
-    return not set(MANDATORY_DOMAINS).issubset({_canonical_domain(q.domain) for q in questions})
+def _insufficient_core(
+    questions: list[QuestionRecord], mandatory: tuple[str, ...] = MANDATORY_DOMAINS,
+) -> bool:
+    covered = {_canonical_domain(q.domain) for q in questions}
+    missing = [domain for domain in mandatory if domain not in covered]
+    # Fall back only when the reviewed library misses most of the core.
+    return len(missing) > len(mandatory) // 2
 
 
 def _plan_from(questions: list[QuestionRecord], exercises: list[ExerciseRecord],
-               role_track: str, tags: set[str], *, preserved: bool) -> dict[str, Any]:
+               role_track: str, tags: set[str], policy: dict[str, Any],
+               coverage: dict[str, Any], *, preserved: bool) -> dict[str, Any]:
+    mandatory = tuple(str(d) for d in policy.get("mandatory_core", MANDATORY_DOMAINS))
+    knockout_applicable = bool(policy.get("knockout", {}).get("applicable", True))
     return {
         "role_track": role_track,
+        "role_policy": policy.get("policy_id"),
+        "role_policy_label": policy.get("label"),
+        "role_coverage": coverage,
         "preserved_prior_selection": preserved,
-        "knockout_question_ids": [q.id for q in questions[:6]],
+        "knockout_question_ids": [q.id for q in questions[:6]] if knockout_applicable else [],
         "question_ids": [q.id for q in questions],
         "exercise_ids": [e.id for e in exercises],
-        "why": [{"id": q.id, "reason": _reason_for(q, tags, role_track, preserved)} for q in questions],
+        "why": [{"id": q.id,
+                 "reason": _reason_for(
+                     q, tags=tags, role_track=role_track, mandatory=mandatory,
+                     depth=tuple(str(d) for d in policy.get("depth_domains", [])),
+                     preserved=preserved)}
+                for q in questions],
         "agenda_fit_minutes": 180,
-        "knockout_minutes": 20,
+        "knockout_minutes": int(policy.get("knockout", {}).get("minutes", 20)) if knockout_applicable else 0,
         "questions": [q.model_dump() for q in questions],
         "exercises": [e.model_dump() for e in exercises],
         "candidate_exercises": [e.candidate_projection() for e in exercises],
+        "warning": coverage.get("warning"),
     }
 
 
-def _reason_for(question: QuestionRecord, tags: set[str], role_track: str, preserved: bool) -> str:
+def _reason_for(question: QuestionRecord, tags: set[str], role_track: str,
+                mandatory: tuple[str, ...] = MANDATORY_DOMAINS,
+                depth: tuple[str, ...] = (), *, preserved: bool = False) -> str:
     domain = _canonical_domain(question.domain)
     if preserved:
         return f"rotation: preserved prior reviewed selection for {domain}"
     if domain in tags:
         return f"resume-claimed: resume evidence maps to {domain}"
-    if domain in MANDATORY_DOMAINS:
+    if domain in mandatory:
         return f"mandatory-core: required {domain} validation"
+    if domain in depth:
+        return f"specialty-depth: {role_track} depth in {domain}"
     if role_track in question.role_tracks:
         return f"role-aligned: {role_track} coverage in {domain}"
     return f"missing-evidence: validate unclaimed {domain} capability"

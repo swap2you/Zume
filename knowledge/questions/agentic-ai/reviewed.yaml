@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In agentic-ai, explain the purpose and failure boundary of architecture. How would you verify
-    that it behaves as intended?
-  concise_answer: architecture should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For architecture, begin with the contract described at MCP: architecture. State
-    the input, expected state transition or result, and the specific evidence collected when it fails.
-    Use the smallest deterministic check that exercises that contract, isolate external timing or data
-    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
-    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
-    case.'
-  deep_dive: Ask for a concrete agentic-ai example involving architecture, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In agentic-ai, explain the purpose and failure boundary of architecture. How would you verify that it behaves
+    as intended?
+  concise_answer: architecture should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For architecture, begin with the contract described at MCP: architecture. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete agentic-ai example involving architecture, including how the candidate would distinguish a
+    product defect from a test or environment fault.
   key_points:
   - uses documented architecture semantics
   - checks a meaningful negative path
@@ -34,14 +32,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that architecture is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from architecture,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that architecture is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from architecture, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused architecture case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused architecture case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +52,13 @@ records:
     locator: 'MCP: architecture'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: agentic-ai-reviewed-02
   domain: agentic-ai
@@ -71,17 +67,16 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In agentic-ai, explain the purpose and failure boundary of tools. How would you verify that
-    it behaves as intended?
-  concise_answer: tools should be chosen for its documented semantics, then verified against the observable
-    result it is responsible for. A test should make the relevant precondition and failure mode visible.
-  recommended_answer: 'For tools, begin with the contract described at MCP: tools. State the input, expected
-    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
-    check that exercises that contract, isolate external timing or data dependencies, and report the failing
-    condition rather than masking it with a retry. The correct implementation depends on the domain boundary,
-    so the reviewer should name the trade-off and demonstrate a negative case.'
-  deep_dive: Ask for a concrete agentic-ai example involving tools, including how the candidate would
-    distinguish a product defect from a test or environment fault.
+  question: In agentic-ai, explain the purpose and failure boundary of tools. How would you verify that it behaves as intended?
+  concise_answer: tools should be chosen for its documented semantics, then verified against the observable result it is responsible
+    for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For tools, begin with the contract described at MCP: tools. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete agentic-ai example involving tools, including how the candidate would distinguish a product
+    defect from a test or environment fault.
   key_points:
   - uses documented tools semantics
   - checks a meaningful negative path
@@ -96,11 +91,9 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that tools is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from tools,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that tools is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from tools, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
   - Create one focused tools case with an explicit expected result and one invalid or boundary input.
   role_tracks:
@@ -118,12 +111,13 @@ records:
     locator: 'MCP: tools'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: agentic-ai-reviewed-03
   domain: agentic-ai
@@ -132,19 +126,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In agentic-ai, explain the purpose and failure boundary of authorization. How would you verify
-    that it behaves as intended?
-  concise_answer: authorization should be chosen for its documented semantics, then verified against the
-    observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For authorization, begin with the contract described at MCP: authorization. State
-    the input, expected state transition or result, and the specific evidence collected when it fails.
-    Use the smallest deterministic check that exercises that contract, isolate external timing or data
-    dependencies, and report the failing condition rather than masking it with a retry. The correct implementation
-    depends on the domain boundary, so the reviewer should name the trade-off and demonstrate a negative
-    case.'
-  deep_dive: Ask for a concrete agentic-ai example involving authorization, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In agentic-ai, explain the purpose and failure boundary of authorization. How would you verify that it behaves
+    as intended?
+  concise_answer: authorization should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For authorization, begin with the contract described at MCP: authorization. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case.'
+  deep_dive: Ask for a concrete agentic-ai example involving authorization, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented authorization semantics
   - checks a meaningful negative path
@@ -159,14 +151,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that authorization is the source of a failure rather than a downstream
-      symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from authorization,
-      and correlated logs or traces. Compare that evidence with the documented contract before changing
-      timeouts, retries, or unrelated code.
+  - question: What evidence would show that authorization is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from authorization, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused authorization case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused authorization case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -182,12 +171,13 @@ records:
     locator: 'MCP: authorization'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: agentic-ai-reviewed-04
   domain: agentic-ai
@@ -196,19 +186,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In agentic-ai, explain the purpose and failure boundary of security best practices. How would
-    you verify that it behaves as intended?
-  concise_answer: security best practices should be chosen for its documented semantics, then verified
-    against the observable result it is responsible for. A test should make the relevant precondition
-    and failure mode visible.
-  recommended_answer: 'For security best practices, begin with the contract described at MCP: security
-    best practices. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete agentic-ai example involving security best practices, including how the
-    candidate would distinguish a product defect from a test or environment fault.
+  question: In agentic-ai, explain the purpose and failure boundary of security best practices. How would you verify that
+    it behaves as intended?
+  concise_answer: security best practices should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For security best practices, begin with the contract described at MCP: security best practices. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete agentic-ai example involving security best practices, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented security best practices semantics
   - checks a meaningful negative path
@@ -223,14 +211,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that security best practices is the source of a failure rather
-      than a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from security
-      best practices, and correlated logs or traces. Compare that evidence with the documented contract
-      before changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that security best practices is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from security best practices,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries,
+      or unrelated code.
   examples:
-  - Create one focused security best practices case with an explicit expected result and one invalid or
-    boundary input.
+  - Create one focused security best practices case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -246,10 +232,11 @@ records:
     locator: 'MCP: security best practices'
   last_verified: '2026-07-16'
   freshness_days: 90
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario

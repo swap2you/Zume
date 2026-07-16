@@ -7,19 +7,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In git-maven, explain the purpose and failure boundary of merge and rebase. How would you
-    verify that it behaves as intended?
-  concise_answer: merge and rebase should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For merge and rebase, begin with the contract described at Git: merge and rebase.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete git-maven example involving merge and rebase, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In git-maven, explain the purpose and failure boundary of merge and rebase. How would you verify that it behaves
+    as intended?
+  concise_answer: merge and rebase should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For merge and rebase, begin with the contract described at Git: merge and rebase. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete git-maven example involving merge and rebase, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented merge and rebase semantics
   - checks a meaningful negative path
@@ -34,14 +32,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that merge and rebase is the source of a failure rather than a
-      downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from merge
-      and rebase, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that merge and rebase is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from merge and rebase, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused merge and rebase case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused merge and rebase case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -57,12 +52,13 @@ records:
     locator: 'Git: merge and rebase'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: git-maven-reviewed-02
   domain: git-maven
@@ -71,19 +67,17 @@ records:
   level: intermediate
   priority: P1
   frequency: common
-  question: In git-maven, explain the purpose and failure boundary of revision selection. How would you
-    verify that it behaves as intended?
-  concise_answer: revision selection should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For revision selection, begin with the contract described at Git: revision selection.
-    State the input, expected state transition or result, and the specific evidence collected when it
-    fails. Use the smallest deterministic check that exercises that contract, isolate external timing
-    or data dependencies, and report the failing condition rather than masking it with a retry. The correct
-    implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
-    a negative case.'
-  deep_dive: Ask for a concrete git-maven example involving revision selection, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In git-maven, explain the purpose and failure boundary of revision selection. How would you verify that it behaves
+    as intended?
+  concise_answer: revision selection should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For revision selection, begin with the contract described at Git: revision selection. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete git-maven example involving revision selection, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented revision selection semantics
   - checks a meaningful negative path
@@ -98,14 +92,11 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that revision selection is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from revision
-      selection, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that revision selection is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from revision selection, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
   examples:
-  - Create one focused revision selection case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused revision selection case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -121,12 +112,13 @@ records:
     locator: 'Git: revision selection'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: git-maven-reviewed-03
   domain: git-maven
@@ -135,19 +127,17 @@ records:
   level: advanced
   priority: P1
   frequency: common
-  question: In git-maven, explain the purpose and failure boundary of lifecycle reference. How would you
-    verify that it behaves as intended?
-  concise_answer: lifecycle reference should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For lifecycle reference, begin with the contract described at Maven: lifecycle
-    reference. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete git-maven example involving lifecycle reference, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In git-maven, explain the purpose and failure boundary of lifecycle reference. How would you verify that it behaves
+    as intended?
+  concise_answer: lifecycle reference should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For lifecycle reference, begin with the contract described at Maven: lifecycle reference. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete git-maven example involving lifecycle reference, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented lifecycle reference semantics
   - checks a meaningful negative path
@@ -162,14 +152,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that lifecycle reference is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from lifecycle
-      reference, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that lifecycle reference is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from lifecycle reference, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused lifecycle reference case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused lifecycle reference case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -185,12 +173,13 @@ records:
     locator: 'Maven: lifecycle reference'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
 - id: git-maven-reviewed-04
   domain: git-maven
@@ -199,19 +188,17 @@ records:
   level: basic
   priority: P1
   frequency: common
-  question: In git-maven, explain the purpose and failure boundary of dependency mechanism. How would
-    you verify that it behaves as intended?
-  concise_answer: dependency mechanism should be chosen for its documented semantics, then verified against
-    the observable result it is responsible for. A test should make the relevant precondition and failure
-    mode visible.
-  recommended_answer: 'For dependency mechanism, begin with the contract described at Maven: dependency
-    mechanism. State the input, expected state transition or result, and the specific evidence collected
-    when it fails. Use the smallest deterministic check that exercises that contract, isolate external
-    timing or data dependencies, and report the failing condition rather than masking it with a retry.
-    The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
-    and demonstrate a negative case.'
-  deep_dive: Ask for a concrete git-maven example involving dependency mechanism, including how the candidate
-    would distinguish a product defect from a test or environment fault.
+  question: In git-maven, explain the purpose and failure boundary of dependency mechanism. How would you verify that it behaves
+    as intended?
+  concise_answer: dependency mechanism should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For dependency mechanism, begin with the contract described at Maven: dependency mechanism. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete git-maven example involving dependency mechanism, including how the candidate would distinguish
+    a product defect from a test or environment fault.
   key_points:
   - uses documented dependency mechanism semantics
   - checks a meaningful negative path
@@ -226,14 +213,12 @@ records:
   common_mistakes:
   - asserting incidental implementation details
   follow_ups:
-  - question: What evidence would show that dependency mechanism is the source of a failure rather than
-      a downstream symptom?
-    recommended_answer: Capture the smallest reproducible input, the direct output or state from dependency
-      mechanism, and correlated logs or traces. Compare that evidence with the documented contract before
-      changing timeouts, retries, or unrelated code.
+  - question: What evidence would show that dependency mechanism is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from dependency mechanism, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
   examples:
-  - Create one focused dependency mechanism case with an explicit expected result and one invalid or boundary
-    input.
+  - Create one focused dependency mechanism case with an explicit expected result and one invalid or boundary input.
   role_tracks:
   - Senior SDET
   years_range:
@@ -249,10 +234,11 @@ records:
     locator: 'Maven: dependency mechanism'
   last_verified: '2026-07-16'
   freshness_days: 365
-  status: published
+  status: retired
   quality_origin: hand_authored
-  review_status: reviewed
+  review_status: rejected
   reviewed_at: '2026-07-16'
   review_notes:
   - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
   question_type: scenario
