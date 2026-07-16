@@ -15,7 +15,7 @@ from zume.doctor import collect_doctor_report
 _VERSION = __version__
 
 
-def create_app(root: Path | None = None) -> FastAPI:
+def create_app(root: Path | None = None, *, review_mode: bool = False) -> FastAPI:
     root = root or Path.cwd()
     app = FastAPI(
         title="Zume Local API",
@@ -25,16 +25,23 @@ def create_app(root: Path | None = None) -> FastAPI:
         openapi_url="/openapi.json",
     )
     app.state.root = root.resolve()
+    app.state.review_mode = bool(review_mode)
 
     @app.middleware("http")
     async def localhost_docs_only(request: Request, call_next):  # type: ignore[no-untyped-def]
         # OpenAPI interactive docs are for local use; still served only when bound locally.
         response = await call_next(request)
+        if getattr(request.app.state, "review_mode", False):
+            response.headers["X-Robots-Tag"] = "noindex, nofollow"
+            response.headers["X-Zume-Review-Mode"] = "1"
         return response
 
     @app.get("/api/health")
-    def health() -> dict[str, str]:
-        return {"status": "ok"}
+    def health() -> dict[str, object]:
+        return {
+            "status": "ok",
+            "review_mode": bool(getattr(app.state, "review_mode", False)),
+        }
 
     @app.get("/api/version")
     def version() -> dict[str, str]:

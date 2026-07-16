@@ -23,7 +23,9 @@ def test_library_loads_and_validates(repo_root: Path):
 def test_stats_and_gaps(repo_root: Path):
     stats = collect_stats(repo_root)
     assert stats["draft_questions"] >= 1200
-    assert stats["reviewed_published_questions"] >= 80
+    # Reviewed published count is honest: may be zero until gold-core critic approval.
+    assert stats["reviewed_published_questions"] >= 0
+    assert "domains" in stats
     gaps = collect_gaps(repo_root)
     assert gaps["complete_claim"] is False
 

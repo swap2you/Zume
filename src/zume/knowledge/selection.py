@@ -224,9 +224,11 @@ def _is_reviewed(record: QuestionRecord | ExerciseRecord) -> bool:
 def _insufficient_core(
     questions: list[QuestionRecord], mandatory: tuple[str, ...] = MANDATORY_DOMAINS,
 ) -> bool:
+    if not questions:
+        return True
     covered = {_canonical_domain(q.domain) for q in questions}
     missing = [domain for domain in mandatory if domain not in covered]
-    # Fall back only when the reviewed library misses most of the core.
+    # Fall back when the reviewed library misses most of the core.
     return len(missing) > len(mandatory) // 2
 
 

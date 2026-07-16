@@ -43,11 +43,11 @@ test('library dropdown facets come from the facets API, not hardcoded text input
     return Promise.resolve({ ok: true, json: () => Promise.resolve({ items: [], total: 0, request_id: 'x' }) })
   }))
   render(<MemoryRouter><Library /></MemoryRouter>)
-  const domain = await screen.findByLabelText(/domain/i)
+  const domain = await screen.findByRole('combobox', { name: /^domain$/i })
   expect(domain.tagName).toBe('SELECT')
   await waitFor(() => expect(domain).toHaveTextContent('Java (2)'))
   // Subdomain stays disabled until a domain is chosen.
-  expect(screen.getByLabelText(/subdomain/i)).toBeDisabled()
+  expect(screen.getByRole('combobox', { name: /^subdomain$/i })).toBeDisabled()
 })
 
 test('home distinguishes reviewed questions from draft proposals', async () => {
@@ -59,8 +59,8 @@ test('home distinguishes reviewed questions from draft proposals', async () => {
   })))
   render(<MemoryRouter><Home /></MemoryRouter>)
   expect(await screen.findByText('66')).toBeInTheDocument()
-  expect(screen.getByText(/reviewed questions/i)).toBeInTheDocument()
-  expect(screen.getByText(/draft/i)).toBeInTheDocument()
+  expect(screen.getAllByText(/reviewed questions/i).length).toBeGreaterThan(0)
+  expect(screen.getAllByText(/draft/i).length).toBeGreaterThan(0)
   // The misleading combined figure must not be the headline metric.
   expect(screen.queryByText(/^library questions$/i)).not.toBeInTheDocument()
 })

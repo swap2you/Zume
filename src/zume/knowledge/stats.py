@@ -40,7 +40,8 @@ def collect_stats(root: Path) -> dict[str, Any]:
         "draft_questions": len(draft_q),
         "reviewed_published_questions": len(reviewed_published_q),
         "published_exercises": len(published_e),
-        "by_domain": dict(Counter(q.domain for q in published_q)),
-        "by_level": dict(Counter(q.level for q in published_q)),
-        "by_priority": dict(Counter(q.priority for q in published_q)),
+        "domains": len({q.domain for q in reviewed_published_q}),
+        "by_domain": dict(Counter(q.domain for q in reviewed_published_q)),
+        "by_level": dict(Counter(q.level for q in reviewed_published_q)),
+        "by_priority": dict(Counter(q.priority for q in reviewed_published_q)),
     }

@@ -16,7 +16,8 @@ from zume import candidate as cand
 from zume import pipeline
 from zume.ai import get_ai_provider
 from zume.audio import get_realtime_provider, get_speech_provider
-from zume.knowledge.enrich import freshness_state, question_payload
+from zume.knowledge.enrich import freshness_state as compute_freshness_state
+from zume.knowledge.enrich import question_payload
 from zume.knowledge.facets import collect_facets
 from zume.knowledge.gaps import collect_gaps
 from zume.knowledge.loader import load_all_exercises, load_all_questions, load_sources
@@ -119,7 +120,8 @@ def api_knowledge_search(
     level, priority, subdomain = _clean(level), _clean(priority), _clean(subdomain)
     frequency, role, tags = _clean(frequency), _clean(role), _clean(tags)
     question_type, status = _clean(question_type), _clean(status)
-    freshness_days = int(freshness) if _clean(freshness) else None
+    freshness_raw = _clean(freshness)
+    freshness_days = int(freshness_raw) if freshness_raw else None
     results = [
         item for item in enriched
         if (not level or item.get("level") == level)
@@ -165,26 +167,39 @@ _LEVEL_RANK = {"basic": 0, "intermediate": 1, "advanced": 2}
 
 
 def _sort_questions(questions: list[Any], sort: str) -> list[Any]:
-    if sort == "priority":
-        key = lambda q: (_PRIORITY_RANK.get(q.priority, 4), q.id)  # noqa: E731
-    elif sort == "frequency":
-        key = lambda q: (_FREQUENCY_RANK.get(q.frequency, 4), q.id)  # noqa: E731
-    elif sort == "recently_verified":
-        return sorted(questions, key=lambda q: (q.last_verified, q.id), reverse=True)
-    elif sort == "basic_to_advanced":
-        key = lambda q: (_LEVEL_RANK.get(q.level, 3), q.id)  # noqa: E731
-    elif sort == "advanced_to_basic":
-        key = lambda q: (-_LEVEL_RANK.get(q.level, 3), q.id)  # noqa: E731
-    elif sort == "domain_az":
-        key = lambda q: (q.domain, q.subdomain, q.id)  # noqa: E731
-    else:  # recommended
-        key = lambda q: (  # noqa: E731
+    def by_priority(q: Any) -> tuple[int, str]:
+        return (_PRIORITY_RANK.get(q.priority, 4), q.id)
+
+    def by_frequency(q: Any) -> tuple[int, str]:
+        return (_FREQUENCY_RANK.get(q.frequency, 4), q.id)
+
+    def by_level_asc(q: Any) -> tuple[int, str]:
+        return (_LEVEL_RANK.get(q.level, 3), q.id)
+
+    def by_level_desc(q: Any) -> tuple[int, str]:
+        return (-_LEVEL_RANK.get(q.level, 3), q.id)
+
+    def by_domain(q: Any) -> tuple[str, str, str]:
+        return (q.domain, q.subdomain, q.id)
+
+    def by_recommended(q: Any) -> tuple[int, int, int, str]:
+        return (
             _PRIORITY_RANK.get(q.priority, 4),
             _FREQUENCY_RANK.get(q.frequency, 4),
             _LEVEL_RANK.get(q.level, 3),
             q.id,
         )
-    return sorted(questions, key=key)
+
+    if sort == "recently_verified":
+        return sorted(questions, key=lambda q: (q.last_verified, q.id), reverse=True)
+    key_fn: Any = {
+        "priority": by_priority,
+        "frequency": by_frequency,
+        "basic_to_advanced": by_level_asc,
+        "advanced_to_basic": by_level_desc,
+        "domain_az": by_domain,
+    }.get(sort, by_recommended)
+    return sorted(questions, key=key_fn)
 
 
 @router.get("/knowledge/questions")
@@ -245,7 +260,8 @@ def api_list_questions(  # noqa: PLR0913 — mirrors the documented query contra
     tag = _clean(tag) or _clean(tags)
     question_type, source_family = _clean(question_type), _clean(source_family)
     freshness_state_filter = _clean(freshness_state)
-    freshness_days = int(freshness) if _clean(freshness) else None
+    freshness_raw = _clean(freshness)
+    freshness_days = int(freshness_raw) if freshness_raw else None
 
     def _matches(item: Any) -> bool:
         if domain and item.domain != domain:
@@ -266,7 +282,7 @@ def api_list_questions(  # noqa: PLR0913 — mirrors the documented query contra
             return False
         if question_type and item.question_type != question_type:
             return False
-        if freshness_state_filter and freshness_state(item) != freshness_state_filter:
+        if freshness_state_filter and compute_freshness_state(item) != freshness_state_filter:
             return False
         if source_family and not any(
             str(sources.get(ref.source_id, {}).get("family") or "") == source_family
@@ -435,6 +451,7 @@ def api_interview_preview(body: InterviewPreviewRequest) -> dict[str, Any]:
         load_all_exercises(root / "knowledge"),
         resume_text=body.resume_text,
         role_track=body.role_track,
+        config_root=root,
     )
     # Preview only — never bypasses intake/finalize candidate workflow.
     return {"preview": True, "plan": plan}

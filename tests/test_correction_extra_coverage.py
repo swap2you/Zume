@@ -114,13 +114,16 @@ def test_curated_fallback_when_core_missing(repo_root: Path):
 def test_content_quality_exercise_projection(repo_root: Path):
     from zume.knowledge.content_quality import _exercise_errors, _published
     from zume.knowledge.gaps import collect_gaps
+    from zume.knowledge.loader import load_sources, load_taxonomy
     from zume.knowledge.stats import collect_stats
 
     exercises = [e for e in load_all_exercises(repo_root / "knowledge") if e.status == "published"]
     assert exercises
     assert _published(exercises)
+    sources = load_sources(repo_root / "knowledge")
+    roles = {str(r) for r in (load_taxonomy(repo_root / "knowledge").get("role_tracks") or [])}
     for exercise in exercises:
-        errs = _exercise_errors(exercise)
+        errs = _exercise_errors(exercise, sources, roles)
         assert not any("leak" in e.lower() for e in errs)
     stats = collect_stats(repo_root)
     gaps = collect_gaps(repo_root)

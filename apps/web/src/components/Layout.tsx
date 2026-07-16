@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { request } from '../api'
 import { NavIcons } from './icons'
 
 const navigation: [string, string, string][] = [
@@ -17,8 +19,15 @@ const groups = ['Workspace', 'Hiring', 'Knowledge', 'Assist']
 
 export function Layout() {
   const location = useLocation()
+  const [reviewMode, setReviewMode] = useState(false)
+  useEffect(() => {
+    request<{ review_mode?: boolean }>('/api/health')
+      .then((data) => setReviewMode(Boolean(data.review_mode)))
+      .catch(() => setReviewMode(false))
+  }, [])
   return (
     <div className="shell">
+      {reviewMode && <div className="review-banner" role="status">Review mode — fictional data</div>}
       <a className="skip-link" href="#main">Skip to content</a>
       <aside className="sidebar">
         <NavLink className="brand" to="/" aria-label="Zume overview">

@@ -237,6 +237,43 @@ def serve_cmd(
         raise typer.Exit(code=2) from exc
 
 
+review_app = typer.Typer(name="review", help="Cowork / local validation review mode.",
+                         no_args_is_help=True)
+app.add_typer(review_app)
+
+
+@review_app.command("serve")
+def review_serve_cmd(
+    port: int = typer.Option(8787, "--port", help="Bind port (localhost only)."),
+    no_open: bool = typer.Option(False, "--no-open", help="Do not open a browser."),
+    reset: bool = typer.Option(False, "--reset", help="Reset fictional review data first."),
+) -> None:
+    """Serve the app in review mode with fictional data only."""
+    from zume.review_mode import apply_review_environment, prepare_review_workspace
+    from zume.serve import run_server
+
+    root = _root()
+    apply_review_environment()
+    workspace = prepare_review_workspace(root, reset=reset)
+    console.print("[yellow]Review mode — fictional data[/]")
+    console.print(f"Workspace: {workspace}")
+    console.print("OpenAI live and Docker labs disabled by default.")
+    try:
+        run_server(workspace, host="127.0.0.1", port=port, open_browser=not no_open, review_mode=True)
+    except (ValueError, RuntimeError) as exc:
+        console.print(f"[red]Serve blocked:[/] {exc}")
+        raise typer.Exit(code=2) from exc
+
+
+@review_app.command("reset")
+def review_reset_cmd() -> None:
+    """Reset the fictional review workspace (never touches real candidates/)."""
+    from zume.review_mode import reset_review_workspace
+
+    workspace = reset_review_workspace(_root())
+    console.print(f"[green]Reset review workspace[/] -> {workspace}")
+
+
 @app.command("demo")
 def demo_cmd() -> None:
     """Run the fictional end-to-end sample: intake, then finalize."""
@@ -529,6 +566,71 @@ def knowledge_content_quality_cmd() -> None:
             console.print(f"[red]FAIL[/] {error}")
         raise typer.Exit(code=1)
     console.print("[green]PASS[/] published knowledge content quality")
+
+
+@knowledge_app.command("review-report")
+def knowledge_review_report_cmd(
+    output: Optional[Path] = typer.Option(None, "--output", help="Optional markdown path."),
+) -> None:
+    """Summarize reviewed/draft/gap/duplicate/role/source status for publication review."""
+    from collections import Counter
+    from datetime import date
+
+    from zume.knowledge.content_quality import scan_content_quality
+    from zume.knowledge.enrich import freshness_state
+    from zume.knowledge.gaps import collect_gaps
+    from zume.knowledge.loader import load_all_questions
+    from zume.knowledge.stats import collect_stats
+
+    root = _root()
+    stats = collect_stats(root)
+    gaps = collect_gaps(root)
+    questions = load_all_questions(root / "knowledge")
+    reviewed = [q for q in questions if q.status == "published" and q.review_status == "reviewed"]
+    drafts = [q for q in questions if q.status == "draft"]
+    quality = scan_content_quality(root)
+    domains = sorted({q.domain for q in reviewed})
+    roles = Counter(role for q in reviewed for role in q.role_tracks)
+    freshness = Counter(freshness_state(q) for q in reviewed)
+    duplicate_clusters = [e for e in quality if "duplicate" in e or "template cluster" in e]
+    lines = [
+        "# Zume knowledge review report",
+        "",
+        f"Date: {date.today().isoformat()}",
+        "",
+        f"- Reviewed published questions: {len(reviewed)}",
+        f"- Draft proposal questions: {len(drafts)}",
+        f"- Reviewed published exercises: {stats.get('published_exercises', 0)}",
+        f"- Domains covered (reviewed): {len(domains)} — {', '.join(domains) or 'none'}",
+        f"- Open gaps: {len(gaps.get('gaps') or [])}",
+        f"- Content-quality findings: {len(quality)}",
+        f"- Normalized duplicate / template clusters: {len(duplicate_clusters)}",
+        f"- Role coverage: {dict(roles) or '{}'}",
+        f"- Source freshness: {dict(freshness) or '{}'}",
+        "",
+        "## Gaps (sample)",
+    ]
+    for gap in (gaps.get("gaps") or [])[:25]:
+        lines.append(
+            f"- {gap['domain']} / {gap['level']} / {gap['kind']}: "
+            f"{gap['have']}/{gap['target']} (missing {gap['missing']})"
+        )
+    if not gaps.get("gaps"):
+        lines.append("- none")
+    lines.extend(["", "## Content-quality findings (sample)"])
+    for item in quality[:40]:
+        lines.append(f"- {item}")
+    if not quality:
+        lines.append("- none")
+    lines.append("")
+    lines.append("complete_claim: false")
+    report = "\n".join(lines) + "\n"
+    console.print(report)
+    if output is not None:
+        target = output if output.is_absolute() else root / output
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(report, encoding="utf-8")
+        console.print(f"[green]Wrote[/] {target}")
 
 
 @knowledge_app.command("critique")

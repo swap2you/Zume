@@ -4,7 +4,9 @@ import { post, request } from '../api'
 import { AudienceTag, PageHeader } from '../components/Layout'
 import { SpeechControls } from '../components/SpeechControls'
 
-type Question = { id: string; title?: string; question?: string; domain?: string; subdomain?: string; level?: string; priority?: string; concise_answer?: string; recommended_answer?: string; deep_dive?: string; follow_ups?: { question: string }[]; strong_signals?: string[]; weak_signals?: string[]; references?: { source_id: string; locator?: string }[]; last_verified?: string }
+export { Library } from './Library'
+
+type Question = { id: string; title?: string; question?: string; domain?: string; subdomain?: string; level?: string; priority?: string; concise_answer?: string; recommended_answer?: string; deep_dive?: string; follow_ups?: { question: string }[]; strong_signals?: string[]; weak_signals?: string[]; references?: { source_id: string; locator?: string; source_url?: string; source_name?: string }[]; last_verified?: string; role_tracks?: string[] }
 type IntakeResult = { decision: string; score_percent: number; deliverables: string[]; wait_message?: string; validation_errors?: string[] }
 
 function useSubmit<T>(path: string) {
@@ -38,18 +40,6 @@ export function Finalize() {
     <form className="workspace-form" onSubmit={e => { e.preventDefault(); void submit({ candidate, notes }) }}><label>Candidate<select value={candidate} onChange={e => setCandidate(e.target.value)} required><option value="">Select a candidate</option>{candidates.map(item => <option value={item.folder} key={item.folder}>{item.display_name} — {item.status}</option>)}</select></label><label>Interviewer notes<textarea value={notes} onChange={e => setNotes(e.target.value)} required /></label><button>Finalize evaluation</button>{error && <p className="error" role="alert">{error}</p>}{result && <div className="summary-cards"><article><b>Decision permitted</b><strong>{result.decision_permitted ? 'Yes' : 'Manual review required'}</strong></article><article><b>Missing areas</b><p>{result.missing_areas.join(', ') || 'None reported'}</p></article><article><b>Deliverables</b><ul>{result.deliverables.map(item => <li key={item}>{item}</li>)}</ul></article></div>}</form></section>
 }
 
-function QuestionCard({ item }: { item: Question }) {
-  const [bookmarked, setBookmarked] = useState(() => localStorage.getItem(`zume-bookmark-${item.id}`) === 'true')
-  const toggle = () => { const next = !bookmarked; setBookmarked(next); localStorage.setItem(`zume-bookmark-${item.id}`, String(next)) }
-  return <article><span>{item.domain} · {item.subdomain} · {item.level} · {item.priority}</span><h3>{item.title ?? item.question ?? item.id}</h3><p>{item.question}</p><button type="button" onClick={toggle}>{bookmarked ? 'Remove bookmark' : 'Bookmark'}</button><details><summary>Details</summary><p><b>Concise answer:</b> {item.concise_answer}</p><p><b>Recommended answer:</b> {item.recommended_answer}</p><p><b>Deep dive:</b> {item.deep_dive}</p><p><b>Follow-ups:</b> {item.follow_ups?.map(f => f.question).join(' · ')}</p><p><b>Strong signals:</b> {item.strong_signals?.join(', ')}</p><p><b>Weak signals:</b> {item.weak_signals?.join(', ')}</p><p><b>Last verified:</b> {item.last_verified}</p><p><b>Citations:</b> {item.references?.map(ref => <a key={ref.source_id} href={ref.locator} target="_blank" rel="noreferrer">{ref.source_id}</a>)}</p></details><AudienceTag /></article>
-}
-export function Library() {
-  const [filters, setFilters] = useState({ q: '', domain: '', subdomain: '', level: '', priority: '', frequency: '', role: '', tags: '', freshness: '', question_type: '' }); const [items, setItems] = useState<Question[]>([]); const [page, setPage] = useState(0); const [total, setTotal] = useState(0)
-  useEffect(() => { const timer = setTimeout(() => { const active = Object.fromEntries(Object.entries({ ...filters, status: 'published', limit: '10' }).filter(([, value]) => value !== '')); const params = new URLSearchParams(active); const endpoint = filters.q ? `/api/knowledge/search?${params}` : `/api/knowledge/questions?${params}&offset=${page * 10}`; request<{ items?: Question[]; results?: Question[]; total?: number }>(endpoint).then(data => { const found = data.items ?? data.results ?? []; setItems(found); setTotal(data.total ?? found.length) }).catch(() => { setItems([]); setTotal(0) }) }, 200); return () => clearTimeout(timer) }, [filters, page])
-  const set = (key: keyof typeof filters, value: string) => { setFilters(current => ({ ...current, [key]: value })); setPage(0) }
-  return <section><PageHeader eyebrow="Structured library" title="Question library" /><div className="filter-bar">{([['q', 'Search'], ['domain', 'Domain'], ['subdomain', 'Subdomain'], ['frequency', 'Frequency'], ['role', 'Role'], ['tags', 'Tag'], ['freshness', 'Freshness days'], ['question_type', 'Question type']] as [keyof typeof filters, string][]).map(([key, label]) => <label key={key}>{label}<input type={key === 'freshness' ? 'number' : 'text'} value={filters[key]} onChange={e => set(key, e.target.value)} /></label>)}<label>Level<select value={filters.level} onChange={e => set('level', e.target.value)}><option value="">All levels</option><option>basic</option><option>intermediate</option><option>advanced</option></select></label><label>Priority<select aria-label="Priority" value={filters.priority} onChange={e => set('priority', e.target.value)}><option value="">All priorities</option><option>P0</option><option>P1</option><option>P2</option><option>P3</option></select></label></div><p className="muted">{filters.q ? items.length : total} results · page {page + 1}</p><div className="question-list">{items.map(item => <QuestionCard key={item.id} item={item} />)}</div><div className="pagination"><button disabled={page === 0 || Boolean(filters.q)} onClick={() => setPage(page - 1)}>Previous</button><button disabled={items.length < 10 || Boolean(filters.q)} onClick={() => setPage(page + 1)}>Next</button></div></section>
-}
-
 function PracticeCard({ item, index, total, onPrev, onNext, onRandom }: { item: Question; index: number; total: number; onPrev: () => void; onNext: () => void; onRandom: () => void }) {
   const [revealed, setRevealed] = useState(false)
   const [rating, setRating] = useState(() => localStorage.getItem(`zume-practice-rating-${item.id}`) ?? '')
@@ -64,9 +54,58 @@ export function Practice() {
   return <section><PageHeader eyebrow="Private study" title="Practice session"><p className="lede">A local study aid. Your self-rating stays in this browser.</p></PageHeader>{error && <p className="error">{error}</p>}{!error && !item && <p className="empty-state">No published practice questions are available.</p>}{item && <PracticeCard key={item.id} item={item} index={index} total={items.length} onPrev={() => move(index - 1)} onNext={() => move(index + 1)} onRandom={() => move(Math.floor(Math.random() * items.length))} />}</section>
 }
 
+const ROLE_OPTIONS = [
+  'Senior SDET', 'Lead SDET', 'Mobile Automation Engineer', 'Performance Engineer',
+  'AI QA Engineer', 'Test Automation Architect', 'QA Manager',
+]
+
+type BuilderPlan = {
+  knockout_minutes?: number
+  knockout_question_ids?: string[]
+  agenda_fit_minutes?: number
+  warning?: string
+  role_policy_label?: string
+  role_coverage?: { sufficient?: boolean; missing_core_domains?: string[]; reviewed_role_questions?: number }
+  why?: { id: string; reason: string }[]
+  questions?: { id?: string; question?: string; level?: string; priority?: string; domain?: string }[]
+  candidate_exercises?: { id: string; title: string; domain: string }[]
+}
+
 export function Builder() {
-  const [role, setRole] = useState(''); const [resume, setResume] = useState(''); const { result, error, submit } = useSubmit<{ plan?: { knockout?: string; agenda?: { minutes?: number }[]; questions?: { question?: string; reason?: string; level?: string; priority?: string }[] } }>('/api/interview/preview'); const plan = result?.plan
-  return <section><PageHeader eyebrow="180-minute standard" title="Interview builder"><p className="lede">Preview the interview plan before creating candidate materials.</p></PageHeader><AudienceTag /><form className="workspace-form" onSubmit={e => { e.preventDefault(); void submit({ role_track: role || undefined, resume_text: resume || undefined }) }}><label>Role track<input value={role} onChange={e => setRole(e.target.value)} /></label><label>Resume context <small>optional</small><textarea value={resume} onChange={e => setResume(e.target.value)} /></label><button>Preview plan</button>{error && <p className="error">{error}</p>}{plan && <div className="summary-cards"><article><b>Knockout round</b><p>{plan.knockout ?? 'Included in the preview.'}</p></article><article><b>Agenda minutes</b><ul>{plan.agenda?.map((item, i) => <li key={i}>{item.minutes ?? '?'} minutes</li>)}</ul></article><article><b>Selected questions</b><ul>{plan.questions?.map((item, i) => <li key={i}>{item.question} — {item.reason} ({item.level}, {item.priority})</li>)}</ul></article></div>}<details>{result && <summary>Raw preview JSON</summary>}<pre className="result">{result && JSON.stringify(result, null, 2)}</pre></details></form></section>
+  const [role, setRole] = useState('Senior SDET')
+  const [resume, setResume] = useState('')
+  const { result, error, submit } = useSubmit<{ plan?: BuilderPlan }>('/api/interview/preview')
+  const plan = result?.plan
+  const reasons = Object.fromEntries((plan?.why ?? []).map((item) => [item.id, item.reason]))
+  return (
+    <section>
+      <PageHeader eyebrow="180-minute standard" title="Interview builder">
+        <p className="lede">Preview the interview plan before creating candidate materials.</p>
+      </PageHeader>
+      <AudienceTag />
+      <form className="workspace-form" onSubmit={(e) => { e.preventDefault(); void submit({ role_track: role, resume_text: resume || undefined }) }}>
+        <label>Role track
+          <select aria-label="Role track" value={role} onChange={(e) => setRole(e.target.value)}>
+            {ROLE_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
+          </select>
+        </label>
+        <label>Resume context <small>optional</small><textarea value={resume} onChange={(e) => setResume(e.target.value)} /></label>
+        <button>Preview plan</button>
+        {error && <p className="error" role="alert">{error}</p>}
+        {plan?.warning && <p className="banner warn" role="status">{plan.warning}</p>}
+        {plan && (
+          <div className="summary-cards">
+            <article><b>Role policy</b><strong>{plan.role_policy_label ?? role}</strong><p>{plan.agenda_fit_minutes ?? 180} minute interview</p></article>
+            <article><b>Knockout round</b><strong>{plan.knockout_minutes ?? 20} minutes</strong><p>{plan.knockout_question_ids?.length ?? 0} P0 questions</p></article>
+            <article><b>Role coverage</b><strong>{plan.role_coverage?.sufficient ? 'Sufficient' : 'Limited'}</strong><p>{plan.role_coverage?.reviewed_role_questions ?? 0} reviewed role questions{plan.role_coverage?.missing_core_domains?.length ? `; missing ${plan.role_coverage.missing_core_domains.join(', ')}` : ''}</p></article>
+            <article><b>Selected questions</b><ul>{plan.questions?.map((item, i) => <li key={item.id ?? i}>{item.question} — {reasons[item.id ?? ''] ?? 'selected'} ({item.domain}, {item.level}, {item.priority})</li>)}</ul></article>
+            <article><b>Candidate-safe exercises</b><ul>{(plan.candidate_exercises ?? []).map((item) => <li key={item.id}>{item.title} ({item.domain})</li>)}</ul></article>
+          </div>
+        )}
+        <details>{result && <summary>Raw preview JSON</summary>}<pre className="result">{result && JSON.stringify(result, null, 2)}</pre></details>
+      </form>
+    </section>
+  )
 }
 
 const LAB_STARTERS: Record<string, string> = { sql: "SELECT name, dept FROM employees WHERE dept = 'QA'", api: '{"method":"GET","path":"/health"}', java: 'public class Main { public static void main(String[] args) { System.out.println("Hello"); } }', selenium: '' }

@@ -31,13 +31,14 @@ def run_server(
     host: str = "127.0.0.1",
     port: int = 8787,
     open_browser: bool = True,
+    review_mode: bool = False,
 ) -> None:
     ensure_local_bind(host)
     if not port_available(host, port):
         raise RuntimeError(
             f"Port {port} on {host} is unavailable. Choose another with --port or free the process."
         )
-    app = create_app(root)
+    app = create_app(root, review_mode=review_mode)
     if open_browser:
         webbrowser.open(f"http://{host}:{port}/")
     uvicorn.run(app, host=host, port=port, log_level="info")
