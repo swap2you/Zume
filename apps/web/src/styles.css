@@ -911,6 +911,7 @@ section > section, .monaco-editor-container { border-radius: var(--radius-md); o
   position: sticky;
   top: 0;
   z-index: 20;
+  pointer-events: none;
 }
 
 .results-header { font-weight: 600; margin: 0.8rem 0; color: var(--ink-700); }

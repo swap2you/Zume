@@ -54,6 +54,8 @@ data/knowledge*.db
 data/chat/
 data/audio-cache/
 data/lab-workspaces/
+data/review-workspace/
+data/knowledge-fts.sqlite
 release-staging/
 releases/
 *.log

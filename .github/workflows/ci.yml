@@ -227,25 +227,73 @@ jobs:
       - name: Install Playwright browser
         working-directory: apps/web
         run: npx playwright install --with-deps chromium
-      - name: Start Zume server
+      - name: Build knowledge index
+        run: zume knowledge build-index
+      - name: Start Zume review server
         run: |
-          zume serve --port 8787 --no-open &
+          zume review serve --port 8787 --no-open --reset &
           echo $! > /tmp/zume-serve.pid
-          for i in $(seq 1 60); do
+          for i in $(seq 1 90); do
             if curl -fsS http://127.0.0.1:8787/api/health >/dev/null; then
               echo "server ready"
               break
             fi
             sleep 1
-            if [ "$i" -eq 60 ]; then
+            if [ "$i" -eq 90 ]; then
               echo "server failed to start"
               exit 1
             fi
           done
+          python - <<'PY'
+          import json
+          import sys
+          import urllib.request
+
+          def get(url: str):
+              with urllib.request.urlopen(url, timeout=30) as response:
+                  return response.status, json.loads(response.read().decode())
+
+          status, health = get("http://127.0.0.1:8787/api/health")
+          assert status == 200 and health.get("review_mode") is True, health
+          req = urllib.request.Request("http://127.0.0.1:8787/api/health")
+          with urllib.request.urlopen(req, timeout=30) as response:
+              headers = {k.lower(): v for k, v in response.headers.items()}
+              assert headers.get("x-zume-review-mode") == "1", headers
+
+          status, candidates = get("http://127.0.0.1:8787/api/candidates")
+          assert status == 200 and candidates.get("items") == [], candidates
+
+          status, facets = get("http://127.0.0.1:8787/api/knowledge/facets?mode=reviewed")
+          assert status == 200, facets
+          counts = facets.get("counts") or {}
+          assert counts.get("questions") == 66, counts
+          assert counts.get("exercises") == 4, counts
+          assert int(counts.get("domains") or 0) > 0, counts
+
+          status, gaps = get("http://127.0.0.1:8787/api/knowledge/gaps")
+          assert status == 200, gaps
+
+          q = "What%20is%20an%20explicit%20wait%20in%20Selenium%3F"
+          status, search = get(f"http://127.0.0.1:8787/api/knowledge/search?q={q}&limit=5")
+          assert status == 200, search
+          items = search.get("items") or search.get("results") or []
+          blob = json.dumps(items).lower()
+          assert items and "selenium" in blob, search
+
+          status, build = get("http://127.0.0.1:8787/api/build-info")
+          assert status == 200, build
+          assert build.get("reviewed_questions") == 66, build
+          print("review preconditions ok", json.dumps({
+              "review_mode": health.get("review_mode"),
+              "reviewed_questions": counts.get("questions"),
+              "reviewed_exercises": counts.get("exercises"),
+              "git_sha": build.get("git_sha"),
+          }))
+          PY
           # Warm knowledge loaders so first Playwright page is not cold-start slow.
           curl -fsS "http://127.0.0.1:8787/api/knowledge/practice?limit=1" >/dev/null
           curl -fsS -X POST "http://127.0.0.1:8787/api/interview/preview" \
-            -H "content-type: application/json" -d '{}' >/dev/null
+            -H "content-type: application/json" -d '{"role_track":"Senior SDET"}' >/dev/null
       - name: Playwright workflows
         working-directory: apps/web
         env:

@@ -61,9 +61,9 @@ class SpeakRequest(BaseModel):
 
 
 def _root() -> Path:
-    from zume import config as cfg
+    from zume.server.runtime import current_root
 
-    return cfg.find_root()
+    return current_root()
 
 
 def _safe_candidate_root(root: Path, folder_name: str) -> Path:

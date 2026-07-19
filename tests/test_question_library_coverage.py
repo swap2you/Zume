@@ -80,8 +80,21 @@ def test_review_workspace_is_isolated(repo_root: Path, tmp_path: Path, monkeypat
     assert not (workspace / "apps" / "web" / "node_modules").exists()
     reset = reset_review_workspace(repo_root)
     assert reset.exists()
-    client = TestClient(create_app(repo_root, review_mode=True))
+    client = TestClient(create_app(workspace, review_mode=True))
     health = client.get("/api/health").json()
     assert health["review_mode"] is True
     assert "X-Robots-Tag" in client.get("/api/health").headers
     assert client.get("/api/knowledge/facets").status_code == 200
+    assert client.get("/api/candidates").json()["items"] == []
+
+
+def test_build_info_endpoint(repo_root: Path):
+    client = TestClient(create_app(repo_root, review_mode=True))
+    response = client.get("/api/build-info")
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["version"]
+    assert payload["reviewed_questions"] >= 1
+    assert payload["reviewed_exercises"] >= 1
+    assert len(payload["knowledge_digest"]) == 64
+    assert payload["git_sha"]

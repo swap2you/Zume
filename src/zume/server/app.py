@@ -29,8 +29,13 @@ def create_app(root: Path | None = None, *, review_mode: bool = False) -> FastAP
 
     @app.middleware("http")
     async def localhost_docs_only(request: Request, call_next):  # type: ignore[no-untyped-def]
-        # OpenAPI interactive docs are for local use; still served only when bound locally.
-        response = await call_next(request)
+        from zume.server.runtime import bind_root, reset_root
+
+        token = bind_root(Path(request.app.state.root))
+        try:
+            response = await call_next(request)
+        finally:
+            reset_root(token)
         if getattr(request.app.state, "review_mode", False):
             response.headers["X-Robots-Tag"] = "noindex, nofollow"
             response.headers["X-Zume-Review-Mode"] = "1"
@@ -46,6 +51,12 @@ def create_app(root: Path | None = None, *, review_mode: bool = False) -> FastAP
     @app.get("/api/version")
     def version() -> dict[str, str]:
         return {"name": "zume", "version": _VERSION}
+
+    @app.get("/api/build-info")
+    def build_info() -> dict[str, Any]:
+        from zume.build_info import collect_build_info
+
+        return collect_build_info(Path(app.state.root))
 
     @app.get("/api/doctor")
     def doctor() -> dict[str, Any]:

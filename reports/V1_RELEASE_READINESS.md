@@ -1,59 +1,41 @@
-# V1 Release Readiness (Post-Correction)
+# V1 Release Readiness (Post CI / Cowork Revalidation)
 
-Date: 2026-07-16  
+Date: 2026-07-19  
 Branch: `release/zume-1.0`  
-Corrected SHA: see tip after Question Library push  
+Baseline tip that failed Playwright: `411a3b3dd86006993249b15c53c15d7fa5c76831`  
 Draft PR: `#1`
 
 ## Builder release verdict
 
-**QUESTION LIBRARY CORRECTIONS COMPLETE LOCALLY — NOT READY FOR PRODUCTION RELEASE**
+**QUESTION LIBRARY + REVIEW ISOLATION FIXED LOCALLY — AWAITING TIP CI GREEN**
 
-Audit + Question Library package addressed on `release/zume-1.0`. Production release still requires:
+Production release still requires:
 
-1. Green expanded central CI against the tip SHA after push
-2. Clean-room / Cowork validation using `docs/release/question-library/05_COWORK_VALIDATION_PROMPT.md`
-3. Human UI review only after independent verdict `READY FOR HUMAN UI REVIEW`
-4. Explicit human approval before merge / tag
+1. Green expanded central CI against the tip SHA after this push
+2. Human UI review after independent verdict `READY FOR HUMAN UI REVIEW`
+3. Explicit human approval before merge / tag
 
 ## Readiness checklist
 
 | Criterion | Status | Evidence |
 |-----------|--------|----------|
-| Ancestry includes audit tip `2dcde4b` | PASS | Git history |
-| Hiring v2 invariants preserved | PASS (local) | `V1_IMPLEMENTATION_REPORT.md` |
-| Generated filler quarantined to draft | PASS | 1,899 Q / 285 E draft |
-| Published reviewed inventory honest | PASS | 66 gold-core Q / 4 E (89 templates retired) |
-| Gaps do not count drafts | PASS | 148 gaps reported |
-| Correction regressions green | PASS | Phase 0 suite |
-| Python gates + cov ≥ 80% | PASS (local) | 228 passed / 80.00% |
-| Frontend lint/typecheck/test/build | PASS (local) | `apps/web` |
-| Playwright no skip-on-missing-server | PASS | Spec + CI job |
-| Browser speechSynthesis controls | PASS | `apps/web/src/audio/speech.ts` |
-| Lab security hardening | PASS (local) | `V1_LAB_SANDBOX_REPORT.md` |
-| Expanded CI workflow present | PASS | `.github/workflows/ci.yml` |
+| Reviewed gold-core inventory | PASS | 66 Q / 4 E |
+| Draft filler quarantined | PASS | 1,899 draft Q |
+| Review workspace isolation | PASS | API binds `app.state.root`; candidates empty after `--reset` |
+| `/api/build-info` | PASS | SHA + corpus/frontend digests |
+| Browser CI uses review serve | PASS | `.github/workflows/ci.yml` |
+| Playwright facets race fixed | PASS | wait for `data-facets-ready` |
+| Review banner click-through | PASS | `pointer-events: none` |
+| Local Playwright workflows | PASS | 12/12 on clean review server |
+| Clean revalidation report | PASS | `reports/COWORK_FULL_VALIDATION.md` |
+| Stale Cowork evidence preserved | PASS | `reports/COWORK_FULL_VALIDATION_STALE_ENV.md` |
 | Central CI green on tip SHA | PENDING | Fill after push |
-| UI screenshots tracked | PASS | `reports/screenshots/` |
-| Release ZIP as CI artifact (not git) | PASS | Workflow upload |
-| Clean-room validation | NOT RUN | Phase 11 |
 | PR `#1` draft / unmerged | REQUIRED | Keep draft |
-| Merge to `main` | NOT DONE | Forbidden here |
-| Tag `v1.0.0` | NOT DONE | Forbidden here |
-
-## Known limitations
-
-| Limitation | Impact |
-|------------|--------|
-| Published reviewed depth << Tier A targets | Gaps honest; promote only after research/review |
-| Optional live OpenAI | Offline/mocks default |
-| Optional Docker labs | Need flag + Docker |
-| SQL lab uses SQLite | Oracle dialect labeling only |
-| Clean-room not yet run | Blocks human UI review |
+| Merge / tag | NOT DONE | Forbidden here |
 
 ## Next actions
 
-1. Push `release/zume-1.0` tip `15e248abddabb7b3eb9cebc6088cfe5ea70f199e`
-2. Confirm expanded CI green; record run ID + artifact checksums
-3. Keep PR `#1` draft
-4. Hand off to clean-room validator (new chat, no builder history)
-5. Do **not** merge or tag
+1. Push tip; confirm CI green; record run ID
+2. Keep PR `#1` draft
+3. Human UI review only
+4. Do **not** merge or tag without explicit approval

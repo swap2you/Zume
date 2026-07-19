@@ -1,5 +1,22 @@
 # Zume Full Browser Validation — Cowork Prompt
 
+## Environment gate (do this first)
+
+Before validation, prove this server is the requested build:
+
+1. `GET /api/health` must show `review_mode=true` and header `X-Zume-Review-Mode: 1`.
+2. `GET /api/knowledge/facets?mode=reviewed` must return 200 and the current gold-core reviewed count (66 questions / 4 exercises unless deliberately changed).
+3. `GET /api/candidates` must be empty.
+4. `GET /api/build-info` must record `git_sha`, digests, and reviewed counts.
+5. Stop and report **ENVIRONMENT MISMATCH** if any check fails.
+6. Do not validate a stale process.
+
+Preferred startup:
+
+```text
+zume review serve --port 8787 --no-open --reset
+```
+
 ## Role
 
 Act as an independent product, UI, API and data validator.
@@ -14,13 +31,7 @@ Local URL:
 
 `http://127.0.0.1:8787/`
 
-Preferred startup:
-
-```text
-zume review serve --port 8787
-```
-
-Review mode must use fictional data.
+Review mode must use fictional data only under `data/review-workspace`.
 
 ## Rules
 

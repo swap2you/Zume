@@ -3,7 +3,7 @@
 ## Preferred local startup
 
 ```text
-zume review serve --port 8787
+zume review serve --port 8787 --no-open --reset
 ```
 
 - Local URL: http://127.0.0.1:8787/
@@ -11,6 +11,15 @@ zume review serve --port 8787
 - Uses `data/review-workspace` (fictional). Never point at real `candidates/`.
 - OpenAI live and Docker labs disabled by default.
 - Reset: `zume review reset`
+- Prove identity: `GET /api/build-info`
+
+## Pre-flight (stop on ENVIRONMENT MISMATCH)
+
+1. `review_mode=true` and `X-Zume-Review-Mode: 1`
+2. `/api/candidates` → `items: []`
+3. `/api/knowledge/facets?mode=reviewed` → 66 questions, 4 exercises
+4. `/api/knowledge/gaps` → 200
+5. Selenium natural-language search returns hits
 
 ## Binding documents
 
@@ -37,5 +46,6 @@ knockouts and coverage warnings when applicable.
 
 ## Independent validator prompt
 
-Use `docs/release/question-library/05_COWORK_VALIDATION_PROMPT.md` unchanged.
-Output target: `reports/COWORK_FULL_VALIDATION.md`.
+Use `docs/release/question-library/05_COWORK_VALIDATION_PROMPT.md` (includes
+environment gate). Preserve any prior stale report as
+`reports/COWORK_FULL_VALIDATION_STALE_ENV.md`.

@@ -349,7 +349,7 @@ export function Library() {
         )}
       </div>
 
-      <div className="filter-strip">
+      <div className="filter-strip" data-facets-ready={facets ? 'true' : 'false'}>
         <FacetSelect id="domain" label="Domain" value={filters.domain} options={facets?.domains ?? []} onChange={(v) => setFilter('domain', v)} />
         <FacetSelect id="subdomain" label="Subdomain" value={filters.subdomain} options={subdomains} onChange={(v) => setFilter('subdomain', v)} disabled={!filters.domain} />
         <FacetSelect id="level" label="Level" value={filters.level} options={facets?.levels ?? []} onChange={(v) => setFilter('level', v)} />

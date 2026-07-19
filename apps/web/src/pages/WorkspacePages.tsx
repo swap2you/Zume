@@ -122,9 +122,13 @@ export function Lab() {
 
 export function Settings() {
   const [doctor, setDoctor] = useState<Record<string, string> | null>(null)
+  const [buildInfo, setBuildInfo] = useState<Record<string, string | number> | null>(null)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
-  useEffect(() => { request<Record<string, string>>('/api/doctor').then(setDoctor).catch(e => setError((e as Error).message)) }, [])
+  useEffect(() => {
+    request<Record<string, string>>('/api/doctor').then(setDoctor).catch(e => setError((e as Error).message))
+    request<Record<string, string | number>>('/api/build-info').then(setBuildInfo).catch(() => setBuildInfo(null))
+  }, [])
   const clear = async (path: string, method: 'DELETE' | 'POST') => {
     try {
       if (method === 'DELETE') await request(path, { method: 'DELETE' })
@@ -132,5 +136,33 @@ export function Settings() {
       setNotice('Local data cleared.')
     } catch (e) { setNotice((e as Error).message) }
   }
-  return <section><PageHeader eyebrow="Local checks" title="Settings & doctor"><p className="lede">Diagnostic information only. Secrets and credentials are intentionally never displayed here.</p></PageHeader>{error ? <p className="error">{error}</p> : <div className="summary-cards">{['openai_provider', 'web_search', 'tts', 'docker_labs', 'secrets_source'].map(key => <article key={key}><b>{key.replaceAll('_', ' ')}</b><p>{doctor?.[key] ?? 'Checking…'}</p></article>)}</div>}<div className="pagination"><button onClick={() => void clear('/api/ask/history', 'DELETE')}>Clear Ask history</button><button onClick={() => void clear('/api/audio/cache/clear', 'POST')}>Clear audio cache</button></div>{notice && <p className="muted">{notice}</p>}</section>
+  const sha = String(buildInfo?.git_sha ?? '…')
+  const shortSha = sha.length > 12 ? sha.slice(0, 12) : sha
+  return (
+    <section>
+      <PageHeader eyebrow="Local checks" title="Settings & doctor">
+        <p className="lede">Diagnostic information only. Secrets and credentials are intentionally never displayed here.</p>
+      </PageHeader>
+      {error ? <p className="error">{error}</p> : (
+        <div className="summary-cards">
+          {['openai_provider', 'web_search', 'tts', 'docker_labs', 'secrets_source'].map(key => (
+            <article key={key}><b>{key.replaceAll('_', ' ')}</b><p>{doctor?.[key] ?? 'Checking…'}</p></article>
+          ))}
+          <article data-testid="build-info">
+            <b>Build identity</b>
+            <p>
+              {buildInfo
+                ? `v${buildInfo.version} · ${shortSha} · ${buildInfo.reviewed_questions}Q/${buildInfo.reviewed_exercises}E · ${String(buildInfo.knowledge_digest).slice(0, 8)}`
+                : 'Checking…'}
+            </p>
+          </article>
+        </div>
+      )}
+      <div className="pagination">
+        <button onClick={() => void clear('/api/ask/history', 'DELETE')}>Clear Ask history</button>
+        <button onClick={() => void clear('/api/audio/cache/clear', 'POST')}>Clear audio cache</button>
+      </div>
+      {notice && <p className="muted">{notice}</p>}
+    </section>
+  )
 }
