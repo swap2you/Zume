@@ -1,0 +1,535 @@
+version: 1
+records:
+- id: agile-delivery-b-01
+  domain: agile-delivery
+  subdomain: planning
+  title: 'Planning: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does planning address, and what is its practical boundary?
+  concise_answer: Planning should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that planning supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your planning approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative planning case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - planning
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: planning
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-02
+  domain: agile-delivery
+  subdomain: estimation
+  title: 'Estimation: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Explain estimation to a teammate who must use it safely tomorrow.
+  concise_answer: Estimation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that estimation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your estimation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative estimation case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - estimation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: estimation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-03
+  domain: agile-delivery
+  subdomain: refinement
+  title: 'Refinement: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: What would you check first before relying on refinement in a test or delivery workflow?
+  concise_answer: Refinement should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that refinement supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your refinement approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative refinement case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - refinement
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: refinement
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-04
+  domain: agile-delivery
+  subdomain: delivery
+  title: 'Delivery: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Give a small example of delivery and state the observable outcome.
+  concise_answer: Delivery should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that delivery supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your delivery approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative delivery case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - delivery
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: delivery
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-05
+  domain: agile-delivery
+  subdomain: feedback
+  title: 'Feedback: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Which assumption about feedback most often causes an avoidable defect?
+  concise_answer: Feedback should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that feedback supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative feedback case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - feedback
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: feedback
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-06
+  domain: agile-delivery
+  subdomain: risk
+  title: 'Risk: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you recognize that risk is being used for the wrong purpose?
+  concise_answer: Risk should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that risk supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative risk case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - risk
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: risk
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-07
+  domain: agile-delivery
+  subdomain: planning
+  title: 'Planning: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What information must be known before choosing planning?
+  concise_answer: Planning should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that planning supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative planning case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - planning
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: planning
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-08
+  domain: agile-delivery
+  subdomain: estimation
+  title: 'Estimation: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What is the simplest useful validation for estimation?
+  concise_answer: Estimation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that estimation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative estimation case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - estimation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: estimation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agile-delivery-b-09
+  domain: agile-delivery
+  subdomain: refinement
+  title: 'Refinement: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Compare a sound use of refinement with a superficially similar but unsafe use.
+  concise_answer: Refinement should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agile/product delivery and estimation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that refinement supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agile/product delivery and estimation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative refinement case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - QA Manager
+  - Engineering Manager
+  years_range:
+  - 1
+  - 8
+  tags:
+  - agile-delivery
+  - refinement
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: refinement
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

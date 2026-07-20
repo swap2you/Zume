@@ -1,0 +1,284 @@
+version: 1
+records:
+- id: sql-oracle-exercise-i-01
+  domain: sql-oracle
+  subdomain: select-filter-sort
+  title: Select Filter Sort evidence exercise
+  level: intermediate
+  priority: P1
+  task: Given a small SQL, Oracle, and database testing scenario, propose and implement or describe a
+    bounded approach for select filter sort. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for select filter sort, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for select
+    filter sort. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the select filter sort approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for select filter sort passes locally but fails intermittently in
+    CI. What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the select filter sort solution is independently understood
+      rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: sql
+  allowed_languages:
+  - SQL
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: oracle-sql
+    locator: select filter sort
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  tags:
+  - sql-oracle
+  - select-filter-sort
+  - exercise
+  variant_family: sql-oracle-select-filter-sort
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-exercise-i-02
+  domain: sql-oracle
+  subdomain: joins
+  title: Joins evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small SQL, Oracle, and database testing scenario, propose and implement or describe a
+    bounded approach for joins. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for joins, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for joins.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the joins approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for joins passes locally but fails intermittently in CI. What do you
+    inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the joins solution is independently understood rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: sql
+  allowed_languages:
+  - SQL
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: oracle-sql
+    locator: joins
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  tags:
+  - sql-oracle
+  - joins
+  - exercise
+  variant_family: sql-oracle-joins
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-exercise-i-03
+  domain: sql-oracle
+  subdomain: aggregation
+  title: Aggregation evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small SQL, Oracle, and database testing scenario, propose and implement or describe a
+    bounded approach for aggregation. State assumptions, cover a failure path, and show the evidence you
+    would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for aggregation, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for aggregation.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the aggregation approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for aggregation passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the aggregation solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: sql
+  allowed_languages:
+  - SQL
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: oracle-sql
+    locator: aggregation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  tags:
+  - sql-oracle
+  - aggregation
+  - exercise
+  variant_family: sql-oracle-aggregation
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-exercise-i-04
+  domain: sql-oracle
+  subdomain: ctes
+  title: Ctes evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small SQL, Oracle, and database testing scenario, propose and implement or describe a
+    bounded approach for ctes. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for ctes, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for ctes.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the ctes approach if the input volume or failure rate
+    doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for ctes passes locally but fails intermittently in CI. What do you
+    inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the ctes solution is independently understood rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: sql
+  allowed_languages:
+  - SQL
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: oracle-sql
+    locator: ctes
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  tags:
+  - sql-oracle
+  - ctes
+  - exercise
+  variant_family: sql-oracle-ctes
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

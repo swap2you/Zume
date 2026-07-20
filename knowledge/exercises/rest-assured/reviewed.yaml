@@ -1,0 +1,66 @@
+version: 1
+records:
+- id: rest-assured-reviewed-exercise-01
+  domain: rest-assured
+  subdomain: reviewed-practice
+  title: rest-assured focused practice
+  level: intermediate
+  priority: P1
+  task: 'Work through a small rest-assured failure scenario based on Usage: request specification. Implement
+    or describe a focused check, identify one boundary case, and show the evidence you would keep for
+    diagnosis.'
+  constraints:
+  - Keep the solution scoped to the stated contract.
+  - Make failures observable.
+  - Do not include interviewer guidance.
+  starter_files:
+    request.json: '{"method":"GET","path":"/health"}
+
+      '
+  expected_reasoning: 'Identify the contract from Usage: request specification, use a focused rest-assured
+    operation, and explain how the failure evidence narrows the fault.'
+  reference_solution: A sound rest-assured solution targets the named contract, checks normal and boundary
+    behavior, and preserves the direct diagnostic output.
+  test_cases:
+  - name: contract-path
+    expected: The stated contract is verified.
+  - name: boundary-path
+    expected: The failure is reported with useful evidence.
+  scoring_rubric:
+  - Uses the stated contract (3)
+  - Covers a boundary (3)
+  - Explains diagnostic evidence (2)
+  - Keeps scope clear (2)
+  requirement_change_follow_up: How would the check change if this contract became a compatibility boundary?
+  requirement_change_recommended_answer: Make the external contract explicit, preserve representative
+    regression cases, and version or document intentional behavior changes.
+  debugging_follow_up: The focused check fails only in CI. What evidence do you compare first?
+  debugging_recommended_answer: Compare the direct failure output, environment inputs, dependency versions,
+    and timing evidence before changing the test.
+  independence_questions:
+  - question: What small change could you make to demonstrate that you understand the solution?
+    recommended_answer: Change one boundary input and explain how the expected evidence and assertion
+      change.
+  hints:
+  - Start from the documented contract.
+  runner_type: api
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: rest-assured
+    locator: 'Usage: request specification'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: hand_authored
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity.
+  role_tracks:
+  - Senior SDET
+  tags:
+  - rest-assured
+  - practice
+  variant_family: rest-assured-reviewed-practice

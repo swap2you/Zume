@@ -1,0 +1,527 @@
+version: 1
+records:
+- id: data-etl-i-01
+  domain: data-etl
+  subdomain: lineage
+  title: 'Lineage: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design lineage for a changing product while preserving clear ownership?
+  concise_answer: Lineage should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that lineage supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your lineage approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative lineage case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - lineage
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: lineage
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-02
+  domain: data-etl
+  subdomain: transformations
+  title: 'Transformations: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling transformations across multiple teams?
+  concise_answer: Transformations should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that transformations supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your transformations approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative transformations case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - transformations
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: transformations
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-03
+  domain: data-etl
+  subdomain: reconciliation
+  title: 'Reconciliation: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: A result involving reconciliation is intermittent. How do you isolate cause from symptom?
+  concise_answer: Reconciliation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reconciliation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reconciliation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reconciliation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - reconciliation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: reconciliation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-04
+  domain: data-etl
+  subdomain: quality
+  title: 'Quality: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: How would you make quality observable enough to support a production investigation?
+  concise_answer: Quality should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that quality supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your quality approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative quality case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - quality
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: quality
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-05
+  domain: data-etl
+  subdomain: incremental-loads
+  title: 'Incremental Loads: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: Where should the boundary around incremental loads live, and why?
+  concise_answer: Incremental Loads should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that incremental loads supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative incremental loads case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - incremental-loads
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: incremental loads
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-06
+  domain: data-etl
+  subdomain: warehouse
+  title: 'Warehouse: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you validate that warehouse remains correct when inputs are incomplete or delayed?
+  concise_answer: Warehouse should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that warehouse supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative warehouse case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - warehouse
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: warehouse
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-07
+  domain: data-etl
+  subdomain: lineage
+  title: 'Lineage: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What design choice makes lineage easier to evolve without hiding failures?
+  concise_answer: Lineage should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that lineage supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative lineage case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - lineage
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: lineage
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-08
+  domain: data-etl
+  subdomain: transformations
+  title: 'Transformations: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around transformations?
+  concise_answer: Transformations should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that transformations supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative transformations case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - transformations
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: transformations
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: data-etl-i-09
+  domain: data-etl
+  subdomain: reconciliation
+  title: 'Reconciliation: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What data would you collect before tuning or optimizing reconciliation?
+  concise_answer: Reconciliation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Data/ETL/warehouse testing, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reconciliation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Data/ETL/warehouse testing example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reconciliation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - data-etl
+  - reconciliation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: reconciliation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

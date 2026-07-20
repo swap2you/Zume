@@ -1,0 +1,538 @@
+version: 1
+records:
+- id: python-automation-a-01
+  domain: python-automation
+  subdomain: language-basics
+  title: 'Language Basics: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for language basics that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Python for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your language basics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - language-basics
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-02
+  domain: python-automation
+  subdomain: pytest
+  title: 'Pytest: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: A large organization has inconsistent implementations of pytest. How would you converge them
+    safely?
+  concise_answer: Pytest should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that pytest supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your pytest approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative pytest case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - pytest
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: pytest
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-03
+  domain: python-automation
+  subdomain: fixtures
+  title: 'Fixtures: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for fixtures under reliability and cost constraints?
+  concise_answer: Fixtures should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that fixtures supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your fixtures approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative fixtures case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - fixtures
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: fixtures
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-04
+  domain: python-automation
+  subdomain: http-clients
+  title: 'Http Clients: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for http clients?
+  concise_answer: Http Clients should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that http clients supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your http clients approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative http clients case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - http-clients
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: http clients
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-05
+  domain: python-automation
+  subdomain: concurrency
+  title: 'Concurrency: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you detect silent degradation of concurrency before users report it?
+  concise_answer: Concurrency should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that concurrency supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative concurrency case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - concurrency
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: concurrency
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-06
+  domain: python-automation
+  subdomain: packaging
+  title: 'Packaging: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: Design an experiment that distinguishes whether packaging improves outcomes or only activity
+    metrics.
+  concise_answer: Packaging should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that packaging supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative packaging case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - packaging
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: packaging
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-07
+  domain: python-automation
+  subdomain: language-basics
+  title: 'Language Basics: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you set risk-based quality gates for a change to language basics?
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Python for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - language-basics
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-08
+  domain: python-automation
+  subdomain: pytest
+  title: 'Pytest: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What must be true before delegating decisions about pytest to automation?
+  concise_answer: Pytest should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that pytest supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative pytest case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - pytest
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: pytest
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: python-automation-a-09
+  domain: python-automation
+  subdomain: fixtures
+  title: 'Fixtures: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving fixtures?
+  concise_answer: Fixtures should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Python for automation, validate both the intended result and
+    the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that fixtures supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Python for automation example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative fixtures case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - python-automation
+  - fixtures
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: python-docs
+    locator: fixtures
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

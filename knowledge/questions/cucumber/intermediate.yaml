@@ -1,0 +1,1461 @@
+version: 1
+records:
+- id: cucumber-i-01
+  domain: cucumber
+  subdomain: bdd-purpose
+  title: 'Bdd Purpose: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design bdd purpose for a changing product while preserving clear ownership?
+  concise_answer: Bdd Purpose should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that bdd purpose supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your bdd purpose approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative bdd purpose case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - bdd-purpose
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: bdd purpose
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-02
+  domain: cucumber
+  subdomain: discovery
+  title: 'Discovery: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling discovery across multiple teams?
+  concise_answer: Discovery should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that discovery supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your discovery approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative discovery case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - discovery
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: discovery
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-03
+  domain: cucumber
+  subdomain: gherkin
+  title: 'Gherkin: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: A result involving gherkin is intermittent. How do you isolate cause from symptom?
+  concise_answer: Gherkin should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that gherkin supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your gherkin approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative gherkin case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - gherkin
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: gherkin
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-04
+  domain: cucumber
+  subdomain: scenarios-outlines-tables
+  title: 'Scenarios Outlines Tables: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you make scenarios outlines tables observable enough to support a production investigation?
+  concise_answer: Scenarios Outlines Tables should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scenarios outlines tables supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your scenarios outlines tables approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative scenarios outlines tables case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - scenarios-outlines-tables
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: scenarios outlines tables
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-05
+  domain: cucumber
+  subdomain: hooks
+  title: 'Hooks: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Where should the boundary around hooks live, and why?
+  concise_answer: Hooks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hooks supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your hooks approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative hooks case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - hooks
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: hooks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-06
+  domain: cucumber
+  subdomain: tags
+  title: 'Tags: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you validate that tags remains correct when inputs are incomplete or delayed?
+  concise_answer: Tags should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tags supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your tags approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative tags case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - tags
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: tags
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-07
+  domain: cucumber
+  subdomain: step-definitions
+  title: 'Step Definitions: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What design choice makes step definitions easier to evolve without hiding failures?
+  concise_answer: Step Definitions should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that step definitions supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your step definitions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative step definitions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - step-definitions
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: step definitions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-08
+  domain: cucumber
+  subdomain: parameter-types
+  title: 'Parameter Types: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around parameter
+    types?
+  concise_answer: Parameter Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parameter types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your parameter types approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative parameter types case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - parameter-types
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: parameter types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-09
+  domain: cucumber
+  subdomain: dependency-injection
+  title: 'Dependency Injection: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What data would you collect before tuning or optimizing dependency injection?
+  concise_answer: Dependency Injection should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency injection supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your dependency injection approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative dependency injection case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - dependency-injection
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: dependency injection
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-10
+  domain: cucumber
+  subdomain: state-context
+  title: 'State Context: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you review a proposal that centralizes state context?
+  concise_answer: State Context should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that state context supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your state context approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative state context case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - state-context
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: state context
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-11
+  domain: cucumber
+  subdomain: maintainability
+  title: 'Maintainability: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What are the consequences of retrying failures associated with maintainability?
+  concise_answer: Maintainability should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that maintainability supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your maintainability approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative maintainability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - maintainability
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: maintainability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-12
+  domain: cucumber
+  subdomain: living-documentation
+  title: 'Living Documentation: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you build a representative test matrix for living documentation without testing
+    every combination?
+  concise_answer: Living Documentation should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that living documentation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your living documentation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative living documentation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - living-documentation
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: living documentation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-13
+  domain: cucumber
+  subdomain: reporting
+  title: 'Reporting: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What contract should adjacent components share when they use reporting?
+  concise_answer: Reporting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reporting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reporting case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - reporting
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: reporting
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-14
+  domain: cucumber
+  subdomain: parallelism
+  title: 'Parallelism: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How do you prevent a local optimization of parallelism from degrading system behavior?
+  concise_answer: Parallelism should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parallelism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative parallelism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - parallelism
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: parallelism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-15
+  domain: cucumber
+  subdomain: suitability
+  title: 'Suitability: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you introduce suitability incrementally and measure whether it helped?
+  concise_answer: Suitability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that suitability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative suitability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - suitability
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: suitability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-16
+  domain: cucumber
+  subdomain: bdd-purpose
+  title: 'Bdd Purpose: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What failure classification would you use for incidents involving bdd purpose?
+  concise_answer: Bdd Purpose should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that bdd purpose supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative bdd purpose case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - bdd-purpose
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: bdd purpose
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-17
+  domain: cucumber
+  subdomain: discovery
+  title: 'Discovery: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you decide whether discovery belongs in a reusable abstraction?
+  concise_answer: Discovery should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that discovery supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative discovery case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - discovery
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: discovery
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-18
+  domain: cucumber
+  subdomain: gherkin
+  title: 'Gherkin: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What is the difference between validating gherkin and merely exercising it?
+  concise_answer: Gherkin should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that gherkin supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative gherkin case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - gherkin
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: gherkin
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-19
+  domain: cucumber
+  subdomain: scenarios-outlines-tables
+  title: 'Scenarios Outlines Tables: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you debug a discrepancy between local and CI behavior involving scenarios outlines
+    tables?
+  concise_answer: Scenarios Outlines Tables should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scenarios outlines tables supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative scenarios outlines tables case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - scenarios-outlines-tables
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: scenarios outlines tables
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-20
+  domain: cucumber
+  subdomain: hooks
+  title: 'Hooks: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: Which signals would trigger a review of the current hooks design?
+  concise_answer: Hooks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hooks supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative hooks case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - hooks
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: hooks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-21
+  domain: cucumber
+  subdomain: tags
+  title: 'Tags: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you handle concurrency or shared-state risk around tags?
+  concise_answer: Tags should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tags supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative tags case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - tags
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: tags
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-22
+  domain: cucumber
+  subdomain: step-definitions
+  title: 'Step Definitions: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What should a high-signal test report expose about step definitions?
+  concise_answer: Step Definitions should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that step definitions supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative step definitions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - step-definitions
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: step definitions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-23
+  domain: cucumber
+  subdomain: parameter-types
+  title: 'Parameter Types: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you make a change to parameter types reversible?
+  concise_answer: Parameter Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parameter types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative parameter types case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - parameter-types
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: parameter types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cucumber-i-24
+  domain: cucumber
+  subdomain: dependency-injection
+  title: 'Dependency Injection: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: Which shortcut around dependency injection seems efficient but creates future maintenance
+    cost?
+  concise_answer: Dependency Injection should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Cucumber, Gherkin, and BDD, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency injection supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Cucumber, Gherkin, and BDD example, competing constraints, and evidence
+    that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative dependency injection case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Quality Engineering Lead
+  - QA Manager
+  years_range:
+  - 3
+  - 15
+  tags:
+  - cucumber
+  - dependency-injection
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: cucumber-docs
+    locator: dependency injection
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -1,0 +1,1462 @@
+version: 1
+records:
+- id: sel-b1
+  domain: selenium
+  subdomain: locators
+  title: Stable WebDriver locators
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: How do you choose a locator for a control whose layout and CSS classes change often?
+  concise_answer: Prefer a unique, intentionally stable semantic or test attribute over structural position
+    or styling. A locator should express the control's durable role or business identity, so it fails
+    when behavior changes rather than when a layout refactor occurs.
+  recommended_answer: Work with the product team to expose a stable accessibility name, label relationship,
+    or purpose-built data attribute. Use a concise CSS selector when it expresses that stable contract;
+    use XPath only when its relationship or text capability is necessary and robust. Avoid copied absolute
+    paths, indexes, and generated IDs, then verify uniqueness and behavior through the user interaction.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - prefer stable semantic attributes
+  - verify uniqueness
+  - avoid layout-coupled selectors
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your webdriver architecture approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative webdriver architecture case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - webdriver-architecture
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: webdriver architecture
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sel-b2
+  domain: selenium
+  subdomain: waits-synchronization
+  title: Condition-based synchronization
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Why should a WebDriver test wait for a specific condition instead of sleeping for a fixed
+    duration?
+  concise_answer: A fixed sleep guesses timing and is either slow when the page is ready early or flaky
+    when it is not ready in time. A condition-based wait polls for the state the next action actually
+    needs and produces a focused timeout when that state never occurs.
+  recommended_answer: 'Identify the actionable condition: for example, an element is visible, enabled,
+    detached after a refresh, or a request-driven status has completed. Apply an explicit wait around
+    that condition and keep timeout ownership clear; do not mix unrelated global delays into the same
+    reasoning. If it times out, inspect the locator, application state, overlay, and page event rather
+    than immediately increasing the timeout.'
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - wait for the next action's condition
+  - fixed sleeps are guesses
+  - timeouts are diagnostic evidence
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your driver management approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative driver management case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - driver-management
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: driver management
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sel-b3
+  domain: selenium
+  subdomain: page-components
+  title: Page and component object boundaries
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What should a page or component object encapsulate, and what should remain in the test?
+  concise_answer: An object should encapsulate how the UI is located and operated, while the test states
+    the business scenario and its assertions. This keeps UI changes local without making the object a
+    hidden test script.
+  recommended_answer: Expose meaningful actions and state queries rather than leaking raw locators to
+    tests. Keep navigation and synchronization close to the component that owns them, return the next
+    page or observable state where useful, and let tests assert the scenario outcome. Avoid putting broad
+    scenario assertions or unrelated workflow decisions inside page objects, because that reduces reuse
+    and obscures failures.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - encapsulate UI mechanics
+  - tests own scenario assertions
+  - prefer meaningful actions over locator leakage
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your locators approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative locators case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - locators
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: locators
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-04
+  domain: selenium
+  subdomain: waits-synchronization
+  title: 'Waits Synchronization: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Give a small example of waits synchronization and state the observable outcome.
+  concise_answer: Waits Synchronization should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that waits synchronization supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your waits synchronization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative waits synchronization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - waits-synchronization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: waits synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-05
+  domain: selenium
+  subdomain: elements-interactions
+  title: 'Elements Interactions: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about elements interactions most often causes an avoidable defect?
+  concise_answer: Elements Interactions should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that elements interactions supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your elements interactions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative elements interactions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - elements-interactions
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: elements interactions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-06
+  domain: selenium
+  subdomain: frames-windows-alerts
+  title: 'Frames Windows Alerts: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that frames windows alerts is being used for the wrong purpose?
+  concise_answer: Frames Windows Alerts should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that frames windows alerts supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your frames windows alerts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative frames windows alerts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - frames-windows-alerts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: frames windows alerts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-07
+  domain: selenium
+  subdomain: actions
+  title: 'Actions: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing actions?
+  concise_answer: Actions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Selenium WebDriver, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that actions supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your actions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative actions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - actions
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: actions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-08
+  domain: selenium
+  subdomain: javascript
+  title: 'Javascript: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What is the simplest useful validation for javascript?
+  concise_answer: Javascript should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Selenium WebDriver, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that javascript supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your javascript approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative javascript case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - javascript
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: javascript
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-09
+  domain: selenium
+  subdomain: file-transfer
+  title: 'File Transfer: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Compare a sound use of file transfer with a superficially similar but unsafe use.
+  concise_answer: File Transfer should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that file transfer supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your file transfer approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative file transfer case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - file-transfer
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: file transfer
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-10
+  domain: selenium
+  subdomain: page-components
+  title: 'Page Components: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What should a concise team convention say about page components?
+  concise_answer: Page Components should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that page components supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your page components approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative page components case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - page-components
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: page components
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-11
+  domain: selenium
+  subdomain: grid-parallelism
+  title: 'Grid Parallelism: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How does grid parallelism affect the reliability of a routine automated check?
+  concise_answer: Grid Parallelism should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that grid parallelism supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your grid parallelism approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative grid parallelism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - grid-parallelism
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: grid parallelism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-12
+  domain: selenium
+  subdomain: bidi-cdp
+  title: 'Bidi Cdp: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What evidence would make you trust a result produced through bidi cdp?
+  concise_answer: Bidi Cdp should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Selenium WebDriver, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that bidi cdp supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your bidi cdp approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative bidi cdp case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - bidi-cdp
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: bidi cdp
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-13
+  domain: selenium
+  subdomain: observability
+  title: 'Observability: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What failure mode should be made visible when introducing observability?
+  concise_answer: Observability should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that observability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative observability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - observability
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: observability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-14
+  domain: selenium
+  subdomain: flaky-diagnosis
+  title: 'Flaky Diagnosis: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you explain the trade-off behind flaky diagnosis without relying on jargon?
+  concise_answer: Flaky Diagnosis should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that flaky diagnosis supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative flaky diagnosis case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - flaky-diagnosis
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: flaky diagnosis
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-15
+  domain: selenium
+  subdomain: anti-patterns
+  title: 'Anti Patterns: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Which input or precondition matters most for anti patterns?
+  concise_answer: Anti Patterns should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that anti patterns supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative anti patterns case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - anti-patterns
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: anti patterns
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-16
+  domain: selenium
+  subdomain: accessibility-browser
+  title: 'Accessibility Browser: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: When should a team stop and clarify the intended use of accessibility browser?
+  concise_answer: Accessibility Browser should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that accessibility browser supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative accessibility browser case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - accessibility-browser
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: accessibility browser
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-17
+  domain: selenium
+  subdomain: webdriver-architecture
+  title: 'Webdriver Architecture: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What would a useful acceptance criterion for webdriver architecture look like?
+  concise_answer: Webdriver Architecture should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that webdriver architecture supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative webdriver architecture case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - webdriver-architecture
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: webdriver architecture
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-18
+  domain: selenium
+  subdomain: driver-management
+  title: 'Driver Management: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you test the negative path around driver management?
+  concise_answer: Driver Management should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that driver management supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative driver management case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - driver-management
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: driver management
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-19
+  domain: selenium
+  subdomain: locators
+  title: 'Locators: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is a reasonable first diagnostic when locators behaves unexpectedly?
+  concise_answer: Locators should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Selenium WebDriver, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that locators supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative locators case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - locators
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: locators
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-20
+  domain: selenium
+  subdomain: waits-synchronization
+  title: 'Waits Synchronization: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How can a team avoid turning waits synchronization into a brittle convention?
+  concise_answer: Waits Synchronization should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that waits synchronization supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative waits synchronization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - waits-synchronization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: waits synchronization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-21
+  domain: selenium
+  subdomain: elements-interactions
+  title: 'Elements Interactions: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which outcome would show that elements interactions has delivered value?
+  concise_answer: Elements Interactions should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that elements interactions supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative elements interactions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - elements-interactions
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: elements interactions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-22
+  domain: selenium
+  subdomain: frames-windows-alerts
+  title: 'Frames Windows Alerts: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What should be documented about frames windows alerts for the next maintainer?
+  concise_answer: Frames Windows Alerts should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Selenium WebDriver, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that frames windows alerts supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative frames windows alerts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - frames-windows-alerts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: frames windows alerts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-23
+  domain: selenium
+  subdomain: actions
+  title: 'Actions: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you make actions understandable in a code review?
+  concise_answer: Actions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Selenium WebDriver, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that actions supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative actions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - actions
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: actions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: selenium-b-24
+  domain: selenium
+  subdomain: javascript
+  title: 'Javascript: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What is a common scope mistake when applying javascript?
+  concise_answer: Javascript should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Selenium WebDriver, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that javascript supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Selenium WebDriver example, competing constraints, and evidence that
+    would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative javascript case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - selenium
+  - javascript
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: javascript
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

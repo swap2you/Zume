@@ -1,0 +1,1460 @@
+version: 1
+records:
+- id: agentic-ai-i-01
+  domain: agentic-ai
+  subdomain: agents-workflows
+  title: 'Agents Workflows: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: How would you design agents workflows for a changing product while preserving clear ownership?
+  concise_answer: Agents Workflows should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that agents workflows supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your agents workflows approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative agents workflows case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - agents-workflows
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: agents workflows
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-02
+  domain: agentic-ai
+  subdomain: planning-tools
+  title: 'Planning Tools: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: What trade-offs would you evaluate before scaling planning tools across multiple teams?
+  concise_answer: Planning Tools should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that planning tools supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your planning tools approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative planning tools case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - planning-tools
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: planning tools
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-03
+  domain: agentic-ai
+  subdomain: state-memory
+  title: 'State Memory: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: A result involving state memory is intermittent. How do you isolate cause from symptom?
+  concise_answer: State Memory should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that state memory supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your state memory approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative state memory case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - state-memory
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: state memory
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-04
+  domain: agentic-ai
+  subdomain: handoffs
+  title: 'Handoffs: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: emerging
+  question: How would you make handoffs observable enough to support a production investigation?
+  concise_answer: Handoffs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that handoffs supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your handoffs approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative handoffs case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - handoffs
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: handoffs
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-05
+  domain: agentic-ai
+  subdomain: tool-schemas
+  title: 'Tool Schemas: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: Where should the boundary around tool schemas live, and why?
+  concise_answer: Tool Schemas should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tool schemas supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your tool schemas approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative tool schemas case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - tool-schemas
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: tool schemas
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-06
+  domain: agentic-ai
+  subdomain: mcp
+  title: 'Mcp: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you validate that mcp remains correct when inputs are incomplete or delayed?
+  concise_answer: Mcp should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that mcp supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your mcp approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative mcp case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - mcp
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: mcp
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-07
+  domain: agentic-ai
+  subdomain: permissions
+  title: 'Permissions: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: What design choice makes permissions easier to evolve without hiding failures?
+  concise_answer: Permissions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that permissions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your permissions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative permissions case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - permissions
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: permissions
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-08
+  domain: agentic-ai
+  subdomain: sandboxing
+  title: 'Sandboxing: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you separate deterministic checks from environmental uncertainty around sandboxing?
+  concise_answer: Sandboxing should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sandboxing supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your sandboxing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative sandboxing case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - sandboxing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: sandboxing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-09
+  domain: agentic-ai
+  subdomain: prompt-injection
+  title: 'Prompt Injection: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: What data would you collect before tuning or optimizing prompt injection?
+  concise_answer: Prompt Injection should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that prompt injection supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your prompt injection approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative prompt injection case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - prompt-injection
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: prompt injection
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-10
+  domain: agentic-ai
+  subdomain: web-search
+  title: 'Web Search: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you review a proposal that centralizes web search?
+  concise_answer: Web Search should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that web search supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your web search approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative web search case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - web-search
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: web search
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-11
+  domain: agentic-ai
+  subdomain: computer-code-tools
+  title: 'Computer Code Tools: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: What are the consequences of retrying failures associated with computer code tools?
+  concise_answer: Computer Code Tools should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that computer code tools supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your computer code tools approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative computer code tools case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - computer-code-tools
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: computer code tools
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-12
+  domain: agentic-ai
+  subdomain: tracing
+  title: 'Tracing: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: emerging
+  question: How would you build a representative test matrix for tracing without testing every combination?
+  concise_answer: Tracing should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tracing supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your tracing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative tracing case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - tracing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: tracing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-13
+  domain: agentic-ai
+  subdomain: evals
+  title: 'Evals: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: What contract should adjacent components share when they use evals?
+  concise_answer: Evals should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that evals supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative evals case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - evals
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: evals
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-14
+  domain: agentic-ai
+  subdomain: recovery
+  title: 'Recovery: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How do you prevent a local optimization of recovery from degrading system behavior?
+  concise_answer: Recovery should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that recovery supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative recovery case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - recovery
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: recovery
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-15
+  domain: agentic-ai
+  subdomain: human-approval
+  title: 'Human Approval: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How would you introduce human approval incrementally and measure whether it helped?
+  concise_answer: Human Approval should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that human approval supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative human approval case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - human-approval
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: human approval
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-16
+  domain: agentic-ai
+  subdomain: multi-agent
+  title: 'Multi Agent: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: What failure classification would you use for incidents involving multi agent?
+  concise_answer: Multi Agent should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that multi agent supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative multi agent case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - multi-agent
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: multi agent
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-17
+  domain: agentic-ai
+  subdomain: agents-workflows
+  title: 'Agents Workflows: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How would you decide whether agents workflows belongs in a reusable abstraction?
+  concise_answer: Agents Workflows should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that agents workflows supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative agents workflows case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - agents-workflows
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: agents workflows
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-18
+  domain: agentic-ai
+  subdomain: planning-tools
+  title: 'Planning Tools: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: What is the difference between validating planning tools and merely exercising it?
+  concise_answer: Planning Tools should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that planning tools supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative planning tools case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - planning-tools
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: planning tools
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-19
+  domain: agentic-ai
+  subdomain: state-memory
+  title: 'State Memory: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: How would you debug a discrepancy between local and CI behavior involving state memory?
+  concise_answer: State Memory should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that state memory supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative state memory case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - state-memory
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: state memory
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-20
+  domain: agentic-ai
+  subdomain: handoffs
+  title: 'Handoffs: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: emerging
+  question: Which signals would trigger a review of the current handoffs design?
+  concise_answer: Handoffs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that handoffs supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative handoffs case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - handoffs
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: handoffs
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-21
+  domain: agentic-ai
+  subdomain: tool-schemas
+  title: 'Tool Schemas: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: How would you handle concurrency or shared-state risk around tool schemas?
+  concise_answer: Tool Schemas should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tool schemas supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative tool schemas case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - tool-schemas
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: tool schemas
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-22
+  domain: agentic-ai
+  subdomain: mcp
+  title: 'Mcp: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: What should a high-signal test report expose about mcp?
+  concise_answer: Mcp should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that mcp supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative mcp case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - mcp
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: mcp
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-23
+  domain: agentic-ai
+  subdomain: permissions
+  title: 'Permissions: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: How would you make a change to permissions reversible?
+  concise_answer: Permissions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that permissions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative permissions case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - permissions
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: permissions
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: agentic-ai-i-24
+  domain: agentic-ai
+  subdomain: sandboxing
+  title: 'Sandboxing: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: emerging
+  question: Which shortcut around sandboxing seems efficient but creates future maintenance cost?
+  concise_answer: Sandboxing should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Agentic AI, tools, MCP, and orchestration, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sandboxing supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Agentic AI, tools, MCP, and orchestration example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative sandboxing case before generalizing.
+  role_tracks:
+  - LLM/Agent Engineer
+  - AI Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - agentic-ai
+  - sandboxing
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: mcp-spec
+    locator: sandboxing
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

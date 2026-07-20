@@ -1,0 +1,908 @@
+version: 1
+records:
+- id: test-data-environments-b-01
+  domain: test-data-environments
+  subdomain: data-lifecycle
+  title: 'Data Lifecycle: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does data lifecycle address, and what is its practical boundary?
+  concise_answer: Data Lifecycle should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that data lifecycle supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data lifecycle approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - data-lifecycle
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: data lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-02
+  domain: test-data-environments
+  subdomain: isolation
+  title: 'Isolation: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Explain isolation to a teammate who must use it safely tomorrow.
+  concise_answer: Isolation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that isolation supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your isolation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative isolation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - isolation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: isolation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-03
+  domain: test-data-environments
+  subdomain: environment-config
+  title: 'Environment Config: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: What would you check first before relying on environment config in a test or delivery workflow?
+  concise_answer: Environment Config should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that environment config supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your environment config approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative environment config case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - environment-config
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: environment config
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-04
+  domain: test-data-environments
+  subdomain: mocks
+  title: 'Mocks: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Give a small example of mocks and state the observable outcome.
+  concise_answer: Mocks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that mocks supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your mocks approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative mocks case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - mocks
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: mocks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-05
+  domain: test-data-environments
+  subdomain: virtualization
+  title: 'Virtualization: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about virtualization most often causes an avoidable defect?
+  concise_answer: Virtualization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that virtualization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your virtualization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative virtualization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - virtualization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: virtualization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-06
+  domain: test-data-environments
+  subdomain: contracts
+  title: 'Contracts: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that contracts is being used for the wrong purpose?
+  concise_answer: Contracts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that contracts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your contracts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative contracts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - contracts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: contracts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-07
+  domain: test-data-environments
+  subdomain: data-lifecycle
+  title: 'Data Lifecycle: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing data lifecycle?
+  concise_answer: Data Lifecycle should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that data lifecycle supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data lifecycle approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - data-lifecycle
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: data lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-08
+  domain: test-data-environments
+  subdomain: isolation
+  title: 'Isolation: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is the simplest useful validation for isolation?
+  concise_answer: Isolation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that isolation supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative isolation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - isolation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: isolation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-09
+  domain: test-data-environments
+  subdomain: environment-config
+  title: 'Environment Config: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Compare a sound use of environment config with a superficially similar but unsafe use.
+  concise_answer: Environment Config should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that environment config supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative environment config case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - environment-config
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: environment config
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-10
+  domain: test-data-environments
+  subdomain: mocks
+  title: 'Mocks: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What should a concise team convention say about mocks?
+  concise_answer: Mocks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that mocks supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative mocks case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - mocks
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: mocks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-11
+  domain: test-data-environments
+  subdomain: virtualization
+  title: 'Virtualization: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How does virtualization affect the reliability of a routine automated check?
+  concise_answer: Virtualization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that virtualization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative virtualization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - virtualization
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: virtualization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-12
+  domain: test-data-environments
+  subdomain: contracts
+  title: 'Contracts: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What evidence would make you trust a result produced through contracts?
+  concise_answer: Contracts should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that contracts supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative contracts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - contracts
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: contracts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-13
+  domain: test-data-environments
+  subdomain: data-lifecycle
+  title: 'Data Lifecycle: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What failure mode should be made visible when introducing data lifecycle?
+  concise_answer: Data Lifecycle should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that data lifecycle supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative data lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - data-lifecycle
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: data lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-14
+  domain: test-data-environments
+  subdomain: isolation
+  title: 'Isolation: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you explain the trade-off behind isolation without relying on jargon?
+  concise_answer: Isolation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Test data, environment management, mocks, and service virtualization,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that isolation supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative isolation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - isolation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: isolation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: test-data-environments-b-15
+  domain: test-data-environments
+  subdomain: environment-config
+  title: 'Environment Config: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which input or precondition matters most for environment config?
+  concise_answer: Environment Config should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Test data, environment management, mocks, and
+    service virtualization, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that environment config supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Test data, environment management, mocks, and service virtualization
+    example, competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative environment config case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 1
+  - 8
+  tags:
+  - test-data-environments
+  - environment-config
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: environment config
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

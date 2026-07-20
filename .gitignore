@@ -36,9 +36,33 @@ data/*.sqlite3
 *.jpeg
 *.zip
 
-# Allow repository documentation/templates
+# Allow repository documentation/templates and UI QA screenshots
 !docs/*.docx
 !templates/*.docx
+!reports/screenshots/*.png
+!reports/screenshots/.gitkeep
+
+# Zume 1.0 runtime / generated artifacts (never commit)
+.venv*/
+node_modules/
+apps/web/dist/
+apps/web/playwright-report/
+apps/web/test-results/
+knowledge/index/
+knowledge/_generated/
+data/knowledge*.db
+data/chat/
+data/audio-cache/
+data/lab-workspaces/
+data/review-workspace/
+data/knowledge-fts.sqlite
+release-staging/
+releases/
+*.log
+Zume_1_0_Cursor_Release_Package/
+Zume-v*.zip
 
 # Office temporary files
 ~$*.docx
+Zume_1_0_Independent_Review_Package/
+Zume_Question_Library_Final_Package/

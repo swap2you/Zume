@@ -1,0 +1,927 @@
+version: 1
+records:
+- id: containers-cloud-a-01
+  domain: containers-cloud
+  subdomain: containers
+  title: 'Containers: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for containers that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Containers should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that containers supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your containers approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative containers case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - containers
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: containers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-02
+  domain: containers-cloud
+  subdomain: kubernetes
+  title: 'Kubernetes: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of kubernetes. How would you converge
+    them safely?
+  concise_answer: Kubernetes should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that kubernetes supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your kubernetes approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative kubernetes case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - kubernetes
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: kubernetes
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-03
+  domain: containers-cloud
+  subdomain: identity
+  title: 'Identity: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for identity under reliability and cost constraints?
+  concise_answer: Identity should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that identity supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your identity approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative identity case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - identity
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: identity
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-04
+  domain: containers-cloud
+  subdomain: networking
+  title: 'Networking: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for networking?
+  concise_answer: Networking should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that networking supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your networking approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative networking case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - networking
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: networking
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-05
+  domain: containers-cloud
+  subdomain: storage
+  title: 'Storage: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of storage before users report it?
+  concise_answer: Storage should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that storage supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your storage approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative storage case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - storage
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: storage
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-06
+  domain: containers-cloud
+  subdomain: compute
+  title: 'Compute: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether compute improves outcomes or only activity
+    metrics.
+  concise_answer: Compute should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that compute supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your compute approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative compute case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - compute
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: compute
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-07
+  domain: containers-cloud
+  subdomain: serverless
+  title: 'Serverless: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to serverless?
+  concise_answer: Serverless should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that serverless supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your serverless approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative serverless case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - serverless
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: serverless
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-08
+  domain: containers-cloud
+  subdomain: cloud-observability
+  title: 'Cloud Observability: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What must be true before delegating decisions about cloud observability to automation?
+  concise_answer: Cloud Observability should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals
+    for quality engineers, validate both the intended result and the meaningful negative or failure path
+    before treating it as reliable.
+  recommended_answer: Start by naming the decision that cloud observability supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative cloud observability case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - cloud-observability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: cloud observability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-09
+  domain: containers-cloud
+  subdomain: containers
+  title: 'Containers: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving containers?
+  concise_answer: Containers should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that containers supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative containers case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - containers
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: containers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-10
+  domain: containers-cloud
+  subdomain: kubernetes
+  title: 'Kubernetes: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring kubernetes?
+  concise_answer: Kubernetes should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that kubernetes supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative kubernetes case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - kubernetes
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: kubernetes
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-11
+  domain: containers-cloud
+  subdomain: identity
+  title: 'Identity: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you establish ownership boundaries for identity across platform and product teams?
+  concise_answer: Identity should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that identity supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative identity case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - identity
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: identity
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-12
+  domain: containers-cloud
+  subdomain: networking
+  title: 'Networking: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature networking implementation?
+  concise_answer: Networking should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that networking supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative networking case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - networking
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: networking
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-13
+  domain: containers-cloud
+  subdomain: storage
+  title: 'Storage: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you design a post-incident review focused on storage without blaming individuals?
+  concise_answer: Storage should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that storage supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative storage case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - storage
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: storage
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-14
+  domain: containers-cloud
+  subdomain: compute
+  title: 'Compute: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What is the minimum observability design that makes compute auditable?
+  concise_answer: Compute should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that compute supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative compute case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - compute
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: compute
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: containers-cloud-a-15
+  domain: containers-cloud
+  subdomain: serverless
+  title: 'Serverless: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you make serverless resilient to partial failure and degraded dependencies?
+  concise_answer: Serverless should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Docker, Kubernetes, and cloud fundamentals for quality engineers,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that serverless supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Docker, Kubernetes, and cloud fundamentals for quality engineers example,
+    competing constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative serverless case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Lead SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - containers-cloud
+  - serverless
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: kubernetes-docs
+    locator: serverless
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

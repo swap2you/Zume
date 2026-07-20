@@ -1,0 +1,1486 @@
+version: 1
+records:
+- id: java-i1
+  domain: java
+  subdomain: language-basics
+  title: 'Language Basics: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design language basics for a changing product while preserving clear ownership?
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your language basics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - language-basics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-02
+  domain: java
+  subdomain: oop
+  title: 'Oop: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling oop across multiple teams?
+  concise_answer: Oop should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that oop supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your oop approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative oop case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - oop
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: oop
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-03
+  domain: java
+  subdomain: strings-immutability
+  title: 'Strings Immutability: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: A result involving strings immutability is intermittent. How do you isolate cause from symptom?
+  concise_answer: Strings Immutability should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Java, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that strings immutability supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your strings immutability approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative strings immutability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - strings-immutability
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: strings immutability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-04
+  domain: java
+  subdomain: equals-hashcode
+  title: 'Equals Hashcode: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you make equals hashcode observable enough to support a production investigation?
+  concise_answer: Equals Hashcode should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that equals hashcode supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your equals hashcode approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative equals hashcode case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - equals-hashcode
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: equals hashcode
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-05
+  domain: java
+  subdomain: collections
+  title: 'Collections: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Where should the boundary around collections live, and why?
+  concise_answer: Collections should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that collections supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your collections approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative collections case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - collections
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: collections
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-06
+  domain: java
+  subdomain: generics
+  title: 'Generics: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you validate that generics remains correct when inputs are incomplete or delayed?
+  concise_answer: Generics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that generics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your generics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative generics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - generics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: generics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-07
+  domain: java
+  subdomain: exceptions
+  title: 'Exceptions: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What design choice makes exceptions easier to evolve without hiding failures?
+  concise_answer: Exceptions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that exceptions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your exceptions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative exceptions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - exceptions
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: exceptions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-08
+  domain: java
+  subdomain: streams-lambdas
+  title: 'Streams Lambdas: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around streams
+    lambdas?
+  concise_answer: Streams Lambdas should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that streams lambdas supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your streams lambdas approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative streams lambdas case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - streams-lambdas
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: streams lambdas
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-09
+  domain: java
+  subdomain: modern-language-features
+  title: 'Modern Language Features: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What data would you collect before tuning or optimizing modern language features?
+  concise_answer: Modern Language Features should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In Java, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that modern language features supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your modern language features approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative modern language features case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - modern-language-features
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: modern language features
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-10
+  domain: java
+  subdomain: concurrency
+  title: 'Concurrency: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you review a proposal that centralizes concurrency?
+  concise_answer: Concurrency should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that concurrency supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your concurrency approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative concurrency case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - concurrency
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: concurrency
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-11
+  domain: java
+  subdomain: virtual-threads
+  title: 'Virtual Threads: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What are the consequences of retrying failures associated with virtual threads?
+  concise_answer: Virtual Threads should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that virtual threads supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your virtual threads approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative virtual threads case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - virtual-threads
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: virtual threads
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-12
+  domain: java
+  subdomain: jvm-memory-gc
+  title: 'Jvm Memory Gc: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you build a representative test matrix for jvm memory gc without testing every combination?
+  concise_answer: Jvm Memory Gc should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that jvm memory gc supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your jvm memory gc approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative jvm memory gc case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - jvm-memory-gc
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: jvm memory gc
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-13
+  domain: java
+  subdomain: io-nio
+  title: 'Io Nio: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What contract should adjacent components share when they use io nio?
+  concise_answer: Io Nio should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that io nio supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative io nio case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - io-nio
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: io nio
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-14
+  domain: java
+  subdomain: reflection-annotations
+  title: 'Reflection Annotations: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How do you prevent a local optimization of reflection annotations from degrading system behavior?
+  concise_answer: Reflection Annotations should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Java, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reflection annotations supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reflection annotations case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - reflection-annotations
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: reflection annotations
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-15
+  domain: java
+  subdomain: design-patterns
+  title: 'Design Patterns: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you introduce design patterns incrementally and measure whether it helped?
+  concise_answer: Design Patterns should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that design patterns supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative design patterns case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - design-patterns
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: design patterns
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-16
+  domain: java
+  subdomain: clean-code
+  title: 'Clean Code: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What failure classification would you use for incidents involving clean code?
+  concise_answer: Clean Code should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that clean code supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative clean code case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - clean-code
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: clean code
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-17
+  domain: java
+  subdomain: testing-java
+  title: 'Testing Java: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you decide whether testing java belongs in a reusable abstraction?
+  concise_answer: Testing Java should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that testing java supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative testing java case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - testing-java
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: testing java
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-18
+  domain: java
+  subdomain: debugging-performance
+  title: 'Debugging Performance: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What is the difference between validating debugging performance and merely exercising it?
+  concise_answer: Debugging Performance should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Java, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that debugging performance supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative debugging performance case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - debugging-performance
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: debugging performance
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-19
+  domain: java
+  subdomain: language-basics
+  title: 'Language Basics: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you debug a discrepancy between local and CI behavior involving language basics?
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - language-basics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-20
+  domain: java
+  subdomain: oop
+  title: 'Oop: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: Which signals would trigger a review of the current oop design?
+  concise_answer: Oop should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that oop supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative oop case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - oop
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: oop
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-21
+  domain: java
+  subdomain: strings-immutability
+  title: 'Strings Immutability: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you handle concurrency or shared-state risk around strings immutability?
+  concise_answer: Strings Immutability should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Java, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that strings immutability supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative strings immutability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - strings-immutability
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: strings immutability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-22
+  domain: java
+  subdomain: equals-hashcode
+  title: 'Equals Hashcode: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What should a high-signal test report expose about equals hashcode?
+  concise_answer: Equals Hashcode should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Java, validate both the intended result and the
+    meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that equals hashcode supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative equals hashcode case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - equals-hashcode
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: equals hashcode
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-23
+  domain: java
+  subdomain: collections
+  title: 'Collections: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you make a change to collections reversible?
+  concise_answer: Collections should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that collections supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative collections case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - collections
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: collections
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: java-i-24
+  domain: java
+  subdomain: generics
+  title: 'Generics: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: Which shortcut around generics seems efficient but creates future maintenance cost?
+  concise_answer: Generics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Java, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that generics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Java example, competing constraints, and evidence that would change
+    the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative generics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - generics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: generics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

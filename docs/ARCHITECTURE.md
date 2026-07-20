@@ -1,58 +1,33 @@
-# Zume Architecture
+# Architecture
 
-Zume is a local-first, CLI-only Python toolkit. There is no web app, GUI, cloud
-service, or authentication layer.
+Zume 1.0 is a local-first Python CLI with an optional localhost preparation UI.
 
-## Modules (`src/zume/`)
+## Components
 
-| Module | Responsibility |
-|--------|----------------|
-| `cli.py` | Typer entry point; wires workflows and sub-apps (`candidate`, `db`). |
-| `config.py` | Loads YAML config (triggers, hiring standard, theme, exercises, privacy). |
-| `models.py` | Pydantic models and enums (evidence, decision, experience state, schedule). |
-| `ingest.py` | Text extraction (PDF/DOCX/TXT), name and experience analysis, image metadata. |
-| `screening.py` | Evidence typing, resume evidence coverage, experience gate, decision. |
-| `exercises.py` | Exercise parsing, fingerprinting, rotation-aware selection. |
-| `interview.py` | Interview kit, focus sheet, guide, scorecard, interviewer/candidate packs. |
-| `scheduling.py` | Schedule parsing, timezone/date/time validation, communication drafts. |
-| `feedback.py` | Interview-notes evaluation, independence observations, feedback docs. |
-| `documents.py` | Branded DOCX engine (headers, footers, page numbers, banners, tables). |
-| `storage.py` | SQLite index: schema versioning, migrations, FK, indexes, backup, integrity. |
-| `validation.py` | DOCX structural validation, candidate folder checks, privacy checks, render. |
-| `security.py` | Secret/PII scanning over git-tracked text files. |
-| `providers/` | Deterministic default provider (no mandatory AI dependency). |
+- `src/zume/cli.py`: Typer commands, including intake, finalize, serve, doctor,
+  and knowledge operations.
+- `src/zume/pipeline.py`: protected candidate lifecycle and document generation.
+- `src/zume/server/`: FastAPI app and workspace API, served only on localhost.
+- `apps/web/`: React/Vite single-page UI; its built `dist/` is served by FastAPI.
+- `knowledge/`: YAML source of truth for questions, exercises, taxonomy, and
+  sources.
+- `src/zume/knowledge/`: schema validation, selection, stats, and deterministic
+  SQLite FTS5 indexing.
+- `src/zume/labs/`: local and optionally Docker-isolated exercise runners.
+- `training/`: bundled mock API and SQL fixtures.
 
 ## Data flow
 
-```
-resume ──ingest──▶ ResumeProfile ──screening──▶ ScreeningResult ──▶ DOCX + JSON
-                                                     │
-                                                     ▼ (decision gate)
-                                        interview-prep ──exercises(rotation)──▶ kit
-                                                     │
-schedule details ──scheduling(validate)──▶ ScheduleRecord ──▶ DOCX + drafts
-                                                     │
-interviewer notes ──feedback──▶ FeedbackResult ──▶ DOCX + drafts
-```
+Hiring input enters the ignored `input/` area, is processed by `intake`, and
+creates exactly `source/`, `_internal/`, and `deliverables/` beneath a candidate
+folder. `finalize` consumes real interviewer notes and preserves workflow
+guards. The UI calls local `/api` routes; it reads library YAML/derived FTS and
+does not bypass the candidate workflow.
 
-## Storage design
+YAML is authoritative; `data/knowledge-fts.sqlite` is generated and disposable.
+Candidate data and runtime caches are ignored. Offline providers are the
+default. Hosted AI, web search, voice, and Docker labs require explicit local
+configuration.
 
-- Source files stay in candidate folders; SQLite (`data/zume.db`) is a
-  searchable **index**, not a document store.
-- `PRAGMA foreign_keys = ON`; schema version tracked via `PRAGMA user_version`
-  with idempotent migrations.
-- Indexes on candidate display name, status, created date, and source hash.
-- Rotation state lives in `exercise_usage` and `candidate_exercises`.
-- Deletion is transactional and cascades across all child tables.
-
-## Candidate folder contract
-
-`candidates/LastName_FirstName_YYYY-MM-DD/` with staged subfolders
-(`00-source` … `06-communications`, `99-final`). Validated DOCX files are
-promoted to `99-final/`. Writes are atomic and content-hash versioned.
-
-## Configuration (`config/`)
-
-`triggers.yaml`, `hiring-standard.yaml` (weights, minimum experience, evidence
-scoring), `statuses.yaml`, `document-theme.yaml`, `exercise-library.yaml`
-(interviewer-only), `privacy.yaml` (retention).
+Historical material is isolated under `docs/reference/legacy/`; it does not
+define the current 1.0 workflow.

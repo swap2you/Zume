@@ -1,0 +1,538 @@
+version: 1
+records:
+- id: javascript-typescript-a-01
+  domain: javascript-typescript
+  subdomain: language-basics
+  title: 'Language Basics: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for language basics that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your language basics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - language-basics
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-02
+  domain: javascript-typescript
+  subdomain: async
+  title: 'Async: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: A large organization has inconsistent implementations of async. How would you converge them
+    safely?
+  concise_answer: Async should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that async supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your async approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative async case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - async
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: async
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-03
+  domain: javascript-typescript
+  subdomain: types
+  title: 'Types: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for types under reliability and cost constraints?
+  concise_answer: Types should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that types supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your types approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative types case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-04
+  domain: javascript-typescript
+  subdomain: test-runners
+  title: 'Test Runners: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for test runners?
+  concise_answer: Test Runners should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that test runners supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your test runners approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative test runners case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - test-runners
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: test runners
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-05
+  domain: javascript-typescript
+  subdomain: browser-automation
+  title: 'Browser Automation: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you detect silent degradation of browser automation before users report it?
+  concise_answer: Browser Automation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that browser automation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative browser automation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - browser-automation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: browser automation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-06
+  domain: javascript-typescript
+  subdomain: tooling
+  title: 'Tooling: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: Design an experiment that distinguishes whether tooling improves outcomes or only activity
+    metrics.
+  concise_answer: Tooling should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tooling supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative tooling case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - tooling
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: tooling
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-07
+  domain: javascript-typescript
+  subdomain: language-basics
+  title: 'Language Basics: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you set risk-based quality gates for a change to language basics?
+  concise_answer: Language Basics should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that language basics supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative language basics case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - language-basics
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: language basics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-08
+  domain: javascript-typescript
+  subdomain: async
+  title: 'Async: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What must be true before delegating decisions about async to automation?
+  concise_answer: Async should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that async supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative async case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - async
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: async
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: javascript-typescript-a-09
+  domain: javascript-typescript
+  subdomain: types
+  title: 'Types: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving types?
+  concise_answer: Types should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In JavaScript/TypeScript for automation, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that types supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete JavaScript/TypeScript for automation example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative types case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - javascript-typescript
+  - types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: typescript-docs
+    locator: types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

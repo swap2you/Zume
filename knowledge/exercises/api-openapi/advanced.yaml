@@ -1,0 +1,281 @@
+version: 1
+records:
+- id: api-openapi-exercise-a-01
+  domain: api-openapi
+  subdomain: http
+  title: Http evidence exercise
+  level: advanced
+  priority: P1
+  task: Given a small API testing fundamentals and OpenAPI scenario, propose and implement or describe
+    a bounded approach for http. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for http, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for http.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the http approach if the input volume or failure rate
+    doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for http passes locally but fails intermittently in CI. What do you
+    inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the http solution is independently understood rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: api
+  allowed_languages: []
+  runtime_limits:
+    minutes: 30
+  references:
+  - source_id: openapi-spec
+    locator: http
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  tags:
+  - api-openapi
+  - http
+  - exercise
+  variant_family: api-openapi-http
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: api-openapi-exercise-a-02
+  domain: api-openapi
+  subdomain: rest-constraints
+  title: Rest Constraints evidence exercise
+  level: advanced
+  priority: P2
+  task: Given a small API testing fundamentals and OpenAPI scenario, propose and implement or describe
+    a bounded approach for rest constraints. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for rest constraints, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for rest
+    constraints. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the rest constraints approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for rest constraints passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the rest constraints solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: api
+  allowed_languages: []
+  runtime_limits:
+    minutes: 30
+  references:
+  - source_id: openapi-spec
+    locator: rest constraints
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  tags:
+  - api-openapi
+  - rest-constraints
+  - exercise
+  variant_family: api-openapi-rest-constraints
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: api-openapi-exercise-a-03
+  domain: api-openapi
+  subdomain: methods-idempotency
+  title: Methods Idempotency evidence exercise
+  level: advanced
+  priority: P2
+  task: Given a small API testing fundamentals and OpenAPI scenario, propose and implement or describe
+    a bounded approach for methods idempotency. State assumptions, cover a failure path, and show the
+    evidence you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for methods idempotency, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for methods
+    idempotency. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the methods idempotency approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for methods idempotency passes locally but fails intermittently in
+    CI. What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the methods idempotency solution is independently understood
+      rather than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: api
+  allowed_languages: []
+  runtime_limits:
+    minutes: 30
+  references:
+  - source_id: openapi-spec
+    locator: methods idempotency
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  tags:
+  - api-openapi
+  - methods-idempotency
+  - exercise
+  variant_family: api-openapi-methods-idempotency
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: api-openapi-exercise-a-04
+  domain: api-openapi
+  subdomain: status-codes
+  title: Status Codes evidence exercise
+  level: advanced
+  priority: P2
+  task: Given a small API testing fundamentals and OpenAPI scenario, propose and implement or describe
+    a bounded approach for status codes. State assumptions, cover a failure path, and show the evidence
+    you would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for status codes, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for status
+    codes. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the status codes approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for status codes passes locally but fails intermittently in CI. What
+    do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the status codes solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: api
+  allowed_languages: []
+  runtime_limits:
+    minutes: 30
+  references:
+  - source_id: openapi-spec
+    locator: status codes
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Solution Architect
+  tags:
+  - api-openapi
+  - status-codes
+  - exercise
+  variant_family: api-openapi-status-codes
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

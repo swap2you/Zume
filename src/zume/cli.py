@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 import shutil
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import typer
 from rich.console import Console
@@ -211,6 +211,67 @@ def finalize_cmd(
     for err in result.validation_errors:
         console.print(f"[red]DOCX issue:[/] {err}")
     console.print(f"Candidate folder: {result.folder}")
+
+
+@app.command("doctor")
+def doctor_cmd() -> None:
+    """Report local provider/runtime status without revealing secrets."""
+    from zume.doctor import format_doctor_text
+
+    console.print(format_doctor_text())
+
+
+@app.command("serve")
+def serve_cmd(
+    host: str = typer.Option("127.0.0.1", "--host", help="Bind host (localhost only)."),
+    port: int = typer.Option(8787, "--port", help="Bind port."),
+    no_open: bool = typer.Option(False, "--no-open", help="Do not open a browser."),
+) -> None:
+    """Start the local API + UI on localhost."""
+    from zume.serve import run_server
+
+    try:
+        run_server(_root(), host=host, port=port, open_browser=not no_open)
+    except (ValueError, RuntimeError) as exc:
+        console.print(f"[red]Serve blocked:[/] {exc}")
+        raise typer.Exit(code=2) from exc
+
+
+review_app = typer.Typer(name="review", help="Cowork / local validation review mode.",
+                         no_args_is_help=True)
+app.add_typer(review_app)
+
+
+@review_app.command("serve")
+def review_serve_cmd(
+    port: int = typer.Option(8787, "--port", help="Bind port (localhost only)."),
+    no_open: bool = typer.Option(False, "--no-open", help="Do not open a browser."),
+    reset: bool = typer.Option(False, "--reset", help="Reset fictional review data first."),
+) -> None:
+    """Serve the app in review mode with fictional data only."""
+    from zume.review_mode import apply_review_environment, prepare_review_workspace
+    from zume.serve import run_server
+
+    root = _root()
+    apply_review_environment()
+    workspace = prepare_review_workspace(root, reset=reset)
+    console.print("[yellow]Review mode — fictional data[/]")
+    console.print(f"Workspace: {workspace}")
+    console.print("OpenAI live and Docker labs disabled by default.")
+    try:
+        run_server(workspace, host="127.0.0.1", port=port, open_browser=not no_open, review_mode=True)
+    except (ValueError, RuntimeError) as exc:
+        console.print(f"[red]Serve blocked:[/] {exc}")
+        raise typer.Exit(code=2) from exc
+
+
+@review_app.command("reset")
+def review_reset_cmd() -> None:
+    """Reset the fictional review workspace (never touches real candidates/)."""
+    from zume.review_mode import reset_review_workspace
+
+    workspace = reset_review_workspace(_root())
+    console.print(f"[green]Reset review workspace[/] -> {workspace}")
 
 
 @app.command("demo")
@@ -464,6 +525,315 @@ def db_backup_cmd(
 def _timestamp() -> str:
     from datetime import datetime, timezone
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+knowledge_app = typer.Typer(name="knowledge", help="Knowledge library commands.", no_args_is_help=True)
+app.add_typer(knowledge_app)
+
+
+@knowledge_app.command("validate")
+def knowledge_validate_cmd() -> None:
+    """Validate published knowledge records against the canonical schema."""
+    from zume.knowledge.validate import validate_library
+
+    errors = validate_library(_root())
+    if errors:
+        for err in errors[:50]:
+            console.print(f"[red]FAIL[/] {err}")
+        if len(errors) > 50:
+            console.print(f"... and {len(errors) - 50} more")
+        raise typer.Exit(code=1)
+    console.print("[green]PASS[/] knowledge library validation")
+
+
+@knowledge_app.command("stats")
+def knowledge_stats_cmd() -> None:
+    """Print knowledge library counts."""
+    from zume.knowledge.stats import collect_stats
+
+    stats = collect_stats(_root())
+    console.print(stats)
+
+
+@knowledge_app.command("content-quality")
+def knowledge_content_quality_cmd() -> None:
+    """Fail when published material has editorial-quality defects."""
+    from zume.knowledge.content_quality import scan_content_quality
+
+    errors = scan_content_quality(_root())
+    if errors:
+        for error in errors:
+            console.print(f"[red]FAIL[/] {error}")
+        raise typer.Exit(code=1)
+    console.print("[green]PASS[/] published knowledge content quality")
+
+
+@knowledge_app.command("review-report")
+def knowledge_review_report_cmd(
+    output: Optional[Path] = typer.Option(None, "--output", help="Optional markdown path."),
+) -> None:
+    """Summarize reviewed/draft/gap/duplicate/role/source status for publication review."""
+    from collections import Counter
+    from datetime import date
+
+    from zume.knowledge.content_quality import scan_content_quality
+    from zume.knowledge.enrich import freshness_state
+    from zume.knowledge.gaps import collect_gaps
+    from zume.knowledge.loader import load_all_questions
+    from zume.knowledge.stats import collect_stats
+
+    root = _root()
+    stats = collect_stats(root)
+    gaps = collect_gaps(root)
+    questions = load_all_questions(root / "knowledge")
+    reviewed = [q for q in questions if q.status == "published" and q.review_status == "reviewed"]
+    drafts = [q for q in questions if q.status == "draft"]
+    quality = scan_content_quality(root)
+    domains = sorted({q.domain for q in reviewed})
+    roles = Counter(role for q in reviewed for role in q.role_tracks)
+    freshness = Counter(freshness_state(q) for q in reviewed)
+    duplicate_clusters = [e for e in quality if "duplicate" in e or "template cluster" in e]
+    lines = [
+        "# Zume knowledge review report",
+        "",
+        f"Date: {date.today().isoformat()}",
+        "",
+        f"- Reviewed published questions: {len(reviewed)}",
+        f"- Draft proposal questions: {len(drafts)}",
+        f"- Reviewed published exercises: {stats.get('published_exercises', 0)}",
+        f"- Domains covered (reviewed): {len(domains)} — {', '.join(domains) or 'none'}",
+        f"- Open gaps: {len(gaps.get('gaps') or [])}",
+        f"- Content-quality findings: {len(quality)}",
+        f"- Normalized duplicate / template clusters: {len(duplicate_clusters)}",
+        f"- Role coverage: {dict(roles) or '{}'}",
+        f"- Source freshness: {dict(freshness) or '{}'}",
+        "",
+        "## Gaps (sample)",
+    ]
+    for gap in (gaps.get("gaps") or [])[:25]:
+        lines.append(
+            f"- {gap['domain']} / {gap['level']} / {gap['kind']}: "
+            f"{gap['have']}/{gap['target']} (missing {gap['missing']})"
+        )
+    if not gaps.get("gaps"):
+        lines.append("- none")
+    lines.extend(["", "## Content-quality findings (sample)"])
+    for item in quality[:40]:
+        lines.append(f"- {item}")
+    if not quality:
+        lines.append("- none")
+    lines.append("")
+    lines.append("complete_claim: false")
+    report = "\n".join(lines) + "\n"
+    console.print(report)
+    if output is not None:
+        target = output if output.is_absolute() else root / output
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(report, encoding="utf-8")
+        console.print(f"[green]Wrote[/] {target}")
+
+
+@knowledge_app.command("critique")
+def knowledge_critique_cmd(
+    domain: str = typer.Option(..., "--domain"),
+    output: Path = typer.Option(..., "--output"),
+) -> None:
+    """Write a review stub; critique never changes publication status."""
+    from datetime import date
+    from zume.knowledge.loader import load_all_questions
+
+    root = _root()
+    records = [q for q in load_all_questions(root / "knowledge") if q.domain == domain]
+    if not records:
+        raise typer.BadParameter(f"No question records for domain {domain!r}.")
+    target = output if output.is_absolute() else root / output
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        "# Zume knowledge review\n\n"
+        f"Domain: `{domain}`\nDate: {date.today().isoformat()}\n\n"
+        "Status: PENDING\n\n"
+        "## Findings\n- [ ] Check technical accuracy against each cited locator.\n"
+        "- [ ] Check the answer is specific to the question and domain.\n"
+        "- [ ] Check P0/P1 follow-ups and recommended answers.\n"
+        "- [ ] Check candidate-facing exercise projections for answer leakage.\n\n"
+        "## Decision\nWrite `APPROVED` on a separate line only after every finding is resolved.\n",
+        encoding="utf-8",
+    )
+    console.print(f"[green]Wrote critique stub[/] -> {target}")
+
+
+@knowledge_app.command("promote")
+def knowledge_promote_cmd(
+    proposal: Path = typer.Option(..., "--proposal"),
+    review_file: Path = typer.Option(..., "--review-file"),
+) -> None:
+    """Promote approved, schema-valid proposals after editorial quality checks."""
+    from datetime import date
+    import yaml
+    from zume.knowledge.content_quality import scan_content_quality
+    from zume.knowledge.loader import clear_loader_cache
+    from zume.knowledge.models import ExerciseRecord, QuestionRecord
+
+    root = _root()
+    proposal_path = proposal if proposal.is_absolute() else root / proposal
+    review_path = review_file if review_file.is_absolute() else root / review_file
+    if not review_path.exists() or "APPROVED" not in review_path.read_text(encoding="utf-8").splitlines():
+        raise typer.BadParameter("Review file must contain APPROVED on its own line.")
+    raw = yaml.safe_load(proposal_path.read_text(encoding="utf-8")) or {}
+    question_raw = raw.get("questions", raw.get("records", [])) if isinstance(raw, dict) else []
+    exercise_raw = raw.get("exercises", []) if isinstance(raw, dict) else []
+    if not isinstance(question_raw, list) or not isinstance(exercise_raw, list):
+        raise typer.BadParameter("Proposal must contain list-valued questions/records and exercises.")
+    stamp = date.today().isoformat()
+    questions = []
+    exercises = []
+    for item in question_raw:
+        if not isinstance(item, dict):
+            raise typer.BadParameter("Question proposal entries must be mappings.")
+        item.update(status="published", review_status="reviewed", reviewed_at=stamp,
+                    quality_origin="researched")
+        questions.append(QuestionRecord.model_validate(item).model_dump(mode="json"))
+    for item in exercise_raw:
+        if not isinstance(item, dict):
+            raise typer.BadParameter("Exercise proposal entries must be mappings.")
+        item.update(status="published", review_status="reviewed", reviewed_at=stamp,
+                    quality_origin="researched")
+        exercises.append(ExerciseRecord.model_validate(item).model_dump(mode="json"))
+    if not questions and not exercises:
+        raise typer.BadParameter("Proposal contains no records to promote.")
+    for records, dirname in ((questions, "questions"), (exercises, "exercises")):
+        for record in records:
+            path = root / "knowledge" / dirname / record["domain"] / f"promoted-{stamp}.yaml"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            existing_raw = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else None
+            existing: dict[str, Any]
+            if isinstance(existing_raw, dict):
+                existing = existing_raw
+            else:
+                existing = {"version": 1, "records": []}
+            records_list = existing.setdefault("records", [])
+            if not isinstance(records_list, list):
+                records_list = []
+                existing["records"] = records_list
+            records_list.append(record)
+            path.write_text(yaml.safe_dump(existing, sort_keys=False, allow_unicode=True), encoding="utf-8")
+    clear_loader_cache()
+    errors = scan_content_quality(root)
+    if errors:
+        raise typer.BadParameter("Promotion introduced content-quality errors: " + "; ".join(errors[:3]))
+    console.print(f"[green]Promoted[/] {len(questions)} questions and {len(exercises)} exercises")
+
+
+@knowledge_app.command("build-index")
+def knowledge_build_index_cmd() -> None:
+    """Rebuild the deterministic SQLite FTS index (generated artifact)."""
+    from zume.knowledge.index import build_index
+
+    path = build_index(_root())
+    console.print(f"[green]Index built[/] -> {path}")
+
+
+@knowledge_app.command("search")
+def knowledge_search_cmd(
+    query: str = typer.Argument(..., help="Full-text query."),
+    limit: int = typer.Option(10, "--limit"),
+    domain: Optional[str] = typer.Option(None, "--domain"),
+) -> None:
+    """Search the local knowledge index."""
+    from zume.knowledge.search import search
+
+    results = search(_root(), query, limit=limit, domain=domain)
+    if not results:
+        console.print("No results.")
+        return
+    for row in results:
+        console.print(f"- {row.get('id')} [{row.get('domain')}/{row.get('level')}] {row.get('title')}")
+
+
+@knowledge_app.command("gaps")
+def knowledge_gaps_cmd() -> None:
+    """Report coverage gaps against taxonomy targets."""
+    from zume.knowledge.gaps import collect_gaps
+
+    report = collect_gaps(_root())
+    console.print(
+        f"Published questions: {report['published_questions']}; "
+        f"exercises: {report['published_exercises']}"
+    )
+    gaps = report.get("gaps") or []
+    if not gaps:
+        console.print("[green]No gaps against configured per-domain targets.[/]")
+        return
+    for gap in gaps[:40]:
+        console.print(
+            f"[yellow]GAP[/] {gap['domain']} {gap['level']} {gap['kind']}: "
+            f"{gap['have']}/{gap['target']} (missing {gap['missing']})"
+        )
+
+
+@knowledge_app.command("research")
+def knowledge_research_cmd(
+    domain: str = typer.Option(..., "--domain"),
+    proposals_only: bool = typer.Option(True, "--proposals-only/--publish-forbidden"),
+) -> None:
+    """Write research proposals only; never publishes directly."""
+    from datetime import datetime, timezone
+
+    if not proposals_only:
+        console.print("[red]Publishing from research is forbidden. Use --proposals-only.[/]")
+        raise typer.Exit(code=2)
+    out = _root() / "knowledge" / "proposals" / f"{domain}-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.yaml"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(
+        f"# Proposal-only research stub for domain={domain}\n"
+        "# Review and merge manually after critic + validation.\n"
+        "proposals: []\n",
+        encoding="utf-8",
+    )
+    console.print(f"[green]Wrote proposal file[/] -> {out}")
+
+
+release_app = typer.Typer(name="release", help="Release validation commands.", no_args_is_help=True)
+app.add_typer(release_app)
+
+
+@release_app.command("validate")
+def release_validate_cmd(
+    full: bool = typer.Option(False, "--full", help="Run the full local gate set."),
+    local: bool = typer.Option(True, "--local", help="Run local compile/lint/type/tests."),
+) -> None:
+    """Run local release gates (does not merge or tag)."""
+    import subprocess
+    import sys
+
+    root = _root()
+    steps = [
+        [sys.executable, "-m", "compileall", "src"],
+        ["ruff", "check", "."],
+        ["mypy", "src"],
+        [sys.executable, "-m", "pytest", "-q", "--cov=zume", "--cov-fail-under=80"],
+    ]
+    if full:
+        steps.extend([
+            [sys.executable, "-m", "zume", "knowledge", "validate"],
+            [sys.executable, "-m", "zume", "knowledge", "stats"],
+            [sys.executable, "-m", "zume", "doctor"],
+            [sys.executable, "-m", "zume", "scan-secrets"],
+        ])
+    elif not local:
+        console.print("Specify --local and/or --full")
+        raise typer.Exit(code=2)
+    failed = False
+    for cmd in steps:
+        console.rule(" ".join(cmd))
+        rc = subprocess.call(cmd, cwd=str(root))
+        if rc != 0:
+            console.print(f"[red]FAIL[/] exit {rc}")
+            failed = True
+            break
+        console.print("[green]PASS[/]")
+    if failed:
+        raise typer.Exit(code=1)
 
 
 def _normalize_trigger(text: str) -> str:

@@ -1,0 +1,1487 @@
+version: 1
+records:
+- id: llm-engineering-a-01
+  domain: llm-engineering
+  subdomain: tokens-context
+  title: 'Tokens Context: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: emerging
+  question: Design a policy for tokens context that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Tokens Context should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tokens context supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your tokens context approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative tokens context case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - tokens-context
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: tokens context
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-02
+  domain: llm-engineering
+  subdomain: prompting
+  title: 'Prompting: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: emerging
+  question: A large organization has inconsistent implementations of prompting. How would you converge
+    them safely?
+  concise_answer: Prompting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that prompting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your prompting approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative prompting case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - prompting
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: prompting
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-03
+  domain: llm-engineering
+  subdomain: structured-output
+  title: 'Structured Output: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: emerging
+  question: How would you evaluate competing architectures for structured output under reliability and
+    cost constraints?
+  concise_answer: Structured Output should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that structured output supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your structured output approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative structured output case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - structured-output
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: structured output
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-04
+  domain: llm-engineering
+  subdomain: tool-calling
+  title: 'Tool Calling: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: emerging
+  question: What governance and exception path would you establish for tool calling?
+  concise_answer: Tool Calling should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tool calling supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your tool calling approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative tool calling case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - tool-calling
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: tool calling
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-05
+  domain: llm-engineering
+  subdomain: embeddings
+  title: 'Embeddings: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you detect silent degradation of embeddings before users report it?
+  concise_answer: Embeddings should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that embeddings supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your embeddings approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative embeddings case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - embeddings
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: embeddings
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-06
+  domain: llm-engineering
+  subdomain: retrieval
+  title: 'Retrieval: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: Design an experiment that distinguishes whether retrieval improves outcomes or only activity
+    metrics.
+  concise_answer: Retrieval should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that retrieval supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your retrieval approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative retrieval case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - retrieval
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: retrieval
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-07
+  domain: llm-engineering
+  subdomain: rag
+  title: 'Rag: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you set risk-based quality gates for a change to rag?
+  concise_answer: Rag should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that rag supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your rag approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative rag case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - rag
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: rag
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-08
+  domain: llm-engineering
+  subdomain: grounding-citations
+  title: 'Grounding Citations: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: What must be true before delegating decisions about grounding citations to automation?
+  concise_answer: Grounding Citations should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that grounding citations supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your grounding citations approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative grounding citations case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - grounding-citations
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: grounding citations
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-09
+  domain: llm-engineering
+  subdomain: evaluation
+  title: 'Evaluation: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you model blast radius and rollback for a failure involving evaluation?
+  concise_answer: Evaluation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that evaluation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your evaluation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative evaluation case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - evaluation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: evaluation
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-10
+  domain: llm-engineering
+  subdomain: latency-cost
+  title: 'Latency Cost: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How do you avoid Goodhart-style metric misuse when measuring latency cost?
+  concise_answer: Latency Cost should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that latency cost supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your latency cost approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative latency cost case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - latency-cost
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: latency cost
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-11
+  domain: llm-engineering
+  subdomain: caching
+  title: 'Caching: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: How would you establish ownership boundaries for caching across platform and product teams?
+  concise_answer: Caching should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that caching supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your caching approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative caching case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - caching
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: caching
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-12
+  domain: llm-engineering
+  subdomain: safety
+  title: 'Safety: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: emerging
+  question: What evidence would justify retiring or replacing a mature safety implementation?
+  concise_answer: Safety should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that safety supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your safety approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative safety case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - safety
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: safety
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-13
+  domain: llm-engineering
+  subdomain: privacy
+  title: 'Privacy: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you design a post-incident review focused on privacy without blaming individuals?
+  concise_answer: Privacy should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that privacy supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative privacy case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - privacy
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: privacy
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-14
+  domain: llm-engineering
+  subdomain: model-selection
+  title: 'Model Selection: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: What is the minimum observability design that makes model selection auditable?
+  concise_answer: Model Selection should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that model selection supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative model selection case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - model-selection
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: model selection
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-15
+  domain: llm-engineering
+  subdomain: hallucinations
+  title: 'Hallucinations: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you make hallucinations resilient to partial failure and degraded dependencies?
+  concise_answer: Hallucinations should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that hallucinations supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative hallucinations case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - hallucinations
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: hallucinations
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-16
+  domain: llm-engineering
+  subdomain: multimodal
+  title: 'Multimodal: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you review a vendor claim that automates multimodal?
+  concise_answer: Multimodal should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that multimodal supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative multimodal case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - multimodal
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: multimodal
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-17
+  domain: llm-engineering
+  subdomain: tokens-context
+  title: 'Tokens Context: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you protect sensitive data while operating tokens context at scale?
+  concise_answer: Tokens Context should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tokens context supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative tokens context case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - tokens-context
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: tokens context
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-18
+  domain: llm-engineering
+  subdomain: prompting
+  title: 'Prompting: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: What decision record would you require before changing a high-impact prompting?
+  concise_answer: Prompting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that prompting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative prompting case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - prompting
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: prompting
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-19
+  domain: llm-engineering
+  subdomain: structured-output
+  title: 'Structured Output: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How do you balance standardization with context-specific needs for structured output?
+  concise_answer: Structured Output should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that structured output supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative structured output case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - structured-output
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: structured output
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-20
+  domain: llm-engineering
+  subdomain: tool-calling
+  title: 'Tool Calling: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question: How would you test whether a proposed abstraction for tool calling hides important domain
+    behavior?
+  concise_answer: Tool Calling should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that tool calling supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative tool calling case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - tool-calling
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: tool calling
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-21
+  domain: llm-engineering
+  subdomain: embeddings
+  title: 'Embeddings: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: What leading and lagging indicators should inform investment in embeddings?
+  concise_answer: Embeddings should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that embeddings supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative embeddings case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - embeddings
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: embeddings
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-22
+  domain: llm-engineering
+  subdomain: retrieval
+  title: 'Retrieval: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: How would you define a human-approval boundary for retrieval?
+  concise_answer: Retrieval should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that retrieval supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative retrieval case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - retrieval
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: retrieval
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-23
+  domain: llm-engineering
+  subdomain: rag
+  title: 'Rag: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: How would you challenge a design that treats rag as a one-time project?
+  concise_answer: Rag should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In LLM and generative-AI engineering, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that rag supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative rag case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - rag
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: rag
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: llm-engineering-a-24
+  domain: llm-engineering
+  subdomain: grounding-citations
+  title: 'Grounding Citations: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: emerging
+  question: What systemic failure patterns would you look for when grounding citations repeatedly causes
+    incidents?
+  concise_answer: Grounding Citations should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In LLM and generative-AI engineering, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that grounding citations supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete LLM and generative-AI engineering example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative grounding citations case before generalizing.
+  role_tracks:
+  - AI Engineer
+  - LLM/Agent Engineer
+  - AI QA Engineer
+  - AI Test Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - llm-engineering
+  - grounding-citations
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: openai-docs
+    locator: grounding citations
+  last_verified: '2026-07-15'
+  freshness_days: 90
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -1,0 +1,196 @@
+version: 1
+records:
+- id: gold-lead-001
+  domain: technical-leadership
+  subdomain: prioritization
+  title: Prioritizing automation investment across channels with limited staff
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: You inherit UI, API, mobile and performance automation requests with limited staff. Build a prioritization model
+    and explain what you would deliberately not automate.
+  concise_answer: Score each request on business/release risk if it fails, repeatability (how often it would run and how often
+    the current process finds real defects), technical feasibility and expected maintenance cost, and the value of manual/exploratory
+    testing that automation would remove. Rank by risk-reduction per unit of ongoing maintenance cost, not by requester seniority
+    or novelty. Publish the ranked backlog and its criteria so intake is transparent, and name categories you will not automate
+    (one-off migrations, UI in active redesign, low-frequency exploratory-heavy flows) with the reasoning attached, not silence.
+  recommended_answer: 'Start from the constraint, not the request list: staff time is fixed, so the model''s job is to make
+    the opportunity cost of every "yes" visible. Score each candidate on four axes — (1) impact if the covered behavior breaks
+    in production or blocks a release, (2) run frequency and defect-detection history, since a test that runs nightly and
+    has caught real regressions earns its keep faster than one that runs twice a year, (3) automation feasibility and expected
+    ongoing maintenance cost given current framework maturity, and (4) whether a human still needs to look at the behavior
+    anyway (visual judgment, exploratory coverage, one-time verification) — automating that adds cost without removing manual
+    effort.
+
+    Rank by risk-reduction-per-maintenance-dollar rather than a single weighted score, so the trade-off stays visible in the
+    conversation with stakeholders. DORA''s research treats test automation as one of several delivery-performance *capabilities*
+    — it only predicts better outcomes together with fast feedback loops and low-risk release practices, which is the argument
+    for prioritizing test suites that shorten the feedback loop on the highest-risk paths over suites that simply maximize
+    count.
+
+    Explicitly declare what will not be automated this cycle and why: a screen mid redesign (rework risk exceeds value), a
+    one-time data migration (no repeat value), a flow whose value is genuinely exploratory judgment. Publish the backlog,
+    its scoring criteria and the "not now" list together — an intake process stakeholders can see and challenge survives longer
+    than a private mental model, and it converts "why wasn''t my request done" into a criteria conversation instead of a relationship
+    one.'
+  deep_dive: ''
+  key_points:
+  - Business and release risk drives priority, not requester seniority.
+  - Repeatability and defect-detection value matter more than raw test count.
+  - Technical feasibility and ongoing maintenance cost are real, recurring costs.
+  - Manual/exploratory value is a reason to not automate, not an oversight.
+  - Transparent roadmap and backlog intake criteria, published and revisitable.
+  strong_signals:
+  - Names concrete, weighable axes (risk, frequency, feasibility, manual value) instead of a gut-feel ranking.
+  - Volunteers specific categories to deliberately not automate, with reasoning.
+  - Ties the model to DORA-style capability thinking — automation serves faster, safer feedback, not raw coverage percentage.
+  weak_signals:
+  - Prioritizes by requester seniority or "who asked first."
+  - Cannot name anything they would refuse to automate.
+  red_flags:
+  - Treats 100% automation coverage as an unqualified goal regardless of maintenance cost.
+  - Has no mechanism for stakeholders to see or contest the ranking.
+  common_mistakes:
+  - Automating whatever is technically easiest first regardless of risk.
+  - Letting the backlog become a private list with no visible criteria.
+  - Ignoring maintenance cost of already-automated suites when planning new work.
+  follow_ups:
+  - question: How would you explain a rejected automation request to a senior stakeholder?
+    recommended_answer: 'Walk the same criteria used for every request: state the risk score, the run frequency assumption
+      and the maintenance cost estimate for their specific request, and show where it landed relative to the current cut line.
+      Offer the concrete alternative — a lighter-weight check, a manual smoke test until the screen stabilizes, or a revisit
+      date tied to a trigger (e.g., after the redesign ships). The goal is that the stakeholder can disagree with an input
+      to the model, not with an opaque decision, which keeps the conversation about criteria rather than status.'
+  examples:
+  - A payment-checkout regression suite that runs on every PR and has caught three production-bound defects this quarter outranks
+    a rarely-exercised admin report page even though the admin request came from a director, because the scoring is on risk
+    and detection history, not requester rank.
+  code_examples: []
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 8
+  - 20
+  tags:
+  - leadership
+  - prioritization
+  - automation-strategy
+  - risk-based-testing
+  - roadmap
+  - dora
+  estimated_minutes: 7
+  references:
+  - source_id: dora-dev
+    locator: DORA Core / Capabilities catalog — Test Automation capability and its relationship to software delivery performance
+  - source_id: gitlab-handbook
+    locator: GitLab Handbook — Engineering Workflow, Severity and Priority label definitions used for issue triage
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: leadership
+- id: gold-lead-003
+  domain: technical-leadership
+  subdomain: conflict
+  title: Resolving "flaky test" versus "real defect" disagreements
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: A developer says an automated failure is a flaky test; the tester says it is a product defect. How do you resolve
+    the disagreement without turning it into ownership conflict?
+  concise_answer: 'Move the conversation from opinion to evidence: reproduce the failure, inspect logs, screenshots and timing,
+    and check whether the same assertion has failed intermittently under identical conditions before. If it reproduces on
+    a stable environment with the same input, it is very likely a defect regardless of who called it flaky first; if it only
+    fails under timing/load variance with no state corruption, it is a synchronization or environment issue in the test, but
+    that still needs a fix, not a label. Agree on a shared diagnostic checklist in advance so the decision is made by the
+    checklist, not by whoever argues more persistently, and record the resolution and the prevention action either way.'
+  recommended_answer: 'The unproductive version of this disagreement treats "flaky" and "defect" as a territory dispute —
+    whoever wins the label wins the argument about whose backlog it goes on. The productive version treats both claims as
+    hypotheses to test against the same evidence: does the failure reproduce with the same input on a controlled environment?
+    Does the application''s persisted state show the wrong outcome, or does only the automation''s synchronization/timing
+    look wrong? Google''s public postmortems on flaky-test mitigation describe exactly this discipline — tracking failure
+    history per test, distinguishing tests that are inherently non-deterministic from tests that are occasionally revealing
+    real, intermittent product bugs, because a "flaky" label can hide a genuine race condition in the product.
+
+    A pre-agreed diagnostic sequence removes the ownership fight: capture the same evidence every time (screenshot, DOM/response
+    snapshot, timing, environment build), check reproduction rate under controlled reruns, and classify using shared, written
+    criteria rather than either party''s instinct. If it reproduces deterministically, it routes to the developer as a defect
+    regardless of who raised it. If it is non-deterministic but the automation''s wait condition was wrong, it routes to test
+    ownership as a synchronization fix. If it is non-deterministic in the product itself (a genuine race condition), it still
+    routes to the developer — "flaky" is not a synonym for "not a bug."
+
+    Every resolution gets recorded with its evidence and a prevention action, so recurring disagreements build a shared case
+    history instead of restarting the argument from zero each time.'
+  deep_dive: ''
+  key_points:
+  - Start from evidence and reproducibility, not from who claims the label first.
+  - Classify uncertainty explicitly using a shared, pre-agreed diagnostic checklist.
+  - '"Flaky" in the product itself can still mean a real, intermittent defect.'
+  - Fix the system (checklist, ownership routing) rather than win the individual argument.
+  - Record the decision and the prevention action regardless of outcome.
+  strong_signals:
+  - Immediately asks for reproduction evidence rather than adjudicating opinions.
+  - Distinguishes automation-timing flakiness from a genuinely non-deterministic product defect.
+  - Proposes a standing, written diagnostic checklist to prevent repeat disputes.
+  weak_signals:
+  - Resolves it by seniority or by whichever side is more insistent.
+  - Assumes "flaky" always means "not a real problem."
+  red_flags:
+  - Routes every disputed failure to quarantine without an investigation record.
+  - Has no process for the same disagreement recurring release after release.
+  common_mistakes:
+  - Accepting "it's flaky" as a closing statement instead of a hypothesis to verify.
+  - Failing to record why a failure was classified a certain way, so the next dispute restarts from zero.
+  - Letting the automation owner be blamed for a genuine intermittent product race condition.
+  follow_ups:
+  - question: What would you do if the same conflict recurs every release?
+    recommended_answer: 'Treat the recurrence itself as data: a repeating dispute usually means either the diagnostic checklist
+      isn''t actually being followed, or there is a real systemic cause (a genuinely racy feature, or a test area with chronic
+      synchronization debt) that keeps generating ambiguous failures. Pull the history of past resolutions for that area,
+      look for a pattern in root causes, and escalate it as a named improvement item — fix the race condition, redesign the
+      flaky suite''s waits, or retrain the team on the checklist — rather than re-litigating the same argument every cycle.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 5
+  - 18
+  tags:
+  - leadership
+  - conflict
+  - flaky-tests
+  - failure-classification
+  - evidence-based
+  estimated_minutes: 6
+  references:
+  - source_id: google-testing-blog
+    locator: Google Testing Blog — Flaky Tests at Google and How We Mitigate Them
+  - source_id: fowler-bliki
+    locator: martinfowler.com articles — NonDeterminism (distinguishing genuinely non-deterministic tests from masked defects)
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: scenario

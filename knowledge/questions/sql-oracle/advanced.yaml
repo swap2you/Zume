@@ -1,0 +1,1489 @@
+version: 1
+records:
+- id: sql-oracle-a-01
+  domain: sql-oracle
+  subdomain: select-filter-sort
+  title: 'Select Filter Sort: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for select filter sort that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Select Filter Sort should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that select filter sort supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your select filter sort approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative select filter sort case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - select-filter-sort
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: select filter sort
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-02
+  domain: sql-oracle
+  subdomain: joins
+  title: 'Joins: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of joins. How would you converge them
+    safely?
+  concise_answer: Joins should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that joins supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your joins approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative joins case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - joins
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: joins
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-03
+  domain: sql-oracle
+  subdomain: aggregation
+  title: 'Aggregation: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: How would you evaluate competing architectures for aggregation under reliability and cost
+    constraints?
+  concise_answer: Aggregation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that aggregation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your aggregation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative aggregation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - aggregation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: aggregation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-04
+  domain: sql-oracle
+  subdomain: ctes
+  title: 'Ctes: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: What governance and exception path would you establish for ctes?
+  concise_answer: Ctes should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ctes supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your ctes approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative ctes case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - ctes
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: ctes
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-05
+  domain: sql-oracle
+  subdomain: window-functions
+  title: 'Window Functions: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of window functions before users report it?
+  concise_answer: Window Functions should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that window functions supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your window functions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative window functions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - window-functions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: window functions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-06
+  domain: sql-oracle
+  subdomain: set-operations
+  title: 'Set Operations: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether set operations improves outcomes or only activity
+    metrics.
+  concise_answer: Set Operations should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that set operations supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your set operations approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative set operations case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - set-operations
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: set operations
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-07
+  domain: sql-oracle
+  subdomain: constraints
+  title: 'Constraints: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to constraints?
+  concise_answer: Constraints should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that constraints supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your constraints approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative constraints case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - constraints
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: constraints
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-08
+  domain: sql-oracle
+  subdomain: transactions-isolation
+  title: 'Transactions Isolation: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What must be true before delegating decisions about transactions isolation to automation?
+  concise_answer: Transactions Isolation should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that transactions isolation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your transactions isolation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative transactions isolation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - transactions-isolation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: transactions isolation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-09
+  domain: sql-oracle
+  subdomain: indexes-plans
+  title: 'Indexes Plans: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving indexes plans?
+  concise_answer: Indexes Plans should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that indexes plans supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your indexes plans approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative indexes plans case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - indexes-plans
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: indexes plans
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-10
+  domain: sql-oracle
+  subdomain: normalization
+  title: 'Normalization: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring normalization?
+  concise_answer: Normalization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that normalization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your normalization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative normalization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - normalization
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: normalization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-11
+  domain: sql-oracle
+  subdomain: latest-records
+  title: 'Latest Records: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you establish ownership boundaries for latest records across platform and product
+    teams?
+  concise_answer: Latest Records should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that latest records supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your latest records approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative latest records case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - latest-records
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: latest records
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-12
+  domain: sql-oracle
+  subdomain: data-quality
+  title: 'Data Quality: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature data quality implementation?
+  concise_answer: Data Quality should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data quality supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data quality approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data quality case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - data-quality
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: data quality
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-13
+  domain: sql-oracle
+  subdomain: oracle-functions
+  title: 'Oracle Functions: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you design a post-incident review focused on oracle functions without blaming individuals?
+  concise_answer: Oracle Functions should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that oracle functions supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative oracle functions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - oracle-functions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: oracle functions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-14
+  domain: sql-oracle
+  subdomain: sequences
+  title: 'Sequences: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What is the minimum observability design that makes sequences auditable?
+  concise_answer: Sequences should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sequences supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative sequences case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - sequences
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: sequences
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-15
+  domain: sql-oracle
+  subdomain: plsql
+  title: 'Plsql: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you make plsql resilient to partial failure and degraded dependencies?
+  concise_answer: Plsql should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that plsql supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative plsql case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - plsql
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: plsql
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-16
+  domain: sql-oracle
+  subdomain: database-test-design
+  title: 'Database Test Design: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you review a vendor claim that automates database test design?
+  concise_answer: Database Test Design should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that database test design supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative database test design case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - database-test-design
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: database test design
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-17
+  domain: sql-oracle
+  subdomain: reconciliation
+  title: 'Reconciliation: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you protect sensitive data while operating reconciliation at scale?
+  concise_answer: Reconciliation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reconciliation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reconciliation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - reconciliation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: reconciliation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-18
+  domain: sql-oracle
+  subdomain: locking-performance
+  title: 'Locking Performance: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What decision record would you require before changing a high-impact locking performance?
+  concise_answer: Locking Performance should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that locking performance supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative locking performance case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - locking-performance
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: locking performance
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-19
+  domain: sql-oracle
+  subdomain: select-filter-sort
+  title: 'Select Filter Sort: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you balance standardization with context-specific needs for select filter sort?
+  concise_answer: Select Filter Sort should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that select filter sort supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative select filter sort case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - select-filter-sort
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: select filter sort
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-20
+  domain: sql-oracle
+  subdomain: joins
+  title: 'Joins: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you test whether a proposed abstraction for joins hides important domain behavior?
+  concise_answer: Joins should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that joins supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative joins case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - joins
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: joins
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-21
+  domain: sql-oracle
+  subdomain: aggregation
+  title: 'Aggregation: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What leading and lagging indicators should inform investment in aggregation?
+  concise_answer: Aggregation should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that aggregation supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative aggregation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - aggregation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: aggregation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-22
+  domain: sql-oracle
+  subdomain: ctes
+  title: 'Ctes: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you define a human-approval boundary for ctes?
+  concise_answer: Ctes should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that ctes supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative ctes case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - ctes
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: ctes
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-23
+  domain: sql-oracle
+  subdomain: window-functions
+  title: 'Window Functions: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you challenge a design that treats window functions as a one-time project?
+  concise_answer: Window Functions should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that window functions supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative window functions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - window-functions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: window functions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sql-oracle-a-24
+  domain: sql-oracle
+  subdomain: set-operations
+  title: 'Set Operations: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What systemic failure patterns would you look for when set operations repeatedly causes incidents?
+  concise_answer: Set Operations should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SQL, Oracle, and database testing, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that set operations supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete SQL, Oracle, and database testing example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative set operations case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Platform Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - sql-oracle
+  - set-operations
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: oracle-sql
+    locator: set operations
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

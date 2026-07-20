@@ -1,0 +1,181 @@
+version: 1
+records:
+- id: ai-governance-reviewed-01
+  domain: ai-governance
+  subdomain: govern
+  title: Govern in ai-governance
+  level: basic
+  priority: P1
+  frequency: common
+  question: In ai-governance, explain the purpose and failure boundary of Govern. How would you verify that it behaves as
+    intended?
+  concise_answer: Govern should be chosen for its documented semantics, then verified against the observable result it is
+    responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Govern, begin with the contract described at AI RMF: Govern. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete ai-governance example involving Govern, including how the candidate would distinguish a product
+    defect from a test or environment fault.
+  key_points:
+  - uses documented Govern semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that Govern is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Govern, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused Govern case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - govern
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: nist-ai-rmf
+    locator: 'AI RMF: Govern'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: ai-governance-reviewed-02
+  domain: ai-governance
+  subdomain: map
+  title: Map in ai-governance
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In ai-governance, explain the purpose and failure boundary of Map. How would you verify that it behaves as intended?
+  concise_answer: Map should be chosen for its documented semantics, then verified against the observable result it is responsible
+    for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Map, begin with the contract described at AI RMF: Map. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete ai-governance example involving Map, including how the candidate would distinguish a product
+    defect from a test or environment fault.
+  key_points:
+  - uses documented Map semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that Map is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Map, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused Map case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - map
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: nist-ai-rmf
+    locator: 'AI RMF: Map'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: ai-governance-reviewed-03
+  domain: ai-governance
+  subdomain: measure
+  title: Measure in ai-governance
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In ai-governance, explain the purpose and failure boundary of Measure. How would you verify that it behaves as
+    intended?
+  concise_answer: Measure should be chosen for its documented semantics, then verified against the observable result it is
+    responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Measure, begin with the contract described at AI RMF: Measure. State the input, expected state
+    transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises
+    that contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with
+    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete ai-governance example involving Measure, including how the candidate would distinguish a product
+    defect from a test or environment fault.
+  key_points:
+  - uses documented Measure semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that Measure is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Measure, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused Measure case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - ai-governance
+  - measure
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: nist-ai-rmf
+    locator: 'AI RMF: Measure'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario

@@ -1,0 +1,1585 @@
+version: 1
+records:
+- id: testing-fundamentals-a-01
+  domain: testing-fundamentals
+  subdomain: testing-principles
+  title: 'Testing Principles: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for testing principles that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Testing Principles should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that testing principles supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your testing principles approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative testing principles case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - testing-principles
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: testing principles
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-02
+  domain: testing-fundamentals
+  subdomain: test-levels-types
+  title: 'Test Levels Types: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of test levels types. How would you
+    converge them safely?
+  concise_answer: Test Levels Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that test levels types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your test levels types approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative test levels types case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - test-levels-types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: test levels types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-03
+  domain: testing-fundamentals
+  subdomain: risk-based-testing
+  title: 'Risk Based Testing: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: How would you evaluate competing architectures for risk based testing under reliability and
+    cost constraints?
+  concise_answer: Risk Based Testing should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that risk based testing supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your risk based testing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative risk based testing case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - risk-based-testing
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: risk based testing
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-04
+  domain: testing-fundamentals
+  subdomain: test-design
+  title: 'Test Design: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: What governance and exception path would you establish for test design?
+  concise_answer: Test Design should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Testing fundamentals and quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that test design supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your test design approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative test design case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - test-design
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: test design
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-05
+  domain: testing-fundamentals
+  subdomain: sdlc-stlc
+  title: 'Sdlc Stlc: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of sdlc stlc before users report it?
+  concise_answer: Sdlc Stlc should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Testing fundamentals and quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sdlc stlc supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your sdlc stlc approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative sdlc stlc case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - sdlc-stlc
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: sdlc stlc
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-06
+  domain: testing-fundamentals
+  subdomain: shift-left-right
+  title: 'Shift Left Right: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether shift left right improves outcomes or only
+    activity metrics.
+  concise_answer: Shift Left Right should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that shift left right supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your shift left right approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative shift left right case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - shift-left-right
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: shift left right
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-07
+  domain: testing-fundamentals
+  subdomain: test-pyramids
+  title: 'Test Pyramids: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to test pyramids?
+  concise_answer: Test Pyramids should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that test pyramids supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your test pyramids approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative test pyramids case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - test-pyramids
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: test pyramids
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-08
+  domain: testing-fundamentals
+  subdomain: exploratory-testing
+  title: 'Exploratory Testing: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What must be true before delegating decisions about exploratory testing to automation?
+  concise_answer: Exploratory Testing should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that exploratory testing supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your exploratory testing approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative exploratory testing case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - exploratory-testing
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: exploratory testing
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-09
+  domain: testing-fundamentals
+  subdomain: defect-lifecycle
+  title: 'Defect Lifecycle: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving defect lifecycle?
+  concise_answer: Defect Lifecycle should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that defect lifecycle supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your defect lifecycle approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative defect lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - defect-lifecycle
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: defect lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-10
+  domain: testing-fundamentals
+  subdomain: quality-gates
+  title: 'Quality Gates: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring quality gates?
+  concise_answer: Quality Gates should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that quality gates supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your quality gates approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative quality gates case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - quality-gates
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: quality gates
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-11
+  domain: testing-fundamentals
+  subdomain: traceability
+  title: 'Traceability: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you establish ownership boundaries for traceability across platform and product
+    teams?
+  concise_answer: Traceability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Testing fundamentals and quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that traceability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your traceability approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative traceability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - traceability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: traceability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-12
+  domain: testing-fundamentals
+  subdomain: metrics-coverage
+  title: 'Metrics Coverage: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature metrics coverage implementation?
+  concise_answer: Metrics Coverage should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that metrics coverage supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your metrics coverage approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative metrics coverage case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - metrics-coverage
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: metrics coverage
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-13
+  domain: testing-fundamentals
+  subdomain: release-readiness
+  title: 'Release Readiness: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you design a post-incident review focused on release readiness without blaming individuals?
+  concise_answer: Release Readiness should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that release readiness supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative release readiness case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - release-readiness
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: release readiness
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-14
+  domain: testing-fundamentals
+  subdomain: production-validation
+  title: 'Production Validation: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What is the minimum observability design that makes production validation auditable?
+  concise_answer: Production Validation should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that production validation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative production validation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - production-validation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: production validation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-15
+  domain: testing-fundamentals
+  subdomain: testing-principles
+  title: 'Testing Principles: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you make testing principles resilient to partial failure and degraded dependencies?
+  concise_answer: Testing Principles should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that testing principles supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative testing principles case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - testing-principles
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: testing principles
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-16
+  domain: testing-fundamentals
+  subdomain: test-levels-types
+  title: 'Test Levels Types: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you review a vendor claim that automates test levels types?
+  concise_answer: Test Levels Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that test levels types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative test levels types case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - test-levels-types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: test levels types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-17
+  domain: testing-fundamentals
+  subdomain: risk-based-testing
+  title: 'Risk Based Testing: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you protect sensitive data while operating risk based testing at scale?
+  concise_answer: Risk Based Testing should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that risk based testing supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative risk based testing case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - risk-based-testing
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: risk based testing
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-18
+  domain: testing-fundamentals
+  subdomain: test-design
+  title: 'Test Design: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What decision record would you require before changing a high-impact test design?
+  concise_answer: Test Design should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Testing fundamentals and quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that test design supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative test design case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - test-design
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: test design
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-19
+  domain: testing-fundamentals
+  subdomain: sdlc-stlc
+  title: 'Sdlc Stlc: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you balance standardization with context-specific needs for sdlc stlc?
+  concise_answer: Sdlc Stlc should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Testing fundamentals and quality engineering, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sdlc stlc supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative sdlc stlc case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - sdlc-stlc
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: sdlc stlc
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-20
+  domain: testing-fundamentals
+  subdomain: shift-left-right
+  title: 'Shift Left Right: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you test whether a proposed abstraction for shift left right hides important domain
+    behavior?
+  concise_answer: Shift Left Right should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that shift left right supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative shift left right case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - shift-left-right
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: shift left right
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-21
+  domain: testing-fundamentals
+  subdomain: test-pyramids
+  title: 'Test Pyramids: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What leading and lagging indicators should inform investment in test pyramids?
+  concise_answer: Test Pyramids should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that test pyramids supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative test pyramids case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - test-pyramids
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: test pyramids
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-22
+  domain: testing-fundamentals
+  subdomain: exploratory-testing
+  title: 'Exploratory Testing: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you define a human-approval boundary for exploratory testing?
+  concise_answer: Exploratory Testing should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that exploratory testing supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative exploratory testing case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - exploratory-testing
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: exploratory testing
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-23
+  domain: testing-fundamentals
+  subdomain: defect-lifecycle
+  title: 'Defect Lifecycle: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you challenge a design that treats defect lifecycle as a one-time project?
+  concise_answer: Defect Lifecycle should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that defect lifecycle supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative defect lifecycle case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - defect-lifecycle
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: defect lifecycle
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: testing-fundamentals-a-24
+  domain: testing-fundamentals
+  subdomain: quality-gates
+  title: 'Quality Gates: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What systemic failure patterns would you look for when quality gates repeatedly causes incidents?
+  concise_answer: Quality Gates should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Testing fundamentals and quality engineering,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that quality gates supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Testing fundamentals and quality engineering example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative quality gates case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Test/Quality Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - testing-fundamentals
+  - quality-gates
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: quality gates
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

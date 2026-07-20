@@ -1,0 +1,210 @@
+version: 1
+records:
+- id: gold-arch-005
+  domain: cicd
+  subdomain: test-selection
+  title: Risk-based PR test selection without creating blind spots
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design risk-based test selection for pull requests without creating blind spots.
+  concise_answer: Map code, components and API/data contracts to the tests that exercise them, then run the mapped subset
+    on every PR alongside a small fixed set of critical smoke/invariant tests that always run regardless of what changed.
+    Use historical failure and change-impact data to prioritize, not to permanently exclude — anything not confidently mapped
+    falls back to the broader suite rather than being skipped. Audit escaped defects periodically against what the selection
+    would have run, and treat any miss as a signal to fix the mapping, not just the missed test.
+  recommended_answer: 'Selection starts from a dependency/impact map: which tests exercise which modules, endpoints and database
+    objects, built from static analysis, coverage instrumentation, or contract references, and kept current as the codebase
+    changes. On each PR, the changed-file set is mapped to the tests that cover it, using GitHub Actions path filters or an
+    equivalent CI trigger mechanism to scope which suites even start.
+
+    Two safeguards keep this from creating blind spots. First, a small always-run set of smoke tests and business-critical
+    invariants runs on every PR unconditionally, independent of the mapping — this catches cross-cutting regressions the impact
+    map missed. Second, low-confidence changes (touching shared libraries, configuration, or files with no clear test ownership)
+    fall back to running the broader suite rather than a narrow guess.
+
+    This mirrors DORA''s test-automation guidance: fast, reliable automated suites are a core delivery capability, and selection
+    should shrink feedback time without shrinking the guarantee that a regression will eventually be caught — ideally before
+    merge, not after. Audit any defect that reaches later stages against what the PR selection ran; a recurring miss means
+    the mapping, not just the test list, needs repair.'
+  deep_dive: ''
+  key_points:
+  - Build and maintain an explicit map from code/contracts to the tests that cover them.
+  - Always run a small fixed set of critical smoke/invariant tests regardless of mapping.
+  - Fall back to broader suites when change confidence or ownership is low.
+  - Use CI path filters to scope which suites even trigger, not to silently skip risk.
+  - Audit escaped defects against what selection would have run and fix the mapping.
+  strong_signals:
+  - Names both an always-run set and a fallback rule alongside the mapped subset.
+  - Treats an escaped defect as a mapping-repair signal, not just a missed test to add.
+  - Distinguishes "scoping what triggers" from "silently reducing coverage."
+  weak_signals:
+  - Selection is based only on file-extension heuristics with no impact mapping.
+  - No fallback path exists for low-confidence or shared-code changes.
+  red_flags:
+  - Skips tests based on "usually passes" history with no evidence-based mapping.
+  - Has no audit loop connecting escaped defects back to the selection logic.
+  common_mistakes:
+  - Excluding a shared-utility change from broader test runs because "it's just a helper."
+  - Letting the impact map go stale as the codebase refactors around it.
+  - Treating AI/ML-based test selection confidence scores as ground truth without audit.
+  follow_ups:
+  - question: How would you evaluate whether AI-based test selection is actually safe?
+    recommended_answer: 'Run the AI-based selector in shadow mode alongside full-suite execution for a period, then compare:
+      for every defect the full suite caught, would the selector''s chosen subset have caught it too? Track precision (selected
+      tests that were relevant) and, more importantly, recall against known regressions/escaped defects before trusting it
+      to skip anything in production CI, and keep the always-run critical set outside the AI''s control as a floor guarantee.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 6
+  - 18
+  tags:
+  - cicd
+  - test-selection
+  - risk-based-testing
+  - ci-pipelines
+  - dora
+  estimated_minutes: 7
+  references:
+  - source_id: dora-dev
+    locator: 'DORA Capabilities: Test automation'
+  - source_id: github-actions
+    locator: Workflow syntax for GitHub Actions — on.push/pull_request.paths and paths-ignore
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-tool-006
+  domain: cicd
+  subdomain: quality-gates
+  title: Designing PR, nightly and release quality gates without a blanket rerun-to-green policy
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design PR, nightly and release quality gates for an automation platform. Explain which failures block immediately
+    and which create follow-up work.
+  concise_answer: PR gates should be fast and deterministic — a small, curated smoke/regression subset plus static checks
+    (lint, unit tests, build) — and block the merge on any failure, because the whole point of a PR gate is fast, trustworthy
+    signal before code lands. Nightly runs cover the broader regression suite against a stable environment; failures there
+    create triaged follow-up work (defect, flaky-test ticket, environment issue) rather than blocking anything, since nothing
+    is merging at that moment, but persistent nightly red must have an owner and a deadline. Release gates re-validate against
+    production-like environment and data, and should block a release specifically on failures that indicate real regression
+    risk (contract breaks, critical-path failures), with clear, named ownership for flaky, infrastructure and product failures
+    so they are routed correctly instead of piling into one undifferentiated queue. A rerun-to-green policy for any of these
+    tiers hides real defects and should be explicitly rejected as a blanket practice.
+  recommended_answer: 'PR gates exist to give a fast, trustworthy "safe to merge" signal, so they should run only what is
+    fast and deterministic: build, static analysis, unit tests, and a curated smoke/critical-path subset of the automation
+    suite chosen for stability and business criticality, not exhaustiveness. Any failure here blocks the merge — there is
+    no acceptable "known flaky, ignore it" exception at this gate, because letting one through erodes trust in the entire
+    gate; a test that is not stable enough to block a PR should be quarantined out of the PR tier entirely (with an owner
+    and a ticket) rather than allowed to fail silently inside it.
+
+    Nightly runs exist to get broad, deep coverage on a cadence that tolerates longer runtime and more environment dependencies
+    — the full regression suite, cross-browser/cross-platform matrices, longer-running data scenarios. Nothing is waiting
+    to merge at nightly time, so a failure does not block anything by itself; it should instead be automatically classified
+    (product defect, automation defect, environment/infrastructure failure, unknown) and filed as follow-up work with an owner,
+    while trend metrics (pass rate over time per suite/component) get reviewed regularly so a suite that stays red for days
+    does not become invisible background noise.
+
+    Release gates re-run critical coverage against a production-like environment and, where applicable, production-like data
+    volume, specifically to catch what PR-tier and nightly-tier testing structurally cannot: environment-specific configuration
+    issues, data-migration effects, and integration with dependencies that are only realistic at that stage. These gates should
+    block the release on failures that represent real regression risk to the release candidate — broken critical paths, contract/API
+    breaking changes, data-integrity failures — while routing infrastructure or environment-only failures to the team that
+    owns that environment rather than blocking the release indefinitely on a problem the application team cannot fix.
+
+    Across all three tiers, ownership must be explicit and different for different failure classes: a flaky test belongs to
+    whoever owns test stability (often a dedicated automation-reliability rotation), an infrastructure failure belongs to
+    platform/DevOps, and a product defect belongs to the feature team — routing a failure to the wrong owner is as damaging
+    as not routing it at all. Artifacts (logs, screenshots, traces) and pass-rate trend metrics should be captured at every
+    tier so a triager never has to reproduce a failure from scratch to understand it. No tier should adopt a policy of automatically
+    rerunning failed tests until they pass and calling that "green" — that specifically converts real defects into invisible
+    flakiness statistics.'
+  deep_dive: ''
+  key_points:
+  - 'PR gates: fast, deterministic, curated subset; any failure blocks the merge.'
+  - 'Nightly gates: broader coverage on a relaxed cadence; failures create classified, owned follow-up work, not a merge block.'
+  - 'Release gates: production-like environment/data validation; block only on real regression risk, route environment issues
+    to the right owner.'
+  - Clear, differentiated ownership for flaky, infrastructure and product failures at every tier.
+  - No blanket rerun-to-green policy at any tier; capture artifacts and trend metrics everywhere.
+  strong_signals:
+  - Assigns a different purpose and failure-response policy to each of the three tiers rather than "run more tests each time".
+  - Explicitly rejects rerun-to-green as a blanket policy while allowing bounded, evidenced retries for known-transient classes.
+  - Describes concrete ownership routing (automation-reliability rotation, platform/DevOps, feature team) for different failure
+    classes.
+  weak_signals:
+  - Describes the three tiers only by runtime/schedule, not by what should block versus what should not.
+  - Treats "flaky" as a catch-all category with no distinct owner or resolution path.
+  red_flags:
+  - Proposes retrying every failed test automatically until green at any tier.
+  - Would block a release on an environment-only failure indefinitely with no routing to the owning team.
+  common_mistakes:
+  - Running the full regression suite as the PR gate, making PRs slow and encouraging people to bypass or ignore the gate.
+  - Letting nightly failures accumulate with no owner or expiry, so the suite is permanently red and ignored.
+  - Blocking a release on a known, already-ticketed flaky test instead of distinguishing it from a genuine regression.
+  follow_ups:
+  - question: How would you prevent a permanently quarantined test suite from becoming invisible debt?
+    recommended_answer: 'Quarantine must be time-boxed and visible, not a permanent parking lot: every quarantined test carries
+      an owner, a ticket and an expiry/review date, and a dashboard surfaces the quarantine list and its age so it cannot
+      silently grow unnoticed. Set a policy cap (e.g. quarantine count or percentage of the suite) that triggers an explicit
+      review when exceeded, and periodically re-run quarantined tests in a non-blocking diagnostic lane so a test that has
+      become stable again is promoted back, while one that keeps failing for a real reason gets escalated rather than living
+      in quarantine indefinitely.'
+  examples:
+  - A PR gate runs a 40-test smoke subset plus unit tests and lint (under 8 minutes) and blocks merge on any failure. The
+    nightly run executes the full 2,000-test cross-browser regression suite; three unrelated failures are auto-classified
+    (one product defect ticket, one flaky-test quarantine ticket, one environment DNS issue routed to platform) with none
+    of them blocking anything, since nothing is merging. The release gate re-runs the critical-path subset against a staging
+    environment seeded with production-like data volume and blocks the release only on a critical-path checkout failure, while
+    a concurrently observed staging-only certificate warning is routed to platform without holding the release.
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 6
+  - 18
+  tags:
+  - cicd
+  - quality-gates
+  - pr-gate
+  - nightly
+  - release-gate
+  - flaky-tests
+  - ownership
+  estimated_minutes: 7
+  references:
+  - source_id: github-actions
+    locator: GitHub Actions documentation — "Using branch protection rules" and required status checks for pull request gates
+  - source_id: jenkins-docs
+    locator: Jenkins documentation — "Pipeline syntax" reference, post-build conditions (success/failure/unstable) for staged
+      gates
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design

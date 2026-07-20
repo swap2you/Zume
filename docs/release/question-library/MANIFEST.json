@@ -1,0 +1,37 @@
+[
+  {
+    "file": "00_READ_ME_FIRST.md",
+    "bytes": 1742,
+    "sha256": "13a7c95e76126fe99566a04bf6a026330d6d0b35e347954ece9c8a9f845eeb81"
+  },
+  {
+    "file": "01_QUESTION_LIBRARY_UI_SPEC.md",
+    "bytes": 7897,
+    "sha256": "1ab0fad499206b4a4339cd46f54522c183d07588cb2813d71d861a4b67dd9600"
+  },
+  {
+    "file": "02_QUESTION_LIBRARY_TAXONOMY.yaml",
+    "bytes": 12806,
+    "sha256": "4adbbb6a20a06550609982615420a6f458e92cd98f0705f606d153c926cd6bb3"
+  },
+  {
+    "file": "03_GOLD_CORE_QUESTION_CATALOG.yaml",
+    "bytes": 56710,
+    "sha256": "65150a05432183fb246004eb3ade5c0ae594e7b2ad4d5837d9703ea1bfffd9b9"
+  },
+  {
+    "file": "04_CURSOR_STARTUP_PROMPT.md",
+    "bytes": 8078,
+    "sha256": "84a29c04006640f7a170d985cb75fdc1c2b10fdbca5521e37b990d5cb1c99d28"
+  },
+  {
+    "file": "05_COWORK_VALIDATION_PROMPT.md",
+    "bytes": 4706,
+    "sha256": "00f114b46606fc93e41d02a6ec225a2a05d1b63b6018fc7b577c50bcb6c48fc3"
+  },
+  {
+    "file": "06_SECURE_REMOTE_REVIEW_RUNBOOK.md",
+    "bytes": 1702,
+    "sha256": "985606d6f8f6efc2fcc138154d6d12f69a594682fa364403d5a74ce871fac12b"
+  }
+]

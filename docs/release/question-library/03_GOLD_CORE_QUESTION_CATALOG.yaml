@@ -1,0 +1,1437 @@
+version: 1
+purpose: High-signal content blueprint derived from the interview-guide style used in this project.
+publication_policy:
+- Blueprint records are not automatically published.
+- Cursor must expand each into the complete Zume schema.
+- Each answer must be verified against official/primary sources.
+- A separate critic must approve technical accuracy, relevance, originality and role mapping.
+- Only reviewed records may enter candidate interview packages.
+records:
+- id: gold-java-001
+  domain: java
+  subdomain: equals-hashcode
+  level: basic
+  priority: P0
+  frequency: very_common
+  role_tracks: &id001
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: A value object is used as a HashMap key. Explain the equals/hashCode contract and what breaks when fields
+    used by that contract are mutated after insertion.
+  answer_key_points:
+  - Equal objects must return equal hash codes.
+  - Hash collections use hash and equality during lookup.
+  - Mutating key fields can move the logical key without moving its bucket.
+  - Prefer immutable key state and test retrieval with an equal instance.
+  follow_up: How would records change the implementation, and what risks remain if a record contains mutable components?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-java-002
+  domain: java
+  subdomain: collections
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Choose collections for ordered input with duplicates, keyed lookup, and concurrent updates. Explain the trade-offs
+    rather than naming one universal collection.
+  answer_key_points:
+  - Model sequence and keyed lookup as separate requirements.
+  - ArrayList, LinkedHashMap, ConcurrentHashMap and immutable snapshots serve different semantics.
+  - Define duplicate-key and ordering behavior explicitly.
+  - Thread safety of a collection does not make compound operations atomic.
+  follow_up: Show how you would make a read-modify-write operation atomic without locking the entire application.
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-java-003
+  domain: java
+  subdomain: exceptions
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: Where should an automation framework translate low-level exceptions into domain-specific failures, and what
+    information must be preserved?
+  answer_key_points:
+  - Translate at an ownership boundary.
+  - Preserve original cause, operation, input identity and environment evidence.
+  - Avoid broad catch-and-log patterns.
+  - Distinguish assertion failure, infrastructure failure, test-data failure and programming defect.
+  follow_up: How should retryable failures differ from non-retryable failures in the exception model?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-java-004
+  domain: java
+  subdomain: streams-lambdas
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: A Stream pipeline is concise but difficult to debug and performs side effects. How would you decide whether
+    to keep it, refactor it, or replace it with an explicit loop?
+  answer_key_points:
+  - Streams suit declarative transformations.
+  - Side effects and hidden mutable state make pipelines fragile.
+  - Readability and observability outweigh line-count reduction.
+  - Parallel streams require evidence, not assumption.
+  follow_up: What specific risks appear when the same pipeline is changed to parallelStream()?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-java-005
+  domain: java
+  subdomain: concurrency
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: A parallel test framework occasionally assigns the wrong driver and test data to a test. Diagnose the likely
+    concurrency design errors and propose a safer ownership model.
+  answer_key_points:
+  - Shared static mutable state is a primary suspect.
+  - Use per-test/per-thread scoped context carefully.
+  - ThreadLocal requires cleanup and does not solve async handoff automatically.
+  - Prefer explicit ownership and immutable configuration.
+  - Capture correlation IDs and thread/test identity in logs.
+  follow_up: How would virtual threads affect this design, and which ThreadLocal assumptions would you re-evaluate?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-java-006
+  domain: java
+  subdomain: jvm-memory-gc
+  level: advanced
+  priority: P2
+  frequency: occasional
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: A long regression suite slows over time and eventually fails with memory pressure. Explain how you would
+    separate a real application leak, test-framework retention, browser-process growth and normal GC behavior.
+  answer_key_points:
+  - Collect heap, process and browser metrics over time.
+  - Inspect dominators and retained references.
+  - Check listeners, screenshots, response bodies, static caches and ThreadLocal cleanup.
+  - Correlate GC pauses with throughput rather than assuming GC is the root cause.
+  follow_up: Which artifacts would you capture in CI before increasing heap size?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sel-001
+  domain: selenium
+  subdomain: locators
+  level: basic
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: A button has generated classes and moves during layout changes. Design a locator strategy that remains stable
+    and explain when text, accessibility attributes, data attributes, CSS and XPath are appropriate.
+  answer_key_points:
+  - Prefer intentional semantic/test contracts.
+  - Verify uniqueness.
+  - Avoid absolute paths, indexes and styling classes.
+  - Use XPath only when its relationship/text capabilities are needed.
+  - Coordinate with developers for stable attributes.
+  follow_up: How would you validate that a locator fails for the right reason after a UI redesign?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sel-002
+  domain: selenium
+  subdomain: waits-synchronization
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Explain why element visibility is not always the condition required before interaction. Give examples involving
+    overlays, stale elements and asynchronous state.
+  answer_key_points:
+  - Wait for the state the next action needs.
+  - Visibility does not guarantee enabled, unobstructed or stable.
+  - Use staleness or state-change conditions after refreshes.
+  - Avoid mixing implicit and explicit timing reasoning.
+  - Timeout messages should expose the awaited condition.
+  follow_up: How would you create a reusable wait without hiding application-specific conditions?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sel-003
+  domain: selenium
+  subdomain: page-components
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Define the boundary between tests, page/component objects and assertions. What symptoms show that a page
+    object has become a hidden test script?
+  answer_key_points:
+  - Objects encapsulate UI mechanics and meaningful actions.
+  - Tests own scenario intent and outcome assertions.
+  - Component objects model reusable page regions.
+  - Large workflow methods, conditional branching and broad assertions are warning signs.
+  follow_up: How would you model a table row or repeated card component without exposing raw WebElements?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sel-004
+  domain: selenium
+  subdomain: grid-parallelism
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Design a parallel Selenium execution model for local and cloud grids. Cover driver ownership, capability
+    construction, test data, artifact naming and cleanup.
+  answer_key_points:
+  - One driver/session owner per test execution context.
+  - Immutable capability creation.
+  - Unique test data and artifact correlation.
+  - Guaranteed quit in finally/fixture teardown.
+  - Concurrency limits based on environment capacity and vendor quota.
+  follow_up: How would you diagnose a failure that occurs only at 20-way parallelism?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sel-005
+  domain: selenium
+  subdomain: flakiness
+  level: advanced
+  priority: P0
+  frequency: very_common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: A test passes locally and fails only in CI with click interception. Give a disciplined investigation sequence
+    and explain why adding a retry is not the first fix.
+  answer_key_points:
+  - Inspect screenshot, DOM, browser console, network and timing evidence.
+  - Identify overlays, viewport, animations, stale state and environment differences.
+  - Reproduce with CI browser/version and viewport.
+  - Retries classify uncertainty but can hide defects.
+  - Fix the causal synchronization or application condition.
+  follow_up: When is a bounded retry justified, and what telemetry must accompany it?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sel-006
+  domain: selenium
+  subdomain: bidi-cdp
+  level: advanced
+  priority: P2
+  frequency: emerging
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Compare WebDriver commands, browser-specific CDP integration and WebDriver BiDi. How would you avoid coupling
+    a framework to a temporary browser implementation detail?
+  answer_key_points:
+  - WebDriver is the cross-browser automation contract.
+  - CDP is Chromium-specific and version-sensitive.
+  - BiDi aims for standardized bidirectional events.
+  - Hide optional capabilities behind interfaces and capability checks.
+  - Fallback behavior must be explicit.
+  follow_up: Which observability use cases justify a BiDi/CDP adapter?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-api-001
+  domain: api-openapi
+  subdomain: methods-idempotency
+  level: basic
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Explain safety and idempotency for GET, PUT, POST, PATCH and DELETE. How should those semantics influence
+    retries and automated assertions?
+  answer_key_points:
+  - Safe means no intended state change.
+  - Idempotent means repeated identical requests have the same intended effect.
+  - POST is not generally idempotent; PUT and DELETE are intended to be.
+  - Retries require operation semantics and idempotency keys where supported.
+  follow_up: How would you test an idempotency-key implementation under duplicate concurrent requests?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-api-002
+  domain: api-openapi
+  subdomain: error-contracts
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Design negative tests for an API error contract. Go beyond checking the status code.
+  answer_key_points:
+  - Validate stable error code, message policy, field/path details and correlation ID.
+  - Check content type and schema.
+  - Ensure sensitive internals are not leaked.
+  - Test malformed, missing, unauthorized, forbidden, conflict and rate-limit cases.
+  follow_up: Which error fields should remain stable enough for automation, and which should not?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-api-003
+  domain: rest-assured
+  subdomain: request-specifications
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: How would you structure REST Assured request and response specifications so reuse does not hide test intent
+    or leak state between tests?
+  answer_key_points:
+  - Separate transport defaults from scenario-specific data.
+  - Build immutable/new specifications per test context.
+  - Centralize auth/logging carefully.
+  - Keep assertions near scenario intent.
+  - Do not store mutable request bodies globally.
+  follow_up: How would you attach sanitized request/response evidence only when a test fails?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-api-004
+  domain: api-openapi
+  subdomain: contract-testing
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Compare OpenAPI schema validation, consumer-driven contract testing and end-to-end integration testing. What
+    defect class does each catch, and what does each miss?
+  answer_key_points:
+  - Schema validation checks shape/constraints.
+  - Consumer contracts verify provider behavior needed by consumers.
+  - End-to-end tests validate deployed integration but are slower and less diagnostic.
+  - Use complementary layers rather than replacing all integration tests.
+  follow_up: How would you manage backward compatibility when a provider adds or removes fields?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-api-005
+  domain: postman-newman
+  subdomain: variables
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: Explain Postman variable scopes and a safe strategy for secrets, generated data and collection portability.
+  answer_key_points:
+  - Understand global, collection, environment, data and local scopes.
+  - Prefer narrow scope.
+  - Never commit real secrets.
+  - Make generated values explicit and clean them up.
+  - CI should inject environment safely.
+  follow_up: How would you migrate a Postman collection into a maintainable CI-owned API regression suite?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-api-006
+  domain: api-openapi
+  subdomain: resilience-rate-limits
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Design tests for retries, backoff, circuit breakers and rate limits without creating a slow or destructive
+    test suite.
+  answer_key_points:
+  - Use controllable mocks/fault injection.
+  - Assert retry count, delay bounds and terminal behavior.
+  - Respect Retry-After semantics.
+  - Avoid testing resilience by attacking shared environments.
+  - Separate deterministic component tests from limited environment checks.
+  follow_up: How would you prove that retries do not duplicate a business transaction?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sql-001
+  domain: sql-oracle
+  subdomain: joins
+  level: basic
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Given customers and orders, explain the difference between INNER, LEFT and FULL joins and how an incorrect
+    join can silently lose or duplicate validation rows.
+  answer_key_points:
+  - Join type represents inclusion semantics.
+  - One-to-many joins multiply rows.
+  - Null handling matters in outer joins.
+  - Validate expected cardinality before aggregating.
+  follow_up: How would you detect an accidental many-to-many join in a reconciliation query?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sql-002
+  domain: sql-oracle
+  subdomain: window-functions
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: Return the latest status row per account while preserving deterministic tie handling. Compare ROW_NUMBER,
+    RANK and a correlated subquery.
+  answer_key_points:
+  - Partition by business key.
+  - Order by effective timestamp plus deterministic tie breaker.
+  - ROW_NUMBER selects one row; RANK may return ties.
+  - Indexes and data semantics affect performance and correctness.
+  follow_up: How would you return both the latest row and the immediately previous row?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sql-003
+  domain: sql-oracle
+  subdomain: transactions-acid
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Explain how transaction isolation can cause a database validation test to see stale, non-repeatable or phantom
+    data.
+  answer_key_points:
+  - Isolation controls visibility and locking.
+  - Autocommit and connection boundaries matter.
+  - Test setup and application transaction may not be committed together.
+  - Polling should wait for committed business state, not arbitrary sleep.
+  follow_up: How would you test a lost-update scenario safely?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sql-004
+  domain: sql-oracle
+  subdomain: duplicates-data-quality
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: Design SQL checks that detect duplicates, orphan records, invalid ranges and cross-table reconciliation mismatches.
+  answer_key_points:
+  - Define business keys and expected cardinality.
+  - Use GROUP BY/HAVING for duplicates.
+  - Use anti-joins for orphans.
+  - Compare aggregates and detailed differences.
+  - Make tolerances explicit.
+  follow_up: How would you report enough evidence to investigate without exporting sensitive rows?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sql-005
+  domain: sql-oracle
+  subdomain: indexes-execution-plans
+  level: advanced
+  priority: P2
+  frequency: occasional
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: A validation query works on small data but times out in production-like volumes. Explain how you would inspect
+    its execution plan and improve it without changing correctness.
+  answer_key_points:
+  - Check access paths, cardinality estimates, joins, sorts and predicates.
+  - Avoid functions that prevent index use when possible.
+  - Use representative statistics.
+  - Measure before and after.
+  - Do not add indexes blindly to production.
+  follow_up: How can bind-variable behavior or stale statistics change the chosen plan?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-sql-006
+  domain: sql-oracle
+  subdomain: oracle-functions
+  level: advanced
+  priority: P2
+  frequency: occasional
+  role_tracks: *id001
+  question: Explain common Oracle-specific pitfalls involving empty strings, NULL, DATE versus TIMESTAMP, time zones
+    and implicit conversion.
+  answer_key_points:
+  - Oracle treats empty string as NULL in SQL contexts.
+  - DATE includes time to seconds.
+  - TIMESTAMP and time-zone types differ.
+  - Implicit conversion depends on session settings.
+  - Use explicit formats and types in tests.
+  follow_up: How would you make a date/time assertion stable across sessions and daylight-saving changes?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-tool-001
+  domain: testng
+  subdomain: parallelism
+  level: intermediate
+  priority: P0
+  frequency: common
+  role_tracks: *id001
+  question: TestNG runs methods in parallel and results become inconsistent. Identify the lifecycle, data-provider and
+    listener state that must be thread-safe.
+  answer_key_points:
+  - Understand suite/test/class/method instance lifecycle.
+  - Avoid shared mutable fields.
+  - Data providers may run in parallel.
+  - Listeners/reporters need correlation-safe state.
+  - Driver and data ownership must match execution unit.
+  follow_up: How would factories or dependency injection change test instance ownership?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-tool-002
+  domain: cucumber
+  subdomain: bdd-purpose
+  level: basic
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: When does Cucumber improve collaboration, and when does it merely add a second programming language to maintain?
+  answer_key_points:
+  - BDD begins with shared discovery and examples.
+  - Gherkin should express business behavior.
+  - Low-level UI steps and implementation language reduce value.
+  - Use it when non-developer collaboration and living examples are real needs.
+  follow_up: Rewrite a brittle click-by-click scenario as a behavior-focused scenario.
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-tool-003
+  domain: cucumber
+  subdomain: state-context
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Design scenario state and dependency injection for parallel Cucumber execution without static globals or
+    hidden coupling between steps.
+  answer_key_points:
+  - Scenario-scoped context.
+  - Explicit object injection.
+  - No order dependence across scenarios.
+  - Hooks manage technical setup, not business flow.
+  - Parallel-safe driver/data ownership.
+  follow_up: How would you split overly broad step-definition classes?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-tool-004
+  domain: git-maven
+  subdomain: maven-lifecycle
+  level: basic
+  priority: P1
+  frequency: very_common
+  role_tracks: *id001
+  question: Explain the Maven lifecycle difference between unit-style tests and integration tests using Surefire and
+    Failsafe.
+  answer_key_points:
+  - Surefire commonly runs in test phase.
+  - Failsafe uses integration-test/verify and supports teardown before failure.
+  - Naming/configuration controls discovery.
+  - CI should invoke the correct lifecycle goal.
+  follow_up: Why can `mvn test` pass while `mvn verify` fails?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-tool-005
+  domain: git-maven
+  subdomain: merge-rebase
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id001
+  question: Compare merge and rebase for a shared automation repository. What history and collaboration risks drive the
+    choice?
+  answer_key_points:
+  - Merge preserves branch topology.
+  - Rebase rewrites commits.
+  - Do not rebase shared published history casually.
+  - Use team convention and protect main.
+  - Resolve conflicts with tests, not text alone.
+  follow_up: When would you use revert instead of reset after a bad merge?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-tool-006
+  domain: cicd
+  subdomain: quality-gates
+  level: advanced
+  priority: P0
+  frequency: very_common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Design PR, nightly and release quality gates for an automation platform. Explain which failures block immediately
+    and which create follow-up work.
+  answer_key_points:
+  - Fast deterministic PR checks.
+  - Broader nightly coverage.
+  - Release-specific environment validation.
+  - Clear ownership for flaky/infrastructure/product failures.
+  - No blanket rerun-to-green policy.
+  - Artifacts and trend metrics.
+  follow_up: How would you prevent a permanently quarantined test suite from becoming invisible debt?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-arch-001
+  domain: framework-architecture
+  subdomain: layers
+  level: advanced
+  priority: P0
+  frequency: very_common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Design a test automation framework that supports UI, API and database validation without making every test
+    depend on every layer.
+  answer_key_points:
+  - Separate domain intent, channel adapters, orchestration and infrastructure.
+  - Use composition, not a universal base class.
+  - Keep test data/configuration explicit.
+  - Share business helpers only where semantics match.
+  - Make components independently testable.
+  follow_up: Show where authentication, logging and reporting should live and why.
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-arch-002
+  domain: framework-architecture
+  subdomain: parallelism-thread-safety
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: A framework must scale from one local test to distributed parallel execution. Which design decisions must
+    be made before adding threads?
+  answer_key_points:
+  - Resource ownership.
+  - Data isolation.
+  - Artifact naming.
+  - Configuration immutability.
+  - Rate/environment limits.
+  - Cleanup and failure containment.
+  follow_up: What measurements determine the useful parallelism ceiling?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-arch-003
+  domain: debugging-reliability
+  subdomain: failure-classification
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: Create a failure-classification model that distinguishes product defects, automation defects, environment
+    failures, data failures and unknowns.
+  answer_key_points:
+  - Classification based on evidence.
+  - Mutually understandable categories.
+  - Unknown is legitimate and tracked.
+  - Owner and next action attached.
+  - Avoid letting retries rewrite the original class.
+  follow_up: How would you measure classification accuracy and reduce unknowns?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-arch-004
+  domain: debugging-reliability
+  subdomain: retry-vs-repair
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  role_tracks: *id001
+  question: A team proposes retrying every failed test twice. Evaluate the proposal and design a safer retry policy.
+  answer_key_points:
+  - Retries can identify transient behavior but hide defects.
+  - Limit to known retryable classes.
+  - Preserve first-failure evidence.
+  - Report retry rate.
+  - Set expiry/owner for exceptions.
+  follow_up: Which failures must never be retried automatically?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-arch-005
+  domain: cicd
+  subdomain: test-selection
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Design risk-based test selection for pull requests without creating blind spots.
+  answer_key_points:
+  - Map code/components/contracts to tests.
+  - Always run critical smoke/invariants.
+  - Use historical failure and change data carefully.
+  - Fallback to broader suites when confidence is low.
+  - Audit missed defects.
+  follow_up: How would you evaluate whether AI-based test selection is actually safe?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-arch-006
+  domain: solution-architecture
+  subdomain: decision-records
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Write the decision criteria for choosing a single framework, multiple specialized frameworks or a shared
+    platform with adapters.
+  answer_key_points:
+  - Team skills and ownership.
+  - Product/channel diversity.
+  - Release cadence.
+  - Maintenance and migration cost.
+  - Governance versus autonomy.
+  - Exit strategy and measurable outcomes.
+  follow_up: What evidence would trigger revisiting the architecture decision?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-mobile-001
+  domain: mobile-appium
+  subdomain: appium-architecture
+  level: basic
+  priority: P0
+  frequency: common
+  role_tracks: &id002
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  question: Explain the Appium client-server-driver architecture and why Android and iOS behavior cannot be assumed identical.
+  answer_key_points:
+  - Client sends WebDriver-compatible commands.
+  - Appium routes to platform drivers.
+  - UiAutomator2 and XCUITest have different capabilities and constraints.
+  - Platform-specific validation remains necessary.
+  follow_up: Where would you isolate platform differences in a maintainable framework?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-mobile-002
+  domain: mobile-appium
+  subdomain: capabilities-options
+  level: intermediate
+  priority: P0
+  frequency: common
+  role_tracks: *id002
+  question: Design capability/options management for local emulators, real devices and a device cloud without scattering
+    environment conditionals through tests.
+  answer_key_points:
+  - Typed configuration.
+  - Platform-specific option builders.
+  - Secrets external.
+  - Validation of required capabilities.
+  - No mutable global capability maps.
+  follow_up: How would you prevent one parallel session from inheriting another session's options?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-mobile-003
+  domain: mobile-appium
+  subdomain: synchronization
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks: *id002
+  question: A mobile test intermittently interacts during an animation or before a native view is actionable. Design
+    synchronization beyond fixed sleeps.
+  answer_key_points:
+  - Wait for platform-observable state.
+  - Consider animation/transition completion.
+  - Handle context switches.
+  - Use stable accessibility identifiers.
+  - Capture page source/screenshot/logcat or device logs.
+  follow_up: How would you diagnose a failure that appears only on slower real devices?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-mobile-004
+  domain: mobile-appium
+  subdomain: device-matrix
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Create a risk-based mobile device matrix across OS versions, manufacturers, screen sizes and real versus
+    virtual devices.
+  answer_key_points:
+  - Use production analytics and support policy.
+  - Cover platform/version boundaries.
+  - Select representative manufacturers and form factors.
+  - Reserve real devices for hardware/system behavior.
+  - Control cost with tiers.
+  follow_up: What should run on every PR, nightly and before release?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-mobile-005
+  domain: mobile-appium
+  subdomain: hybrid-apps
+  level: advanced
+  priority: P2
+  frequency: occasional
+  role_tracks: *id002
+  question: Explain hybrid-app context switching and common causes of webview discovery or synchronization failures.
+  answer_key_points:
+  - Native and web contexts are distinct.
+  - Webview/debugging availability and driver compatibility matter.
+  - Wait for context presence and page readiness.
+  - Do not keep stale elements across context changes.
+  follow_up: How would you collect evidence when a webview is present manually but absent to Appium?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-mobile-006
+  domain: browserstack
+  subdomain: local-tunnel
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id002
+  question: Explain how a device-cloud local tunnel changes network trust, test setup and failure diagnosis.
+  answer_key_points:
+  - Outbound tunnel exposes approved internal target.
+  - Credentials and access scope must be controlled.
+  - Tunnel lifecycle belongs to CI orchestration.
+  - Differentiate app failure, cloud failure and tunnel failure.
+  - Capture provider session artifacts.
+  follow_up: How would you prevent tests from reaching unintended internal services?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-perf-001
+  domain: performance-observability
+  subdomain: workload-models
+  level: basic
+  priority: P0
+  frequency: common
+  role_tracks: &id003
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  question: Translate a business workload into users, arrival rate, pacing, data distribution and transaction mix.
+  answer_key_points:
+  - Workload starts from production/business behavior.
+  - Concurrency is not the same as arrival rate.
+  - Think time and pacing affect demand.
+  - Use realistic data and transaction distribution.
+  - Document assumptions.
+  follow_up: How would you validate that the test actually generated the intended workload?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-perf-002
+  domain: performance-observability
+  subdomain: percentiles
+  level: intermediate
+  priority: P0
+  frequency: common
+  role_tracks: *id003
+  question: Explain why average response time can hide user pain and how percentiles should be interpreted.
+  answer_key_points:
+  - Averages hide tails and multimodal behavior.
+  - p95/p99 describe tail distributions, not individual guarantees.
+  - Sample size and aggregation windows matter.
+  - Pair latency with throughput and error rate.
+  follow_up: How would you detect coordinated omission or misleading client-side timing?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-perf-003
+  domain: performance-observability
+  subdomain: bottleneck-analysis
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: A test reaches high latency with low CPU. Build a bottleneck investigation using application, database, network
+    and dependency evidence.
+  answer_key_points:
+  - Low CPU does not mean no saturation.
+  - Inspect queues, locks, pools, I/O and downstream latency.
+  - Use traces to follow critical paths.
+  - Correlate metrics by time and load stage.
+  - Change one variable at a time.
+  follow_up: Which evidence would distinguish connection-pool exhaustion from database locking?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-perf-004
+  domain: performance-observability
+  subdomain: traces-metrics-logs
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: Design observability for a performance test so a failed SLA produces an actionable diagnosis rather than
+    only a graph.
+  answer_key_points:
+  - Correlation IDs and test-stage markers.
+  - Service/resource metrics.
+  - Distributed traces.
+  - Structured errors and dependency timing.
+  - Dashboards aligned to hypotheses.
+  follow_up: How would you avoid observability overhead distorting the test?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-perf-005
+  domain: performance-observability
+  subdomain: soak-spike
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks: *id003
+  question: Compare load, stress, spike, soak and capacity tests. Which risk does each reveal?
+  answer_key_points:
+  - Load validates expected demand.
+  - Stress finds failure boundary.
+  - Spike tests sudden change and recovery.
+  - Soak reveals accumulation/leaks.
+  - Capacity supports planning.
+  follow_up: What recovery assertions belong after a stress or spike test?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-perf-006
+  domain: performance-observability
+  subdomain: performance-gates
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  question: Create a performance quality gate that accounts for baseline variability and avoids blocking on noise.
+  answer_key_points:
+  - Use stable environment and repeated baseline.
+  - Define statistical/tolerance policy.
+  - Gate critical percentiles, errors and throughput.
+  - Investigate trend and regression magnitude.
+  - Separate hard limits from warnings.
+  follow_up: How would you handle a faster response time caused by returning incorrect data?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-lead-001
+  domain: technical-leadership
+  subdomain: prioritization
+  level: advanced
+  priority: P0
+  frequency: very_common
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: You inherit UI, API, mobile and performance automation requests with limited staff. Build a prioritization
+    model and explain what you would deliberately not automate.
+  answer_key_points:
+  - Business and release risk.
+  - Repeatability and defect value.
+  - Technical feasibility and maintenance cost.
+  - Manual/exploratory value.
+  - Transparent roadmap and backlog intake.
+  follow_up: How would you explain a rejected automation request to a senior stakeholder?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-lead-002
+  domain: qa-strategy-governance
+  subdomain: metrics
+  level: advanced
+  priority: P0
+  frequency: very_common
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  question: Choose a small set of quality-engineering metrics and explain how each could be gamed or misinterpreted.
+  answer_key_points:
+  - Outcome and flow metrics over raw test counts.
+  - Escaped defects with context.
+  - Automation reliability and cycle time.
+  - Coverage tied to risk.
+  - Metric ownership and narrative.
+  follow_up: Which metric would you refuse to use as an individual performance target?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-lead-003
+  domain: technical-leadership
+  subdomain: conflict
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: A developer says an automated failure is a flaky test; the tester says it is a product defect. How do you
+    resolve the disagreement without turning it into ownership conflict?
+  answer_key_points:
+  - Start from evidence and reproducibility.
+  - Classify uncertainty explicitly.
+  - Create shared diagnostic steps.
+  - Fix the system, not win the argument.
+  - Record decision and prevention action.
+  follow_up: What would you do if the same conflict recurs every release?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-lead-004
+  domain: qa-strategy-governance
+  subdomain: roadmap
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  question: Build a twelve-month quality-engineering roadmap that balances delivery support, framework modernization,
+    pipeline reliability and team capability.
+  answer_key_points:
+  - Baseline current pain and risk.
+  - Define measurable outcomes.
+  - Sequence dependencies.
+  - Reserve operational capacity.
+  - Review quarterly with evidence.
+  follow_up: How would you prevent modernization from becoming an endless internal project?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-lead-005
+  domain: solution-architecture
+  subdomain: trade-offs
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  question: Present an architecture decision where the technically strongest option is not the best organizational choice.
+  answer_key_points:
+  - Decision includes skills, ownership, migration and support.
+  - State quality attributes and trade-offs.
+  - Use reversible steps where possible.
+  - Document consequences and triggers for review.
+  follow_up: What makes an architecture decision responsible rather than merely conservative?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-lead-006
+  domain: behavioral
+  subdomain: failure
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: Describe a delivery or technical decision that failed. What evidence did you miss, what did you change, and
+    how did you verify the change worked?
+  answer_key_points:
+  - Specific ownership.
+  - No blame shifting.
+  - Concrete missed signal.
+  - Corrective and preventive action.
+  - Measured follow-through.
+  follow_up: What would you do differently if the same conditions appeared tomorrow?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-ai-001
+  domain: llm-engineering
+  subdomain: grounding-citations
+  level: intermediate
+  priority: P0
+  frequency: common
+  role_tracks: &id004
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  question: Design a grounded answer system that must cite sources. How do you prevent a fluent answer with fabricated
+    or mismatched citations?
+  answer_key_points:
+  - Retrieve traceable source chunks.
+  - Bind claims to source IDs.
+  - Validate URLs and citation spans.
+  - Abstain when evidence is insufficient.
+  - Evaluate citation correctness separately from answer quality.
+  follow_up: How would you score citation completeness and citation correctness?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-ai-002
+  domain: llm-engineering
+  subdomain: structured-output
+  level: intermediate
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: An LLM must return a typed decision object. Compare prompt-only JSON, JSON mode and schema-constrained structured
+    output.
+  answer_key_points:
+  - Prompt-only output is fragile.
+  - Schema constraints improve syntactic/type reliability.
+  - Semantic validation is still required.
+  - Handle refusals, truncation and version changes.
+  - Never trust model output directly.
+  follow_up: Which validation belongs before the object reaches business logic?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-ai-003
+  domain: agentic-ai
+  subdomain: agents-vs-workflows
+  level: basic
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  question: When should a deterministic workflow be used instead of an autonomous agent?
+  answer_key_points:
+  - Use workflow when steps and transitions are known.
+  - Agents add value under bounded ambiguity and tool choice.
+  - Autonomy increases evaluation, security and recovery cost.
+  - Start with least autonomy needed.
+  follow_up: Give an example where calling the system an agent adds no practical value.
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-ai-004
+  domain: agentic-ai
+  subdomain: tool-schemas
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks: *id004
+  question: Design a tool schema and permission model for an agent that can search, read files and create issues but
+    must not leak secrets or make irreversible changes.
+  answer_key_points:
+  - Least privilege.
+  - Narrow typed schemas.
+  - Separate read and write.
+  - Validate arguments and paths.
+  - Human approval for irreversible actions.
+  - Audit tool calls and results.
+  follow_up: How would you defend against a retrieved document instructing the agent to reveal credentials?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-ai-005
+  domain: agentic-ai
+  subdomain: state-memory
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks: *id004
+  question: Separate conversation state, task state, long-term memory and source retrieval in an agent system. What should
+    not be remembered?
+  answer_key_points:
+  - State types have different lifecycle and trust.
+  - Minimize sensitive retention.
+  - Memory requires provenance and correction.
+  - Retrieved facts are not automatically trusted.
+  - Users need deletion/control.
+  follow_up: How would you test that outdated memory does not override current source evidence?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-ai-006
+  domain: agentic-ai
+  subdomain: evals
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: Create an evaluation strategy for an agent that chooses tools and performs multi-step tasks.
+  answer_key_points:
+  - Task success alone is insufficient.
+  - Evaluate tool choice, arguments, sequence, policy compliance, recovery, latency and cost.
+  - Use deterministic fixtures and adversarial cases.
+  - Trace failures.
+  - Maintain regression sets.
+  follow_up: How would you evaluate a run that reaches the correct answer using an unsafe tool path?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-aiqa-001
+  domain: ai-quality
+  subdomain: nondeterminism
+  level: basic
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: How should testing change when the same prompt can produce multiple acceptable outputs?
+  answer_key_points:
+  - Define acceptable properties and rubrics.
+  - Use repeated samples where needed.
+  - Separate deterministic plumbing from probabilistic quality.
+  - Track distributions, not one golden string.
+  - Control model/version/temperature in regression tests.
+  follow_up: Which parts of an LLM application should still have exact deterministic assertions?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-aiqa-002
+  domain: ai-quality
+  subdomain: prompt-injection
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: Design tests for indirect prompt injection in retrieved web pages or documents.
+  answer_key_points:
+  - Treat retrieved content as untrusted data.
+  - Seed malicious instructions in fixtures.
+  - Verify tool and secret boundaries.
+  - Test instruction hierarchy and source isolation.
+  - Check logs for attempted policy violation.
+  follow_up: How would you distinguish injection resistance from merely refusing every useful request?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-aiqa-003
+  domain: ai-quality
+  subdomain: evals
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: Build an evaluation dataset for a QA assistant that generates tests from requirements.
+  answer_key_points:
+  - Representative requirements and defect risks.
+  - Gold rubrics, not only gold text.
+  - Coverage, correctness, redundancy and harmful suggestion metrics.
+  - Human-reviewed difficult cases.
+  - Versioned dataset and contamination controls.
+  follow_up: How would you measure whether generated tests find defects rather than only look plausible?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-aiqa-004
+  domain: ai-quality
+  subdomain: failure-triage
+  level: intermediate
+  priority: P1
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  question: An AI classifier assigns automation failures to product, test, environment or data categories. How would
+    you validate it before allowing automatic routing?
+  answer_key_points:
+  - Labeled representative history.
+  - Class-specific precision/recall.
+  - Confidence thresholds.
+  - Human review for uncertain/high-impact cases.
+  - Drift monitoring and feedback correction.
+  follow_up: Which classification errors are most costly and how would that affect thresholds?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-aiqa-005
+  domain: ai-governance
+  subdomain: data-privacy
+  level: advanced
+  priority: P0
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  question: Create a privacy and governance policy for using resumes, test data and production evidence with external
+    AI providers.
+  answer_key_points:
+  - Data classification.
+  - Minimization and redaction.
+  - Approved providers and retention terms.
+  - No secret or candidate data by default.
+  - Audit and incident response.
+  - Human accountability.
+  follow_up: What technical controls prove that candidate data was not sent?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.
+- id: gold-aiqa-006
+  domain: ai-governance
+  subdomain: roi
+  level: advanced
+  priority: P1
+  frequency: common
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  question: Evaluate an AI automation initiative whose demo is impressive but whose operating cost and defect impact
+    are unclear.
+  answer_key_points:
+  - Define baseline and measurable outcome.
+  - Include review, model, integration and failure costs.
+  - Run controlled pilot.
+  - Measure quality and cycle time.
+  - Set stop/scale criteria.
+  follow_up: Which evidence would cause you to stop the initiative despite positive user sentiment?
+  status: blueprint
+  publication_note: Expand into the full Zume schema, source-check, independently review, then publish.

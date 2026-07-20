@@ -1,0 +1,893 @@
+version: 1
+records:
+- id: qa-strategy-governance-i-01
+  domain: qa-strategy-governance
+  subdomain: strategy
+  title: 'Strategy: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: How would you design strategy for a changing product while preserving clear ownership?
+  concise_answer: Strategy should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that strategy supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your strategy approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative strategy case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - strategy
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: strategy
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-02
+  domain: qa-strategy-governance
+  subdomain: prioritization
+  title: 'Prioritization: intermediate decision'
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: What trade-offs would you evaluate before scaling prioritization across multiple teams?
+  concise_answer: Prioritization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In QA strategy, metrics, management, and governance,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that prioritization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your prioritization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative prioritization case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - prioritization
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: prioritization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-03
+  domain: qa-strategy-governance
+  subdomain: metrics
+  title: 'Metrics: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: A result involving metrics is intermittent. How do you isolate cause from symptom?
+  concise_answer: Metrics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that metrics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your metrics approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative metrics case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - metrics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: metrics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-04
+  domain: qa-strategy-governance
+  subdomain: governance
+  title: 'Governance: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: How would you make governance observable enough to support a production investigation?
+  concise_answer: Governance should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that governance supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your governance approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative governance case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - governance
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: governance
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-05
+  domain: qa-strategy-governance
+  subdomain: roadmap
+  title: 'Roadmap: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Where should the boundary around roadmap live, and why?
+  concise_answer: Roadmap should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that roadmap supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your roadmap approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative roadmap case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - roadmap
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: roadmap
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-06
+  domain: qa-strategy-governance
+  subdomain: budgets
+  title: 'Budgets: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: How would you validate that budgets remains correct when inputs are incomplete or delayed?
+  concise_answer: Budgets should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that budgets supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your budgets approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative budgets case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - budgets
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: budgets
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-07
+  domain: qa-strategy-governance
+  subdomain: strategy
+  title: 'Strategy: intermediate decision'
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: What design choice makes strategy easier to evolve without hiding failures?
+  concise_answer: Strategy should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that strategy supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your strategy approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative strategy case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - strategy
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: strategy
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-08
+  domain: qa-strategy-governance
+  subdomain: prioritization
+  title: 'Prioritization: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you separate deterministic checks from environmental uncertainty around prioritization?
+  concise_answer: Prioritization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In QA strategy, metrics, management, and governance,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that prioritization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative prioritization case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - prioritization
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: prioritization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-09
+  domain: qa-strategy-governance
+  subdomain: metrics
+  title: 'Metrics: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What data would you collect before tuning or optimizing metrics?
+  concise_answer: Metrics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that metrics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative metrics case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - metrics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: metrics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-10
+  domain: qa-strategy-governance
+  subdomain: governance
+  title: 'Governance: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you review a proposal that centralizes governance?
+  concise_answer: Governance should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that governance supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative governance case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - governance
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: governance
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-11
+  domain: qa-strategy-governance
+  subdomain: roadmap
+  title: 'Roadmap: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: What are the consequences of retrying failures associated with roadmap?
+  concise_answer: Roadmap should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that roadmap supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative roadmap case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - roadmap
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: roadmap
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-12
+  domain: qa-strategy-governance
+  subdomain: budgets
+  title: 'Budgets: intermediate decision'
+  level: intermediate
+  priority: P2
+  frequency: common
+  question: How would you build a representative test matrix for budgets without testing every combination?
+  concise_answer: Budgets should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that budgets supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative budgets case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - budgets
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: budgets
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-13
+  domain: qa-strategy-governance
+  subdomain: strategy
+  title: 'Strategy: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: What contract should adjacent components share when they use strategy?
+  concise_answer: Strategy should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that strategy supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative strategy case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - strategy
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: strategy
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-14
+  domain: qa-strategy-governance
+  subdomain: prioritization
+  title: 'Prioritization: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How do you prevent a local optimization of prioritization from degrading system behavior?
+  concise_answer: Prioritization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In QA strategy, metrics, management, and governance,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that prioritization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative prioritization case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - prioritization
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: prioritization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: qa-strategy-governance-i-15
+  domain: qa-strategy-governance
+  subdomain: metrics
+  title: 'Metrics: intermediate decision'
+  level: intermediate
+  priority: P3
+  frequency: common
+  question: How would you introduce metrics incrementally and measure whether it helped?
+  concise_answer: Metrics should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In QA strategy, metrics, management, and governance, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that metrics supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete QA strategy, metrics, management, and governance example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative metrics case before generalizing.
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 15
+  tags:
+  - qa-strategy-governance
+  - metrics
+  - intermediate
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: metrics
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

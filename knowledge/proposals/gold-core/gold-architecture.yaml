@@ -1,0 +1,619 @@
+version: 1
+note: >-
+  Gold-core expansion (framework architecture, reliability, CI/CD and solution-architecture decisions)
+  from docs/release/question-library/03_GOLD_CORE_QUESTION_CATALOG.yaml. Draft until critic approval.
+questions:
+- id: gold-arch-001
+  domain: framework-architecture
+  subdomain: layers
+  title: Layering a UI/API/DB framework so tests depend only on what they use
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question_type: framework_design
+  question: >-
+    Design a test automation framework that supports UI, API, and database validation without making every
+    test depend on every layer. Where should authentication, logging, and reporting live, and why?
+  concise_answer: >-
+    Structure the framework in independent layers: a domain layer expressing business intent, channel
+    adapters, UI page or component objects, API clients, database access helpers, that each encapsulate
+    one integration's mechanics, and thin orchestration that composes only the adapters a given test actually
+    needs, never a single base class that every test extends and therefore depends on UI, API, and database
+    machinery simultaneously. Cross-cutting concerns, authentication, logging, reporting, live in their
+    own infrastructure services injected into whichever adapters need them, not baked into a shared superclass,
+    so a pure API test never instantiates a browser and a pure UI test never pulls in database driver
+    dependencies it does not use.
+  recommended_answer: |-
+    Composition over inheritance is the organizing principle: a single AbstractBaseTest that every test extends inevitably accumulates a driver field, an API client field, and a database connection field, because some subset of tests needs each one, and every test pays the coupling and setup cost of all three regardless of what it actually exercises. Instead, each channel gets its own adapter with a clear responsibility boundary: UI page and component objects encapsulate locators and waits and expose user-meaningful actions; an API client wraps request construction and response parsing behind typed methods; a database helper wraps SQL or ORM access behind repository-style methods. A test declares, through its constructor or a DI container, exactly which adapters it needs, so a checkout-flow UI test composes a page object and an API client, while a price-reconciliation test composes an API client and a database repository, with neither test instantiating machinery it does not use.
+
+    Authentication belongs in a dedicated session or auth service that any adapter needing a token or cookie calls, with token acquisition and caching logic living exactly once instead of being duplicated per channel; a UI adapter and an API client both ask the same service for a valid session rather than each reimplementing login. Logging belongs behind a thin, consistent facade used uniformly by every layer, always stamping a correlation or test-run ID, so log lines from the UI, API, and database layers for the same test can be joined during triage regardless of which channel produced them. Reporting should be event-driven: adapters and orchestration emit structured events, test started, step executed, assertion failed, and a separate reporting service subscribes to those events, which means adding or changing a report format never requires touching test code.
+
+    The payoff of this separation is independent testability: because each adapter's dependencies are explicit and narrow, the API client can be unit tested against a mocked HTTP layer to verify it parses error contracts correctly, without ever touching a browser or a database, which is not possible when every test class inherits all three capabilities from one shared base.
+  key_points:
+  - >-
+    Separate domain intent, channel adapters (UI, API, DB), and thin orchestration; avoid a universal
+    base class.
+  - >-
+    Compose only the adapters a test actually needs via constructor or DI instead of inheriting from all
+    of them.
+  - >-
+    Centralize authentication as a shared service that adapters call, not duplicated per layer.
+  - >-
+    Treat logging and reporting as cross-cutting, event-driven services independent of any one channel.
+  - >-
+    Make each layer independently unit-testable by keeping its dependencies explicit and narrow.
+  code_examples:
+  - |-
+    // Composition instead of inheritance:
+    class CheckoutFlowTest {
+      CheckoutFlowTest(UiCheckoutPage ui, OrdersApiClient api) { ... } // only needs UI+API
+    }
+    class PriceReconciliationTest {
+      PriceReconciliationTest(OrdersApiClient api, OrderRepository db) { ... } // only needs API+DB
+    }
+  strong_signals:
+  - Explicitly rejects a single shared base class in favor of composition.
+  - >-
+    Places authentication, logging, and reporting as independent services rather than superclass members.
+  - Can justify why a database-only test should not instantiate a browser.
+  weak_signals:
+  - >-
+    Defaults to 'one BaseTest with everything' and calls it reusable without discussing coupling cost.
+  red_flags:
+  - Cannot explain why coupling every test to every layer is a problem.
+  - Puts business assertions inside page objects because 'it's easier'.
+  common_mistakes:
+  - >-
+    A giant AbstractBaseTest with driver, API client, and database connection fields used by every subclass
+    regardless of need.
+  - Duplicating auth-token logic in each adapter.
+  - Hard-wiring a specific report format into test logic.
+  follow_ups:
+  - question: Show where authentication, logging, and reporting should live and why.
+    recommended_answer: >-
+      Authentication lives in a dedicated session or auth service that issues and caches tokens or cookies
+      for the scope of a test or run, injected into whichever adapters, UI, API, need to be authenticated,
+      so token logic and expiry handling exist exactly once. Logging lives behind a thin facade used uniformly
+      across adapters, always stamping a correlation or test ID, so log lines from UI, API, and database
+      layers for the same test can be joined. Reporting subscribes to structured events, test started,
+      step executed, assertion failed, emitted by orchestration and adapters rather than being called
+      explicitly from test code, which lets you add or change report formats without touching any test
+      or adapter.
+  - question: >-
+      How would you evolve this architecture if a new channel, for example message-queue validation, needs
+      to be added later?
+    recommended_answer: >-
+      Add a new adapter implementing the same conventions as existing ones, its own client wrapper, its
+      own failure-translation boundary, injected auth and logging like the others, without touching existing
+      UI, API, or database adapters or the orchestration layer, then compose it into only the tests that
+      need it. If adding the new channel requires touching unrelated adapters, that is a signal the original
+      boundaries were not actually independent.
+  role_tracks: &id001
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 5
+  - 18
+  tags:
+  - framework-design
+  - architecture
+  - composition
+  - layering
+  - auth
+  - reporting
+  estimated_minutes: 7
+  references:
+  - source_id: fowler-bliki
+    locator: >-
+      martinfowler.com — test architecture and composition-over-inheritance writing (e.g. 'TestPyramid')
+  - source_id: google-testing-blog
+    locator: Google Testing Blog — test infrastructure and framework-layering posts
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-arch-002
+  domain: framework-architecture
+  subdomain: parallelism-thread-safety
+  title: Design decisions required before scaling a framework across threads
+  level: advanced
+  priority: P0
+  frequency: common
+  question_type: framework_design
+  question: >-
+    A framework must scale from one local test to distributed parallel execution. Which design decisions
+    must be made before adding threads?
+  concise_answer: >-
+    Before any thread count is raised, the framework needs explicit resource ownership, each execution
+    unit creates and owns its own driver or connection, never a shared static; enforced data isolation,
+    unique or partitioned test data per execution unit; deterministic artifact naming keyed by a correlation
+    ID that includes run, test, and thread rather than a reused filename; immutable configuration and
+    capabilities built fresh per execution unit; awareness of external rate or environment limits such
+    as API quotas or grid concurrency caps; and guaranteed cleanup and failure containment so one test's
+    crash cannot leak state or resources into another's run. Only after those are true does raising thread
+    count produce more throughput instead of more flakiness.
+  recommended_answer: |-
+    Resource ownership generalizes the classic ThreadLocal-driver discussion to distributed workers: each worker process should be fully isolated so ownership is largely a non-issue at that granularity, but within a worker running multiple threads it still matters, and the rule is that whatever creates a resource, a driver session, a connection, also owns its cleanup, never a field shared implicitly across executions. Data isolation means test-data factories generate unique keys per execution rather than relying on a fixed shared row, or a shared dataset is explicitly partitioned by worker index so two parallel tests never contend for the same record.
+
+    Artifact naming is an easy failure mode to overlook: two parallel tests writing to a fixed filename such as screenshot.png silently overwrite each other, so correlation IDs, run, test, and thread identity, must be baked into every artifact path before scaling, not retrofitted after collisions are observed. Configuration immutability matters because a capabilities object built once and then mutated by reference is a classic race when a builder is reused across threads; capabilities should be constructed fresh, or as an immutable value, per execution unit.
+
+    External rate and environment limits, a login API's rate limit, a Selenium Grid or cloud vendor's concurrent-session quota, a database's connection-pool size, cap useful parallelism regardless of how many local threads are available, and exceeding them produces queuing or errors that are easily misread as flaky test failures rather than capacity exhaustion. Finally, cleanup and failure containment must guarantee that a crashed worker or thread does not hold a lock, leave a browser session open, or leave a database transaction uncommitted in a way that blocks other execution units.
+
+    Measuring the useful parallelism ceiling should be evidence-based: run the same suite at increasing concurrency, one, two, four, eight, sixteen, and so on, recording wall-clock time, failure rate, and resource saturation, CPU, memory, network, external API error and latency. The ceiling is the concurrency level where marginal wall-clock improvement flattens or failure and error rates start rising due to saturation, and it should be re-measured whenever the environment or suite composition changes materially, rather than assumed to be a fixed number.
+  key_points:
+  - >-
+    Establish explicit resource ownership, data isolation, artifact naming, and configuration immutability
+    before scaling threads.
+  - >-
+    Account for external rate and environment limits, API quotas, grid or cloud concurrency caps, that
+    cap useful parallelism independent of local capacity.
+  - >-
+    Guarantee cleanup and failure containment so one execution unit's failure cannot leak into another's.
+  - >-
+    Measure the parallelism ceiling empirically: wall-clock time and failure or error rate versus concurrency,
+    not intuition.
+  - >-
+    Re-measure the ceiling whenever environment capacity, suite composition, or infrastructure changes.
+  strong_signals:
+  - >-
+    Lists a concrete ownership, isolation, naming, configuration, limits, and cleanup checklist unprompted.
+  - >-
+    Proposes a concurrency-versus-wall-clock-and-failure-rate measurement methodology for finding the
+    ceiling.
+  weak_signals:
+  - >-
+    Says 'just increase thread count and see what breaks' without a systematic measurement plan.
+  - Ignores external rate limits as a ceiling factor.
+  red_flags:
+  - >-
+    Assumes more threads always means more throughput with no diminishing returns or environment constraints.
+  - Has no plan for cleanup when a worker crashes mid-test.
+  common_mistakes:
+  - Hardcoded artifact filenames colliding under parallel runs.
+  - Shared mutable capability or configuration builders reused across threads.
+  - >-
+    Discovering a vendor's grid concurrency cap only when sessions start silently queuing in production
+    CI.
+  follow_ups:
+  - question: What measurements determine the useful parallelism ceiling?
+    recommended_answer: >-
+      Plot suite wall-clock duration and failure or error rate against increasing concurrency levels while
+      also sampling resource saturation, CPU and memory on runners, external API latency and error codes,
+      grid or cloud session queue depth; the ceiling is the concurrency level just before wall-clock gains
+      flatten or failure and error rates begin rising due to saturation rather than genuine defects. Beyond
+      that point, added threads buy queuing and flakiness, not speed.
+  - question: >-
+      How would you diagnose whether a parallelism-related failure is a framework bug versus an environment
+      capacity limit?
+    recommended_answer: >-
+      Reproduce at the same concurrency against an environment with headroom, a higher quota, an isolated
+      grid; if the failure disappears, it is capacity-bound, not a framework defect. If it persists, inspect
+      for the ownership and isolation classes of bugs, shared static state, colliding artifact names,
+      stale ThreadLocal, using correlation IDs in logs to trace which two execution units collided.
+  role_tracks: *id001
+  years_range:
+  - 6
+  - 18
+  tags:
+  - framework-design
+  - parallelism
+  - scalability
+  - resource-ownership
+  - ci
+  - measurement
+  estimated_minutes: 7
+  references:
+  - source_id: selenium-dev
+    locator: Selenium documentation — Grid and parallel session capacity considerations
+  - source_id: google-testing-blog
+    locator: Google Testing Blog — scaling test execution and flakiness-from-capacity posts
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-arch-003
+  domain: debugging-reliability
+  subdomain: failure-classification
+  title: An evidence-based failure-classification model with a legitimate unknown bucket
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question_type: framework_design
+  question: >-
+    Create a failure-classification model that distinguishes product defects, automation defects, environment
+    failures, data failures, and unknowns. What makes the model trustworthy in practice?
+  concise_answer: >-
+    A trustworthy model classifies from evidence, not from who happens to be looking at the failure: a
+    product defect has a reproducible mismatch between actual and specified behavior; an automation defect
+    has evidence the test or framework code itself is wrong, a bad locator, an incorrect assertion, a
+    race in the test; an environment failure has evidence external to the code under test, a service outage,
+    a network error, an expired certificate; a data failure has evidence of missing, invalid, or stale
+    test data; unknown is a legitimate, tracked category for insufficient evidence rather than a forced
+    guess. Trustworthiness comes from mutually exclusive, evidence-based categories, an owner and next
+    action attached to every classified failure, and retries or reruns that never silently rewrite the
+    original classification.
+  recommended_answer: |-
+    Each category needs a concrete evidence definition, not just a name, or two triagers will reach different conclusions from the same failure. Product versus automation defect is distinguished by comparing observed behavior against a specification or prior known-good behavior using screenshot, DOM, or response-body evidence: if the application state itself is wrong, it is a product defect; if the test's locator, assertion, or timing logic is wrong against a correct application state, it is an automation defect. Environment failures are confirmed against external evidence, infrastructure dashboards, status pages, connectivity logs, independent of the test's own output. Data failures are confirmed against data lineage or fixture-provisioning logs showing the expected record was missing, stale, or malformed.
+
+    Unknown must be a first-class, trended category rather than something the team eliminates by forcing every ambiguous failure into a convenient bucket; a rising unknown rate is itself a signal that diagnostics, structured logging, correlation IDs, are inadequate, and treating it as an embarrassing number to hide produces false confidence elsewhere in the model instead.
+
+    A common way the model breaks in practice is letting retries or reruns silently overwrite the original classification: if a flaky rerun passes and the first failure's evidence and category are discarded, the team loses the trail needed to ever notice a recurring class of intermittent product defects. The report should always show the first-failure classification and evidence, the retry count, and the final outcome as separate facts.
+
+    Finally, the model is only useful with ownership attached: product defects route to the responsible development team, automation defects to the automation owner, environment failures to infrastructure or DevOps, data failures to whoever owns fixtures or test-data pipelines. A consistent decision order, for example checking environment health before assuming an application-layer defect, since an outage can produce misleading symptoms at the application layer, is what lets two independent triagers reach the same classification.
+  key_points:
+  - Classify from concrete evidence per category, not from convenience or who is triaging.
+  - Treat unknown as a legitimate, tracked category rather than forcing a guess.
+  - Attach an owner and next action to every classified failure.
+  - >-
+    Never let a retry or rerun silently overwrite or discard the original failure's classification and
+    evidence.
+  - >-
+    Define a consistent decision order, for example checking environment health first, so independent
+    triagers agree.
+  strong_signals:
+  - Defines evidence criteria per category concretely, not just category names.
+  - Insists unknown be tracked and trended, not eliminated by forcing a guess.
+  - Flags retries overwriting original evidence as a specific, named anti-pattern.
+  weak_signals:
+  - Proposes categories without defining what evidence distinguishes them.
+  - Treats classification as a one-time label with no owner or next action.
+  red_flags:
+  - Classifies every unexplained failure as 'flaky' by default.
+  - Discards the first failure's evidence once a rerun passes.
+  common_mistakes:
+  - No environment-health check before assuming a product defect.
+  - >-
+    Automation owners re-labeling failures as 'product' without evidence, to avoid triage work.
+  - No periodic audit of the unknown bucket.
+  follow_ups:
+  - question: How would you measure classification accuracy and reduce unknowns?
+    recommended_answer: >-
+      Periodically audit a sample of classified failures against ground truth, confirmed fixes, closed
+      tickets, to compute precision and recall per category if any automated or semi-automated classification
+      is used; track the unknown rate as a trend and treat sustained increases as a signal to invest in
+      better diagnostics, structured logging, correlation IDs, environment health checks, rather than
+      accepting it as a permanent bucket. Feed confirmed misclassifications back into the triage checklist
+      or automated rules.
+  - question: How should this classification model interact with an automatic retry policy?
+    recommended_answer: >-
+      The retry policy should consult the classification, not the other way around: only failures already
+      evidenced as environment-transient are auto-retried, and every retry attempt is logged alongside
+      the original failure's evidence rather than replacing it, so the report always shows first-failure
+      classification, retry count, and final outcome. A passing rerun changes the run's final status but
+      must never erase the record that a first-attempt failure of a given class occurred.
+  role_tracks: &id002
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 4
+  - 14
+  tags:
+  - failure-classification
+  - triage
+  - reliability
+  - retries
+  - evidence
+  estimated_minutes: 6
+  references:
+  - source_id: google-testing-blog
+    locator: Google Testing Blog — flaky-test categorization and triage practices
+  - source_id: dora-dev
+    locator: DORA research program — change failure rate measurement and failure attribution
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-arch-004
+  domain: debugging-reliability
+  subdomain: retry-vs-repair
+  title: Why a blanket retry-twice policy hides defects, and a safer alternative
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question_type: framework_design
+  question: >-
+    A team proposes retrying every failed test twice before reporting a failure. Evaluate the proposal
+    and design a safer retry policy. Which failures must never be retried automatically?
+  concise_answer: >-
+    Blanket retry-everything-twice is dangerous because it treats 'passed on retry' as equivalent to 'passed',
+    silently absorbing real intermittent defects, race conditions, timing bugs, actual flaky product behavior,
+    into a green build with no record. A safer policy retries only failures already evidenced as belonging
+    to a known-retryable class, transient network or environment errors, specific documented flaky-infrastructure
+    conditions, applies a bounded number of attempts with backoff, always preserves and reports the first-failure
+    evidence and retry count, and tracks retry rate as a trend metric that triggers investigation if it
+    rises. Assertion failures representing an actual behavioral mismatch, and known product-defect signatures,
+    must never be auto-retried; they should fail once and stay visible.
+  recommended_answer: |-
+    Retry-twice-then-it's-fine optimizes for a green dashboard over defect detection, and the math makes the risk concrete: a test that genuinely fails about thirty percent of the time will pass at least once across three attempts roughly ninety-one percent of the time, so a blanket policy converts a real, actionable reliability problem into something that is almost entirely invisible on a dashboard. Retries should instead be scoped to specific, evidenced failure signatures, for example a particular timeout exception known to correlate with a documented infrastructure issue, rather than 'any failure'.
+
+    Every retry must be logged with the original failure's stack trace, screenshot, and evidence preserved, not overwritten, so trend dashboards can show retry rate per test and flag tests whose retry rate is creeping up, which is a leading indicator of a real defect being masked rather than resolved. Any retry-classification rule tied to a specific known issue should carry an expiry so it does not outlive the issue's fix and keep masking a problem that no longer exists for the reason it was written. The policy needs an owner who reviews the retry-rate trend, and a rising retry rate for a given test should trigger the same investigation as a hard failure, not be treated as already handled.
+
+    A never-retry list keeps the policy honest: assertion failures against documented expected behavior, data-integrity or security-control check failures, which must always be investigated rather than masked, and any failure category not yet classified with evidence, since auto-retrying unknowns removes both the incentive and the trail needed to ever classify them properly.
+  key_points:
+  - >-
+    Blanket retry-everything policies convert real intermittent defects into statistically likely passes.
+  - >-
+    Scope retries to specific, evidenced failure signatures with bounded attempts and backoff, not 'any
+    failure'.
+  - >-
+    Preserve and report first-failure evidence and retry count even when a later attempt passes.
+  - Track retry rate as a trend metric and investigate tests whose rate rises.
+  - >-
+    Never auto-retry assertion failures, data-integrity or security failures, or unclassified unknown
+    failures.
+  strong_signals:
+  - Quantifies why blanket retries hide defects with a probability argument.
+  - Proposes scoping retries to evidenced classes with an expiry.
+  - Insists on preserving first-failure evidence and tracking retry-rate trend.
+  weak_signals:
+  - Accepts retry-twice as 'standard practice' without quantifying the masking effect.
+  - Has no plan for reporting retry counts.
+  red_flags:
+  - Treats a passing rerun as equivalent to no failure ever occurring, with no record kept.
+  - Would retry assertion or security-check failures automatically.
+  common_mistakes:
+  - Unbounded or unlogged retries.
+  - No distinction between failure classes when deciding to retry.
+  - No periodic review of which tests are retried most often.
+  follow_ups:
+  - question: Which failures must never be retried automatically?
+    recommended_answer: >-
+      Assertion failures documenting an actual mismatch between expected and observed application behavior,
+      data-integrity or security-control failures, which must be investigated rather than masked, and
+      any failure whose cause is not yet classified with evidence, unknowns, because auto-retrying unknowns
+      removes the incentive and the trail needed to ever classify them properly.
+  - question: >-
+      How would you report retry rate so it doesn't just become another ignored dashboard number?
+    recommended_answer: >-
+      Publish retry rate per test, not just per suite, alongside pass or fail trend, with an alert threshold
+      that flags a specific test once its retry rate crosses a set level over a rolling window; route
+      that alert to the test's owner as an action item with an expectation of root-causing within a defined
+      time, and periodically review the aggregate retry rate at a team level as a reliability metric alongside
+      escaped-defect counts, so rising retries are treated with the same severity as rising failure counts.
+  role_tracks: *id002
+  years_range:
+  - 4
+  - 14
+  tags:
+  - retries
+  - reliability
+  - flakiness
+  - ci
+  - quality-gates
+  - evidence
+  estimated_minutes: 6
+  references:
+  - source_id: google-testing-blog
+    locator: Google Testing Blog — flaky tests and the risks of blanket retry strategies
+  - source_id: dora-dev
+    locator: >-
+      DORA research program — reliability and change failure rate implications of masked failures
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365
+- id: gold-arch-005
+  domain: cicd
+  subdomain: test-selection
+  title: Risk-based PR test selection with an audited floor and an AI-safety bar
+  level: advanced
+  priority: P1
+  frequency: common
+  question_type: framework_design
+  question: >-
+    Design risk-based test selection for pull requests without creating blind spots. Which evidence should
+    drive the selection, and how would you evaluate whether an AI-based test-selection approach is actually
+    safe to trust?
+  concise_answer: >-
+    Build an explicit map from code, components, and contracts to the tests that exercise them, via coverage
+    data, dependency graphs, or ownership metadata, always run a small set of critical smoke or invariant
+    tests on every PR regardless of the selection algorithm's output, use historical failure and change
+    data to prioritize, not exclude, additional tests, and fall back to the broader suite whenever confidence
+    in the mapping is low, new files, cross-cutting changes, sparse history for the touched area. Continuously
+    audit for blind spots by periodically running the full suite and comparing against what the selective
+    approach would have chosen, tracking any defect a broader run caught but the selective run would have
+    missed.
+  recommended_answer: |-
+    The code-to-test map can come from coverage instrumentation, which tests exercised which lines or methods on a prior full run, or from static dependency analysis, but either source goes stale as code changes, and a stale map is worse than no map because it creates false confidence while quietly skipping tests that now matter. The map must be refreshed on a defined cadence, not built once and trusted indefinitely.
+
+    Regardless of what the selection algorithm decides, a fixed tier of critical invariant tests, smoke tests and high-severity regression guards, should run on every PR unconditionally, so even a wrong selection decision cannot skip the tests that catch the worst outcomes. Historical failure and change data, for example files that have historically correlated with test failures, is a legitimate signal for prioritizing or widening the selected set, but it should never be the sole basis for skipping tests outright.
+
+    Explicit low-confidence triggers should widen selection to the full suite: large diffs, changes to shared or core modules, new files with no coverage history, and changes to build or CI configuration itself all warrant broader coverage rather than trusting a thin mapping. Auditing closes the loop: run the full suite on a schedule, or across a sample of PRs, and diff its results against what the selective approach would have chosen, treating any missed defect as a bug in the selection model that must be fixed, not an acceptable cost of speed.
+
+    An AI-based selector should be evaluated exactly like any other risk model: measure its precision and, more importantly, its recall or miss rate against the same full-suite ground truth; require it to expose which changed files it associated with which tests so specific decisions can be audited; run it in shadow or advisory mode, recording what it would have selected without acting on it, before ever letting it actually skip tests; and keep the same fixed critical-invariant floor that the model's decision can never override, so a wrong AI judgment cannot silently remove the last line of defense.
+  key_points:
+  - >-
+    Build and continuously refresh an explicit code, component, or contract-to-test map, using coverage
+    or dependency data.
+  - >-
+    Always run a small, fixed set of critical smoke or invariant tests regardless of what selection picks.
+  - >-
+    Use historical failure and change data to prioritize and widen selection, not to justify skipping
+    tests outright.
+  - >-
+    Fall back to broader or full-suite runs when confidence in the mapping is low, new files, core-module
+    changes, sparse history.
+  - >-
+    Audit continuously by comparing selective results against periodic full runs, treating any missed
+    defect as a model bug to fix.
+  strong_signals:
+  - Proposes concrete confidence triggers that widen the selected set.
+  - Treats missed-defect audits as a hard, owned metric rather than an accepted risk.
+  - >-
+    Would evaluate an AI selector against the same full-suite ground truth in shadow mode before trusting
+    it.
+  weak_signals:
+  - Trusts a coverage map without discussing staleness.
+  - Has no always-run invariant tier as a floor.
+  red_flags:
+  - >-
+    Would let an AI-based selector skip tests in production without any shadow-mode validation or audit
+    trail.
+  - Treats faster PR feedback as sufficient justification with no missed-defect tracking.
+  common_mistakes:
+  - Never refreshing the code-to-test map as the codebase evolves.
+  - No critical-tier floor, so a wrong selection decision can skip everything.
+  - No periodic full-suite audit to catch blind spots.
+  follow_ups:
+  - question: How would you evaluate whether AI-based test selection is actually safe?
+    recommended_answer: >-
+      Run the AI selector in shadow or advisory mode against real PRs for a defined period, recording
+      what it would have selected without acting on it, then compare against actual full-suite results
+      to compute precision, selected tests that were actually relevant, and, more importantly, recall
+      or miss rate, real failures the selector would have skipped. Require the selector to expose which
+      signals drove each decision so specific misses can be root-caused, and only promote it from advisory
+      to blocking after it clears a defined miss-rate bar over a representative sample, keeping the fixed
+      critical-tier floor regardless.
+  - question: >-
+      What would cause you to widen selection to the full suite even if the model reports high confidence?
+    recommended_answer: >-
+      Changes to shared or core modules or to build and CI configuration, large or structurally unusual
+      diffs, new files with no coverage history, any recent history of the model missing a defect in a
+      similar area, or a defect escaping to production that the model would have skipped; any of these
+      should trip an automatic override to run the broader or full suite regardless of the model's own
+      confidence score.
+  role_tracks: *id001
+  years_range:
+  - 6
+  - 18
+  tags:
+  - cicd
+  - test-selection
+  - risk-based-testing
+  - coverage
+  - ai-evaluation
+  - ci
+  estimated_minutes: 7
+  references:
+  - source_id: github-actions
+    locator: >-
+      GitHub Actions documentation — path filters and conditional job execution for selective test runs
+  - source_id: dora-dev
+    locator: >-
+      DORA research program — change failure rate and lead-time trade-offs of test-selection strategies
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 180
+- id: gold-arch-006
+  domain: solution-architecture
+  subdomain: decision-records
+  title: Single framework, specialized frameworks, or a shared platform with adapters
+  level: advanced
+  priority: P1
+  frequency: common
+  question_type: framework_design
+  question: >-
+    Write the decision criteria for choosing a single shared framework, multiple specialized frameworks,
+    or a shared platform with adapters, for a test automation organization spanning multiple products.
+  concise_answer: >-
+    The choice hinges on team skills and ownership boundaries, can one team realistically support every
+    product's needs, product and channel diversity, how different are the products' technology stacks
+    and testing needs, release cadence and coupling, do teams need to move independently, and maintenance
+    and migration cost versus governance value. A shared platform with pluggable adapters can capture
+    common infrastructure, reporting, CI integration, authentication, while letting each product team
+    own its adapter, often the best balance when diversity is moderate and governance still matters. Any
+    choice should include an explicit exit strategy and measurable outcomes so the decision can be revisited
+    with evidence rather than becoming permanent by inertia.
+  recommended_answer: |-
+    A single shared framework minimizes duplication and maximizes consistency, one reporting format, one CI integration pattern, one set of conventions, but it risks becoming a lowest-common-denominator solution as products' needs diverge, and it concentrates the ability to serve many different teams' requirements in a single owning team, which can become a bottleneck. Multiple specialized frameworks per product or team maximize autonomy and fit-for-purpose design, but duplicate infrastructure, reporting, CI wiring, authentication handling, across teams, fragment best practices, and hurt cross-team mobility of engineers who must relearn a different framework at every product boundary. A shared platform with adapters aims to capture the governance and consistency benefit of a single framework while allowing the fit-for-purpose benefit of specialization: a common core, execution engine, reporting, CI integration, shared libraries, with each product owning a thin adapter for its specific technology, at the cost of a more complex core that must stay genuinely optional and pluggable rather than quietly becoming another lowest-common-denominator.
+
+    The decision criteria to score explicitly: team skills and ownership capacity, whether one team can realistically support every product's needs; degree of product and channel diversity, how different the actual testing needs are across products; required release-cadence independence, whether teams need to ship on different schedules without coordinating framework changes; current and projected maintenance cost under each option; governance and compliance needs, for example consistent reporting for a regulator or an executive dashboard; and migration cost from the current state, since a technically superior target architecture is not free to reach.
+
+    The decision itself should be documented as a lightweight decision record: context, options considered, decision, consequences, and, critically, the conditions that would trigger revisiting it, for example if the organization exceeds a certain number of products or a product's needs diverge beyond what an adapter can express.
+  key_points:
+  - >-
+    Base the choice on team skills and ownership capacity, product and channel diversity, release-cadence
+    independence, and maintenance and governance cost.
+  - >-
+    A single shared framework maximizes consistency but risks becoming a lowest-common-denominator bottleneck
+    as needs diverge.
+  - >-
+    Multiple specialized frameworks maximize fit-for-purpose autonomy but duplicate infrastructure and
+    fragment best practices.
+  - >-
+    A shared platform with pluggable adapters often balances governance and fit-for-purpose, if the core
+    stays genuinely optional.
+  - >-
+    Document the decision with explicit consequences and revisit triggers, not as a permanent, unreviewed
+    choice.
+  strong_signals:
+  - >-
+    Scores the decision against explicit criteria, skills, diversity, cadence, cost, governance, rather
+    than a general preference.
+  - >-
+    Names the lowest-common-denominator risk of a single framework and the duplication risk of fully specialized
+    frameworks.
+  - Insists on documented revisit triggers.
+  weak_signals:
+  - >-
+    Picks one option as universally 'best practice' without weighing the organization's actual diversity
+    or skills.
+  red_flags:
+  - Treats the decision as permanent with no revisit criteria.
+  - Ignores maintenance and governance cost entirely in favor of short-term convenience.
+  common_mistakes:
+  - >-
+    Adopting a shared platform whose adapter layer is so thin that every product ends up forking the core
+    anyway.
+  - >-
+    Choosing multiple specialized frameworks without a plan for shared reporting or governance, fragmenting
+    visibility for leadership.
+  - Never revisiting an old decision as the organization's product portfolio changes.
+  follow_ups:
+  - question: What evidence would trigger revisiting the architecture decision?
+    recommended_answer: >-
+      A material increase in the number or diversity of products or channels beyond what current adapters
+      can cleanly express, rising maintenance cost or duplicated defects traced to the chosen structure,
+      a governance failure such as inconsistent reporting blocking a compliance or executive need, a team-skills
+      shift from attrition or reorganization changing who can own what, or a measurable mismatch between
+      promised and actual velocity or autonomy under the current model; any of these should trigger a
+      scheduled or ad hoc re-evaluation using the same criteria as the original decision.
+  - question: What makes an architecture decision responsible rather than merely conservative?
+    recommended_answer: >-
+      A responsible decision states its trade-offs and consequences explicitly rather than presenting
+      the choice as objectively correct, prefers reversible or incrementally adoptable steps, for example
+      piloting the shared-platform adapter with one product before an organization-wide rollout, over
+      irreversible big-bang commitments, and commits to measurable outcomes and revisit triggers up front.
+      A merely conservative decision avoids risk by default without evaluating whether the status quo's
+      cost has grown to exceed the risk of changing it.
+  role_tracks:
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 8
+  - 20
+  tags:
+  - solution-architecture
+  - decision-records
+  - framework-strategy
+  - governance
+  - trade-offs
+  estimated_minutes: 7
+  references:
+  - source_id: fowler-bliki
+    locator: >-
+      martinfowler.com — architecture decision-making and trade-off articles, including reversible-decisions
+      framing
+  - source_id: dora-dev
+    locator: >-
+      DORA research program — team autonomy, ownership boundaries, and delivery performance research
+  last_verified: '2026-07-16'
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+  freshness_days: 365

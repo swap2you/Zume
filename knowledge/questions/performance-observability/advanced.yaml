@@ -1,0 +1,922 @@
+version: 1
+records:
+- id: performance-observability-a-01
+  domain: performance-observability
+  subdomain: performance-types
+  title: 'Performance Types: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for performance types that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Performance Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that performance types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your performance types approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative performance types case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - performance-types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: performance types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-02
+  domain: performance-observability
+  subdomain: workload-models
+  title: 'Workload Models: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of workload models. How would you converge
+    them safely?
+  concise_answer: Workload Models should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that workload models supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your workload models approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative workload models case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - workload-models
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: workload models
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-03
+  domain: performance-observability
+  subdomain: percentiles
+  title: 'Percentiles: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for percentiles under reliability and cost
+    constraints?
+  concise_answer: Percentiles should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Performance testing and APM/observability, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that percentiles supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your percentiles approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative percentiles case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - percentiles
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: percentiles
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-04
+  domain: performance-observability
+  subdomain: throughput-errors
+  title: 'Throughput Errors: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for throughput errors?
+  concise_answer: Throughput Errors should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that throughput errors supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your throughput errors approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative throughput errors case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - throughput-errors
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: throughput errors
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-05
+  domain: performance-observability
+  subdomain: bottlenecks
+  title: 'Bottlenecks: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of bottlenecks before users report it?
+  concise_answer: Bottlenecks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Performance testing and APM/observability, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that bottlenecks supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your bottlenecks approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative bottlenecks case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - bottlenecks
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: bottlenecks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-06
+  domain: performance-observability
+  subdomain: jmeter-gatling-k6
+  title: 'Jmeter Gatling K6: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether jmeter gatling k6 improves outcomes or only
+    activity metrics.
+  concise_answer: Jmeter Gatling K6 should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that jmeter gatling k6 supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your jmeter gatling k6 approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative jmeter gatling k6 case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - jmeter-gatling-k6
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: jmeter gatling k6
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-07
+  domain: performance-observability
+  subdomain: traces-metrics-logs
+  title: 'Traces Metrics Logs: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to traces metrics logs?
+  concise_answer: Traces Metrics Logs should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Performance testing and APM/observability,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that traces metrics logs supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your traces metrics logs approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative traces metrics logs case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - traces-metrics-logs
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: traces metrics logs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-08
+  domain: performance-observability
+  subdomain: performance-types
+  title: 'Performance Types: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What must be true before delegating decisions about performance types to automation?
+  concise_answer: Performance Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that performance types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative performance types case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - performance-types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: performance types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-09
+  domain: performance-observability
+  subdomain: workload-models
+  title: 'Workload Models: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving workload models?
+  concise_answer: Workload Models should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that workload models supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative workload models case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - workload-models
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: workload models
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-10
+  domain: performance-observability
+  subdomain: percentiles
+  title: 'Percentiles: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring percentiles?
+  concise_answer: Percentiles should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Performance testing and APM/observability, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that percentiles supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative percentiles case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - percentiles
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: percentiles
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-11
+  domain: performance-observability
+  subdomain: throughput-errors
+  title: 'Throughput Errors: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you establish ownership boundaries for throughput errors across platform and product
+    teams?
+  concise_answer: Throughput Errors should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that throughput errors supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative throughput errors case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - throughput-errors
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: throughput errors
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-12
+  domain: performance-observability
+  subdomain: bottlenecks
+  title: 'Bottlenecks: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature bottlenecks implementation?
+  concise_answer: Bottlenecks should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Performance testing and APM/observability, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that bottlenecks supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative bottlenecks case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - bottlenecks
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: bottlenecks
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-13
+  domain: performance-observability
+  subdomain: jmeter-gatling-k6
+  title: 'Jmeter Gatling K6: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you design a post-incident review focused on jmeter gatling k6 without blaming individuals?
+  concise_answer: Jmeter Gatling K6 should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that jmeter gatling k6 supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative jmeter gatling k6 case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - jmeter-gatling-k6
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: jmeter gatling k6
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-14
+  domain: performance-observability
+  subdomain: traces-metrics-logs
+  title: 'Traces Metrics Logs: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What is the minimum observability design that makes traces metrics logs auditable?
+  concise_answer: Traces Metrics Logs should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Performance testing and APM/observability,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that traces metrics logs supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative traces metrics logs case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - traces-metrics-logs
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: traces metrics logs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: performance-observability-a-15
+  domain: performance-observability
+  subdomain: performance-types
+  title: 'Performance Types: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you make performance types resilient to partial failure and degraded dependencies?
+  concise_answer: Performance Types should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Performance testing and APM/observability, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that performance types supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Performance testing and APM/observability example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative performance types case before generalizing.
+  role_tracks:
+  - Performance Engineer
+  - Quality Platform Engineer
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - performance-observability
+  - performance-types
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: opentelemetry
+    locator: performance types
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

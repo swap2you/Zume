@@ -1,0 +1,459 @@
+version: 1
+records:
+- id: gold-mobile-001
+  domain: mobile-appium
+  subdomain: appium-architecture
+  title: Appium's client-server-driver architecture and platform divergence
+  level: basic
+  priority: P0
+  frequency: common
+  question: Explain the Appium client-server-driver architecture and why Android and iOS behavior cannot be assumed identical.
+  concise_answer: A test's Appium client library sends WebDriver-protocol commands over HTTP to the Appium server, which routes
+    each command to the platform-specific driver named by the automationName capability - UiAutomator2 for Android, XCUITest
+    for iOS. Each driver is a separate project translating the same WebDriver commands into a different underlying automation
+    technology (Google's UiAutomator2 plus ADB for Android; Apple's XCUITest, which only runs inside Xcode's tooling, for
+    iOS). Because the two technologies expose different capabilities, timing behavior and element models, the same WebDriver
+    call can behave differently per platform, and platform-specific validation is not optional polish - it is required by
+    the architecture.
+  recommended_answer: 'Appium''s official architecture description centers on drivers as pluggable interfaces to a target
+    platform: the client is "your automation code," it talks WebDriver protocol to the Appium server, and the server hands
+    the session to a driver matching the requested automationName. This design deliberately does not force one automation
+    technology across platforms - it embraces that Android and iOS need fundamentally different tooling.
+
+    The UiAutomator2 driver leverages Google''s UiAutomator2 technology plus ADB and an Android helper app; it can address
+    app package/activity directly and interacts with native Android views. The XCUITest driver is architecturally split in
+    two: a Node.js part that speaks WebDriver, and an Objective-C/Swift part that must run inside Xcode''s XCUITest execution
+    mode, since XCUITest code cannot be invoked any other way. That split introduces its own coordination complexity and constraints
+    (build/signing requirements, simulator-vs-device differences) that have no Android equivalent.
+
+    Practical consequence: capability names, supported gestures, context-switching behavior, and timing/wait characteristics
+    differ by driver. A framework that assumes "if it works on Android it works on iOS" will discover the gap through failures,
+    not documentation, so platform-specific verification and platform-specific capability builders are structural requirements,
+    not optional cleanup.'
+  deep_dive: ''
+  key_points:
+  - Client sends WebDriver-protocol commands; the server routes to a platform driver.
+  - automationName selects the driver - UiAutomator2 (Android) or XCUITest (iOS).
+  - Each driver wraps a different, non-interchangeable underlying automation technology.
+  - XCUITest's Node.js/Objective-C split imposes iOS-only build and execution constraints.
+  - Platform-specific validation is required by the architecture, not an afterthought.
+  strong_signals:
+  - Names automationName as the mechanism that selects UiAutomator2 vs. XCUITest.
+  - Explains the XCUITest driver's two-part (Node.js plus Xcode-run) architecture.
+  - Concludes that platform divergence is structural, citing a concrete capability/behavior gap.
+  weak_signals:
+  - Describes Appium only as "Selenium for mobile" with no driver-routing detail.
+  - Assumes gesture/context APIs are identical across UiAutomator2 and XCUITest.
+  red_flags:
+  - Believes one Appium script runs unmodified and correctly on both platforms by default.
+  - Cannot explain what automationName does.
+  common_mistakes:
+  - Hardcoding UiAutomator2-only capabilities into a "shared" cross-platform base config.
+  - Assuming a locator strategy that works in one driver works in the other.
+  - Treating simulator/emulator behavior as equivalent to real-device behavior for both platforms.
+  follow_ups:
+  - question: Where would you isolate platform differences in a maintainable framework?
+    recommended_answer: Behind a platform adapter interface exposing business-level actions (login, add to cart), with UiAutomator2-
+      and XCUITest-specific implementations selected by configuration, mirroring the same composition-over-inheritance approach
+      used for UI/API/DB channels. Capability construction belongs in platform-specific builders, never a shared mutable capability
+      map, and any platform-conditional logic inside a test method is a signal the abstraction boundary is in the wrong place.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 2
+  - 10
+  tags:
+  - mobile-appium
+  - architecture
+  - uiautomator2
+  - xcuitest
+  - drivers
+  estimated_minutes: 5
+  references:
+  - source_id: appium-docs
+    locator: The Appium Ecosystem - drivers, clients, plugins overview
+  - source_id: appium-docs
+    locator: Intro to Appium Drivers - WebDriver-to-XCUITest/UiAutomator2 mapping
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept
+- id: gold-mobile-002
+  domain: mobile-appium
+  subdomain: capabilities-options
+  title: Capability and options management across emulators, devices and a cloud
+  level: intermediate
+  priority: P0
+  frequency: common
+  question: Design capability/options management for local emulators, real devices and a device cloud without scattering environment
+    conditionals through tests.
+  concise_answer: 'Model capabilities as typed configuration objects built by environment-specific builders (LocalEmulatorOptions,
+    RealDeviceOptions, CloudOptions), not as one mutable map with if-environment branches sprinkled through test code. Since
+    Appium 2.0, vendor and driver-specific capabilities require the appium: prefix or an appium:options object - encode that
+    structurally in the builder rather than as stringly-typed keys tests must remember. Secrets (cloud access keys) come from
+    environment/secret stores, never literals, and every builder validates its required capabilities before returning, failing
+    fast instead of producing an opaque session start error.'
+  recommended_answer: 'Appium''s capability model requires appium:automationName plus platform/app identifiers as a minimum,
+    and cloud providers layer their own vendor-namespaced capabilities ($cloud:... or provider-specific keys) on top; since
+    2.0, extension capabilities must be namespaced with appium: to avoid W3C standard-capability collisions. A maintainable
+    design encodes this as one builder per environment profile, each returning an immutable, fully validated capability set
+    - no test method should construct or mutate a capability map directly.
+
+    Structure: a common interface (e.g., SessionOptionsBuilder) with implementations per environment; each implementation
+    reads its environment-specific inputs (device farm URL and access key for cloud; local emulator AVD name for local) from
+    configuration or environment variables, builds the platform-appropriate capability object, and validates presence of required
+    fields (platformName, automationName, app or browserName/bundleId as XCUITest requires at least one) before the session
+    starts. This keeps environment selection a single factory decision at test-suite startup, not a conditional inside every
+    test.
+
+    Concurrency safety matters here too: since capability objects are immutable once built, one parallel session cannot accidentally
+    read or mutate another session''s in-flight capability map - a shared mutable capabilities map is the same defect class
+    as shared mutable driver state.'
+  deep_dive: ''
+  key_points:
+  - Typed, environment-specific capability builders replace scattered environment conditionals.
+  - 'Respect the appium: namespace requirement for extension/vendor capabilities since 2.0.'
+  - Secrets come from environment/secret stores, never hardcoded literals.
+  - Validate required capabilities in the builder and fail fast before session start.
+  - Immutable built capability objects prevent one parallel session from leaking into another's.
+  strong_signals:
+  - 'Names the appium: namespacing rule and applies it inside the builder, not the test.'
+  - Treats capability objects as immutable and built once per session.
+  - Pulls secrets from environment/secret storage explicitly.
+  weak_signals:
+  - Uses one global mutable capabilities map with environment if-checks in test code.
+  - Never validates required capabilities before attempting a session start.
+  red_flags:
+  - Hardcodes a cloud access key literal in source.
+  - 'Cannot explain why appium:options/appium: prefixes exist since Appium 2.0.'
+  common_mistakes:
+  - Copy-pasting a capability map per test file, drifting out of sync over time.
+  - Mixing local emulator AVD settings into the same object used for cloud sessions.
+  - Skipping validation, letting a missing app/bundleId surface as a confusing session-start failure.
+  follow_ups:
+  - question: How would you prevent one parallel session from inheriting another session's options?
+    recommended_answer: Build a fresh, immutable capability object per execution unit inside the composition root that also
+      creates the driver for that unit - never cache or reuse a builder's mutable intermediate state across threads. If a
+      base template is shared, copy it (Map.copyOf or a defensive clone) before customizing per session, so mutation for session
+      B can never be observed by an in-flight session A.
+  examples: []
+  code_examples:
+  - "interface SessionOptionsBuilder { Capabilities build(); }\nclass CloudOptionsBuilder implements SessionOptionsBuilder\
+    \ {\n  public Capabilities build() {\n    UiAutomator2Options opts = new UiAutomator2Options()\n      .setApp(app).setAutomationName(\"\
+    UiAutomator2\");\n    opts.setCapability(\"cloud:options\", Map.of(\"accessKey\", System.getenv(\"CLOUD_KEY\")));\n  \
+    \  return opts; // immutable once returned\n  }\n}"
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 3
+  - 12
+  tags:
+  - mobile-appium
+  - capabilities
+  - options
+  - configuration
+  - secrets
+  estimated_minutes: 6
+  references:
+  - source_id: appium-docs
+    locator: 'Session Capabilities - required/optional capabilities and appium: namespacing'
+  - source_id: appium-docs
+    locator: Install the UiAutomator2 Driver - automationName and driver selection
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design
+- id: gold-mobile-003
+  domain: mobile-appium
+  subdomain: synchronization
+  title: Synchronizing with animations and native view readiness beyond fixed sleeps
+  level: advanced
+  priority: P1
+  frequency: common
+  question: A mobile test intermittently interacts during an animation or before a native view is actionable. Design synchronization
+    beyond fixed sleeps.
+  concise_answer: 'Replace fixed sleeps with waits for the specific state the next action needs: element presence via Appium''s
+    implicit wait for find operations, and explicit WebDriverWait/ExpectedConditions polling for element-specific state such
+    as clickability or attribute values that Appium inherits from the WebDriver protocol. For animation-heavy transitions,
+    wait for the platform-observable end state (a stable attribute value, a new screen''s identifying element) rather than
+    a duration guess, and never mix implicit and explicit waits in the same flow since their interaction is officially unpredictable.
+    Context switches need their own explicit wait for the target context/view to exist before interacting.'
+  recommended_answer: 'Appium exposes the same implicit-wait mechanism as WebDriver: the server polls for an element up to
+    a configured timeout before failing, set once per session via implicitlyWait/implicit_wait. That solves "element not found
+    yet" races but not "element found but not yet actionable" races - a view mid-animation can be present in the hierarchy
+    while still moving, unclickable, or about to be replaced.
+
+    For those cases, use explicit waits with a condition that reflects app state rather than time: poll for the element''s
+    clickable/enabled state, for a specific text/attribute that only appears once a transition completes, or for a stable
+    bounding-rect (unchanged across two polls) as a practical animation-settled proxy when the platform provides no explicit
+    "animation finished" signal. Custom expected conditions are appropriate when a single built-in condition cannot express
+    the real readiness criterion (for example, "found and then successfully clicked," retried together).
+
+    Two Appium-specific wrinkles: never combine implicit and explicit waits in the same test flow - official guidance flags
+    this as producing unpredictable, hard-to-diagnose timing bugs - and context switches (native to webview) need their own
+    explicit wait for the destination context to exist and be ready before any interaction, since a context can be listed
+    before its content has finished loading.
+
+    When a failure still occurs, capture page source, a screenshot, and device logs (logcat/syslog) at the moment of failure;
+    on real devices in particular, the same wait strategy that is reliable on a fast emulator can still be too short under
+    real hardware and network variance, which is a signal to make the wait condition-based rather than to simply enlarge a
+    fixed timeout.'
+  deep_dive: ''
+  key_points:
+  - Wait for the actionable state a specific action needs, not a fixed duration.
+  - Implicit wait solves presence races; explicit waits solve actionability/animation races.
+  - Never mix implicit and explicit waits in the same flow.
+  - Context switches require their own explicit wait for destination-context readiness.
+  - Capture page source, screenshot and device logs at the point of failure.
+  strong_signals:
+  - Distinguishes "element present" from "element actionable" as separate race conditions.
+  - Explicitly avoids mixing implicit and explicit waits.
+  - Proposes a condition-based readiness signal for animations instead of a longer sleep.
+  weak_signals:
+  - Proposes only "increase the implicit wait timeout" as the fix.
+  - Uses Thread.sleep as the primary synchronization mechanism.
+  red_flags:
+  - Cannot explain why mixing implicit and explicit waits is discouraged.
+  - Treats a longer fixed sleep as a permanent fix rather than a temporary workaround.
+  common_mistakes:
+  - Fixed sleeps sized for CI-average timing that fail under real-device variance.
+  - Waiting for element presence but not for it to be clickable/enabled before interacting.
+  - Switching context without waiting for the new context's content to be ready.
+  follow_ups:
+  - question: How would you diagnose a failure that appears only on slower real devices?
+    recommended_answer: 'Compare timing evidence between the passing emulator run and the failing real-device run: device
+      logs (logcat/syslog) timestamps around the interaction, whether the same explicit-wait condition eventually became true
+      (just later), and whether the app itself performs slower cold-start/network work on that device class. If the condition-based
+      wait eventually succeeded but only after the configured timeout, the fix is a longer condition-based timeout for that
+      device tier, not a switch back to fixed sleeps; if the condition never became true, it points to an app defect specific
+      to that hardware/OS combination.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 4
+  - 14
+  tags:
+  - mobile-appium
+  - synchronization
+  - waits
+  - animations
+  - context-switching
+  estimated_minutes: 7
+  references:
+  - source_id: appium-docs
+    locator: Set Implicit Wait Timeout - session-level element-search polling
+  - source_id: selenium-dev
+    locator: 'WebDriver: waits'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: troubleshooting
+- id: gold-mobile-004
+  domain: mobile-appium
+  subdomain: device-matrix
+  title: Building a risk-based mobile device matrix
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Create a risk-based mobile device matrix across OS versions, manufacturers, screen sizes and real versus virtual
+    devices.
+  concise_answer: Anchor the matrix in production analytics (which OS versions, manufacturers and screen sizes real users
+    actually run) and the platform's support policy, not arbitrary breadth. Cover the OS-version boundaries most likely to
+    break (oldest still supported, newest/beta) and representative manufacturers whose OEM customizations diverge from stock
+    behavior (rendering, permission dialogs, notification handling). Reserve real devices for anything hardware- or system-behavior-dependent
+    (camera, biometrics, performance, battery, notifications); emulators/simulators are sufficient for most functional flows.
+    Use tiers - a small PR set, a broader nightly set, a near-exhaustive release set - so cost scales with confidence needed,
+    not with matrix size alone.
+  recommended_answer: 'Start from data: production crash/analytics data on OS version and device-model distribution, and the
+    platform''s official support policy for how far back to test. Device selection should target real coverage, not arbitrary
+    breadth - a device cloud like BrowserStack exposes tens of thousands of real Android and iOS devices and a combinations
+    API precisely so a matrix can be defined in configuration and refreshed against actual available OS/browser/device data
+    rather than hand-maintained guesses, using version-relative flags (latest, latest-1) to avoid the matrix silently going
+    stale as new OS versions ship.
+
+    Manufacturer/form-factor selection should be representative, not exhaustive: pick devices whose OEM layer (camera permission
+    flows, notification shades, gesture navigation) is known to diverge, plus at least one small-screen and one large-screen/
+    tablet form factor if the app''s layout is responsive. Real devices are reserved for anything an emulator/simulator cannot
+    faithfully reproduce - camera, biometric prompts, real cellular/network conditions, battery/performance characteristics,
+    push-notification delivery - while emulators/simulators cover the bulk of functional UI logic at far lower cost and higher
+    parallel throughput.
+
+    Cost control comes from tiering: PR runs hit a minimal high-confidence subset (one current Android, one current iOS, real
+    or virtual); nightly expands to the boundary OS versions and representative manufacturers; pre-release runs the fuller
+    matrix including real-device hardware-dependent cases. Revisit the matrix on a schedule against updated production analytics,
+    not only when something breaks.'
+  deep_dive: ''
+  key_points:
+  - Anchor coverage in production OS/device analytics and platform support policy.
+  - Cover OS-version boundaries and representative, divergence-prone manufacturers.
+  - Reserve real devices for hardware/system-behavior-dependent cases.
+  - Use version-relative flags/APIs so the matrix does not silently go stale.
+  - Tier PR, nightly and release runs so cost scales with confidence required.
+  strong_signals:
+  - Grounds matrix scope in analytics/support-policy data, not arbitrary device counts.
+  - Distinguishes what must run on real hardware from what emulators legitimately cover.
+  - Designs tiers with different scope for PR, nightly and release runs.
+  weak_signals:
+  - Chooses devices by personal familiarity rather than production data.
+  - Runs the full matrix on every PR regardless of cost or confidence needed.
+  red_flags:
+  - Uses only emulators/simulators for camera, biometrics or performance-sensitive tests.
+  - Has no process to update the matrix as OS versions and device popularity shift.
+  common_mistakes:
+  - Freezing the matrix to devices used at project kickoff, ignoring version drift.
+  - Testing exhaustively on PR builds, causing slow feedback with little added confidence.
+  - Treating "runs on an emulator" as proof of real-device readiness for hardware features.
+  follow_ups:
+  - question: What should run on every PR, nightly and before release?
+    recommended_answer: 'PR: a minimal smoke set on one current Android and one current iOS configuration, virtual devices,
+      optimized for speed. Nightly: the boundary OS versions (oldest supported, latest/beta), representative manufacturers,
+      and any previously-flaky-on-specific-hardware cases. Pre-release: the fuller matrix including real-device runs for camera/biometric/performance/notification
+      flows, since those are exactly the cases an emulator cannot faithfully validate.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 6
+  - 18
+  tags:
+  - mobile-appium
+  - device-matrix
+  - real-devices
+  - emulators
+  - risk-based-testing
+  estimated_minutes: 7
+  references:
+  - source_id: browserstack-docs
+    locator: Select browsers and devices for Selenium testing - capability reference
+  - source_id: browserstack-docs
+    locator: Get list of browsers & devices using Automate API - GET /automate/browsers.json
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-mobile-005
+  domain: mobile-appium
+  subdomain: hybrid-apps
+  title: Hybrid-app context switching and webview discovery failures
+  level: advanced
+  priority: P2
+  frequency: occasional
+  question: Explain hybrid-app context switching and common causes of webview discovery or synchronization failures.
+  concise_answer: Appium models a hybrid app as multiple contexts - NATIVE_APP plus one context per active webview - accessible
+    via getContexts/setContext. Inside a webview context, the full Selenium WebDriver API applies to the page's DOM; outside
+    it, native locator strategies apply. Webview discovery fails most often because the webview is not yet debuggable (Android's
+    setWebContentsDebuggingEnabled must be true, or an equivalent iOS Web Inspector state) or has not finished loading when
+    getContexts is called; synchronization failures happen when code holds a stale element reference or interacts immediately
+    after a switch, before the target context's content is ready.
+  recommended_answer: 'The Context API adds three WebDriver-spec-compatible commands - Get Contexts, Get Current Context,
+    Set Context - that let a driver expose multiple simultaneous execution surfaces. NATIVE_APP is always present as the default;
+    each active webview appears as its own context (WEBVIEW_1, etc.). Once switched into a webview context, findElement and
+    friends operate against that page''s DOM using standard web locator strategies, and the full Selenium WebDriver API becomes
+    available - but native-only commands stop making sense in that context and vice versa.
+
+    Discovery failures usually trace to one of: the webview not being debug-enabled (Android requires WebView.setWebContentsDebuggingEnabled(true)
+    in the app, or an equivalent iOS remote-inspector state, before Appium''s Chromedriver-backed bridge can see it); a Chromedriver
+    version mismatch with the device''s WebView/Chrome version; or calling getContexts before the webview has actually attached,
+    so it simply is not in the list yet - this looks like "Appium can''t find it" but is really a timing problem, not a discovery-mechanism
+    problem.
+
+    Synchronization failures after a successful switch usually come from acting immediately post-switch before the webview''s
+    document has finished loading - the context exists but its DOM is still empty or mid-navigation - or from reusing an element
+    handle obtained in one context after switching away and back, which is a stale reference by definition. The reliable pattern
+    is: switch, then explicitly wait for a known element/condition inside the new context before any interaction, exactly
+    as you would wait for page readiness after a plain web navigation.'
+  deep_dive: ''
+  key_points:
+  - NATIVE_APP and each active webview are distinct contexts accessed via the Context API.
+  - Full Selenium WebDriver API applies once inside a webview context.
+  - Webview must be debug-enabled and version-compatible with the bridging Chromedriver.
+  - Discovery failures are often timing (webview not yet attached), not a missing feature.
+  - Never keep or reuse element handles across a context switch; wait after switching.
+  strong_signals:
+  - Correctly separates "webview not debuggable" from "webview not yet attached" as distinct causes.
+  - Explains that stale element handles across context switches cause synchronization failures.
+  - Proposes an explicit wait for webview-content readiness immediately after switching.
+  weak_signals:
+  - Treats context switching as a single command with no readiness/versioning caveats.
+  - Cannot explain the difference between NATIVE_APP and a webview context's capabilities.
+  red_flags:
+  - Assumes a webview is automatically debuggable with no app-side configuration.
+  - Interacts immediately after switching context with no readiness wait.
+  common_mistakes:
+  - Forgetting to switch back to NATIVE_APP, leaving subsequent native steps failing silently.
+  - Ignoring Chromedriver/WebView version compatibility as a source of intermittent discovery failure.
+  - Assuming autoWebview capability removes the need for explicit context readiness waits.
+  follow_ups:
+  - question: How would you collect evidence when a webview is present manually but absent to Appium?
+    recommended_answer: Confirm the webview is actually debug-enabled in that build (not just in a debug build variant that
+      differs from the one under test), check the device's remote debugging surface directly (chrome://inspect for Android,
+      Safari's Web Inspector for iOS) to see if the OS itself lists the webview, and compare the installed Chromedriver/WebView
+      version pairing against Appium's compatibility requirements - a version mismatch is a common cause of "visible to the
+      OS, invisible to Appium."
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Mobile Automation Engineer
+  - Senior SDET
+  - Lead SDET
+  years_range:
+  - 5
+  - 16
+  tags:
+  - mobile-appium
+  - hybrid-apps
+  - webview
+  - context-switching
+  - chromedriver
+  estimated_minutes: 7
+  references:
+  - source_id: appium-docs
+    locator: Automating Hybrid Apps - entering and leaving the web view context
+  - source_id: appium-docs
+    locator: Managing Contexts - Get Contexts, Get Current Context, Set Context
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: troubleshooting

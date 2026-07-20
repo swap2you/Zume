@@ -1,0 +1,561 @@
+version: 1
+records:
+- id: gold-java-001
+  domain: java
+  subdomain: equals-hashcode
+  title: Mutable HashMap keys and the equals/hashCode contract
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: A value object is used as a HashMap key. Explain the equals/hashCode contract and what breaks when fields used
+    by that contract are mutated after insertion.
+  concise_answer: The contract requires that equal objects return equal hash codes and that hashCode stays consistent while
+    the object is unchanged. HashMap stores an entry in a bucket derived from the key's hash at insertion time. If a field
+    used by equals/hashCode is mutated afterwards, the recomputed hash points at a different bucket, so get() with an equal
+    key misses the entry even though it is still in the map. The fix is to make key state immutable (or key only on immutable
+    fields) and to test retrieval with a separate, equal instance rather than the same reference.
+  recommended_answer: 'java.lang.Object defines the contract: equals must be reflexive, symmetric, transitive and consistent,
+    and any two objects that are equal must return the same hashCode. Hash-based collections rely on both parts in sequence
+    — first the hash selects a bucket, then equals identifies the entry within it.
+
+    When a key is inserted, HashMap records it in the bucket for its current hash value. The map never re-hashes an entry
+    because a key object changed. If code later mutates a field that participates in hashCode, the logical identity of the
+    key moves but its stored bucket does not. A lookup with an equal key computes the new hash, walks the wrong bucket, and
+    returns null; containsKey reports false; the entry is effectively orphaned and can even be "re-added", creating two entries
+    that are equal to each other.
+
+    The design remedy is to make the key type immutable — final fields, no setters for identity state — or to base equals/hashCode
+    only on fields that never change (for example a database identifier assigned once). In test code, retrieval should always
+    be asserted with a newly constructed equal instance; asserting with the same reference hides exactly this defect class.'
+  deep_dive: ''
+  key_points:
+  - Equal objects must return equal hash codes.
+  - Hash collections use the hash to pick a bucket, then equals within the bucket.
+  - Mutating key fields moves the logical key without moving its stored bucket.
+  - Prefer immutable key state and test retrieval with a separate equal instance.
+  strong_signals:
+  - States both halves of the contract and the bucket-then-equals lookup sequence unprompted.
+  - Explains that the map stores the hash at insertion and never re-buckets a mutated key.
+  - Proposes immutability or identity-only keys as the structural fix, not a workaround.
+  - Mentions testing lookups with a distinct equal instance.
+  weak_signals:
+  - Recites "override both equals and hashCode" without explaining why lookups fail.
+  - Believes calling put() again "fixes" the map without recognizing the duplicate entry.
+  red_flags:
+  - Claims HashMap compares every key with equals, ignoring hashing entirely.
+  - Suggests overriding equals only, or hashCode returning a constant, as acceptable.
+  common_mistakes:
+  - Hashing on all fields of a mutable JavaBean because the IDE generated it that way.
+  - Using the same object reference in test assertions, which masks the moved-bucket defect.
+  - Assuming HashSet behaves differently from HashMap keys (it is a HashMap underneath).
+  follow_ups:
+  - question: How would records change the implementation, and what risks remain if a record contains mutable components?
+    recommended_answer: 'A record generates equals/hashCode from all components and makes the component references final,
+      which removes accidental setter mutation and boilerplate errors. The residual risk is a mutable component type: if a
+      record holds a List or a Date and code mutates that object''s content, the reference is unchanged but its hash contribution
+      changes, recreating the moved-bucket problem. The remedy is defensive copying in the canonical constructor (for example
+      List.copyOf) and choosing immutable component types.'
+  - question: Independence check — without an IDE, what would your test for this defect look like?
+    recommended_answer: 'Insert the key, mutate the identity field, then assert three things: get with an equal fresh instance
+      returns null (documents the defect), containsKey with the original reference is false, and the map size after re-put
+      is 2. A candidate who can write that sequence has actually understood the bucket mechanics rather than memorized the
+      rule.'
+  examples:
+  - An Employee(id, department) key hashed on both fields is inserted, then employee.setDepartment("QA") runs. map.get(new
+    Employee(7, "QA")) computes the new hash, checks the wrong bucket and returns null, while the stale entry still occupies
+    the old bucket.
+  code_examples:
+  - 'Map<Employee, Badge> badges = new HashMap<>();
+
+    Employee e = new Employee(7, "Engineering");
+
+    badges.put(e, badge);
+
+    e.setDepartment("QA");                    // field participates in hashCode
+
+    badges.get(new Employee(7, "QA"));        // null — new hash, wrong bucket
+
+    badges.containsKey(e);                    // false — same reference, new hash'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 4
+  - 15
+  tags:
+  - java
+  - hashmap
+  - equals
+  - hashcode
+  - immutability
+  - collections
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: java.lang.Object API — equals(Object) and hashCode() general contracts
+  - source_id: java-dev
+    locator: dev.java Learn — Using Objects and Records (equals/hashCode guidance)
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept
+- id: gold-java-002
+  domain: java
+  subdomain: collections
+  title: Choosing collections by semantics, not habit
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question: Choose collections for ordered input with duplicates, keyed lookup, and concurrent updates. Explain the trade-offs
+    rather than naming one universal collection.
+  concise_answer: 'Each requirement maps to different semantics. Ordered input with duplicates is a List (ArrayList for random
+    access, ArrayDeque for queue-like use). Keyed lookup is a Map — LinkedHashMap when insertion order must be observable,
+    TreeMap for sorted keys. Concurrent updates need ConcurrentHashMap or immutable snapshots handed between threads. The
+    trap is choosing one "safe" structure for everything: a synchronized map still does not make check-then-act sequences
+    atomic, and ordering, duplicate policy and iteration cost differ per type.'
+  recommended_answer: 'The disciplined approach is to write down the semantic requirements first: does order matter and which
+    order (insertion, sorted, access)? Are duplicates legal? Is lookup by key or by position? Who mutates it and from how
+    many threads? Then map requirements to types: ArrayList preserves insertion order and duplicates with O(1) positional
+    access; LinkedHashMap gives keyed lookup with deterministic iteration, which matters for reproducible test output; TreeMap
+    trades O(log n) operations for sorted traversal; ConcurrentHashMap provides lock-striped thread-safe access and atomic
+    compute/merge methods.
+
+    The critical trade-off to articulate is that a thread-safe collection does not make compound operations atomic. `if (!map.containsKey(k))
+    map.put(k, v)` is a race even on ConcurrentHashMap; the atomic form is putIfAbsent or computeIfAbsent. Similarly, iterating
+    while another thread mutates has different contracts: ConcurrentHashMap iterators are weakly consistent, while Collections.synchronizedMap
+    iteration must be manually synchronized or it throws ConcurrentModificationException.
+
+    In automation frameworks, a common pattern is to build results concurrently in a ConcurrentHashMap, then expose an immutable
+    snapshot (Map.copyOf) to reporting code, which makes ownership and mutation boundaries explicit.'
+  deep_dive: ''
+  key_points:
+  - Model sequence and keyed lookup as separate requirements.
+  - ArrayList, LinkedHashMap, ConcurrentHashMap and immutable snapshots serve different semantics.
+  - Define duplicate-key and ordering behavior explicitly.
+  - Thread safety of a collection does not make compound operations atomic.
+  strong_signals:
+  - Asks about ordering, duplicates and mutation ownership before naming a type.
+  - Distinguishes weakly consistent iteration from fail-fast iteration.
+  - Names putIfAbsent/computeIfAbsent as the atomic forms of check-then-act.
+  weak_signals:
+  - Defaults to HashMap/ArrayList for everything and reasons only about "speed".
+  - Says "use synchronized" without identifying which compound operation is racy.
+  red_flags:
+  - Claims ConcurrentHashMap makes any sequence of calls on it thread-safe.
+  - Cannot explain why LinkedHashMap iteration order matters for reproducible tests.
+  common_mistakes:
+  - Using Vector or Hashtable in new code because they are "thread-safe".
+  - Sorting a HashMap's entrySet on every access instead of choosing TreeMap.
+  - Sharing a mutable collection between test threads and the reporter without a snapshot.
+  follow_ups:
+  - question: Show how you would make a read-modify-write operation atomic without locking the entire application.
+    recommended_answer: 'Use the collection''s atomic primitives: compute(key, fn) applies the mutation under the map''s internal
+      fine-grained locking; merge(key, delta, Long::sum) is the atomic counter idiom. For multi-key invariants that a single
+      map method cannot cover, confine the state to one owner thread or guard just that state with a dedicated small lock
+      object — never the whole service. AtomicReference with a compare-and-set loop is the lock-free alternative for single-reference
+      state.'
+  examples: []
+  code_examples:
+  - '// Race even on a concurrent map:
+
+    if (!results.containsKey(testId)) { results.put(testId, outcome); }
+
+    // Atomic equivalents:
+
+    results.putIfAbsent(testId, outcome);
+
+    results.computeIfAbsent(testId, id -> expensiveOutcome(id));'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 4
+  - 15
+  tags:
+  - java
+  - collections
+  - concurrenthashmap
+  - thread-safety
+  - atomicity
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: java.util.concurrent.ConcurrentHashMap API — memory consistency and atomic compute methods
+  - source_id: java-dev
+    locator: dev.java Learn — The Collections Framework track
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: compare_contrast
+- id: gold-java-003
+  domain: java
+  subdomain: exceptions
+  title: Exception translation boundaries in automation frameworks
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Where should an automation framework translate low-level exceptions into domain-specific failures, and what information
+    must be preserved?
+  concise_answer: 'Translation belongs at ownership boundaries — where a layer stops being responsible for the mechanics and
+    starts reporting meaning: the HTTP client wrapper, the page or component object, the database access helper. Each translation
+    must wrap, not replace, the original: keep the cause chain, the operation being attempted, the identifying input (request
+    ID, locator, SQL statement key) and environment evidence. The failure taxonomy should distinguish assertion failures,
+    infrastructure failures, test-data failures and programming defects, because each routes to a different owner.'
+  recommended_answer: 'A useful rule: translate an exception exactly once, at the boundary where the abstraction changes.
+    Inside a REST client adapter, an IOException or a 503 becomes an InfrastructureFailure("payments API unreachable", cause)
+    carrying method, URL, correlation ID and elapsed time. Inside a page component, a NoSuchElementException becomes a UiStateFailure
+    naming the intended user action and the awaited condition. Above that boundary, code reasons in domain vocabulary only.
+
+    What must be preserved: the complete cause chain (initCause/constructor cause — never log-and-swallow), the operation
+    identity, the specific inputs needed to reproduce (sanitized), and the environment evidence a triager needs — screenshot
+    reference, response body location, host/build identifiers. What must be avoided: broad `catch (Exception e) { log(e);
+    }` blocks that convert every failure class into a passed-over log line, and rethrowing raw driver exceptions to the test
+    layer where they read as noise.
+
+    Classifying failures into assertion (product defect candidate), infrastructure, test-data and framework-defect categories
+    is what lets reporting route each failure to the right owner rather than a single triage queue.'
+  deep_dive: ''
+  key_points:
+  - Translate at an ownership boundary, exactly once.
+  - Preserve original cause, operation, input identity and environment evidence.
+  - Avoid broad catch-and-log patterns.
+  - Distinguish assertion, infrastructure, test-data and programming-defect failures.
+  strong_signals:
+  - Names concrete boundaries (client adapter, page object, data helper) rather than "everywhere".
+  - Insists on cause-chain preservation and gives the constructor-cause idiom.
+  - Connects the failure taxonomy to triage ownership and reporting.
+  weak_signals:
+  - Talks only about checked-versus-unchecked without addressing where translation happens.
+  - Preserves the message but discards the cause and stack.
+  red_flags:
+  - Advocates catching Throwable centrally so the suite "never crashes".
+  - Cannot explain the difference between a test failure and a framework defect.
+  common_mistakes:
+  - Double-translating so the report shows three nested wrappers with the same text.
+  - Losing the response body or SQL key that would have made the failure reproducible.
+  - Encoding retry decisions in string-matching on exception messages.
+  follow_ups:
+  - question: How should retryable failures differ from non-retryable failures in the exception model?
+    recommended_answer: 'Retryability is a property of the failure type, not of a message. Model it explicitly — an interface
+      or a field on the framework''s failure hierarchy — set at translation time where context is known: a connection reset
+      or a 503 with Retry-After is retryable; an assertion failure or a 400 contract violation is not. The retry executor
+      then consults the type, honors bounded attempts and backoff, and records every retry in the result so the report shows
+      first-failure evidence and retry count instead of silently absorbing them.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 5
+  - 15
+  tags:
+  - java
+  - exceptions
+  - framework-design
+  - failure-triage
+  - cause-chain
+  estimated_minutes: 6
+  references:
+  - source_id: java-oracle-docs
+    locator: java.lang.Throwable API — cause chains and chained exception facility
+  - source_id: java-dev
+    locator: dev.java Learn — Exceptions (throwing, chaining and wrapping)
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design
+- id: gold-java-004
+  domain: java
+  subdomain: streams-lambdas
+  title: Deciding when a Stream pipeline should stay
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: A Stream pipeline is concise but difficult to debug and performs side effects. How would you decide whether to
+    keep it, refactor it, or replace it with an explicit loop?
+  concise_answer: 'Keep a stream when it is a pure transformation — map/filter/collect over a source with no side effects
+    — because intent is declarative and testable. Refactor when the pipeline mixes transformation with side effects (forEach
+    mutating external state, peek used for logic) by extracting named methods or moving accumulation into a collector. Replace
+    with a loop when control flow dominates: early exits with complex conditions, checked exceptions, index-coupled logic,
+    or when debugging visibility matters more than concision. Parallel streams need measured evidence, never assumption.'
+  recommended_answer: 'The Stream API''s contract assumes behavioral parameters are non-interfering and mostly stateless;
+    side effects inside map/filter are explicitly discouraged by the java.util.stream package documentation. That gives an
+    objective test: if removing the side effect breaks the pipeline''s result, the code is a loop wearing stream syntax.
+
+    Decision criteria in review: (1) Purity — pure transformations stay; side-effecting pipelines get refactored so mutation
+    happens in the terminal operation or, better, in a Collector. (2) Readability — a pipeline whose lambdas exceed a few
+    lines should have them extracted to named private methods so the pipeline reads as a sentence. (3) Debuggability — if
+    developers routinely need breakpoints inside the pipeline, an explicit loop with local variables is more honest. (4) Exceptions
+    — checked exceptions inside lambdas force wrappers that obscure intent; loops handle them naturally. (5) Performance —
+    parallelStream() changes ordering guarantees, uses the common ForkJoinPool, and only pays for large, CPU-bound, splittable
+    workloads; switching it on without a measurement is a defect, not an optimization.'
+  deep_dive: ''
+  key_points:
+  - Streams suit declarative transformations.
+  - Side effects and hidden mutable state make pipelines fragile.
+  - Readability and observability outweigh line-count reduction.
+  - Parallel streams require evidence, not assumption.
+  strong_signals:
+  - Uses the non-interference/statelessness contract as the review criterion.
+  - Extracts lambdas to named methods before abandoning the pipeline.
+  - States concrete conditions under which parallelStream is even a candidate.
+  weak_signals:
+  - Argues purely on style preference ("streams are modern") without behavioral criteria.
+  - Treats peek as a legitimate place for business logic.
+  red_flags:
+  - Unaware that side effects in intermediate operations are contract violations.
+  - Would parallelize by default "because more threads are faster".
+  common_mistakes:
+  - Collecting to a list only to iterate it again immediately with a loop.
+  - Using forEach with external mutation instead of collect/reduce.
+  - Ignoring that streams cannot be reused after a terminal operation.
+  follow_ups:
+  - question: What specific risks appear when the same pipeline is changed to parallelStream()?
+    recommended_answer: 'Interference and ordering: side-effecting lambdas now race on shared state; forEach loses encounter
+      order (forEachOrdered restores it at a cost); non-associative reductions produce wrong results silently. Operationally,
+      the work runs on the shared common ForkJoinPool, so a blocking call inside the pipeline can starve every other parallel
+      stream in the JVM. Ordering-dependent collectors, stateful lambdas and small workloads typically make the parallel version
+      slower, so the change requires a benchmark and a review of every lambda for shared state.'
+  examples: []
+  code_examples:
+  - '// Fragile: side effect inside map, shared list mutation
+
+    List<Result> out = new ArrayList<>();
+
+    ids.stream().map(id -> { out.add(fetch(id)); return id; }).count();
+
+    // Honest equivalent:
+
+    List<Result> out = ids.stream().map(this::fetch).collect(Collectors.toList());'
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 4
+  - 15
+  tags:
+  - java
+  - streams
+  - lambdas
+  - refactoring
+  - parallelism
+  - code-review
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: java.util.stream package documentation — non-interference, statelessness and side-effects
+  - source_id: java-dev
+    locator: dev.java Learn — The Stream API (processing data in memory)
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: code_review
+- id: gold-java-005
+  domain: java
+  subdomain: concurrency
+  title: Wrong driver/data in parallel tests — ownership diagnosis
+  level: advanced
+  priority: P1
+  frequency: common
+  question: A parallel test framework occasionally assigns the wrong driver and test data to a test. Diagnose the likely concurrency
+    design errors and propose a safer ownership model.
+  concise_answer: 'The classic causes are shared static mutable state — a static WebDriver field or a singleton "TestContext"
+    written by every thread — and ThreadLocal used without cleanup or across thread handoffs. The safer model is explicit
+    per-test ownership: the execution unit (test instance or fixture) creates or receives its own driver and data context
+    as immutable references, passes them explicitly, and tears them down in a finally/fixture hook. Logs must carry test ID
+    and thread identity so any future cross-contamination is observable rather than mysterious.'
+  recommended_answer: 'Diagnosis starts from the symptom: "occasionally wrong assignment" means state is keyed on something
+    with wider scope than the test. The usual suspects, in order: (1) static mutable fields (static driver, static current-user)
+    that every thread writes; (2) a ThreadLocal that is populated in a listener but never removed, so a pooled worker thread
+    reuses the previous test''s driver when the framework reuses threads; (3) async callbacks or parallel data providers that
+    run continuation work on a different thread than the one that owns the ThreadLocal; (4) test-instance sharing, e.g. one
+    class instance running methods in parallel with instance fields.
+
+    The ownership model that removes the class of defects: create driver and data in the narrowest scope that needs them,
+    hold them in effectively final locals or final fields of a per-test object, inject them explicitly into collaborators
+    (page objects take the driver in the constructor), and guarantee cleanup in the same scope that created them. Configuration
+    should be immutable snapshots, so no thread can observe a half-updated capability set. If ThreadLocal remains (it is legitimate
+    for per-thread caches), pair every set() with remove() in a finally block and never assume it crosses an async boundary.
+
+    Finally, make contamination detectable: correlation IDs per test, thread name and session ID in every log line, and an
+    assertion at test start that the context is empty. That converts a heisenbug into a deterministic failure.'
+  deep_dive: ''
+  key_points:
+  - Shared static mutable state is a primary suspect.
+  - Use per-test/per-thread scoped context carefully.
+  - ThreadLocal requires cleanup and does not survive async handoff automatically.
+  - Prefer explicit ownership and immutable configuration.
+  - Capture correlation IDs and thread/test identity in logs.
+  strong_signals:
+  - Immediately asks how drivers and context are scoped and who writes them.
+  - Knows thread pools reuse threads, making stale ThreadLocals a contamination vector.
+  - Proposes constructor injection of the driver into page objects over static access.
+  weak_signals:
+  - Proposes "add synchronized" without identifying the shared state.
+  - Treats ThreadLocal as a magic fix without a cleanup story.
+  red_flags:
+  - Wants to serialize the whole suite as the permanent fix.
+  - Cannot explain why a listener-populated ThreadLocal leaks across tests.
+  common_mistakes:
+  - Static driver field "for convenience" in a base test class.
+  - ThreadLocal.set without remove in frameworks that pool threads.
+  - Mutable global capability maps mutated per test.
+  follow_ups:
+  - question: How would virtual threads affect this design, and which ThreadLocal assumptions would you re-evaluate?
+    recommended_answer: 'Virtual threads (JEP 444) make thread-per-test cheap, which strengthens the one-owner-per-thread
+      model: no pooling means no stale ThreadLocal reuse. But ThreadLocal becomes costlier and more error-prone at millions
+      of threads, and thread identity is no longer a stable correlation key across a task''s lifetime if work moves between
+      virtual threads. The re-evaluation: prefer explicit context passing or scoped values (JEP 506 finalized scoped values
+      in JDK 25) over ThreadLocal, and verify third-party pooling assumptions — pinning and synchronized-block behavior —
+      with measurements on the actual JDK version.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 6
+  - 18
+  tags:
+  - java
+  - concurrency
+  - threadlocal
+  - parallel-execution
+  - virtual-threads
+  - ownership
+  estimated_minutes: 7
+  references:
+  - source_id: java-oracle-docs
+    locator: java.lang.ThreadLocal API — per-thread values and remove() lifecycle
+  - source_id: openjdk-jep
+    locator: JEP 444 Virtual Threads — ThreadLocal guidance and thread identity notes
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: troubleshooting
+- id: gold-java-006
+  domain: java
+  subdomain: jvm-memory-gc
+  title: Separating leaks from retention in a slowing regression suite
+  level: advanced
+  priority: P2
+  frequency: occasional
+  question: A long regression suite slows over time and eventually fails with memory pressure. Explain how you would separate
+    a real application leak, test-framework retention, browser-process growth and normal GC behavior.
+  concise_answer: 'Instrument first: collect JVM heap and GC metrics, OS-level process memory for the test JVM and every browser/driver
+    process, over the suite''s lifetime. A real application leak shows monotonic old-generation growth in the application
+    JVM after full GCs; test-framework retention shows the same curve in the test JVM, usually dominated by listeners, screenshots,
+    response bodies or static caches in a heap dump; browser growth appears in chrome/driver RSS while both JVMs stay flat;
+    normal GC shows a sawtooth that returns to a stable floor. The heap dump''s dominator tree distinguishes the second case
+    precisely.'
+  recommended_answer: 'The mistake to avoid is concluding "memory leak" from wall-clock slowdown alone. The investigation:
+    (1) Trend the data — enable GC logging (-Xlog:gc*) and record heap-after-full-GC over time. A flat post-GC floor with
+    rising pause frequency is a throughput problem, not a leak. A rising floor is retention. (2) Attribute the process — suites
+    commonly conflate the test JVM, the application under test and a fleet of browser processes. Per-process RSS over time
+    tells you which one grows. (3) For JVM retention, take two heap dumps far apart and compare dominators: typical test-framework
+    culprits are result listeners accumulating every response body, screenshot byte arrays referenced by report objects, static
+    Map caches keyed by test ID that are never cleared, and ThreadLocals holding drivers after their test ended. (4) Browser
+    growth means sessions are not truly quit (driver.quit versus close), or a single long-lived session accumulates tabs/service
+    workers; recycling sessions every N tests bounds it. (5) Only after attribution do you tune GC or raise heap — raising
+    -Xmx to hide framework retention just delays the failure and lengthens pauses.'
+  deep_dive: ''
+  key_points:
+  - Collect heap, process and browser metrics over time before hypothesizing.
+  - Inspect dominators and retained references in comparative heap dumps.
+  - Check listeners, screenshots, response bodies, static caches and ThreadLocal cleanup.
+  - Correlate GC pauses with throughput rather than assuming GC is the root cause.
+  strong_signals:
+  - Separates the three process families (test JVM, app JVM, browsers) before analysis.
+  - Uses heap-after-full-GC trend, not instantaneous usage, as the leak criterion.
+  - Names concrete framework retention culprits from experience.
+  weak_signals:
+  - First move is raising -Xmx or forcing System.gc().
+  - Talks about GC algorithms without any attribution methodology.
+  red_flags:
+  - Cannot distinguish a leak from normal sawtooth heap behavior.
+  - Blames "Selenium being leaky" with no process-level evidence.
+  common_mistakes:
+  - Reading Task Manager totals instead of per-process trends.
+  - Keeping every screenshot in memory until suite end for the report.
+  - Never calling driver.quit in failure paths, leaking browser processes.
+  follow_ups:
+  - question: Which artifacts would you capture in CI before increasing heap size?
+    recommended_answer: GC logs for the full run, heap-after-full-GC trend extracted into the report, two heap dumps (mid-run
+      and near-failure, HeapDumpOnOutOfMemoryError as the safety net), per-process RSS samples for JVMs and browsers, thread
+      dump at peak, and the count of live driver sessions versus completed tests. With those, the "raise heap" decision becomes
+      a reviewable engineering change instead of a guess — and most of the time the dominator tree makes it unnecessary.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 7
+  - 18
+  tags:
+  - java
+  - jvm
+  - memory
+  - gc
+  - heap-dump
+  - leak-diagnosis
+  - ci
+  estimated_minutes: 7
+  references:
+  - source_id: java-oracle-docs
+    locator: Java Platform troubleshooting guide — memory leaks, GC logging and heap dump analysis
+  - source_id: openjdk-jep
+    locator: JEP 271 Unified GC Logging — -Xlog:gc* usage
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: troubleshooting

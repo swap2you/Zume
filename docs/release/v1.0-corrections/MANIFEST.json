@@ -1,0 +1,17 @@
+[
+  {
+    "file": "Zume_1_0_Clean_Room_Validation_Prompt_v2.md",
+    "bytes": 4537,
+    "sha256": "2d6e683662deb9f072d413c20eef26cbffb75a231a1808b1bce21a59b4b8587e"
+  },
+  {
+    "file": "Zume_1_0_Independent_Release_Audit.md",
+    "bytes": 11973,
+    "sha256": "f59dcf3c15926d79d017279984621530d1ae422feb79f97a9ddbb80c969227a5"
+  },
+  {
+    "file": "Zume_1_0_Release_Candidate_Correction_Prompt.md",
+    "bytes": 16308,
+    "sha256": "c2423f5f642a15608fe154dd1a9d3575f7421a350921e760811a4cca6fab662f"
+  }
+]

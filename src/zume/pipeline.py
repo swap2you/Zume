@@ -259,10 +259,88 @@ def _build_kit(exercise_cfg, question_areas, result, candidate,
         with Storage(root) as storage:
             cid = storage.upsert_candidate(candidate)
             storage.record_exercise_assignments(cid, kit.exercises)
-        return kit
+        return _enrich_kit_from_knowledge(root, kit, result, candidate, rotate=rotate_exercises)
     # Preserve the exact prior assignment on normal reruns (idempotent).
-    return iv.build_kit(exercise_cfg, result, override_reason=effective_override,
-                        question_areas=question_areas, preassigned_ids=preassigned)
+    kit = iv.build_kit(exercise_cfg, result, override_reason=effective_override,
+                       question_areas=question_areas, preassigned_ids=preassigned)
+    return _enrich_kit_from_knowledge(root, kit, result, candidate, rotate=False)
+
+
+def _enrich_kit_from_knowledge(root, kit, result, candidate, *, rotate: bool):
+    """Overlay compact knowledge-library selections without changing deliverable names."""
+    knowledge_root = root / "knowledge"
+    if not (knowledge_root / "questions").exists():
+        return kit
+    try:
+        from zume.knowledge.loader import load_all_exercises, load_all_questions
+        from zume.knowledge.selection import select_interview_plan
+        from zume.models import GuideFollowUp, GuideQuestion, KnockoutItem
+    except Exception:  # noqa: BLE001
+        return kit
+
+    prior_q = getattr(candidate, "assigned_question_ids", None) or []
+    resume_bits = [result.candidate_name]
+    for item in result.evidence:
+        resume_bits.append(f"{item.label} {item.level.value}")
+    resume_bits.extend(result.validation_questions)
+    plan = select_interview_plan(
+        load_all_questions(knowledge_root),
+        load_all_exercises(knowledge_root),
+        resume_text="\n".join(resume_bits),
+        previous_question_ids=prior_q,
+        previous_exercise_ids=getattr(candidate, "assigned_exercise_ids", None) or [],
+        rotate=bool(rotate) or not prior_q,
+        config_root=root,
+    )
+    # A partial/unreviewed selection must never replace the established library kit.
+    if len(plan.get("question_ids") or []) < 6 or not plan.get("knockout_question_ids"):
+        return kit
+    # Persist IDs (not copied question bodies) for reproducibility.
+    candidate.assigned_question_ids = list(plan.get("question_ids") or [])
+    candidate.assigned_exercise_ids = list(plan.get("exercise_ids") or [])
+
+    knockout_items: list = []
+    sections: dict[str, list] = {}
+    for raw in plan.get("questions") or []:
+        fu = [
+            GuideFollowUp(question=f.get("question", ""), recommended_answer=f.get("recommended_answer", ""))
+            for f in (raw.get("follow_ups") or [])
+            if isinstance(f, dict)
+        ]
+        gq = GuideQuestion(
+            id=raw["id"],
+            area=raw.get("domain", ""),
+            area_label=str(raw.get("domain", "")).replace("-", " ").title(),
+            level=raw.get("level", "basic"),
+            question=raw.get("question", ""),
+            recommended_answer=raw.get("recommended_answer", ""),
+            key_points=list(raw.get("key_points") or []),
+            strong_signals=list(raw.get("strong_signals") or []),
+            weak_signals=list(raw.get("weak_signals") or []),
+            red_flags=list(raw.get("red_flags") or []),
+            follow_ups=fu,
+            time_minutes=int(raw.get("estimated_minutes") or 4),
+        )
+        if raw.get("id") in (plan.get("knockout_question_ids") or []) or raw.get("priority") == "P0":
+            if len(knockout_items) < 6:
+                knockout_items.append(
+                    KnockoutItem(
+                        area_label=gq.area_label,
+                        question=gq.question,
+                        recommended_answer=gq.recommended_answer,
+                        strong_indicator="; ".join(gq.strong_signals[:2]),
+                        weak_indicator="; ".join(gq.weak_signals[:2]),
+                    )
+                )
+        sections.setdefault(gq.area_label, []).append(gq)
+
+    if knockout_items:
+        kit.knockout = knockout_items
+    if sections:
+        # Keep guide compact: at most 3 questions per section, 8 sections.
+        compact = {k: v[:3] for k, v in list(sections.items())[:8]}
+        kit.question_sections = compact
+    return kit
 
 
 def run_finalize(root: Path, candidate_ref: str, notes: str,
@@ -308,9 +386,20 @@ def run_finalize(root: Path, candidate_ref: str, notes: str,
 
 
 def _read_arg(value: str | None) -> str | None:
+    """Return file contents when ``value`` is an existing path; else treat as literal text.
+
+    Long interview-note strings must never be probed as filesystem paths on platforms
+    that raise ``OSError`` for over-long names (Linux ENAMETOOLONG).
+    """
     if value is None:
         return None
+    # Heuristic: obvious multi-line / very long payloads are never file paths.
+    if "\n" in value or len(value) > 240:
+        return value
     path = Path(value)
-    if path.exists() and path.is_file():
-        return path.read_text(encoding="utf-8", errors="replace")
+    try:
+        if path.exists() and path.is_file():
+            return path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return value
     return value

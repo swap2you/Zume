@@ -1,0 +1,1457 @@
+version: 1
+records:
+- id: framework-architecture-b-01
+  domain: framework-architecture
+  subdomain: layers
+  title: 'Layers: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does layers address, and what is its practical boundary?
+  concise_answer: Layers should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that layers supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your layers approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative layers case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - layers
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: layers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-02
+  domain: framework-architecture
+  subdomain: factories
+  title: 'Factories: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Explain factories to a teammate who must use it safely tomorrow.
+  concise_answer: Factories should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that factories supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your factories approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative factories case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - factories
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: factories
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-03
+  domain: framework-architecture
+  subdomain: configuration
+  title: 'Configuration: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What would you check first before relying on configuration in a test or delivery workflow?
+  concise_answer: Configuration should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that configuration supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your configuration approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative configuration case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - configuration
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: configuration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-04
+  domain: framework-architecture
+  subdomain: dependency-injection
+  title: 'Dependency Injection: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: Give a small example of dependency injection and state the observable outcome.
+  concise_answer: Dependency Injection should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Automation framework architecture, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency injection supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your dependency injection approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative dependency injection case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - dependency-injection
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: dependency injection
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-05
+  domain: framework-architecture
+  subdomain: data-management
+  title: 'Data Management: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Which assumption about data management most often causes an avoidable defect?
+  concise_answer: Data Management should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data management supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your data management approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative data management case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - data-management
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: data management
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-06
+  domain: framework-architecture
+  subdomain: objects
+  title: 'Objects: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How would you recognize that objects is being used for the wrong purpose?
+  concise_answer: Objects should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that objects supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your objects approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative objects case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - objects
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: objects
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-07
+  domain: framework-architecture
+  subdomain: cross-channel-integration
+  title: 'Cross Channel Integration: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What information must be known before choosing cross channel integration?
+  concise_answer: Cross Channel Integration should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In Automation framework architecture, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cross channel integration supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your cross channel integration approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative cross channel integration case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - cross-channel-integration
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: cross channel integration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-08
+  domain: framework-architecture
+  subdomain: logging-reporting
+  title: 'Logging Reporting: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What is the simplest useful validation for logging reporting?
+  concise_answer: Logging Reporting should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that logging reporting supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your logging reporting approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative logging reporting case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - logging-reporting
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: logging reporting
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-09
+  domain: framework-architecture
+  subdomain: retries
+  title: 'Retries: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: Compare a sound use of retries with a superficially similar but unsafe use.
+  concise_answer: Retries should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that retries supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your retries approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative retries case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - retries
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: retries
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-10
+  domain: framework-architecture
+  subdomain: parallelism
+  title: 'Parallelism: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What should a concise team convention say about parallelism?
+  concise_answer: Parallelism should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parallelism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your parallelism approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative parallelism case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - parallelism
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: parallelism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-11
+  domain: framework-architecture
+  subdomain: environments
+  title: 'Environments: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: How does environments affect the reliability of a routine automated check?
+  concise_answer: Environments should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that environments supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your environments approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative environments case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - environments
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: environments
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-12
+  domain: framework-architecture
+  subdomain: extensibility
+  title: 'Extensibility: basic decision'
+  level: basic
+  priority: P1
+  frequency: common
+  question: What evidence would make you trust a result produced through extensibility?
+  concise_answer: Extensibility should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that extensibility supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your extensibility approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative extensibility case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - extensibility
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: extensibility
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-13
+  domain: framework-architecture
+  subdomain: packaging
+  title: 'Packaging: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What failure mode should be made visible when introducing packaging?
+  concise_answer: Packaging should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that packaging supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative packaging case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - packaging
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: packaging
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-14
+  domain: framework-architecture
+  subdomain: testability
+  title: 'Testability: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you explain the trade-off behind testability without relying on jargon?
+  concise_answer: Testability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that testability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative testability case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - testability
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: testability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-15
+  domain: framework-architecture
+  subdomain: governance
+  title: 'Governance: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Which input or precondition matters most for governance?
+  concise_answer: Governance should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that governance supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative governance case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - governance
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: governance
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-16
+  domain: framework-architecture
+  subdomain: migration
+  title: 'Migration: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: When should a team stop and clarify the intended use of migration?
+  concise_answer: Migration should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that migration supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative migration case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - migration
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: migration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-17
+  domain: framework-architecture
+  subdomain: maintenance-cost
+  title: 'Maintenance Cost: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What would a useful acceptance criterion for maintenance cost look like?
+  concise_answer: Maintenance Cost should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that maintenance cost supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative maintenance cost case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - maintenance-cost
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: maintenance cost
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-18
+  domain: framework-architecture
+  subdomain: layers
+  title: 'Layers: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you test the negative path around layers?
+  concise_answer: Layers should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that layers supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative layers case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - layers
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: layers
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-19
+  domain: framework-architecture
+  subdomain: factories
+  title: 'Factories: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What is a reasonable first diagnostic when factories behaves unexpectedly?
+  concise_answer: Factories should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that factories supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative factories case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - factories
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: factories
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-20
+  domain: framework-architecture
+  subdomain: configuration
+  title: 'Configuration: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How can a team avoid turning configuration into a brittle convention?
+  concise_answer: Configuration should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that configuration supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative configuration case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - configuration
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: configuration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-21
+  domain: framework-architecture
+  subdomain: dependency-injection
+  title: 'Dependency Injection: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Which outcome would show that dependency injection has delivered value?
+  concise_answer: Dependency Injection should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In Automation framework architecture, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency injection supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative dependency injection case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - dependency-injection
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: dependency injection
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-22
+  domain: framework-architecture
+  subdomain: data-management
+  title: 'Data Management: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What should be documented about data management for the next maintainer?
+  concise_answer: Data Management should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Automation framework architecture, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that data management supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative data management case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - data-management
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: data management
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-23
+  domain: framework-architecture
+  subdomain: objects
+  title: 'Objects: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: How would you make objects understandable in a code review?
+  concise_answer: Objects should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Automation framework architecture, validate both the intended
+    result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that objects supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative objects case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - objects
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: objects
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: framework-architecture-b-24
+  domain: framework-architecture
+  subdomain: cross-channel-integration
+  title: 'Cross Channel Integration: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What is a common scope mistake when applying cross channel integration?
+  concise_answer: Cross Channel Integration should be applied to a stated outcome, observable evidence,
+    and known constraints; using it as a ritual is not enough. In Automation framework architecture, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that cross channel integration supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete Automation framework architecture example, competing constraints, and
+    evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative cross channel integration case before generalizing.
+  role_tracks:
+  - Lead SDET
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Quality Platform Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - framework-architecture
+  - cross-channel-integration
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: selenium-dev
+    locator: cross channel integration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

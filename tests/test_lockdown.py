@@ -244,6 +244,8 @@ def test_all_drafts_include_timezone_and_platform(tmp_root: Path):
     drafts = sched.build_communication_drafts(record)
     kinds = {d.kind for d in drafts}
     assert {"join", "reschedule", "cancel", "no-show"} <= kinds
+    join = next(d for d in drafts if d.kind == "join")
+    assert join.subject == "Interview Confirmation – Aarav Mehta"
     for draft in drafts:
         assert "America/New_York" in draft.body
         assert "DRAFT — schedule is NOT confirmed" not in draft.body
@@ -254,6 +256,12 @@ def test_unconfirmed_schedule_is_not_presented_as_confirmed():
         "Aarav Mehta", None, "Date: 2026-07-20\nTime: 10:00 AM", today=date(2026, 7, 1))
     assert record.needs_confirmation
     drafts = sched.build_communication_drafts(record)
+    join = next(d for d in drafts if d.kind == "join")
+    assert join.subject == "Proposed Interview Schedule – Aarav Mehta"
+    assert "Interview Confirmation" not in join.subject
     for draft in drafts:
         assert "NOT confirmed" in draft.body
         assert "Confirming the interview" not in draft.body
+    for draft in drafts:
+        if draft.kind != "join":
+            assert "Proposed Interview Schedule" not in draft.subject

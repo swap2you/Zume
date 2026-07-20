@@ -1,0 +1,1470 @@
+version: 1
+records:
+- id: rest-assured-a-01
+  domain: rest-assured
+  subdomain: specifications
+  title: 'Specifications: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for specifications that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Specifications should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that specifications supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your specifications approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative specifications case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - specifications
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: specifications
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-02
+  domain: rest-assured
+  subdomain: assertions
+  title: 'Assertions: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of assertions. How would you converge
+    them safely?
+  concise_answer: Assertions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In REST Assured, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that assertions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your assertions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative assertions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - assertions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: assertions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-03
+  domain: rest-assured
+  subdomain: serialization
+  title: 'Serialization: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: How would you evaluate competing architectures for serialization under reliability and cost
+    constraints?
+  concise_answer: Serialization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that serialization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your serialization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative serialization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - serialization
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: serialization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-04
+  domain: rest-assured
+  subdomain: authentication
+  title: 'Authentication: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: What governance and exception path would you establish for authentication?
+  concise_answer: Authentication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that authentication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your authentication approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative authentication case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - authentication
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: authentication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-05
+  domain: rest-assured
+  subdomain: filters-logging
+  title: 'Filters Logging: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of filters logging before users report it?
+  concise_answer: Filters Logging should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that filters logging supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your filters logging approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative filters logging case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - filters-logging
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: filters logging
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-06
+  domain: rest-assured
+  subdomain: json-xml-path
+  title: 'Json Xml Path: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether json xml path improves outcomes or only activity
+    metrics.
+  concise_answer: Json Xml Path should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that json xml path supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your json xml path approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative json xml path case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - json-xml-path
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: json xml path
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-07
+  domain: rest-assured
+  subdomain: schema-validation
+  title: 'Schema Validation: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to schema validation?
+  concise_answer: Schema Validation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that schema validation supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your schema validation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative schema validation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - schema-validation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: schema validation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-08
+  domain: rest-assured
+  subdomain: chaining
+  title: 'Chaining: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What must be true before delegating decisions about chaining to automation?
+  concise_answer: Chaining should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In REST Assured, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that chaining supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your chaining approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative chaining case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - chaining
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: chaining
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-09
+  domain: rest-assured
+  subdomain: parameterization
+  title: 'Parameterization: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving parameterization?
+  concise_answer: Parameterization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parameterization supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your parameterization approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative parameterization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - parameterization
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: parameterization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-10
+  domain: rest-assured
+  subdomain: reusable-clients
+  title: 'Reusable Clients: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring reusable clients?
+  concise_answer: Reusable Clients should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reusable clients supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reusable clients approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reusable clients case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - reusable-clients
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: reusable clients
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-11
+  domain: rest-assured
+  subdomain: error-handling
+  title: 'Error Handling: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you establish ownership boundaries for error handling across platform and product
+    teams?
+  concise_answer: Error Handling should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that error handling supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your error handling approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative error handling case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - error-handling
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: error handling
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-12
+  domain: rest-assured
+  subdomain: parallelism
+  title: 'Parallelism: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature parallelism implementation?
+  concise_answer: Parallelism should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In REST Assured, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parallelism supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your parallelism approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative parallelism case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - parallelism
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: parallelism
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-13
+  domain: rest-assured
+  subdomain: testng-cucumber
+  title: 'Testng Cucumber: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you design a post-incident review focused on testng cucumber without blaming individuals?
+  concise_answer: Testng Cucumber should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that testng cucumber supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative testng cucumber case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - testng-cucumber
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: testng cucumber
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-14
+  domain: rest-assured
+  subdomain: reporting
+  title: 'Reporting: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What is the minimum observability design that makes reporting auditable?
+  concise_answer: Reporting should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In REST Assured, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reporting supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reporting case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - reporting
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: reporting
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-15
+  domain: rest-assured
+  subdomain: framework-design
+  title: 'Framework Design: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you make framework design resilient to partial failure and degraded dependencies?
+  concise_answer: Framework Design should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that framework design supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative framework design case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - framework-design
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: framework design
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-16
+  domain: rest-assured
+  subdomain: specifications
+  title: 'Specifications: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you review a vendor claim that automates specifications?
+  concise_answer: Specifications should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that specifications supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative specifications case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - specifications
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: specifications
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-17
+  domain: rest-assured
+  subdomain: assertions
+  title: 'Assertions: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you protect sensitive data while operating assertions at scale?
+  concise_answer: Assertions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In REST Assured, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that assertions supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative assertions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - assertions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: assertions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-18
+  domain: rest-assured
+  subdomain: serialization
+  title: 'Serialization: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What decision record would you require before changing a high-impact serialization?
+  concise_answer: Serialization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that serialization supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative serialization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - serialization
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: serialization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-19
+  domain: rest-assured
+  subdomain: authentication
+  title: 'Authentication: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you balance standardization with context-specific needs for authentication?
+  concise_answer: Authentication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that authentication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative authentication case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - authentication
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: authentication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-20
+  domain: rest-assured
+  subdomain: filters-logging
+  title: 'Filters Logging: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you test whether a proposed abstraction for filters logging hides important domain
+    behavior?
+  concise_answer: Filters Logging should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that filters logging supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative filters logging case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - filters-logging
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: filters logging
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-21
+  domain: rest-assured
+  subdomain: json-xml-path
+  title: 'Json Xml Path: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What leading and lagging indicators should inform investment in json xml path?
+  concise_answer: Json Xml Path should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that json xml path supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative json xml path case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - json-xml-path
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: json xml path
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-22
+  domain: rest-assured
+  subdomain: schema-validation
+  title: 'Schema Validation: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you define a human-approval boundary for schema validation?
+  concise_answer: Schema Validation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that schema validation supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative schema validation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - schema-validation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: schema validation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-23
+  domain: rest-assured
+  subdomain: chaining
+  title: 'Chaining: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you challenge a design that treats chaining as a one-time project?
+  concise_answer: Chaining should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In REST Assured, validate both the intended result and the meaningful
+    negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that chaining supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative chaining case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - chaining
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: chaining
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: rest-assured-a-24
+  domain: rest-assured
+  subdomain: parameterization
+  title: 'Parameterization: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What systemic failure patterns would you look for when parameterization repeatedly causes
+    incidents?
+  concise_answer: Parameterization should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In REST Assured, validate both the intended result
+    and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that parameterization supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete REST Assured example, competing constraints, and evidence that would
+    change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative parameterization case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - rest-assured
+  - parameterization
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: rest-assured
+    locator: parameterization
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

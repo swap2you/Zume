@@ -1,0 +1,635 @@
+version: 1
+note: Gold-core expansion (Selenium) from docs/release/question-library/03_GOLD_CORE_QUESTION_CATALOG.yaml. Draft until critic approval.
+questions:
+- id: gold-sel-001
+  domain: selenium
+  subdomain: locators
+  title: Designing resilient locators for a dynamic UI
+  level: basic
+  priority: P0
+  frequency: very_common
+  question_type: design
+  question: >-
+    A button has generated classes and moves during layout changes. Design a locator
+    strategy that remains stable and explain when text, accessibility attributes, data
+    attributes, CSS and XPath are appropriate.
+  concise_answer: >-
+    Anchor locators to an intentional contract rather than incidental structure: a
+    dedicated test attribute (data-testid) or a stable accessibility attribute
+    (aria-label, role) survives layout and style changes that break generated classes
+    like btn-3f8a2 or nth-child position. Text locators fit user-facing labels that are
+    part of the product contract (button copy), CSS should target IDs/attributes rather
+    than style classes, and XPath is reserved for cases only it can express — traversing
+    to a sibling/ancestor or matching on partial text/contains() — used sparingly because
+    it is slower and more brittle to DOM restructuring. Every candidate locator must be
+    checked for uniqueness on the page, not just presence.
+  recommended_answer: >-
+    The stability problem is that hashed utility classes and DOM position are
+    implementation details the developer can change on every build; locating against
+    them couples the test to accidents of the build, not to product intent. The fix is
+    to locate against something that represents a deliberate contract between the
+    product and the test: a data-testid/data-qa attribute owned by the team, or —
+    better where it also improves the product — a semantic accessibility attribute like
+    role="button" combined with an aria-label, which doubles as an accessibility check.
+
+    Guidance for each mechanism: use text locators when the visible label is itself the
+    behavior under test and is unlikely to be a translation/copy variable in scope; use
+    CSS selectors for attribute and ID matching because they are fast and native to the
+    browser's selector engine; use XPath only for what CSS cannot do — axis traversal
+    (following-sibling, ancestor), text-contains matching, or matching on multiple
+    possible attributes with `or` — because XPath evaluation is slower and its axis
+    syntax is easy to write in a way that silently matches zero or many elements.
+
+    Before accepting any locator, verify it resolves to exactly one element in the
+    current DOM and stays unique across the states the test will exercise (loading,
+    populated, error). The most durable long-term fix is coordinating with development
+    to add stable `data-testid` attributes as part of the component's contract, rather
+    than reverse-engineering stability from styling classes that were never meant to be
+    a public API.
+  key_points:
+  - Prefer intentional semantic/test contracts.
+  - Verify uniqueness.
+  - Avoid absolute paths, indexes and styling classes.
+  - Use XPath only when its relationship/text capabilities are needed.
+  - Coordinate with developers for stable attributes.
+  examples:
+  - >-
+    A "Submit" button rendered as <button class="btn-3f8a2 mt-2">Submit</button> should
+    be located via `[data-testid="submit-order"]` or `[aria-label="Submit order"]`, not
+    `.btn-3f8a2` or `//div[3]/button[1]`, either of which breaks on the next CSS
+    refactor or layout reflow.
+  code_examples:
+  - |-
+    // Fragile — generated class and absolute position
+    driver.findElement(By.cssSelector(".btn-3f8a2"));
+    driver.findElement(By.xpath("/html/body/div[3]/div/button[1]"));
+
+    // Stable — intentional contract
+    driver.findElement(By.cssSelector("[data-testid='submit-order']"));
+    driver.findElement(By.xpath("//button[@aria-label='Submit order']"));
+  strong_signals:
+  - Distinguishes incidental structure (generated classes, DOM position) from
+    intentional contracts (test IDs, accessibility attributes) unprompted.
+  - States a concrete reason for each mechanism (CSS speed, XPath axis/text capability).
+  - Checks uniqueness across UI states, not just the happy-path DOM.
+  weak_signals:
+  - Defaults to "use XPath because it's more powerful" without a concrete need.
+  - Names data-testid as the answer but cannot say why generated classes are unstable.
+  red_flags:
+  - Proposes indexed/positional locators (nth-child, absolute XPath) as the primary strategy.
+  - Cannot explain the difference between "element exists" and "locator is unique".
+  common_mistakes:
+  - Locating on a CSS class that is also a styling hook shared by unrelated components.
+  - Writing `contains(text(), '...')` XPath against copy that is subject to A/B tests or i18n.
+  - Never re-checking uniqueness after adding a new similar component to the page.
+  follow_ups:
+  - question: How would you validate that a locator fails for the right reason after a UI redesign?
+    recommended_answer: >-
+      Distinguish "locator found zero elements" from "element found but interaction
+      failed" by inspecting the failure evidence: a NoSuchElementException after a
+      redesign, with a screenshot/DOM dump showing the target control still visually
+      present under a new attribute, confirms the locator itself broke — the fix is
+      updating the locator to the new contract, not adding a wait. If the same locator
+      finds multiple matches, the redesign introduced a duplicate contract and the test
+      should fail loudly rather than pick the first match. Capturing the page source
+      and a screenshot on every locator failure makes this distinction fast instead of
+      guesswork.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead]
+  years_range: [2, 10]
+  tags: [selenium, locators, css-selectors, xpath, data-testid, accessibility]
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: "Selenium documentation — Locating Elements, finding elements by CSS selector and XPath"
+  - source_id: w3c-webdriver
+    locator: "W3C WebDriver — Element Retrieval (Find Element / Find Elements) command semantics"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-sel-002
+  domain: selenium
+  subdomain: waits-synchronization
+  title: Waiting for the right condition, not just visibility
+  level: intermediate
+  priority: P0
+  frequency: very_common
+  question_type: concept
+  question: >-
+    Explain why element visibility is not always the condition required before
+    interaction. Give examples involving overlays, stale elements and asynchronous
+    state.
+  concise_answer: >-
+    Visibility only means the element has non-zero size and no `display:none`/hidden
+    ancestor; it says nothing about whether the element is enabled, unobstructed by an
+    overlay, or attached to the current DOM. A spinner overlay can leave a button
+    visible but not clickable; a re-rendered list after an API call leaves the old
+    element visible-looking but stale in the DOM (StaleElementReferenceException on
+    interaction); an asynchronously loaded dropdown can be visible before its options
+    are populated. The wait condition must match exactly what the next action needs —
+    elementToBeClickable, invisibilityOf(overlay), or a custom condition on staleness —
+    not a single generic "wait for visible" used everywhere.
+  recommended_answer: >-
+    WebDriver's own interactability checks (used internally before a click/send-keys
+    command) test several things beyond visibility: the element must be displayed,
+    within the viewport or scrolled into view, not obscured by another element at its
+    click point, and not disabled. ExpectedConditions.visibilityOf only proves the
+    first of these. That gap is exactly where "visible but click intercepted" failures
+    come from — a modal overlay, a sticky header, or a toast notification sits on top
+    of a visible button.
+
+    Stale elements are a different failure mode entirely: after an AJAX refresh or a
+    framework re-render, the old DOM node backing a previously located WebElement is
+    detached, even if a visually identical element replaced it. Waiting for visibility
+    on the *old* reference cannot help — the correct pattern is either to re-locate the
+    element after the refresh completes, or to wait for staleness of the old reference
+    before re-locating, so the test never operates on a detached node.
+
+    Asynchronous state adds a third dimension: a container can become visible while its
+    content is still being populated (a dropdown rendered empty before an API response
+    fills it). Here the wait condition must target the actual precondition for the next
+    step — "at least one option is present" or "loading spinner is gone" — not the
+    container's own visibility, which is already true.
+
+    The discipline is to ask "what does the next action actually require?" and select
+    or compose the wait for that: elementToBeClickable for a click, invisibilityOf for
+    an overlay to clear, a custom ExpectedCondition for domain-specific readiness.
+    Mixing an implicit wait with these explicit waits produces compounding,
+    unpredictable timeouts and should be avoided; pick one timing model per driver
+    instance.
+  key_points:
+  - Wait for the state the next action needs, not a generic default.
+  - Visibility does not guarantee enabled, unobstructed or stable.
+  - Use staleness or explicit state-change conditions after refreshes.
+  - Avoid mixing implicit and explicit timing reasoning.
+  - Timeout messages should expose the awaited condition, not just "timed out".
+  code_examples:
+  - |-
+    // Wrong condition for the actual need
+    wait.until(ExpectedConditions.visibilityOf(submitButton));
+    submitButton.click();   // ElementClickInterceptedException — overlay still present
+
+    // Matches what the click actually requires
+    wait.until(ExpectedConditions.invisibilityOf(loadingOverlay));
+    wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+
+    // Stale-element safe re-render pattern
+    WebElement oldRow = driver.findElement(By.id("row-42"));
+    triggerRefresh();
+    wait.until(ExpectedConditions.stalenessOf(oldRow));
+    WebElement newRow = driver.findElement(By.id("row-42"));
+  strong_signals:
+  - Names the specific interactability checks WebDriver performs beyond visibility.
+  - Distinguishes stale-element handling (re-locate after staleness) from a plain wait.
+  - Writes a wait condition that expresses the actual business precondition, not a generic proxy.
+  weak_signals:
+  - Treats Thread.sleep as an acceptable substitute for a targeted wait.
+  - Knows ExpectedConditions exists but can't say which condition fits which failure.
+  red_flags:
+  - Proposes wrapping every click in try/catch-and-retry instead of fixing the wait condition.
+  - Cannot explain what a StaleElementReferenceException actually means.
+  common_mistakes:
+  - Setting both an implicit wait and explicit WebDriverWait, causing additive delays.
+  - Waiting for the container's visibility when the async content inside isn't ready yet.
+  - Catching StaleElementReferenceException and retrying the same stale reference.
+  follow_ups:
+  - question: How would you create a reusable wait without hiding application-specific conditions?
+    recommended_answer: >-
+      Build small, named, composable ExpectedCondition (or Function<WebDriver, Boolean>)
+      helpers per domain concept — e.g. `overlayCleared()`, `gridPopulated(minRows)` —
+      rather than one generic `waitForReady()` that silently absorbs whatever the page
+      happens to need that day. Each helper should produce a diagnostic message
+      describing exactly what it was waiting for on timeout, and the framework should
+      expose a fluent way to compose them (wait for overlay cleared, then element
+      clickable) without collapsing them into an opaque catch-all that a future
+      engineer can't safely change.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead]
+  years_range: [3, 12]
+  tags: [selenium, waits, synchronization, stale-element, expectedconditions]
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: "Selenium documentation — Waits (implicit, explicit, ExpectedConditions and FluentWait)"
+  - source_id: w3c-webdriver
+    locator: "W3C WebDriver — Element Interactability (interactable, obscuring elements) and Element Click"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-sel-003
+  domain: selenium
+  subdomain: page-components
+  title: Where page objects end and tests begin
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question_type: framework_design
+  question: >-
+    Define the boundary between tests, page/component objects and assertions. What
+    symptoms show that a page object has become a hidden test script?
+  concise_answer: >-
+    Page and component objects own UI mechanics — locators, waits, and meaningful
+    user-facing actions (login(), addToCart()) — and expose state as typed accessors
+    (isErrorDisplayed(), getLineItemCount()). Tests own scenario intent: which actions
+    to call, in what order, and what the expected outcome is, expressed through
+    assertions that live in the test, not the page object. A page object has become a
+    hidden test script when it contains assertions, conditional branching on business
+    rules, or multi-step workflows that encode a specific scenario rather than a
+    reusable page capability — at that point a test failure inside the "page object"
+    hides which scenario actually failed.
+  recommended_answer: >-
+    The Page Object pattern's intent, as described in Selenium's own documentation, is
+    to separate the "what" (test intent and expected outcomes) from the "how" (finding
+    elements and driving the UI). A page object method should read as a user-facing
+    capability — `checkout.applyPromoCode("SAVE10")` — and return either
+    `this`/another page object for navigation, or plain data for the test to assert
+    against. It should never call assert/verify internally, because that couples a
+    specific expectation to every caller of that method and makes failures report from
+    the wrong place in the stack.
+
+    Component objects extend this to reusable regions — a table row, a modal, a nav
+    bar — modeled once and composed into multiple pages, so a table's sorting/paging
+    behavior is written and fixed in one place instead of duplicated per page that
+    embeds a table.
+
+    Symptoms that a page object has drifted into being a test script: methods with
+    names like `verifyOrderSubmittedSuccessfully()` that assert internally; `if/else`
+    branches responding to business state (different behavior for guest vs
+    logged-in checkout) baked into the object rather than expressed as two explicit
+    test paths; long workflow methods that chain five unrelated actions into one call,
+    so a single test failure can't tell you which step broke; and page objects that
+    accept and interpret test data (discount thresholds, expected totals) instead of
+    the test computing and asserting on them. All of these push scenario logic below
+    the layer where failures are diagnosable.
+  key_points:
+  - Objects encapsulate UI mechanics and meaningful user-facing actions.
+  - Tests own scenario intent and outcome assertions.
+  - Component objects model reusable page regions once.
+  - Large workflow methods, conditional branching and broad assertions are warning signs.
+  examples:
+  - >-
+    `LoginPage.loginAs(user)` returning a `DashboardPage` is a healthy page-object
+    method. `LoginPage.loginAndVerifyDashboardShowsWelcomeMessage(user)` is a hidden
+    test script — it hides the assertion and the intent inside infrastructure code.
+  code_examples:
+  - |-
+    // Hidden test script inside a "page object"
+    public void completeCheckout(Cart cart) {
+        applyPromo(cart.promoCode());
+        clickPay();
+        Assert.assertTrue(successBanner.isDisplayed()); // assertion buried here
+    }
+
+    // Correct separation
+    public CheckoutPage applyPromo(String code) { ...; return this; }
+    public OrderConfirmationPage submitPayment() { ...; return new OrderConfirmationPage(driver); }
+    // In the test:
+    OrderConfirmationPage confirmation = checkoutPage.applyPromo("SAVE10").submitPayment();
+    assertThat(confirmation.isSuccessBannerDisplayed()).isTrue();
+  strong_signals:
+  - Can point to a concrete method and say "this assertion belongs in the test, not here".
+  - Distinguishes component objects (reusable regions) from page objects (whole screens) with an example.
+  - Flags multi-step workflow methods as diagnosability risks, not just style issues.
+  weak_signals:
+  - Says "assertions don't belong in page objects" as a rule without explaining the diagnosability cost.
+  - Cannot describe what a component object is beyond "a smaller page object".
+  red_flags:
+  - Believes page objects should return booleans for every check so tests never touch elements — but then buries assertions inside those same booleans.
+  - Thinks the Page Object pattern is only about "storing locators in one file".
+  common_mistakes:
+  - Growing a single page object per page into a god-object with 50+ methods and no component decomposition.
+  - Returning raw WebElement from page-object accessors, leaking driver mechanics into tests.
+  - Encoding one specific test's expected values as constants inside the page object.
+  follow_ups:
+  - question: How would you model a table row or repeated card component without exposing raw WebElements?
+    recommended_answer: >-
+      Create a component object wrapping the row's root WebElement, with typed
+      accessors (`getPrice(): BigDecimal`, `getStatus(): OrderStatus`,
+      `clickCancel(): void`) scoped to searches within that root element
+      (`root.findElement(By...)`), and a parent list page object exposes
+      `getRows(): List<OrderRowComponent>` or `findRow(orderId)`. This keeps
+      row-specific locators contained in one class reused across every page that
+      renders the same table, and callers never see a WebElement — only typed domain
+      values and actions.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, Test/Quality Architect, Solution Architect, Technical Architect]
+  years_range: [4, 15]
+  tags: [selenium, page-object-model, component-objects, framework-design, test-architecture]
+  estimated_minutes: 6
+  references:
+  - source_id: selenium-dev
+    locator: "Selenium documentation — Page Object Models (design pattern goals and anti-patterns)"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-sel-004
+  domain: selenium
+  subdomain: grid-parallelism
+  title: Designing driver and data ownership for parallel Grid execution
+  level: advanced
+  priority: P1
+  frequency: common
+  question_type: framework_design
+  question: >-
+    Design a parallel Selenium execution model for local and cloud grids. Cover driver
+    ownership, capability construction, test data, artifact naming and cleanup.
+  concise_answer: >-
+    Give each parallel test execution context exactly one driver/session, created
+    fresh from an immutable capability object built per test (never a shared mutable
+    Capabilities/Options instance mutated in place), and injected explicitly rather
+    than read from a static field. Test data must be unique per execution (generated
+    or namespaced identifiers) so parallel tests never collide on the same record.
+    Artifacts — screenshots, logs, videos — are named with a correlation ID (session ID
+    plus test ID) so failures are traceable. Driver quit must run in a
+    finally/fixture teardown that always executes, and the parallelism level must be
+    bounded by both local machine capacity and the cloud vendor's concurrent-session
+    quota.
+  recommended_answer: >-
+    Ownership: model "one driver per execution context" as an invariant enforced by
+    the framework, not a convention — a fixture/extension creates the driver at test
+    start and the same fixture is the only code that quits it. No static or shared
+    driver field, because Grid tests routinely run on multiple threads/JVM-forks and a
+    shared reference is a direct route to one test operating another test's browser.
+
+    Capability construction: build a fresh, immutable capabilities/options object per
+    test from typed configuration (browser, version, platform, cloud-specific keys
+    like build name and test name for reporting) rather than mutating one shared
+    ChromeOptions instance across the suite — mutation from multiple threads is a
+    race, and even single-threaded reuse risks leaking one test's flags into another's
+    session.
+
+    Test data: every parallel test must operate on data it does not share with any
+    other concurrently running test — generate unique identifiers (order numbers,
+    usernames) or partition a fixed dataset by worker index, and avoid tests that
+    assert on global counts or shared fixture rows.
+
+    Artifact naming and correlation: name every captured artifact with the WebDriver
+    session ID and the test's unique ID (not just a timestamp, which collides under
+    parallelism), and log the same IDs on both the test-runner side and, where the
+    cloud vendor exposes it, the session dashboard, so a failed test can be traced to
+    its exact video/log without ambiguity.
+
+    Cleanup and limits: quit the driver in a finally block or test-framework
+    after-hook that runs even on failure/timeout, and cap concurrency to what the
+    local machine or the grid/cloud plan can sustain — exceeding a vendor's
+    concurrent-session quota causes queuing or session-creation failures that look
+    like flakiness but are a capacity-planning defect.
+  key_points:
+  - One driver/session owner per test execution context.
+  - Immutable capability creation per test, not a shared mutated object.
+  - Unique test data and artifact correlation via session/test IDs.
+  - Guaranteed quit in finally/fixture teardown.
+  - Concurrency limits based on environment capacity and vendor quota.
+  code_examples:
+  - |-
+    // Per-test, immutable capability construction (not a shared mutable Options field)
+    ChromeOptions options = new ChromeOptions();
+    options.setCapability("browserVersion", "stable");
+    options.setCapability("selenoid:options", Map.of(
+        "name", testId, "sessionTimeout", "5m"
+    ));
+    WebDriver driver = new RemoteWebDriver(gridUrl, options);
+    try {
+        // test steps, artifacts named with driver session id + testId
+    } finally {
+        driver.quit();   // guaranteed, even on assertion failure
+    }
+  strong_signals:
+  - Names "one driver per execution context" as an explicit invariant, not a convention.
+  - Explains why mutating a shared Options object across tests is dangerous under parallelism.
+  - Ties artifact naming to session ID + test ID specifically for traceability.
+  weak_signals:
+  - Discusses parallelism only in terms of thread count without addressing data isolation.
+  - Assumes cloud grids have unlimited concurrent sessions.
+  red_flags:
+  - Proposes a static shared WebDriver field "to save setup time" across tests.
+  - Has no plan for quit() running when a test times out or throws during setup.
+  common_mistakes:
+  - Naming screenshots only by timestamp, causing collisions or ambiguity under parallel runs.
+  - Sharing one ChromeOptions instance and appending capabilities per test.
+  - Not bounding parallelism to the grid's quota, causing session-creation failures.
+  follow_ups:
+  - question: How would you diagnose a failure that occurs only at 20-way parallelism?
+    recommended_answer: >-
+      First rule out resource exhaustion: check grid node/queue metrics and vendor
+      concurrent-session limits at that parallelism level — a session queued or
+      rejected looks like a random UI failure otherwise. Next check for shared-state
+      contamination (static fields, ThreadLocal without cleanup, shared test data)
+      correlated by thread/worker ID in logs. Finally check host resource pressure —
+      CPU, memory, network — on the machine or grid node running that many browser
+      processes, since real timing-sensitive UI bugs can also only manifest under CPU
+      contention that stretches JavaScript execution and network round-trips.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, Test/Quality Architect, Solution Architect, Technical Architect]
+  years_range: [6, 18]
+  tags: [selenium, grid, parallelism, capabilities, driver-ownership, ci]
+  estimated_minutes: 7
+  references:
+  - source_id: selenium-dev
+    locator: "Selenium documentation — Grid architecture (Hub/Node, Router, Distributor, Session Queue) and Driver capabilities"
+  - source_id: w3c-webdriver
+    locator: "W3C WebDriver — New Session (capability negotiation and processing)"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-sel-005
+  domain: selenium
+  subdomain: flakiness
+  title: Investigating a CI-only click interception before adding retries
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question_type: troubleshooting
+  question: >-
+    A test passes locally and fails only in CI with click interception. Give a
+    disciplined investigation sequence and explain why adding a retry is not the first
+    fix.
+  concise_answer: >-
+    Start from the evidence a click-intercepted failure already carries — the
+    exception reports the element that was actually at the click point, which is often
+    an overlay, sticky header, or cookie banner rather than the intended target.
+    Reproduce with the same browser/version, viewport size and network throttling CI
+    uses, since CI headless viewports and slower rendering commonly expose
+    timing/layout differences invisible locally. Only after identifying and fixing the
+    causal condition — the real obstruction or a missing wait — does a bounded retry
+    become a legitimate mitigation for genuinely transient cases; used first, a retry
+    launders a real defect into a "flaky test" statistic and can hide a production UI
+    regression.
+  recommended_answer: >-
+    The investigation sequence: (1) Read the exception itself — Selenium's
+    ElementClickInterceptedException reports the element actually receiving the click,
+    which frequently names the real obstruction (a modal backdrop, a fixed-position
+    header, a toast). (2) Pull the failure's screenshot and DOM snapshot from CI
+    artifacts to see the page state at the moment of failure, not a guess about it.
+    (3) Check browser console and network logs for a slow-loading resource that delays
+    layout stabilization only under CI's typically slower/headless environment.
+    (4) Reproduce locally using the exact CI browser version and viewport dimensions
+    (CI runners are frequently headless with a different default viewport than a
+    developer's browser), and, if available, the same network throttling — many click
+    interceptions only appear at a specific viewport width where an element overlaps.
+    (5) Compare timing: CI machines are often slower/more contended, so a race that
+    never surfaces locally (an animation finishing just before the click locally)
+    loses the race in CI.
+
+    Why retry-first is wrong: a bounded retry treats every failure as equally likely to
+    be transient, but click interception is frequently deterministic given the same
+    conditions — if a cookie-consent banner always renders on first page load in a
+    region CI simulates and never locally, retrying doesn't fix it; it either fails
+    every retry (wasting CI time while reporting a confusing final state) or
+    occasionally passes because the banner auto-dismisses, silently normalizing a real
+    synchronization or UI defect into background noise. Fixing the causal condition —
+    waiting for the banner's invisibility, or fixing scroll-into-view behavior —
+    removes the failure class entirely rather than papering over one instance of it.
+  key_points:
+  - Inspect screenshot, DOM, browser console, network and timing evidence first.
+  - Identify overlays, viewport, animations, stale state and environment differences.
+  - Reproduce with CI's browser/version and viewport, not a local default.
+  - Retries classify uncertainty but can hide real defects.
+  - Fix the causal synchronization or application condition, not the symptom.
+  strong_signals:
+  - Reads the exception's reported obstructing element as the first diagnostic step.
+  - Explicitly reproduces with CI's viewport/browser version rather than guessing.
+  - "Explains the harm of retry-first: normalizing a deterministic defect into noise."
+  weak_signals:
+  - Jumps straight to "add a wait" without identifying what condition it should wait for.
+  - Says "it's probably an environment difference" without naming which one to check.
+  red_flags:
+  - Proposes wrapping the click in a retry loop as the complete fix.
+  - Has no plan to capture or examine screenshot/DOM evidence from the CI failure.
+  common_mistakes:
+  - Increasing a global implicit wait to "fix" a specific click-interception failure.
+  - Not checking that CI runs headless with a different default viewport than local Chrome.
+  - Treating one successful retry as proof the underlying condition was transient.
+  follow_ups:
+  - question: When is a bounded retry justified, and what telemetry must accompany it?
+    recommended_answer: >-
+      A retry is justified only for a classified, genuinely transient failure type —
+      e.g. a network blip on a third-party resource unrelated to the assertion under
+      test — after the deterministic causes above have been ruled out or fixed. It
+      must be bounded (one or two attempts), scoped to a specific exception type rather
+      than "any failure", and every retry must be recorded in the test report with the
+      first-failure evidence preserved (screenshot, stack trace, retry count) so a
+      rising retry rate for a given test is visible and triaged, rather than quietly
+      absorbed into a green build.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, Test/Quality Architect, Solution Architect, Technical Architect]
+  years_range: [5, 16]
+  tags: [selenium, flakiness, click-intercepted, ci, root-cause-analysis, retries]
+  estimated_minutes: 7
+  references:
+  - source_id: w3c-webdriver
+    locator: "W3C WebDriver — Element Click (obscuring/pointer-interactable point-in-view checks)"
+  - source_id: selenium-dev
+    locator: "Selenium documentation — Debugging and troubleshooting flaky tests (evidence capture, waits)"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed
+
+- id: gold-sel-006
+  domain: selenium
+  subdomain: bidi-cdp
+  title: WebDriver, CDP and BiDi — choosing a cross-browser boundary
+  level: advanced
+  priority: P2
+  frequency: emerging
+  question_type: compare_contrast
+  question: >-
+    Compare WebDriver commands, browser-specific CDP integration and WebDriver BiDi.
+    How would you avoid coupling a framework to a temporary browser implementation
+    detail?
+  concise_answer: >-
+    WebDriver (the W3C standard Selenium implements) is the stable, cross-browser
+    automation contract — navigation, element interaction, session management — but it
+    has no standardized way to intercept network traffic or listen for console/JS
+    events. Chrome DevTools Protocol fills those gaps for Chromium-based browsers but
+    is Chromium-specific, versioned per Chrome release, and not implemented by Firefox
+    or Safari the same way. WebDriver BiDi is the emerging W3C standard that brings
+    bidirectional, event-driven capabilities (network interception, console messages,
+    logging) into the cross-browser WebDriver contract itself. The way to avoid
+    coupling a framework to a temporary detail is to hide any CDP-specific capability
+    behind an interface with a capability check and an explicit fallback, so the
+    framework degrades gracefully on browsers or versions that lack it, and to migrate
+    to BiDi APIs as Selenium's support matures rather than deepening CDP-specific code.
+  recommended_answer: >-
+    WebDriver defines a synchronous, request/response command protocol standardized by
+    the W3C — click, sendKeys, navigate — and every WebDriver-conformant browser driver
+    implements the same contract, which is why the same Selenium test code drives
+    Chrome, Firefox and Safari. Its scope is deliberately limited to user-facing
+    interaction and session management; it does not standardize network interception
+    or push-style events from the browser to the client.
+
+    Chrome DevTools Protocol is Chromium's own debugging protocol, and Selenium
+    exposes a subset of it (via DevTools/CDP session objects) to fill that gap —
+    mocking network responses, capturing console logs, emulating geolocation. The cost
+    is that CDP is not a stable cross-browser contract: it changes between Chrome
+    versions, and Firefox/Safari either don't implement it or implement a different
+    debugging protocol, so CDP-based code only runs reliably on Chromium browsers and
+    needs version-aware handling.
+
+    WebDriver BiDi is the W3C's answer to this gap: a bidirectional, event-driven
+    protocol layered onto WebDriver itself, aiming to standardize exactly the
+    capabilities CDP currently provides ad hoc — network interception, console/log
+    events, and more — across all conformant browsers, not just Chromium. As of
+    current Selenium versions, BiDi support is real but still maturing across browsers
+    and Selenium's own API surface for it.
+
+    To avoid coupling: define an interface in the framework for each optional
+    capability (e.g. `NetworkInterceptor`), implement it against CDP today, check the
+    browser/driver capability before invoking it, and provide an explicit no-op or
+    skip path when the capability is unavailable rather than letting a CDP call throw
+    deep inside a test. When BiDi coverage for a given capability becomes available
+    and stable in the Selenium version in use, swap the implementation behind the same
+    interface — tests and page objects never reference CDP or BiDi directly.
+  key_points:
+  - WebDriver is the cross-browser automation contract for interaction and sessions.
+  - CDP is Chromium-specific, version-sensitive, and not a cross-browser standard.
+  - BiDi aims to standardize bidirectional/event capabilities across all browsers.
+  - Hide optional capabilities behind an interface with explicit capability checks.
+  - Fallback behavior for unsupported browsers/versions must be explicit, not silent.
+  strong_signals:
+  - Correctly scopes WebDriver to interaction/session commands versus CDP/BiDi's event capabilities.
+  - Names Chromium-only support as CDP's specific limitation, not "it's newer".
+  - Proposes an interface + capability-check pattern to isolate the framework from either API.
+  weak_signals:
+  - Treats CDP and BiDi as interchangeable without noting cross-browser scope differences.
+  - Cannot explain what capability CDP/BiDi add that plain WebDriver commands lack.
+  red_flags:
+  - Recommends writing all new framework code directly against CDP with no abstraction.
+  - Believes WebDriver itself supports network interception natively today.
+  common_mistakes:
+  - Building network-mocking tests on CDP without a fallback, silently skipping on Firefox/Safari.
+  - Assuming a CDP feature available in one Chrome version is stable across all supported versions.
+  - Not tracking Selenium's BiDi support maturity when planning a migration timeline.
+  follow_ups:
+  - question: Which observability use cases justify a BiDi/CDP adapter?
+    recommended_answer: >-
+      Cases where WebDriver's own contract has no equivalent: asserting no console
+      errors occurred during a flow, intercepting/mocking a specific network response
+      to test an error-handling path deterministically, capturing performance timing
+      events, or asserting on JS exceptions thrown asynchronously. These justify the
+      added complexity because they test conditions unreachable through clicks and
+      assertions alone; routine UI interaction and state assertions should stay on
+      plain WebDriver so the majority of the suite remains browser-portable.
+  role_tracks: [Senior SDET, Lead SDET, Test Automation Architect, Quality Engineering Lead, Test/Quality Architect, Solution Architect, Technical Architect]
+  years_range: [6, 18]
+  tags: [selenium, webdriver-bidi, cdp, cross-browser, framework-design]
+  estimated_minutes: 6
+  references:
+  - source_id: w3c-webdriver
+    locator: "W3C WebDriver — protocol scope (commands, sessions) as the baseline cross-browser contract"
+  - source_id: selenium-dev
+    locator: "Selenium documentation — WebDriver BiDi and Chrome DevTools Protocol (CDP) integration"
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: draft
+  quality_origin: researched
+  review_status: unreviewed

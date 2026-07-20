@@ -1,0 +1,485 @@
+version: 1
+records:
+- id: java-reviewed-01
+  domain: java
+  subdomain: java-util-collection
+  title: java.util.Collection in java
+  level: basic
+  priority: P0
+  frequency: common
+  question: In java, explain the purpose and failure boundary of java.util.Collection. How would you verify that it behaves
+    as intended?
+  concise_answer: java.util.Collection should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For java.util.Collection, begin with the contract described at Java SE API: java.util.Collection. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete java example involving java.util.Collection, including how the candidate would distinguish
+    a product defect from a test or environment fault.
+  key_points:
+  - uses documented java.util.Collection semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that java.util.Collection is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from java.util.Collection, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
+  examples:
+  - Create one focused java.util.Collection case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - java-util-collection
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java SE API: java.util.Collection'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-02
+  domain: java
+  subdomain: object-equals-and-hashcode
+  title: Object.equals and hashCode in java
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of Object.equals and hashCode. How would you verify that it
+    behaves as intended?
+  concise_answer: Object.equals and hashCode should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Object.equals and hashCode, begin with the contract described at Java SE API: Object.equals and
+    hashCode. State the input, expected state transition or result, and the specific evidence collected when it fails. Use
+    the smallest deterministic check that exercises that contract, isolate external timing or data dependencies, and report
+    the failing condition rather than masking it with a retry. The correct implementation depends on the domain boundary,
+    so the reviewer should name the trade-off and demonstrate a negative case. Insert two equal value objects into a HashMap
+    lookup to demonstrate why equality and hash codes must agree.'
+  deep_dive: Ask for a concrete java example involving Object.equals and hashCode, including how the candidate would distinguish
+    a product defect from a test or environment fault.
+  key_points:
+  - uses documented Object.equals and hashCode semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that Object.equals and hashCode is the source of a failure rather than a downstream
+      symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Object.equals and hashCode,
+      and correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries,
+      or unrelated code.
+  examples:
+  - Create one focused Object.equals and hashCode case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - object-equals-and-hashcode
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java SE API: Object.equals and hashCode'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-03
+  domain: java
+  subdomain: exceptions
+  title: exceptions in java
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of exceptions. How would you verify that it behaves as intended?
+  concise_answer: exceptions should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For exceptions, begin with the contract described at Java Language Specification: exceptions. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete java example involving exceptions, including how the candidate would distinguish a product
+    defect from a test or environment fault.
+  key_points:
+  - uses documented exceptions semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that exceptions is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from exceptions, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused exceptions case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - exceptions
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java Language Specification: exceptions'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-04
+  domain: java
+  subdomain: java-util-stream
+  title: java.util.stream in java
+  level: basic
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of java.util.stream. How would you verify that it behaves as
+    intended?
+  concise_answer: java.util.stream should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For java.util.stream, begin with the contract described at Java SE API: java.util.stream. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete java example involving java.util.stream, including how the candidate would distinguish a product
+    defect from a test or environment fault.
+  key_points:
+  - uses documented java.util.stream semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that java.util.stream is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from java.util.stream, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused java.util.stream case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - java-util-stream
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java SE API: java.util.stream'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-05
+  domain: java
+  subdomain: java-util-concurrent
+  title: java.util.concurrent in java
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of java.util.concurrent. How would you verify that it behaves
+    as intended?
+  concise_answer: java.util.concurrent should be chosen for its documented semantics, then verified against the observable
+    result it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For java.util.concurrent, begin with the contract described at Java SE API: java.util.concurrent. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete java example involving java.util.concurrent, including how the candidate would distinguish
+    a product defect from a test or environment fault.
+  key_points:
+  - uses documented java.util.concurrent semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that java.util.concurrent is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from java.util.concurrent, and
+      correlated logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or
+      unrelated code.
+  examples:
+  - Create one focused java.util.concurrent case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - java-util-concurrent
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java SE API: java.util.concurrent'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-06
+  domain: java
+  subdomain: map
+  title: Map in java
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of Map. How would you verify that it behaves as intended?
+  concise_answer: Map should be chosen for its documented semantics, then verified against the observable result it is responsible
+    for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For Map, begin with the contract described at Java SE API: Map. State the input, expected state transition
+    or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises that
+    contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with a
+    retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete java example involving Map, including how the candidate would distinguish a product defect
+    from a test or environment fault.
+  key_points:
+  - uses documented Map semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that Map is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Map, and correlated logs
+      or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused Map case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - map
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java SE API: Map'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-07
+  domain: java
+  subdomain: try-with-resources
+  title: try-with-resources in java
+  level: basic
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of try-with-resources. How would you verify that it behaves
+    as intended?
+  concise_answer: try-with-resources should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For try-with-resources, begin with the contract described at Java Language Specification: try-with-resources.
+    State the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest
+    deterministic check that exercises that contract, isolate external timing or data dependencies, and report the failing
+    condition rather than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer
+    should name the trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete java example involving try-with-resources, including how the candidate would distinguish a
+    product defect from a test or environment fault.
+  key_points:
+  - uses documented try-with-resources semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that try-with-resources is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from try-with-resources, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused try-with-resources case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - try-with-resources
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java Language Specification: try-with-resources'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: java-reviewed-08
+  domain: java
+  subdomain: completablefuture
+  title: CompletableFuture in java
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In java, explain the purpose and failure boundary of CompletableFuture. How would you verify that it behaves as
+    intended?
+  concise_answer: CompletableFuture should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For CompletableFuture, begin with the contract described at Java SE API: CompletableFuture. State the
+    input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete java example involving CompletableFuture, including how the candidate would distinguish a
+    product defect from a test or environment fault.
+  key_points:
+  - uses documented CompletableFuture semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that CompletableFuture is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from CompletableFuture, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused CompletableFuture case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - java
+  - completablefuture
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: java-oracle-docs
+    locator: 'Java SE API: CompletableFuture'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario

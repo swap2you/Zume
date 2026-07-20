@@ -1,0 +1,917 @@
+version: 1
+records:
+- id: solution-architecture-a-01
+  domain: solution-architecture
+  subdomain: requirements
+  title: 'Requirements: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for requirements that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Requirements should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that requirements supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your requirements approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative requirements case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - requirements
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: requirements
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-02
+  domain: solution-architecture
+  subdomain: trade-offs
+  title: 'Trade Offs: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of trade offs. How would you converge
+    them safely?
+  concise_answer: Trade Offs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that trade offs supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your trade offs approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative trade offs case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - trade-offs
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: trade offs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-03
+  domain: solution-architecture
+  subdomain: scalability
+  title: 'Scalability: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for scalability under reliability and cost
+    constraints?
+  concise_answer: Scalability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scalability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your scalability approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative scalability case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - scalability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: scalability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-04
+  domain: solution-architecture
+  subdomain: reliability
+  title: 'Reliability: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for reliability?
+  concise_answer: Reliability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reliability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your reliability approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative reliability case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - reliability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: reliability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-05
+  domain: solution-architecture
+  subdomain: integration
+  title: 'Integration: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of integration before users report it?
+  concise_answer: Integration should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that integration supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your integration approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative integration case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - integration
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: integration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-06
+  domain: solution-architecture
+  subdomain: evolution
+  title: 'Evolution: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether evolution improves outcomes or only activity
+    metrics.
+  concise_answer: Evolution should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that evolution supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your evolution approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative evolution case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - evolution
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: evolution
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-07
+  domain: solution-architecture
+  subdomain: requirements
+  title: 'Requirements: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to requirements?
+  concise_answer: Requirements should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that requirements supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your requirements approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative requirements case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - requirements
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: requirements
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-08
+  domain: solution-architecture
+  subdomain: trade-offs
+  title: 'Trade Offs: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What must be true before delegating decisions about trade offs to automation?
+  concise_answer: Trade Offs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that trade offs supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative trade offs case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - trade-offs
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: trade offs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-09
+  domain: solution-architecture
+  subdomain: scalability
+  title: 'Scalability: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving scalability?
+  concise_answer: Scalability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scalability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative scalability case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - scalability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: scalability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-10
+  domain: solution-architecture
+  subdomain: reliability
+  title: 'Reliability: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring reliability?
+  concise_answer: Reliability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that reliability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative reliability case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - reliability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: reliability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-11
+  domain: solution-architecture
+  subdomain: integration
+  title: 'Integration: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you establish ownership boundaries for integration across platform and product teams?
+  concise_answer: Integration should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that integration supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative integration case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - integration
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: integration
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-12
+  domain: solution-architecture
+  subdomain: evolution
+  title: 'Evolution: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature evolution implementation?
+  concise_answer: Evolution should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that evolution supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative evolution case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - evolution
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: evolution
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-13
+  domain: solution-architecture
+  subdomain: requirements
+  title: 'Requirements: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you design a post-incident review focused on requirements without blaming individuals?
+  concise_answer: Requirements should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that requirements supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative requirements case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - requirements
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: requirements
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-14
+  domain: solution-architecture
+  subdomain: trade-offs
+  title: 'Trade Offs: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What is the minimum observability design that makes trade offs auditable?
+  concise_answer: Trade Offs should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that trade offs supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative trade offs case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - trade-offs
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: trade offs
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: solution-architecture-a-15
+  domain: solution-architecture
+  subdomain: scalability
+  title: 'Scalability: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you make scalability resilient to partial failure and degraded dependencies?
+  concise_answer: Scalability should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Solution/test architecture and system-design scenarios, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that scalability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Solution/test architecture and system-design scenarios example, competing
+    constraints, and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative scalability case before generalizing.
+  role_tracks:
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - solution-architecture
+  - scalability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: istqb-glossary
+    locator: scalability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

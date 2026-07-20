@@ -1,0 +1,537 @@
+version: 1
+records:
+- id: sre-resilience-b-01
+  domain: sre-resilience
+  subdomain: slo-sli
+  title: 'Slo Sli: basic decision'
+  level: basic
+  priority: P0
+  frequency: very_common
+  question: What problem does slo sli address, and what is its practical boundary?
+  concise_answer: Slo Sli should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that slo sli supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your slo sli approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative slo sli case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - slo-sli
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: slo sli
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-02
+  domain: sre-resilience
+  subdomain: resilience
+  title: 'Resilience: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Explain resilience to a teammate who must use it safely tomorrow.
+  concise_answer: Resilience should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that resilience supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your resilience approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative resilience case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - resilience
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: resilience
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-03
+  domain: sre-resilience
+  subdomain: chaos
+  title: 'Chaos: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: What would you check first before relying on chaos in a test or delivery workflow?
+  concise_answer: Chaos should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that chaos supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your chaos approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative chaos case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - chaos
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: chaos
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-04
+  domain: sre-resilience
+  subdomain: incident-response
+  title: 'Incident Response: basic decision'
+  level: basic
+  priority: P1
+  frequency: very_common
+  question: Give a small example of incident response and state the observable outcome.
+  concise_answer: Incident Response should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In SRE, resilience, chaos, and production quality,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that incident response supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your incident response approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative incident response case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - incident-response
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: incident response
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-05
+  domain: sre-resilience
+  subdomain: capacity
+  title: 'Capacity: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: Which assumption about capacity most often causes an avoidable defect?
+  concise_answer: Capacity should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that capacity supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative capacity case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - capacity
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: capacity
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-06
+  domain: sre-resilience
+  subdomain: production-validation
+  title: 'Production Validation: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: How would you recognize that production validation is being used for the wrong purpose?
+  concise_answer: Production Validation should be applied to a stated outcome, observable evidence, and
+    known constraints; using it as a ritual is not enough. In SRE, resilience, chaos, and production quality,
+    validate both the intended result and the meaningful negative or failure path before treating it as
+    reliable.
+  recommended_answer: Start by naming the decision that production validation supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative production validation case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - production-validation
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: production validation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-07
+  domain: sre-resilience
+  subdomain: slo-sli
+  title: 'Slo Sli: basic decision'
+  level: basic
+  priority: P2
+  frequency: common
+  question: What information must be known before choosing slo sli?
+  concise_answer: Slo Sli should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that slo sli supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative slo sli case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - slo-sli
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: slo sli
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-08
+  domain: sre-resilience
+  subdomain: resilience
+  title: 'Resilience: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: What is the simplest useful validation for resilience?
+  concise_answer: Resilience should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that resilience supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative resilience case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - resilience
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: resilience
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: sre-resilience-b-09
+  domain: sre-resilience
+  subdomain: chaos
+  title: 'Chaos: basic decision'
+  level: basic
+  priority: P3
+  frequency: common
+  question: Compare a sound use of chaos with a superficially similar but unsafe use.
+  concise_answer: Chaos should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In SRE, resilience, chaos, and production quality, validate both
+    the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that chaos supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs.
+  deep_dive: Probe for a concrete SRE, resilience, chaos, and production quality example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative chaos case before generalizing.
+  role_tracks:
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Performance Engineer
+  years_range:
+  - 1
+  - 8
+  tags:
+  - sre-resilience
+  - chaos
+  - basic
+  estimated_minutes: 4
+  references:
+  - source_id: istqb-glossary
+    locator: chaos
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: concept
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

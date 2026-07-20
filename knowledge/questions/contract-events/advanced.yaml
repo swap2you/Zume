@@ -1,0 +1,543 @@
+version: 1
+records:
+- id: contract-events-a-01
+  domain: contract-events
+  subdomain: consumer-contracts
+  title: 'Consumer Contracts: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for consumer contracts that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Consumer Contracts should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that consumer contracts supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your consumer contracts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative consumer contracts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - consumer-contracts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: consumer contracts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-02
+  domain: contract-events
+  subdomain: provider-contracts
+  title: 'Provider Contracts: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: A large organization has inconsistent implementations of provider contracts. How would you
+    converge them safely?
+  concise_answer: Provider Contracts should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that provider contracts supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your provider contracts approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative provider contracts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - provider-contracts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: provider contracts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-03
+  domain: contract-events
+  subdomain: schema-evolution
+  title: 'Schema Evolution: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for schema evolution under reliability and
+    cost constraints?
+  concise_answer: Schema Evolution should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that schema evolution supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your schema evolution approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative schema evolution case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - schema-evolution
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: schema evolution
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-04
+  domain: contract-events
+  subdomain: events
+  title: 'Events: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for events?
+  concise_answer: Events should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Contract testing and event-driven systems, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that events supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your events approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative events case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - events
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: events
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-05
+  domain: contract-events
+  subdomain: idempotency
+  title: 'Idempotency: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you detect silent degradation of idempotency before users report it?
+  concise_answer: Idempotency should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Contract testing and event-driven systems, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that idempotency supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative idempotency case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - idempotency
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: idempotency
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-06
+  domain: contract-events
+  subdomain: observability
+  title: 'Observability: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: Design an experiment that distinguishes whether observability improves outcomes or only activity
+    metrics.
+  concise_answer: Observability should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that observability supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative observability case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - observability
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: observability
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-07
+  domain: contract-events
+  subdomain: consumer-contracts
+  title: 'Consumer Contracts: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you set risk-based quality gates for a change to consumer contracts?
+  concise_answer: Consumer Contracts should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that consumer contracts supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative consumer contracts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - consumer-contracts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: consumer contracts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-08
+  domain: contract-events
+  subdomain: provider-contracts
+  title: 'Provider Contracts: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What must be true before delegating decisions about provider contracts to automation?
+  concise_answer: Provider Contracts should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that provider contracts supports and the invariant
+    it must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative provider contracts case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - provider-contracts
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: provider contracts
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: contract-events-a-09
+  domain: contract-events
+  subdomain: schema-evolution
+  title: 'Schema Evolution: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving schema evolution?
+  concise_answer: Schema Evolution should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Contract testing and event-driven systems, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that schema evolution supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Contract testing and event-driven systems example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative schema evolution case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  years_range:
+  - 3
+  - 15
+  tags:
+  - contract-events
+  - schema-evolution
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: pact-docs
+    locator: schema evolution
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

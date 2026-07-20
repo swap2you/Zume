@@ -1,0 +1,243 @@
+version: 1
+records:
+- id: framework-architecture-reviewed-01
+  domain: framework-architecture
+  subdomain: page-object-models
+  title: Page object models in framework-architecture
+  level: basic
+  priority: P1
+  frequency: common
+  question: In framework-architecture, explain the purpose and failure boundary of Page object models. How would you verify
+    that it behaves as intended?
+  concise_answer: Page object models should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: For Page object models, begin with the contract described at Page object models. State the input, expected
+    state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that
+    exercises that contract, isolate external timing or data dependencies, and report the failing condition rather than masking
+    it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off
+    and demonstrate a negative case. At a framework boundary, page-object methods should expose user-relevant actions and
+    state while hiding selectors and synchronization mechanics from scenario tests.
+  deep_dive: Ask for a concrete framework-architecture example involving Page object models, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented Page object models semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that Page object models is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from Page object models, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused Page object models case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - framework-architecture
+  - page-object-models
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: Page object models
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: framework-architecture-reviewed-02
+  domain: framework-architecture
+  subdomain: design-patterns
+  title: design patterns in framework-architecture
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: In framework-architecture, explain the purpose and failure boundary of design patterns. How would you verify that
+    it behaves as intended?
+  concise_answer: design patterns should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For design patterns, begin with the contract described at WebDriver: design patterns. State the input,
+    expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete framework-architecture example involving design patterns, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented design patterns semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that design patterns is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from design patterns, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused design patterns case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - framework-architecture
+  - design-patterns
+  - intermediate
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'WebDriver: design patterns'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: framework-architecture-reviewed-03
+  domain: framework-architecture
+  subdomain: components
+  title: components in framework-architecture
+  level: advanced
+  priority: P1
+  frequency: common
+  question: In framework-architecture, explain the purpose and failure boundary of components. How would you verify that it
+    behaves as intended?
+  concise_answer: components should be chosen for its documented semantics, then verified against the observable result it
+    is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For components, begin with the contract described at Grid: components. State the input, expected state
+    transition or result, and the specific evidence collected when it fails. Use the smallest deterministic check that exercises
+    that contract, isolate external timing or data dependencies, and report the failing condition rather than masking it with
+    a retry. The correct implementation depends on the domain boundary, so the reviewer should name the trade-off and demonstrate
+    a negative case.'
+  deep_dive: Ask for a concrete framework-architecture example involving components, including how the candidate would distinguish
+    a product defect from a test or environment fault.
+  key_points:
+  - uses documented components semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that components is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from components, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused components case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - framework-architecture
+  - components
+  - advanced
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'Grid: components'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario
+- id: framework-architecture-reviewed-04
+  domain: framework-architecture
+  subdomain: test-independence
+  title: test independence in framework-architecture
+  level: basic
+  priority: P1
+  frequency: common
+  question: In framework-architecture, explain the purpose and failure boundary of test independence. How would you verify
+    that it behaves as intended?
+  concise_answer: test independence should be chosen for its documented semantics, then verified against the observable result
+    it is responsible for. A test should make the relevant precondition and failure mode visible.
+  recommended_answer: 'For test independence, begin with the contract described at Test practices: test independence. State
+    the input, expected state transition or result, and the specific evidence collected when it fails. Use the smallest deterministic
+    check that exercises that contract, isolate external timing or data dependencies, and report the failing condition rather
+    than masking it with a retry. The correct implementation depends on the domain boundary, so the reviewer should name the
+    trade-off and demonstrate a negative case.'
+  deep_dive: Ask for a concrete framework-architecture example involving test independence, including how the candidate would
+    distinguish a product defect from a test or environment fault.
+  key_points:
+  - uses documented test independence semantics
+  - checks a meaningful negative path
+  - preserves diagnostic evidence
+  strong_signals:
+  - names the ownership boundary
+  - explains a falsifiable verification
+  weak_signals:
+  - uses a tool feature without explaining its contract
+  red_flags:
+  - hides a failure with an unbounded retry
+  common_mistakes:
+  - asserting incidental implementation details
+  follow_ups:
+  - question: What evidence would show that test independence is the source of a failure rather than a downstream symptom?
+    recommended_answer: Capture the smallest reproducible input, the direct output or state from test independence, and correlated
+      logs or traces. Compare that evidence with the documented contract before changing timeouts, retries, or unrelated code.
+  examples:
+  - Create one focused test independence case with an explicit expected result and one invalid or boundary input.
+  role_tracks:
+  - Senior SDET
+  years_range:
+  - 3
+  - 15
+  tags:
+  - framework-architecture
+  - test-independence
+  - basic
+  estimated_minutes: 5
+  references:
+  - source_id: selenium-dev
+    locator: 'Test practices: test independence'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: retired
+  quality_origin: hand_authored
+  review_status: rejected
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - Reviewed for domain specificity and cited-source alignment.
+  - '2026-07-16: retired by Question Library correction - concept-substitution template, fails the published content standard.'
+  question_type: scenario

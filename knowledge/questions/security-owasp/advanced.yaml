@@ -1,0 +1,914 @@
+version: 1
+records:
+- id: security-owasp-a-01
+  domain: security-owasp
+  subdomain: authentication
+  title: 'Authentication: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Design a policy for authentication that balances correctness, delivery speed, and operational
+    evidence.
+  concise_answer: Authentication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that authentication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your authentication approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative authentication case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - authentication
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: authentication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-02
+  domain: security-owasp
+  subdomain: sessions
+  title: 'Sessions: advanced decision'
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: A large organization has inconsistent implementations of sessions. How would you converge
+    them safely?
+  concise_answer: Sessions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sessions supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your sessions approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative sessions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - sessions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: sessions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-03
+  domain: security-owasp
+  subdomain: input-validation
+  title: 'Input Validation: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: How would you evaluate competing architectures for input validation under reliability and
+    cost constraints?
+  concise_answer: Input Validation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that input validation supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your input validation approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative input validation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - input-validation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: input validation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-04
+  domain: security-owasp
+  subdomain: api-security
+  title: 'Api Security: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: very_common
+  question: What governance and exception path would you establish for api security?
+  concise_answer: Api Security should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that api security supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your api security approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative api security case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - api-security
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: api security
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-05
+  domain: security-owasp
+  subdomain: owasp
+  title: 'Owasp: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you detect silent degradation of owasp before users report it?
+  concise_answer: Owasp should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that owasp supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your owasp approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative owasp case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - owasp
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: owasp
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-06
+  domain: security-owasp
+  subdomain: secrets
+  title: 'Secrets: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design an experiment that distinguishes whether secrets improves outcomes or only activity
+    metrics.
+  concise_answer: Secrets should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that secrets supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your secrets approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative secrets case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - secrets
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: secrets
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-07
+  domain: security-owasp
+  subdomain: dependency-risk
+  title: 'Dependency Risk: advanced decision'
+  level: advanced
+  priority: P1
+  frequency: common
+  question: How would you set risk-based quality gates for a change to dependency risk?
+  concise_answer: Dependency Risk should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency risk supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups:
+  - question: What evidence would make you revise your dependency risk approach?
+    recommended_answer: A repeatable failure, a violated invariant, or telemetry showing the design misses
+      its stated outcome should trigger review. Reproduce the evidence, classify the scope, and change
+      the smallest responsible layer.
+  examples:
+  - Use a small, representative dependency risk case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - dependency-risk
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: dependency risk
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-08
+  domain: security-owasp
+  subdomain: safe-testing
+  title: 'Safe Testing: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What must be true before delegating decisions about safe testing to automation?
+  concise_answer: Safe Testing should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that safe testing supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative safe testing case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - safe-testing
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: safe testing
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-09
+  domain: security-owasp
+  subdomain: authentication
+  title: 'Authentication: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you model blast radius and rollback for a failure involving authentication?
+  concise_answer: Authentication should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that authentication supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative authentication case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - authentication
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: authentication
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-10
+  domain: security-owasp
+  subdomain: sessions
+  title: 'Sessions: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How do you avoid Goodhart-style metric misuse when measuring sessions?
+  concise_answer: Sessions should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that sessions supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative sessions case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - sessions
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: sessions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-11
+  domain: security-owasp
+  subdomain: input-validation
+  title: 'Input Validation: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: How would you establish ownership boundaries for input validation across platform and product
+    teams?
+  concise_answer: Input Validation should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that input validation supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative input validation case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - input-validation
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: input validation
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-12
+  domain: security-owasp
+  subdomain: api-security
+  title: 'Api Security: advanced decision'
+  level: advanced
+  priority: P2
+  frequency: common
+  question: What evidence would justify retiring or replacing a mature api security implementation?
+  concise_answer: Api Security should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that api security supports and the invariant it must
+    preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then
+    test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative api security case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - api-security
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: api security
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-13
+  domain: security-owasp
+  subdomain: owasp
+  title: 'Owasp: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you design a post-incident review focused on owasp without blaming individuals?
+  concise_answer: Owasp should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that owasp supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative owasp case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - owasp
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: owasp
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-14
+  domain: security-owasp
+  subdomain: secrets
+  title: 'Secrets: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: What is the minimum observability design that makes secrets auditable?
+  concise_answer: Secrets should be applied to a stated outcome, observable evidence, and known constraints;
+    using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate both the
+    intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that secrets supports and the invariant it must preserve.
+    Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership; then test representative
+    normal, boundary, and failure cases. Explain the trade-off rather than claiming a single universal
+    pattern, and use telemetry or review evidence to revise the design when reality differs. At scale,
+    define an exception path, measurable guardrails, and a rollback or containment plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative secrets case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - secrets
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: secrets
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: security-owasp-a-15
+  domain: security-owasp
+  subdomain: dependency-risk
+  title: 'Dependency Risk: advanced decision'
+  level: advanced
+  priority: P3
+  frequency: common
+  question: How would you make dependency risk resilient to partial failure and degraded dependencies?
+  concise_answer: Dependency Risk should be applied to a stated outcome, observable evidence, and known
+    constraints; using it as a ritual is not enough. In Security testing and OWASP fundamentals, validate
+    both the intended result and the meaningful negative or failure path before treating it as reliable.
+  recommended_answer: Start by naming the decision that dependency risk supports and the invariant it
+    must preserve. Choose the smallest mechanism that exposes inputs, outputs, failures, and ownership;
+    then test representative normal, boundary, and failure cases. Explain the trade-off rather than claiming
+    a single universal pattern, and use telemetry or review evidence to revise the design when reality
+    differs. At scale, define an exception path, measurable guardrails, and a rollback or containment
+    plan.
+  deep_dive: Probe for a concrete Security testing and OWASP fundamentals example, competing constraints,
+    and evidence that would change the candidate's decision.
+  key_points:
+  - states an invariant
+  - uses evidence
+  - names trade-offs
+  strong_signals:
+  - distinguishes symptom from root cause
+  - defines a bounded validation strategy
+  weak_signals:
+  - recites a tool feature without a decision context
+  red_flags:
+  - claims a pattern is universally correct
+  - hides or ignores failure evidence
+  common_mistakes:
+  - testing only a happy path
+  - confusing activity with outcome
+  follow_ups: []
+  examples:
+  - Use a small, representative dependency risk case before generalizing.
+  role_tracks:
+  - Senior SDET
+  - Test Automation Architect
+  - DevOps/CI Quality Engineer
+  years_range:
+  - 3
+  - 15
+  tags:
+  - security-owasp
+  - dependency-risk
+  - advanced
+  estimated_minutes: 6
+  references:
+  - source_id: owasp
+    locator: dependency risk
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  question_type: scenario
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

@@ -1,0 +1,47 @@
+[
+  {
+    "file": "00_READ_ME_FIRST.md",
+    "bytes": 893,
+    "sha256": "76c51713651508fdeb9cb64346f97962447708eec4c75ad3a787afbf0aa68cca"
+  },
+  {
+    "file": "01_COWORK_UAT_CURRENT_A3FC503.md",
+    "bytes": 8527,
+    "sha256": "15f28f39c01cdcb1ade1729aaca19ad409b07943b7d0beaf80c9995b5edf2ca9"
+  },
+  {
+    "file": "02_CURSOR_MASTER_BANK_IMPORT_AND_UI_FIX.md",
+    "bytes": 10301,
+    "sha256": "8a1d0de06e0f2f9d95f22de49f3f11f0f459c72aeceb3743b1acb2232de78574"
+  },
+  {
+    "file": "03_COWORK_UAT_AFTER_MASTER_BANK.md",
+    "bytes": 3741,
+    "sha256": "0c48a9ee91fc176c2855ed212a450379e5c75b59c2863b6952ea25845601dfbe"
+  },
+  {
+    "file": "Zume_Master_Question_Bank_1546.csv",
+    "bytes": 1610971,
+    "sha256": "1fc314bf0f13534341396f0982b8006ad9f7a715d03d990f52775ee551f8b4ec"
+  },
+  {
+    "file": "Zume_Master_Question_Bank_1546.json",
+    "bytes": 2541349,
+    "sha256": "7d64810e81eda69805d54a093fdadb7ae9620d67893c08e4db49e4a0b2583b8d"
+  },
+  {
+    "file": "Zume_Master_Question_Bank_1546.xlsx",
+    "bytes": 182844,
+    "sha256": "911530452513d777dc8c46b029b7e533c992e14e1980586152003a1fc48b187b"
+  },
+  {
+    "file": "coverage.json",
+    "bytes": 9359,
+    "sha256": "5d2a41e355738821f4ab3ff5956d50490cfd8c3089826adae02d0e19776dc531"
+  },
+  {
+    "file": "coverage_preview.png",
+    "bytes": 242443,
+    "sha256": "4bd11bdc5e278d69ae66917b312efe7136581a1c0803835910ce8aff36f0f2c1"
+  }
+]

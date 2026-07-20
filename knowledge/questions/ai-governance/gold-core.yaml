@@ -1,0 +1,197 @@
+version: 1
+records:
+- id: gold-aiqa-005
+  domain: ai-governance
+  subdomain: data-privacy
+  title: Privacy and governance policy for candidate/production data with external AI providers
+  level: advanced
+  priority: P0
+  frequency: common
+  question: Create a privacy and governance policy for using resumes, test data and production evidence with external AI providers.
+  concise_answer: Classify data by sensitivity before deciding anything else, minimize and redact what is actually sent (never
+    send candidate PII, secrets or unredacted production data by default), restrict usage to approved providers under contractual
+    retention and training-use terms, and require an audit trail and incident-response plan for anything that is sent externally.
+    Accountability stays with a named human owner, not 'the AI process,' and the default posture for anything not explicitly
+    classified and approved is to withhold it, not to send it.
+  recommended_answer: 'The policy starts with data classification, because ''AI governance'' without a classification scheme
+    underneath it has nothing concrete to enforce: label data by sensitivity (public, internal, confidential, restricted/PII)
+    before any decision about whether it can touch an external AI provider is even meaningful. Candidate resumes and interview
+    notes are restricted/PII by default; production evidence (logs, error traces, database exports) is confidential and frequently
+    contains PII embedded in it even when the export itself is not labeled as such — that embedded PII is the most common
+    way a supposedly de-identified dataset actually leaks personal data.
+
+    Minimization is the operating default, not an exception process: anything sent to an external provider should be the smallest
+    necessary subset, redacted of names, identifiers and secrets wherever the task does not specifically require them, and
+    never sent as raw data ''for convenience'' or ''to save preprocessing time.'' Only contractually approved providers —
+    with explicit, verified terms on data retention, training-use restrictions (does the provider train future models on submitted
+    data), and deletion — are eligible destinations; a provider without those terms in writing is treated as unapproved regardless
+    of its technical quality.
+
+    Governance requires an audit trail: what was sent, to which provider, when, and under which approval, retained in a way
+    that supports both routine review and incident investigation. And every one of these controls needs a named human owner
+    accountable for the decision to send data externally — ''the pipeline decided to send it'' is not an acceptable answer
+    during an incident review; a specific role or person approved the data flow and is accountable for its correctness.'
+  deep_dive: ''
+  key_points:
+  - Classify data by sensitivity before deciding what can go to an external provider.
+  - Minimize and redact by default; never send raw candidate PII, secrets or unredacted production data.
+  - Restrict usage to approved providers with explicit retention and training-use terms.
+  - Maintain an audit trail of what was sent, to whom, and under what approval.
+  - Assign human accountability for every external data-sharing decision, not an automated default.
+  strong_signals:
+  - Starts from a concrete data-classification scheme rather than treating governance as a vague policy statement.
+  - Names embedded PII inside seemingly technical exports (logs, traces) as a specific, common leak vector.
+  - Requires named human accountability for every external data-sharing decision.
+  weak_signals:
+  - Writes a policy that says 'protect sensitive data' with no classification scheme or enforcement mechanism.
+  - Assumes production log/trace exports are automatically free of PII without content-level scanning.
+  red_flags:
+  - Sends unredacted candidate or production data to an external provider with no retention/training-use terms in writing.
+  - Has no audit trail of what data was sent externally or under whose approval.
+  common_mistakes:
+  - Approving a provider based on technical capability alone without verifying retention/training-use contract terms.
+  - Redacting obvious identifiers (names) but missing embedded PII in nested fields or free-text logs.
+  - Treating 'anonymized' as equivalent to 'no re-identification risk' without checking for indirect identifiers.
+  follow_ups:
+  - question: What technical controls prove that candidate data was not sent?
+    recommended_answer: A deny-by-default egress control at the integration boundary (the code path calling an external provider
+      is not given access to candidate-labeled fields/tables at all, rather than being trusted to filter them out), combined
+      with request/response logging of exactly what payload was transmitted to each provider call, gives an auditable, verifiable
+      answer rather than a policy assertion. A scheduled review that samples actual transmitted payloads against the classification
+      scheme closes the loop between the stated policy and what the system actually does.
+  examples:
+  - A production error log exported to help an AI provider debug an integration issue contains customer email addresses embedded
+    in request payloads; the export looked like 'system logs,' not PII, and would have bypassed a classification scheme that
+    only labels data at the dataset-name level instead of scanning content.
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 5
+  - 18
+  tags:
+  - ai-governance
+  - data-privacy
+  - pii
+  - vendor-risk
+  - audit
+  - compliance
+  estimated_minutes: 7
+  references:
+  - source_id: nist-ai-rmf
+    locator: NIST AI Risk Management Framework — GOVERN function, data governance and third-party/vendor risk guidance
+  - source_id: owasp-genai
+    locator: OWASP Top 10 for LLM Applications — LLM02 Sensitive Information Disclosure
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-aiqa-006
+  domain: ai-governance
+  subdomain: roi
+  title: Evaluating an AI automation initiative beyond an impressive demo
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Evaluate an AI automation initiative whose demo is impressive but whose operating cost and defect impact are unclear.
+  concise_answer: Define a measurable baseline and outcome before trusting a demo — what specific metric (cycle time, defect
+    escape rate, manual review hours) is expected to move, and by how much. Total the real operating cost, including human
+    review time, model/API spend, integration maintenance and the cost of correcting its failures, not just the per-call price.
+    Run a controlled pilot against that baseline, measure quality and cycle-time impact with the same rigor as any other engineering
+    investment, and set explicit stop/scale criteria in advance so the decision is not made retroactively to justify sunk
+    cost.
+  recommended_answer: 'A demo is optimized to look impressive on a handful of curated examples; it says almost nothing about
+    total operating cost or defect impact at production scale, and treating it as sufficient evidence is the single most common
+    way an AI initiative becomes an expensive, unmeasured commitment. The first requirement is a baseline and a specific measurable
+    outcome defined before the pilot starts: what is the current cycle time, defect escape rate, or manual-hours cost for
+    the task this initiative targets, and what magnitude of improvement would justify the investment — without that number,
+    any post-hoc result can be narrated as a success.
+
+    Total cost has to include everything the demo hides: human review time for every output (which is often mandatory, not
+    optional, especially early on), model/API spend at realistic production volume rather than demo volume, integration and
+    maintenance engineering cost, and — critically — the cost of correcting the initiative''s own failures, including any
+    downstream defect impact from a wrong output that was not caught in review. An initiative that looks cheap per call can
+    be expensive once review time and failure-correction cost are counted honestly.
+
+    Run a controlled pilot — a defined scope, a defined duration, the pre-agreed baseline metric measured before and after
+    — rather than a rolling, informal expansion based on positive anecdotes. Measure quality (defect rate, review-override
+    rate) and cycle-time impact with the same rigor applied to any other engineering change, and set stop/scale criteria in
+    writing before the pilot begins: what result would justify scaling, and what result would justify stopping, decided in
+    advance so the decision is not made retroactively to justify sunk cost or momentum. Positive user sentiment alone, without
+    a measured outcome against the baseline, is not sufficient evidence to scale.'
+  deep_dive: ''
+  key_points:
+  - Define a measurable baseline and specific expected outcome before trusting a demo.
+  - Include review time, model/API spend, integration maintenance and failure-correction cost in total cost.
+  - Run a controlled, bounded pilot against the pre-agreed baseline rather than an informal rolling expansion.
+  - Measure quality and cycle-time impact with the same rigor as any other engineering investment.
+  - Set stop/scale criteria in advance so the decision is not made retroactively to justify sunk cost.
+  strong_signals:
+  - Insists on a pre-defined baseline and outcome metric before evaluating pilot results.
+  - Names review time and failure-correction cost as real, often-hidden components of total operating cost.
+  - Sets stop/scale criteria in advance rather than deciding after seeing which way the data leans.
+  weak_signals:
+  - Evaluates the initiative primarily on demo quality or user enthusiasm.
+  - Counts only per-call API price as the cost, ignoring review and integration effort.
+  red_flags:
+  - Scales an initiative to production with no baseline measurement and no defined success criteria.
+  - Continues an initiative indefinitely with no evidence of the outcome it was meant to produce.
+  common_mistakes:
+  - Running an uncontrolled pilot with no comparison against a pre-change baseline.
+  - Ignoring the cost of human review time because it is 'temporary' with no plan to actually reduce it.
+  - Defining success criteria only after seeing the pilot's results, tailored to whatever those results were.
+  follow_ups:
+  - question: Which evidence would cause you to stop the initiative despite positive user sentiment?
+    recommended_answer: A measured outcome against the pre-agreed baseline that fails to clear the stated bar — cycle time
+      unchanged, defect escape rate flat or worse, or total cost (including review and correction time) exceeding the value
+      delivered — should stop the initiative regardless of how positively users describe the experience, because sentiment
+      reflects perceived convenience, not the specific outcome the initiative was funded to produce. Written stop criteria
+      agreed before the pilot are what make that decision possible without it becoming a political argument after the fact.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 5
+  - 18
+  tags:
+  - ai-governance
+  - roi
+  - pilot-design
+  - cost-analysis
+  - decision-making
+  estimated_minutes: 7
+  references:
+  - source_id: dora-dev
+    locator: DORA research program — measuring delivery performance and controlled experimentation for engineering investments
+  - source_id: nist-ai-rmf
+    locator: NIST AI Risk Management Framework — GOVERN function, accountability and risk-tolerance guidance for AI investment
+      decisions
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design

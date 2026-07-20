@@ -1,0 +1,402 @@
+version: 1
+records:
+- id: gold-ai-003
+  domain: agentic-ai
+  subdomain: agents-vs-workflows
+  title: Deterministic workflow versus autonomous agent
+  level: basic
+  priority: P0
+  frequency: common
+  question: When should a deterministic workflow be used instead of an autonomous agent?
+  concise_answer: Use a deterministic workflow when the sequence of steps, the available paths and the decision logic between
+    them are known in advance — a fixed pipeline of LLM calls and tools chained in code gives predictable cost, latency and
+    behavior. Reach for an agent — a model that dynamically decides its own steps and tool calls in a loop — only when the
+    task has genuine, bounded ambiguity that a fixed sequence cannot anticipate, because autonomy trades predictability for
+    flexibility and multiplies evaluation, security and failure-recovery cost. The right default is the least autonomy that
+    solves the task, not the most impressive architecture.
+  recommended_answer: 'The distinction is about who decides the next step. A workflow is orchestration code that calls models
+    and tools in a predetermined sequence or a small set of predefined branches — the developer already knows the paths, so
+    the code encodes them directly and the LLM is used for the parts that genuinely need language understanding or generation
+    within a step. An agent is a model given a goal, a set of tools and a loop that lets it decide, at each turn, what to
+    do next — the developer does not enumerate the paths, the model discovers them.
+
+    That difference has concrete costs. A workflow''s behavior is testable step-by-step and its cost/latency are predictable
+    because the number of model calls is bounded and known. An agent''s number of steps, tool calls and therefore cost and
+    latency are open-ended, its failure modes multiply (wrong tool choice, wrong argument, infinite or looping behavior, tool
+    misuse under adversarial input), and its evaluation surface grows from ''did it produce the right output'' to ''did it
+    choose a safe and efficient path to get there.'' Public guidance on building agents frames this exactly as a threshold
+    decision: start with the simplest workflow that could work, and only introduce agentic autonomy where the task has real
+    ambiguity in the number of steps or the right tool to use that cannot be reasonably hard-coded, and where the cost of
+    that autonomy (evaluation, guardrails, monitoring) is worth paying.
+
+    In practice: a fixed intake form that always runs the same three validation steps is a workflow, even if one of those
+    steps calls an LLM to summarize free text. A support system that must decide, case by case, whether to search documentation,
+    escalate to a human, or issue a refund based on an open-ended conversation is a legitimate candidate for an agent, because
+    the right sequence of actions genuinely cannot be enumerated in advance.'
+  deep_dive: ''
+  key_points:
+  - Use a workflow when steps and transitions between them are known in advance.
+  - Agents add value only under genuine, bounded ambiguity in path or tool choice.
+  - Autonomy increases evaluation, security and recovery cost, not just capability.
+  - Start with the least autonomy that solves the task and add agentic behavior only when needed.
+  strong_signals:
+  - Frames the decision around 'who decides the next step' rather than marketing language.
+  - Names the concrete costs of autonomy (evaluation surface, cost/latency variance, failure modes).
+  - Defaults to the least autonomous design that satisfies the requirement.
+  weak_signals:
+  - Calls any system with an LLM call inside it an 'agent' regardless of whether it makes decisions.
+  - Cannot name a concrete cost of choosing agentic autonomy over a workflow.
+  red_flags:
+  - Recommends an open-ended autonomous agent for a task with a small, fully enumerable set of steps.
+  - Has no plan for bounding an agent's number of steps, tool calls, or cost.
+  common_mistakes:
+  - Building an agent for marketing/architecture-astronaut reasons rather than a real ambiguity requirement.
+  - Failing to bound iteration count, leading to runaway cost or infinite tool-call loops.
+  - Not distinguishing 'uses an LLM' from 'makes autonomous decisions' when describing the system.
+  follow_ups:
+  - question: Give an example where calling the system an agent adds no practical value.
+    recommended_answer: A form that extracts three fields from a resume with one LLM call, always validates them against a
+      fixed schema, and always writes the same report format has a fully enumerable set of steps — wrapping it in an agent
+      loop with tool-choice autonomy adds unpredictable cost and a larger failure surface (the model could 'decide' to skip
+      a step or invoke an unnecessary tool) without adding any capability the fixed workflow did not already have. Calling
+      it an agent here is a marketing choice, not an engineering one.
+  examples:
+  - A resume-intake pipeline that always extracts fields, always validates them against a schema, and always writes a fixed
+    report is a workflow — an LLM call inside one step does not make the overall system an agent, because the sequence of
+    steps never changes based on what the model decides.
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 2
+  - 15
+  tags:
+  - agentic-ai
+  - workflows
+  - agents
+  - architecture
+  - autonomy
+  estimated_minutes: 5
+  references:
+  - source_id: openai-docs
+    locator: OpenAI developer documentation — A Practical Guide to Building Agents, 'when to build an agent' decision criteria
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept
+- id: gold-ai-004
+  domain: agentic-ai
+  subdomain: tool-schemas
+  title: Least-privilege tool schema and permission model for an agent
+  level: advanced
+  priority: P0
+  frequency: common
+  question: Design a tool schema and permission model for an agent that can search, read files and create issues but must
+    not leak secrets or make irreversible changes.
+  concise_answer: Give the agent narrow, typed tools rather than a general 'run shell command' tool — search(query), readFile(path)
+    restricted to an allowlisted directory, and createIssue(title, body) — each with strict argument validation and no ability
+    to reach outside its declared scope. Separate read-only tools from write/side-effecting tools explicitly, validate every
+    argument (especially file paths, to block traversal outside the allowlist) before execution, require human approval for
+    anything irreversible or high-impact, and log every tool call and result so the sequence is auditable. Treat any content
+    the agent reads (file contents, search results) as untrusted data that must never be interpreted as new instructions.
+  recommended_answer: 'The permission model starts from least privilege at the tool-definition level, not just at the prompt
+    level: define exactly three tools with narrow, typed schemas — search(query: string) returning ranked snippets, readFile(path:
+    string) restricted at the implementation layer to an explicit allowlisted root directory with path normalization to block
+    ''../'' traversal, and createIssue(title: string, body: string) that only creates, never edits or deletes. There is no
+    general file-write, shell, or ''run arbitrary code'' tool in scope, because the permission model is enforced by which
+    tools exist, not by instructing the model not to misuse a more powerful one.
+
+    Separate read tools from write/side-effecting tools in the permission model itself — search and readFile require no approval
+    because they cannot change external state; createIssue is the one action with real-world side effects and should either
+    require a human-in-the-loop approval step before execution or be restricted to a non-production issue tracker/queue that
+    a human reviews before it becomes visible. Any tool the agent could plausibly gain that performs a delete, a payment,
+    a credential change, or anything else irreversible must sit behind mandatory human approval — this is the practical meaning
+    of ''must not make irreversible changes.''
+
+    Validate every argument at the tool boundary regardless of what the model intended: normalize and check file paths against
+    the allowlist server-side (never trust the model to only ask for allowed paths), size- and content-type-check search queries,
+    and reject or sanitize createIssue content that looks like it is trying to smuggle secrets or credentials into a public
+    issue tracker. Treat retrieved file contents and search results as untrusted data — this is the core defense against prompt
+    injection and against the OWASP Top 10 for LLM Applications'' ''excessive agency'' risk category — the agent''s system
+    prompt should explicitly instruct it that content read via tools is data, not instructions, and the tool layer should
+    never let a ''read'' result trigger an unreviewed ''write'' action. Finally, log every tool call, its arguments and its
+    result for audit — this is what makes an incident investigable after the fact rather than a mystery.'
+  deep_dive: ''
+  key_points:
+  - Least privilege at the tool-definition level — narrow typed schemas, not a general-purpose execution tool.
+  - Separate read-only tools from write/side-effecting tools explicitly in the permission model.
+  - Validate every argument (especially paths) server-side, never trusting model-supplied values.
+  - Require human approval for irreversible or high-impact actions.
+  - Audit every tool call and result; treat retrieved content as untrusted data, not instructions.
+  strong_signals:
+  - Enforces permission boundaries in tool implementation code, not only via prompt instructions.
+  - Explicitly separates read and write tools and gates write/irreversible actions behind human approval.
+  - Names prompt injection via retrieved content as a first-class threat to design against.
+  weak_signals:
+  - Relies on instructing the model 'don't access files outside this folder' as the only control.
+  - Has no distinction between read and write tools in the permission model.
+  red_flags:
+  - Gives the agent a general shell/code-execution tool 'for flexibility.'
+  - No human-approval gate before any irreversible or credential-touching action.
+  common_mistakes:
+  - Validating arguments only client-side in the prompt, not in the tool's actual implementation.
+  - Trusting retrieved document/file content as instructions rather than untrusted data.
+  - Logging only final answers, not the intermediate tool calls, making incidents unauditable.
+  follow_ups:
+  - question: How would you defend against a retrieved document instructing the agent to reveal credentials?
+    recommended_answer: 'Layer defenses rather than relying on the model to ''just know better'': mark all retrieved/tool-returned
+      content as data in the prompt structure (a distinct role/section the model is instructed to never treat as instructions),
+      scan tool outputs for known injection patterns before they reach the model where feasible, and — critically — ensure
+      the tools themselves have no capability to read or emit secrets in the first place, so even a fully successful injection
+      has nothing to exfiltrate. Add output-side checks that flag or block responses containing credential-shaped strings
+      (API-key patterns, connection strings) before they are returned, and log the attempt for review. This matches the OWASP
+      guidance on treating prompt injection and excessive agency as top-tier risks that need architectural mitigation, not
+      just prompt wording.'
+  examples:
+  - readFile('../../../etc/secrets.env') must be rejected by path normalization and allowlist enforcement in the tool implementation
+    itself — not by hoping the model never asks for it, since a poisoned search result or document could instruct the model
+    to try exactly that path.
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 4
+  - 18
+  tags:
+  - agentic-ai
+  - tool-schemas
+  - permissions
+  - least-privilege
+  - prompt-injection
+  - mcp
+  estimated_minutes: 8
+  references:
+  - source_id: mcp-spec
+    locator: Model Context Protocol specification — Server Features (Tools) and security best practices (tool safety, user
+      consent for tool invocation)
+  - source_id: owasp-genai
+    locator: OWASP Top 10 for LLM Applications — LLM01 Prompt Injection and LLM06 Excessive Agency
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-ai-005
+  domain: agentic-ai
+  subdomain: state-memory
+  title: Separating conversation state, task state, memory and retrieval
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Separate conversation state, task state, long-term memory and source retrieval in an agent system. What should
+    not be remembered?
+  concise_answer: 'Conversation state is the current turn''s message history, scoped to the session and typically ephemeral.
+    Task state is the agent''s working progress on the current goal — plan, completed steps, intermediate results — scoped
+    to the task and cleared on completion or handoff. Long-term memory is durable facts intentionally persisted across sessions
+    (user preferences, prior decisions), which requires provenance, versioning and a correction/deletion path because it can
+    go stale or wrong. Retrieved source content is neither memory nor state — it is external evidence fetched fresh per query
+    and should never be blindly trusted or silently merged into long-term memory. What should not be remembered: secrets,
+    unredacted PII beyond what the task genuinely needs, and low-confidence inferences promoted to ''fact'' status without
+    review.'
+  recommended_answer: 'These four state types differ in lifecycle and trust, and conflating them is the root of several classic
+    agent bugs. Conversation state — the raw turn history — is scoped to a session and should generally not outlive it without
+    explicit consent; it is high volume and often contains exactly the sensitive detail a user assumed was transient. Task
+    state — the agent''s plan, completed sub-steps, and intermediate tool results for the current goal — is scoped to a single
+    task/run; it should be cleared or archived once the task completes or hands off, and it is what makes a multi-step run
+    resumable or debuggable, not a place for facts to leak into future unrelated conversations.
+
+    Long-term memory is qualitatively different: it is a deliberate decision to persist a fact beyond the session because
+    it will be useful later (a stated preference, a correction the user gave previously). Because it is durable, it needs
+    provenance (when and from what interaction was this learned), a way to be corrected or deleted (a user who says ''that''s
+    wrong, forget it'' must have a working mechanism, not just a wish), and a policy for what is even eligible to become memory
+    — sensitive or ambiguous inferences should not silently graduate to ''remembered fact'' status without a confidence bar
+    or human confirmation.
+
+    Retrieved source content (documents, search results, database rows) is not memory at all — it is fetched fresh for the
+    current query and should be treated as evidence to reason over, not as something to blindly write into long-term memory.
+    Writing a retrieved claim into permanent memory without provenance is how an agent ends up permanently ''believing'' something
+    that was only true at retrieval time, or was wrong to begin with. This connects to the Model Context Protocol''s separation
+    of concerns between server-exposed resources (external, application-controlled context, fetched per request) and any client-side
+    conversation/session state — the two are architected as distinct because they have different trust and lifecycle properties.
+
+    What should never be remembered regardless of type: raw secrets or credentials seen during a task, PII beyond what the
+    specific task requires, and speculative or low-confidence conclusions stored as if they were confirmed facts. Minimization
+    is a design default, not an afterthought bolted on for compliance.'
+  deep_dive: ''
+  key_points:
+  - State types (conversation, task, long-term memory, retrieval) have different lifecycle and trust properties.
+  - Minimize sensitive retention by default rather than remembering everything by convenience.
+  - Long-term memory requires provenance, versioning and a correction/deletion path.
+  - Retrieved facts are evidence for the current query, not automatically trusted or automatically remembered.
+  - Users need visible deletion/control over what has been remembered about them.
+  strong_signals:
+  - Distinguishes all four state types by lifecycle and trust, not just by 'storage location.'
+  - Requires provenance and a deletion path before treating anything as durable memory.
+  - Explicitly refuses to auto-promote retrieved content into long-term memory.
+  weak_signals:
+  - Uses 'memory' as a single undifferentiated bucket for everything the system has ever seen.
+  - Has no user-facing mechanism to correct or delete remembered facts.
+  red_flags:
+  - Persists secrets or full conversation transcripts into long-term memory by default.
+  - Treats retrieved search/document content as equivalent to a confirmed, permanent fact.
+  common_mistakes:
+  - Letting task-scoped intermediate results leak into a later, unrelated conversation.
+  - Storing PII in long-term memory beyond what any task actually requires.
+  - No versioning on memory, so a corrected fact and its outdated predecessor coexist silently.
+  follow_ups:
+  - question: How would you test that outdated memory does not override current source evidence?
+    recommended_answer: Construct a fixture where long-term memory contains a stale fact (for example, 'user's plan tier is
+      Basic') and retrieval/tooling returns current, contradicting evidence (an API call showing the tier is now Premium)
+      in the same run, then assert the agent prefers the fresher, sourced evidence and — ideally — flags or updates the stale
+      memory entry rather than silently answering from memory or presenting a contradiction to the user without resolution.
+      Run this as a standing regression case, since memory-versus-fresh-evidence conflicts recur every time a persisted fact
+      and live system diverge.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  years_range:
+  - 4
+  - 18
+  tags:
+  - agentic-ai
+  - state-memory
+  - retrieval
+  - privacy
+  - mcp
+  estimated_minutes: 7
+  references:
+  - source_id: mcp-spec
+    locator: Model Context Protocol specification — Server Features (Resources), application-controlled context fetched per
+      request versus client-managed conversation state
+  - source_id: nist-ai-rmf
+    locator: NIST AI Risk Management Framework — MAP function, data-governance and privacy-enhancement guidance
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: system_design
+- id: gold-ai-006
+  domain: agentic-ai
+  subdomain: evals
+  title: Evaluating an agent that chooses tools and performs multi-step tasks
+  level: advanced
+  priority: P0
+  frequency: common
+  question: Create an evaluation strategy for an agent that chooses tools and performs multi-step tasks.
+  concise_answer: 'Task success alone is insufficient because an agent can reach the right final answer through an unsafe
+    or inefficient path. Evaluate the full trajectory: which tools it chose, whether arguments were correct, whether the sequence
+    was efficient and policy-compliant, how it recovered from a failed tool call, and its latency and cost per run. Use deterministic
+    fixtures (mocked tools with known responses) for repeatable regression, plus a smaller set of adversarial cases (bad tool
+    results, injected instructions, ambiguous goals) to test safety and recovery. Trace every run so failures are diagnosable,
+    and maintain the eval set as a versioned regression suite that grows every time a real failure is found.'
+  recommended_answer: 'Grading only the final answer misses most of what can go wrong in an agent: it can arrive at a correct
+    answer by calling an unauthorized tool, by leaking data through an intermediate step, by taking twenty turns where two
+    would do, or by getting lucky after a wrong tool call rather than recovering deliberately. The evaluation strategy needs
+    to score the trajectory, not just the destination — tool choice correctness (did it pick the right tool for each subgoal),
+    argument correctness (were the parameters right, not just ''some call was made''), sequence efficiency (unnecessary calls,
+    redundant searches), policy compliance (did it stay within its permitted tools and avoid disallowed actions), recovery
+    behavior (what did it do when a tool call failed or returned unexpected data), and operational cost — latency and token/dollar
+    cost per run, since an agent that succeeds at ten times the cost of a workflow may not be worth deploying.
+
+    Build this on two complementary layers of fixtures. Deterministic fixtures — mocked tools with fixed, known responses
+    — give repeatable, fast regression tests where the expected trajectory (or an acceptable set of trajectories) is known
+    in advance, so CI can catch a regression in tool-choice logic immediately. Adversarial cases — a search tool returning
+    content that tries to inject new instructions, a file read that returns malformed data, an ambiguous user goal with no
+    clearly correct action — test the properties that matter most for safety: does the agent stay within its tool-permission
+    boundary, does it recognize and reject injected instructions, does it ask for clarification instead of guessing destructively.
+
+    Every run needs full tracing — the sequence of model calls, tool calls, arguments and results — so a failure can be diagnosed
+    rather than just flagged. And the eval set should be a living regression suite: every real production failure that gets
+    root-caused should turn into a new fixture, the same discipline unit tests get after a bug fix, so evaluation coverage
+    compounds rather than staying frozen at launch-time.'
+  deep_dive: ''
+  key_points:
+  - Task success alone is insufficient — evaluate the full trajectory.
+  - Score tool choice, arguments, sequence efficiency, policy compliance, recovery, latency and cost.
+  - Use deterministic mocked-tool fixtures for repeatable regression testing.
+  - Add adversarial cases (injected instructions, malformed tool results, ambiguous goals) for safety evaluation.
+  - Trace every run and grow the regression set from real production failures.
+  strong_signals:
+  - Scores the trajectory (tool choice, arguments, recovery) rather than only the final answer.
+  - Proposes both deterministic fixtures and adversarial cases as distinct eval layers.
+  - Treats every production failure as a candidate new regression fixture.
+  weak_signals:
+  - Evaluates only whether the final answer matches an expected string.
+  - Has no plan for tracing intermediate tool calls when a run fails.
+  red_flags:
+  - Considers an agent that reaches the right answer via an unsafe tool call to be a passing run.
+  - No adversarial/safety evaluation at all, only happy-path task success.
+  common_mistakes:
+  - Grading cost/latency only in aggregate, missing runs that succeed but are absurdly expensive.
+  - Never updating the eval set after a real incident, so the same failure recurs untested.
+  - Using live, non-deterministic external tools in CI regression, making failures unreproducible.
+  follow_ups:
+  - question: How would you evaluate a run that reaches the correct answer using an unsafe tool path?
+    recommended_answer: 'Fail it, regardless of the final answer''s correctness. Define policy-compliance as a hard gate in
+      the scoring rubric, evaluated independently of task success — a run that used a disallowed tool, exceeded its permission
+      scope, or leaked data en route to a correct answer should score as a policy failure with its own severity, separate
+      from and not offset by the correctness score. Treat it exactly like a security finding: log it, root-cause why the guardrail
+      didn''t stop it, and add it as a new adversarial fixture so the same unsafe path is caught in future regression runs.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - AI QA Engineer
+  - AI Test Engineer
+  - AI Engineer
+  - LLM/Agent Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 4
+  - 18
+  tags:
+  - agentic-ai
+  - evals
+  - test-strategy
+  - tool-choice
+  - safety
+  - regression
+  estimated_minutes: 7
+  references:
+  - source_id: openai-docs
+    locator: OpenAI developer documentation — evaluation and agent-tracing guidance for grading model/agent output
+  - source_id: nist-ai-rmf
+    locator: NIST AI Risk Management Framework — MEASURE function, TEVV (test, evaluation, verification and validation) guidance
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: test_strategy

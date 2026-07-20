@@ -1,0 +1,550 @@
+version: 1
+records:
+- id: gold-perf-001
+  domain: performance-observability
+  subdomain: workload-models
+  title: Translating a business workload into a load-test model
+  level: basic
+  priority: P0
+  frequency: common
+  question: Translate a business workload into users, arrival rate, pacing, data distribution and transaction mix.
+  concise_answer: A workload model starts from production behavior, not a round number of "500 users." Translate business
+    volume into an arrival rate (requests or transactions per unit time), decide whether the system should be modeled as open
+    (arrivals independent of response time) or closed (a fixed pool of users who wait, then think, then repeat), and set pacing/think
+    time so demand matches reality. Data distribution and transaction mix must reflect production skew, not uniform synthetic
+    values, and every assumption should be written down so a stakeholder can challenge it before the run.
+  recommended_answer: 'Concurrency and arrival rate answer different questions, and conflating them is the most common workload-modeling
+    defect. Concurrency ("500 concurrent users") describes a closed model: a fixed VU pool where each virtual user waits for
+    its previous iteration to finish, then thinks, then starts again. Arrival rate ("120 requests per second") describes an
+    open model: new work arrives on a schedule regardless of how long the system takes to respond. When response time degrades
+    under load, a closed model silently throttles itself - VUs are still "waiting," so the offered load drops exactly when
+    it should be rising - a problem documented in load-testing literature as coordinated omission. Public-facing APIs and
+    event-driven systems are usually closer to an open model in production, so an arrival-rate executor (k6''s constant-arrival-rate/ramping-arrival-rate,
+    or a JMeter throughput-shaping timer setup) is the safer default when the SLA is stated as a rate or a percentile latency.
+
+    Beyond the model choice, the workload needs: think time and pacing derived from real session analytics rather than zero-wait
+    loops; a transaction mix weighted the way production traffic is actually weighted (browse-to-checkout ratios, not equal
+    shares); and data distribution that avoids cache-friendly repetition - random or production-sampled account IDs, not "customer
+    1" for every virtual user. Every one of these choices is an assumption; documenting it (source of the ratio, sampling
+    window, why an open or closed model was chosen) is what lets a reviewer catch a wrong assumption before it becomes a wrong
+    capacity decision.'
+  deep_dive: ''
+  key_points:
+  - Workload modeling starts from production/business behavior, not a round VU count.
+  - Concurrency (closed model) and arrival rate (open model) are different things.
+  - Closed models can hide true load loss under degradation (coordinated omission).
+  - Think time, pacing and transaction mix must reflect real session and traffic data.
+  - Document every workload assumption so it can be challenged before the run.
+  strong_signals:
+  - Distinguishes open (arrival-rate) from closed (VU-based) models unprompted.
+  - Names coordinated omission as the risk of pure closed-model testing under degradation.
+  - Ties transaction mix and data distribution to actual production analytics.
+  weak_signals:
+  - Picks a VU count "that feels right" without connecting it to a business rate.
+  - Uses uniform or sequential test data without discussing cache or skew effects.
+  red_flags:
+  - Believes "500 users" and "500 requests per second" are interchangeable.
+  - Has no answer for where the transaction-mix ratios came from.
+  common_mistakes:
+  - Modeling every workload as closed even when the target SLA is expressed as an RPS or percentile latency.
+  - Using zero think time, which manufactures unrealistic arrival bursts.
+  - Reusing the same small data set across all virtual users, hiding cache-miss behavior.
+  follow_ups:
+  - question: How would you validate that the test actually generated the intended workload?
+    recommended_answer: 'Verify the generator''s own reported rate against the target before trusting any result: compare
+      achieved iterations-per-second or requests-per-second to the configured rate, and check that VU or thread saturation
+      (hitting maxVUs or the thread-pool ceiling) did not silently cap throughput below the intended level. Confirm pacing
+      empirically - measured think time between requests should match the modeled value, not collapse under load. Finally,
+      sample the actual request payloads and parameters sent during the run to confirm the transaction mix and data distribution
+      matched the plan, since a misconfigured weight or a data-file exhaustion issue can quietly change the test that ran
+      versus the test that was designed.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - performance-testing
+  - workload-modeling
+  - arrival-rate
+  - coordinated-omission
+  - load-testing
+  estimated_minutes: 6
+  references:
+  - source_id: grafana-k6
+    locator: 'k6 docs: Open and closed models - arrival-rate vs virtual-user workload configuration'
+  - source_id: jmeter-docs
+    locator: 'Apache JMeter User Manual: Component Reference - Thread Group ramp-up, loop count and scheduler'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design
+- id: gold-perf-002
+  domain: performance-observability
+  subdomain: percentiles
+  title: Percentiles vs averages for latency SLAs
+  level: intermediate
+  priority: P0
+  frequency: common
+  question: Explain why average response time can hide user pain and how percentiles should be interpreted.
+  concise_answer: 'An average blends every response time into one number, so a fast majority can mask a slow tail - or a bimodal
+    distribution (cache hit vs cache miss) can average into a value neither group actually experiences. Percentiles describe
+    where a value sits in the sorted distribution: p95 means 95% of requests were at or below that time, so it reports tail
+    behavior an average cannot. Percentiles still describe a batch, not a guarantee for any single user, and they are sensitive
+    to sample size, aggregation window and how the data was collected.'
+  recommended_answer: 'Two systems can have identical averages and completely different user experiences: one where every
+    request takes 200ms, and one where 90% take 50ms and 10% take 1500ms. The average (roughly 195ms in the second case) reports
+    neither reality. Percentiles fix this by describing the distribution''s shape - p50 (median) reports typical experience,
+    p95/p99 report the tail that a meaningful fraction of real users actually hit, and reporting several together (p50, p95,
+    p99) reveals whether a system is uniformly slow or has a narrow but painful tail.
+
+    Percentiles have their own failure modes. Small sample sizes make high percentiles statistically noisy - a single slow
+    outlier can dominate a p99 computed over a few hundred samples, so tools like JMeter''s Aggregate Report and k6''s Trend
+    metrics both depend on enough samples per aggregation window to be meaningful. Aggregation window size matters too: a
+    p95 computed over an entire multi-hour soak test can hide a ten-minute spike that a per-minute p95 would expose. And a
+    percentile is a population statistic, not a per-user guarantee - "p99 < 1s" says nothing about whether the same user''s
+    next three requests will also be under a second.
+
+    The deeper trap is coordinated omission: if the load generator''s own request rate slows down when the system under test
+    slows down (a closed workload model), the slowest responses are undersampled or never issued at all, and the measured
+    percentiles look better than what real, arrival-driven traffic would experience. Pairing percentile latency with throughput
+    and error rate - and generating load with an open or arrival-rate model when the SLA is rate-based - is what keeps the
+    percentile honest.'
+  deep_dive: ''
+  key_points:
+  - Averages hide tails and multimodal (cache-hit vs cache-miss) behavior.
+  - Percentiles report where a value sits in the sorted distribution, not a per-user guarantee.
+  - Sample size and aggregation-window size change how trustworthy a percentile is.
+  - Coordinated omission from closed-model load generation can understate true tail latency.
+  - Pair latency percentiles with throughput and error rate, never read alone.
+  strong_signals:
+  - Gives a concrete example where identical averages hide different distributions.
+  - Raises coordinated omission as a threat to percentile validity.
+  - Discusses aggregation-window size, not just percentile choice.
+  weak_signals:
+  - Recommends "just use p95" without discussing sample size or window effects.
+  - Cannot explain why p99 over 50 samples is unreliable.
+  red_flags:
+  - Treats a percentile as a guarantee that applies to every individual request.
+  - Has never heard of coordinated omission and dismisses it as irrelevant.
+  common_mistakes:
+  - Reporting only the average in a performance test summary.
+  - Computing p99 over a tiny sample and treating it as stable.
+  - Ignoring throughput and error rate when a percentile looks good.
+  follow_ups:
+  - question: How would you detect coordinated omission or misleading client-side timing?
+    recommended_answer: 'Compare the load generator''s configured or target rate against its achieved rate over time - a gap
+      that widens as response time degrades is the signature of a closed model throttling itself. Re-run the same scenario
+      with an open or arrival-rate executor and compare the resulting percentiles; a large gap indicates the closed-model
+      numbers were optimistic. Also verify timing boundaries: client-side timers that start after connection setup, or that
+      exclude queueing, DNS or TLS time, will under-report latency versus server-side or end-to-end trace timing, so cross-check
+      the client''s reported percentile against a server-side or distributed-trace measurement of the same requests.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - performance-testing
+  - percentiles
+  - latency
+  - coordinated-omission
+  - metrics
+  estimated_minutes: 6
+  references:
+  - source_id: grafana-k6
+    locator: 'k6 docs: Thresholds - percentile aggregation methods p(95) and p(99) for Trend metrics'
+  - source_id: jmeter-docs
+    locator: 'Apache JMeter User Manual: Generating Dashboard Report - configurable percentile properties'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: concept
+- id: gold-perf-003
+  domain: performance-observability
+  subdomain: bottleneck-analysis
+  title: Diagnosing high latency with low CPU utilization
+  level: advanced
+  priority: P0
+  frequency: common
+  question: A test reaches high latency with low CPU. Build a bottleneck investigation using application, database, network
+    and dependency evidence.
+  concise_answer: 'Low CPU does not mean the system is idle - it usually means work is waiting rather than executing: a connection
+    pool exhausted, a lock held, a downstream dependency slow, or threads blocked on I/O. The investigation collects queue
+    depth, pool utilization, lock wait time, and downstream/dependency latency alongside CPU, then uses distributed traces
+    to find which span in the request''s path is actually consuming the wall-clock time. Change one variable at a time and
+    correlate every metric by timestamp and load stage so the bottleneck evidence and the symptom line up.'
+  recommended_answer: 'High latency with low CPU is a saturation-on-something-other-than-CPU signature. The investigation
+    should widen from CPU to the full resource set: connection pool utilization (application-to-database and application-to-downstream-service
+    pools both have finite size and a wait queue when exhausted), thread pool queue depth, database lock and wait-event statistics,
+    garbage-collection pause time, and network-level retransmits or connection setup latency. Any one of these can hold a
+    request "in flight" without touching the CPU.
+
+    Distributed tracing is the tool that turns a vague "latency is high" into "this span is high": a trace shows the request''s
+    path through every hop with per-span duration, so the investigation can see whether the time is spent waiting to acquire
+    a database connection, inside a slow query, in a downstream HTTP call, or in serialization. Pair the trace with resource
+    metrics scoped to the same time window - a spike in span duration that lines up with a spike in a pool-wait-time metric
+    is strong evidence; one that lines up with nothing is a clue to keep looking rather than to accept a hypothesis.
+
+    Discipline matters as much as tooling: correlate every signal by timestamp and by load stage (ramp-up vs steady-state
+    vs ramp-down behave differently), and change one variable at a time - increasing pool size while also adding an index
+    at the same time makes it impossible to attribute the improvement. Only after the bottleneck is attributed to a specific
+    resource should a fix (larger pool, added index, faster downstream call, reduced serialization cost) be proposed and re-measured.'
+  deep_dive: ''
+  key_points:
+  - Low CPU does not mean no saturation - work can be blocked rather than executing.
+  - Inspect connection pools, thread queues, database locks and downstream dependency latency.
+  - Use distributed traces to find which span in the request path consumes the time.
+  - Correlate every metric by timestamp and load stage, not in isolation.
+  - Change one variable at a time to keep the attribution valid.
+  strong_signals:
+  - Immediately widens the search beyond CPU to pools, locks, queues and dependencies.
+  - Uses trace span duration as the primary localization tool, not a guess.
+  - Insists on timestamp and load-stage correlation before proposing a fix.
+  weak_signals:
+  - Jumps straight to "add more CPU" or "scale up the instance" without evidence.
+  - Treats every metric independently instead of correlating them by time.
+  red_flags:
+  - Cannot name a single non-CPU resource that could cause this symptom.
+  - Changes multiple variables simultaneously and still claims to know the root cause.
+  common_mistakes:
+  - Concluding "no bottleneck" because average CPU looks healthy.
+  - Skipping traces and relying only on aggregate dashboards for localization.
+  - Fixing the first plausible-looking metric spike without confirming causation.
+  follow_ups:
+  - question: Which evidence would distinguish connection-pool exhaustion from database locking?
+    recommended_answer: 'Connection-pool exhaustion shows up as growing pool-wait-time or a rising count of threads queued
+      for a connection while the database itself reports low active-query time - the database is idle, waiting for work that
+      never arrives because it is stuck in the pool''s queue. Database locking shows the opposite: connections are checked
+      out and active, but the database''s own lock or wait-event statistics show sessions blocked on other sessions, and query
+      duration (not connection-acquisition time) is what grows. A trace confirms which: a long span before the query starts
+      points to pool exhaustion, a long span inside the query execution itself points to locking.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 5
+  - 16
+  tags:
+  - performance-testing
+  - bottleneck-analysis
+  - distributed-tracing
+  - connection-pools
+  - database-locking
+  estimated_minutes: 7
+  references:
+  - source_id: opentelemetry
+    locator: 'OpenTelemetry docs: Signals - Traces (spans and the request path through a distributed system)'
+  - source_id: opentelemetry
+    locator: 'OpenTelemetry docs: Signals - Metrics (resource and dependency measurements captured at runtime)'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: troubleshooting
+- id: gold-perf-004
+  domain: performance-observability
+  subdomain: traces-metrics-logs
+  title: Observability design for actionable performance-test failures
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Design observability for a performance test so a failed SLA produces an actionable diagnosis rather than only
+    a graph.
+  concise_answer: 'Instrument the test itself, not just the system under test: inject a correlation ID and a test-stage marker
+    (ramp-up, steady-state, ramp-down) into every request so results can be sliced by load stage later. Collect the three
+    complementary signals - metrics for aggregated resource/service health, distributed traces for per-request path and latency
+    attribution, and structured logs/errors for the specific failure detail - and build dashboards around the hypotheses the
+    team expects to test, not a generic "everything" board. A failed SLA should point at a span, a resource metric and a log
+    line, not just a red line on a chart.'
+  recommended_answer: 'A performance test that only produces a pass/fail graph forces a second investigation every time it
+    fails. The fix is to design the test''s observability the same way the production system''s observability is designed,
+    using the same three signal types. Metrics give aggregated, cheap-to-store service and resource health (CPU, pool utilization,
+    queue depth, request rate) over the test''s duration. Distributed traces give per-request causality - which span in a
+    failing request''s path actually consumed the latency - and are the signal that turns "the SLA failed" into "the SLA failed
+    because the payment-service call added 800ms." Structured logs and error records carry the specific detail a trace span
+    cannot: an exception type, a validation message, a downstream error code.
+
+    Correlation is what ties the three together: every request the test issues should carry (or receive, for a synthetically
+    injected header) a request or trace ID that appears in the trace, in structured log lines, and ideally in the test''s
+    own result record. A test-stage marker (which phase of the load profile was active) lets a post-run query answer "did
+    the failures cluster in ramp-up or steady-state?" without re-running the test.
+
+    Dashboards should be built to test specific hypotheses the team already holds - "is the database connection pool the limiting
+    factor," "does p99 degrade before p95" - rather than a single dashboard trying to show everything at every zoom level.
+    Finally, observability has a cost: high-cardinality trace sampling, verbose logging, or a monitoring agent''s own CPU
+    and network footprint can distort the very load test it is meant to observe, so sampling rates and instrumentation overhead
+    need to be measured and bounded, not left at a library''s default.'
+  deep_dive: ''
+  key_points:
+  - Correlation IDs and test-stage markers let failures be sliced by load phase after the run.
+  - Combine metrics, distributed traces and structured logs/errors, not one signal alone.
+  - Dashboards should be built around specific hypotheses, not a generic overview.
+  - Traces provide per-request path attribution that a metric graph cannot.
+  - Observability overhead itself can distort the test and must be measured and bounded.
+  strong_signals:
+  - Explains what each of metrics, traces and logs uniquely contributes to diagnosis.
+  - Proposes correlation IDs and stage markers before being asked how to slice results.
+  - Raises instrumentation overhead as a risk to the test's own validity.
+  weak_signals:
+  - Equates observability with "a dashboard with more charts on it."
+  - Cannot explain why a trace adds anything beyond an aggregate latency metric.
+  red_flags:
+  - Believes logging every request body at full verbosity has no cost to the test.
+  - Has no way to correlate a specific failed request across signals after the fact.
+  common_mistakes:
+  - Building one dashboard that mixes every metric at every zoom level, making nothing readable.
+  - Omitting a correlation ID, so a failure can be seen in a trace but not matched to a log line.
+  - Sampling traces at 100% in a high-throughput test and having the tracing overhead become the bottleneck.
+  follow_ups:
+  - question: How would you avoid observability overhead distorting the test?
+    recommended_answer: Measure the instrumentation's own resource footprint before trusting the test's results - run the
+      same load profile with and without full instrumentation and compare throughput and latency. Use sampling for traces
+      (head-based or tail-based) rather than capturing every request at full detail during high-throughput phases, reserve
+      full-detail capture for failure-investigation runs at lower load, and keep structured logging at a level that carries
+      diagnostic fields without dumping full payloads on every request. Treat the collector or agent's CPU and network cost
+      as part of the system under test's resource budget, not as a free side channel.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  - Quality Engineering Lead
+  years_range:
+  - 5
+  - 16
+  tags:
+  - performance-testing
+  - observability
+  - distributed-tracing
+  - correlation-ids
+  - dashboards
+  estimated_minutes: 7
+  references:
+  - source_id: opentelemetry
+    locator: 'OpenTelemetry docs: Signals - Traces, Metrics and Logs and their shared context-propagation mechanism'
+  - source_id: dora-dev
+    locator: 'DORA: Capabilities - Monitoring and observability'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design
+- id: gold-perf-005
+  domain: performance-observability
+  subdomain: soak-spike
+  title: Load, stress, spike, soak and capacity tests compared
+  level: intermediate
+  priority: P1
+  frequency: common
+  question: Compare load, stress, spike, soak and capacity tests. Which risk does each reveal?
+  concise_answer: Each test type applies a different traffic shape to answer a different question. Load (average-load) testing
+    confirms the system handles expected production traffic within its performance targets. Stress testing raises load above
+    average to find the point where performance degrades or fails. Spike testing applies a sudden, short surge to check how
+    the system handles and recovers from a burst. Soak testing holds an average load for an extended duration to reveal slow
+    accumulation - memory growth, connection leaks, log-disk exhaustion - that a short test would never surface. Capacity
+    (breakpoint) testing ramps load until the system actually breaks, to find the ceiling for planning.
+  recommended_answer: 'The five test types differ in load level and duration, and each is designed to surface a distinct failure
+    mode. An average-load test uses production- representative concurrency or arrival rate for a moderate duration to validate
+    that normal traffic meets its performance targets - this is the baseline every other test type is compared against. A
+    stress test uses the same shape but a higher load level to find where performance starts to degrade non-linearly or where
+    the system fails outright; it should only run after the average-load baseline is established, or the degradation point
+    cannot be interpreted. A spike test applies a short, very high surge (with little to no ramp) to check whether the system
+    absorbs a sudden traffic burst gracefully and, critically, whether it recovers cleanly afterward rather than staying degraded.
+
+    A soak (endurance) test keeps an average load running for hours or days - the load level resembles the average-load test,
+    but the extended duration is the point: memory leaks, unbounded caches, connection-pool leaks, log or disk-space exhaustion,
+    and certificate or token expiry issues only appear given enough elapsed time, not enough concurrent load. A capacity or
+    breakpoint test progressively increases load (often via an arrival-rate executor with an abort-on-threshold-fail condition)
+    until the system actually breaks, producing the ceiling number that capacity planning and auto-scaling policy both need.
+
+    Running these out of order wastes effort and misleads interpretation: a stress test without a load-test baseline cannot
+    say what "degraded" means, and a soak test at stress-level load conflates two different risk classes (accumulation versus
+    peak capacity) into one ambiguous result.'
+  deep_dive: ''
+  key_points:
+  - Load (average-load) tests validate expected production traffic against performance targets.
+  - Stress tests find the degradation or failure point above average load.
+  - Spike tests validate sudden-surge handling and, importantly, recovery afterward.
+  - Soak tests reveal accumulation defects that only appear over extended duration.
+  - Capacity/breakpoint tests progressively find the system's actual ceiling for planning.
+  strong_signals:
+  - States the distinct failure mode each test type is designed to surface.
+  - Insists on running an average-load baseline before interpreting a stress test.
+  - Adds recovery assertions after spike/stress, not just peak-load assertions.
+  weak_signals:
+  - Uses the terms interchangeably or describes only load level without duration.
+  - Cannot explain why soak tests need duration rather than higher concurrency.
+  red_flags:
+  - Believes a single test type covers every performance risk.
+  - Runs a stress or breakpoint test directly against a production environment with no safeguards.
+  common_mistakes:
+  - Running a soak test at stress-level load, conflating accumulation risk with capacity risk.
+  - Treating a spike test's recovery period as optional and only checking the peak.
+  - Skipping the average-load baseline, leaving no reference point for stress-test results.
+  follow_ups:
+  - question: What recovery assertions belong after a stress or spike test?
+    recommended_answer: After load returns to baseline, assert that latency and error rate return to their pre-test average-load
+      values within a bounded recovery window, not just that the system "came back up." Check that resource metrics - connection
+      pools, thread counts, queue depth, memory - return to their pre-test baseline rather than staying elevated, which would
+      indicate a leak triggered by the stress rather than genuine elasticity. Also verify that any circuit breakers, rate
+      limiters or autoscaling actions that engaged during the spike disengage cleanly, and that no requests were silently
+      dropped without an error being recorded during the surge.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  years_range:
+  - 3
+  - 12
+  tags:
+  - performance-testing
+  - load-testing
+  - stress-testing
+  - spike-testing
+  - soak-testing
+  - capacity-planning
+  estimated_minutes: 6
+  references:
+  - source_id: grafana-k6
+    locator: 'k6 docs: Test Types - smoke, average-load, stress, spike, soak and breakpoint tests'
+  - source_id: jmeter-docs
+    locator: 'Apache JMeter User Manual: Component Reference - Thread Group ramp-up and scheduler for shaping load profiles'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: compare_contrast
+- id: gold-perf-006
+  domain: performance-observability
+  subdomain: performance-gates
+  title: Performance quality gates that tolerate baseline noise
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Create a performance quality gate that accounts for baseline variability and avoids blocking on noise.
+  concise_answer: A defensible gate starts from a stable, repeated baseline - the same environment, data and load shape run
+    enough times to know the natural variance, not a single prior run treated as ground truth. Gate a small set of critical
+    signals (key percentiles, error rate, throughput) against a tolerance band derived from that variance, use abort-on-threshold
+    conditions for hard limits, and separate hard failures that block a release from warnings that create follow-up work.
+    A regression that exceeds normal variance should block; noise within the established band should not.
+  recommended_answer: 'Gating on a single number from a single prior run treats measurement noise as signal and produces both
+    false failures (a normal-variance run blocks a release) and false confidence (a real regression inside the noise band
+    ships). The remedy starts with the baseline itself: run the same test against a stable, dedicated environment multiple
+    times to characterize natural run-to-run variance before defining any threshold, and re-baseline whenever the environment,
+    data volume or code path meaningfully changes - an old baseline compared against a changed system is not a valid comparison.
+
+    With variance characterized, define a tolerance policy explicitly: a percentage or statistical-interval band around the
+    baseline for each gated metric, rather than a single hard number nobody can justify. Gate only the metrics that represent
+    real risk - typically p95/p99 latency for critical transactions, error rate and throughput - and use abort-on-fail thresholds
+    (as in k6''s abortOnFail and delayAbortEval, or an equivalent in other tools) for values that indicate the system is already
+    failing, so the test stops burning time and money once the outcome is clear.
+
+    Separate hard limits from warnings: a hard limit blocks the release and requires investigation before proceeding; a warning
+    (a metric trending worse but still inside tolerance) creates tracked follow-up work without blocking. This avoids a policy
+    where every small fluctuation becomes an emergency, which erodes trust in the gate and leads teams to bypass it. Finally,
+    investigate the magnitude and trend, not only the pass/fail bit - a metric that is technically inside tolerance but has
+    degraded for three consecutive releases is a signal the gate''s binary result would otherwise hide.'
+  deep_dive: ''
+  key_points:
+  - Characterize baseline variance from repeated runs on a stable environment before setting thresholds.
+  - Define an explicit statistical or percentage tolerance policy per gated metric.
+  - Gate the critical percentiles, error rate and throughput, not every available metric.
+  - Separate hard limits that block a release from warnings that create follow-up work.
+  - Investigate trend and regression magnitude, not just the pass/fail bit.
+  strong_signals:
+  - Insists on repeated baseline runs to characterize variance before defining a threshold.
+  - Distinguishes hard-limit metrics from trend-tracked warning metrics.
+  - Re-baselines deliberately when environment or data volume changes, rather than reusing a stale number.
+  weak_signals:
+  - Sets a single threshold from one prior run with no discussion of variance.
+  - Gates every available metric equally instead of the few that represent real risk.
+  red_flags:
+  - Treats every gate failure as equally urgent regardless of magnitude.
+  - Would raise the threshold whenever the gate fails, rather than investigating the cause.
+  common_mistakes:
+  - Comparing against a baseline from a materially different environment or data volume.
+  - Using a hard-coded absolute number that nobody can trace back to a risk or SLA.
+  - Ignoring a metric that is inside tolerance but trending worse release after release.
+  follow_ups:
+  - question: How would you handle a faster response time caused by returning incorrect data?
+    recommended_answer: Treat correctness as a precondition for any performance comparison, not a separate concern - a gate
+      that only checks latency and throughput will happily pass a build that returns a cached error, a truncated payload or
+      a wrong record faster than the correct one. Pair every performance assertion with a functional or contract check (schema
+      validation, checksum or business-rule assertion) on the same responses being timed, and fail the gate if either fails.
+      Investigate any latency improvement that lacks a corresponding engineering change as suspicious by default, since an
+      unexplained speedup is exactly the symptom of accidentally-skipped work.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - Performance Engineer
+  - Senior SDET
+  - Quality Engineering Lead
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  years_range:
+  - 5
+  - 16
+  tags:
+  - performance-testing
+  - quality-gates
+  - baseline-variability
+  - ci-cd
+  - thresholds
+  estimated_minutes: 7
+  references:
+  - source_id: grafana-k6
+    locator: 'k6 docs: Thresholds - abortOnFail and delayAbortEval for gating on percentile and error-rate breaches'
+  - source_id: dora-dev
+    locator: 'DORA: Capabilities - Monitoring and observability, fast feedback and change failure rate'
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: framework_design

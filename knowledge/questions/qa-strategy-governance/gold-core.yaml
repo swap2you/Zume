@@ -1,0 +1,186 @@
+version: 1
+records:
+- id: gold-lead-002
+  domain: qa-strategy-governance
+  subdomain: metrics
+  title: Choosing quality-engineering metrics that resist gaming
+  level: advanced
+  priority: P0
+  frequency: very_common
+  question: Choose a small set of quality-engineering metrics and explain how each could be gamed or misinterpreted.
+  concise_answer: 'Prefer outcome and flow metrics over raw test counts: escaped defects (with severity and root-cause context),
+    change failure rate and time-to-restore for the pipeline as a whole, automation suite reliability (flaky rate, not just
+    pass rate), and coverage expressed as risk covered rather than a percentage of lines. Every one of these can be gamed
+    — escaped defects drop if triage reclassifies bugs as "enhancements," pass rate rises if flaky tests are quarantined and
+    never fixed, coverage percentage rises from trivial assertions. The defense is pairing each metric with its narrative
+    and never using a single number as an individual performance target.'
+  recommended_answer: 'A small, defensible set: (1) escaped defect rate by severity, reviewed with root cause, not just counted;
+    (2) DORA''s change failure rate and time-to-restore, because they measure the system''s actual safety net rather than
+    test-suite size; (3) automation reliability — flaky-failure rate and mean time to fix a quarantined test — because a rising
+    pass rate achieved by quarantining flaky tests is a regression wearing a disguise; (4) risk-weighted coverage, tied to
+    a risk model rather than a line-coverage percentage that rewards trivial assertions.
+
+    Each is gameable, and a good leader names how before publishing it: escaped-defect counts fall if triage relabels bugs
+    as feature requests, or if reporting channels get harder to use; change-failure-rate improves if teams simply ship less;
+    flaky-rate improves if flaky tests are deleted instead of fixed; coverage rises with tests that execute code without asserting
+    behavior. DORA''s own guidance is explicit that these are *capability* metrics meant to describe a system, and using them
+    as individual developer or tester performance targets invites exactly this gaming — a version of Goodhart''s Law where
+    the measure stops representing the goal once it becomes the target of an incentive.
+
+    The mitigation is structural: publish the metric with its known failure modes, review trend and narrative together in
+    retros rather than a single number in isolation, and give metric ownership to a role who is accountable for investigating
+    anomalies rather than defending the number.'
+  deep_dive: ''
+  key_points:
+  - Outcome and flow metrics over raw test counts.
+  - Escaped defects need severity and root-cause context, not a bare count.
+  - Automation reliability (flaky rate) must be tracked alongside pass rate.
+  - Coverage should be risk-weighted, not a line-percentage vanity metric.
+  - Metric ownership and narrative prevent silent gaming.
+  strong_signals:
+  - Names the specific gaming failure mode for every metric proposed, unprompted.
+  - Distinguishes capability metrics (describing a system) from individual performance targets.
+  - Insists metrics ship with narrative/trend review, not a bare dashboard number.
+  weak_signals:
+  - Lists metrics with no discussion of how they could be gamed.
+  - Treats test-count or pass-rate as sufficient quality signals on their own.
+  red_flags:
+  - Proposes using an easily-gamed metric (e.g., bug count) as an individual performance target.
+  - Cannot describe Goodhart's Law or an equivalent gaming risk in their own words.
+  common_mistakes:
+  - Reporting pass rate without reporting flaky/quarantine rate alongside it.
+  - Using raw test count as a proxy for coverage or quality.
+  - Setting a single-number target with no owner accountable for investigating drift.
+  follow_ups:
+  - question: Which metric would you refuse to use as an individual performance target?
+    recommended_answer: Escaped defect count tied to an individual tester or developer — it punishes the person who tests
+      hardest and reports the most, and it creates an incentive to under-report or reclassify. The same logic applies to raw
+      bug-count and to automation pass rate as individual targets; both push toward hiding problems rather than fixing them.
+      Capability metrics belong to teams and systems; individual accountability should be based on behavior — did they investigate,
+      disclose and fix — not on a number that a system, not a person, ultimately produces.
+  examples: []
+  code_examples: []
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  years_range:
+  - 8
+  - 20
+  tags:
+  - leadership
+  - metrics
+  - dora
+  - goodharts-law
+  - flaky-tests
+  - governance
+  estimated_minutes: 6
+  references:
+  - source_id: dora-dev
+    locator: DORA — Four Keys metrics (change failure rate, time to restore service) and guidance against individual performance
+      targets
+  - source_id: gitlab-handbook
+    locator: GitLab Handbook — Engineering Metrics guidance on using data respectfully and avoiding vanity metrics
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: leadership
+- id: gold-lead-004
+  domain: qa-strategy-governance
+  subdomain: roadmap
+  title: Building a twelve-month quality-engineering roadmap
+  level: advanced
+  priority: P1
+  frequency: common
+  question: Build a twelve-month quality-engineering roadmap that balances delivery support, framework modernization, pipeline
+    reliability and team capability.
+  concise_answer: Start from a baseline of current pain (flaky rate, pipeline duration, escaped defects, on-call/support load)
+    and define measurable twelve-month outcomes for each, not just activities. Sequence work so foundational reliability fixes
+    (pipeline stability, flaky-test backlog) land before modernization that depends on them, keep a reserved percentage of
+    capacity for ongoing delivery support so the roadmap does not silently starve day-to-day releases, and review progress
+    quarterly against the baseline with evidence, adjusting scope rather than pretending the plan was perfect.
+  recommended_answer: 'A roadmap that survives contact with a real year starts with measurement, not ambition: baseline current
+    flaky-test rate, pipeline duration and reliability, escaped-defect trend, and the proportion of team time already consumed
+    by delivery support versus planned improvement work. Every roadmap item then gets a measurable, twelve-month-horizon outcome
+    — "reduce PR pipeline p95 duration by 30%," "reduce flaky quarantine backlog to under N tests," "cut mean time to add
+    a new API regression suite from weeks to days" — rather than open-ended activities like "modernize the framework."
+
+    Sequence dependencies deliberately: pipeline reliability and flaky-test remediation usually need to happen before framework
+    modernization, because a team cannot safely validate a new architecture against a suite that already lies about its own
+    health. Reserve explicit operational capacity — a fixed percentage of the team''s time — for ongoing delivery support
+    (new feature coverage, triage, on-call), because roadmaps that assume 100% dedicated improvement time are fictional and
+    get silently abandoned the first time a release deadline slips.
+
+    Review quarterly against the original baseline with evidence, not sentiment: did the p95 pipeline duration actually drop,
+    did the flaky backlog actually shrink. Treat schedule slippage as information to re-sequence, not as failure to hide —
+    a roadmap that never changes over twelve months either had no real dependencies or is not being honestly tracked.'
+  deep_dive: ''
+  key_points:
+  - Baseline current pain and risk with real measurements before planning.
+  - Define measurable outcomes per roadmap item, not open-ended activities.
+  - Sequence dependencies — reliability work usually precedes modernization.
+  - Reserve explicit operational capacity for ongoing delivery support.
+  - Review quarterly against the baseline with evidence and adjust scope.
+  strong_signals:
+  - Anchors every roadmap item to a measurable baseline and target, not an activity description.
+  - Explicitly reserves capacity for delivery support rather than assuming 100% improvement time.
+  - Treats quarterly review as a re-sequencing checkpoint, not a status theater exercise.
+  weak_signals:
+  - Presents a list of activities ("migrate to X", "adopt Y") with no baseline or measurable outcome.
+  - Assumes the team has zero ongoing delivery-support load during the roadmap period.
+  red_flags:
+  - Roadmap has no review checkpoint or explicit way to detect it is off track.
+  - Modernization work is sequenced ahead of known pipeline/flaky reliability problems for no stated reason.
+  common_mistakes:
+  - Planning a year of work with no baseline measurement to compare against later.
+  - Ignoring interrupt-driven support work when allocating roadmap capacity.
+  - Treating every slipped deadline as a failure to conceal instead of information to re-sequence.
+  follow_ups:
+  - question: How would you prevent modernization from becoming an endless internal project?
+    recommended_answer: 'Give the modernization effort the same discipline as customer-facing work: a scoped outcome, a deadline,
+      and a definition of done tied to measurable impact (e.g., "old framework fully decommissioned" or "new pattern adopted
+      by N of M suites"), not "continuously improve." Timebox exploration phases, require a go/no-go decision point with evidence
+      before committing further investment, and report progress against the same baseline used to justify starting it — if
+      the numbers stop moving, that is the trigger to stop, pause, or change approach rather than keep funding by default.'
+  examples: []
+  code_examples: []
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Test Automation Architect
+  - Test/Quality Architect
+  - Solution Architect
+  - Technical Architect
+  years_range:
+  - 8
+  - 20
+  tags:
+  - leadership
+  - roadmap
+  - planning
+  - dora
+  - pipeline-reliability
+  - modernization
+  estimated_minutes: 7
+  references:
+  - source_id: dora-dev
+    locator: DORA Core model — capability-based improvement sequencing and measuring delivery performance over time
+  - source_id: gitlab-handbook
+    locator: GitLab Handbook — Product Development Flow, milestone-based planning and issue readiness stages
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: estimation_planning

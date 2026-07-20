@@ -1,0 +1,95 @@
+version: 1
+records:
+- id: gold-lead-006
+  domain: behavioral
+  subdomain: failure
+  title: Owning a failed delivery or technical decision
+  level: intermediate
+  priority: P1
+  frequency: very_common
+  question: Describe a delivery or technical decision that failed. What evidence did you miss, what did you change, and how
+    did you verify the change worked?
+  concise_answer: A strong answer names a specific decision the candidate owned, the concrete signal that was available but
+    not acted on (a warning in logs, a skipped review step, an assumption never validated with data), the corrective change
+    made afterward, and a later measurement showing the change actually worked — not just that the decision "would not happen
+    again" as an assertion. It avoids blaming teammates, tooling, or circumstance as the primary cause, even when those were
+    contributing factors.
+  recommended_answer: 'The strongest version of this answer is structured like a blameless postmortem: what was the decision,
+    what evidence existed at the time that a careful read would have caught, what was the actual impact, what specific process
+    or technical change was made afterward, and what later evidence shows the change worked rather than just feeling better.
+    "I should have tested more" is not an answer; "I skipped validating the staging data volume against production before
+    signing off the migration plan, it caused a four-hour outage, I added a mandatory data-volume parity check to the migration
+    checklist, and the next three migrations all passed that check with no incident" is.
+
+    Blameless postmortem practice — treating the failure as a system and process gap to close rather than an individual to
+    punish — matters here for two reasons: it is what good organizations actually expect from their leaders, and interviewers
+    use this question specifically to see whether the candidate defaults to blame-shifting under pressure. A candidate who
+    immediately explains why it was really the other team''s fault, or frames the whole story around external circumstance,
+    is showing exactly the instinct that makes failures repeat, because nothing about the *system* changed.
+
+    The verification step separates people who reflect from people who merely apologize: what did they measure afterward to
+    confirm the fix worked, and over what time horizon. Absence of a measured follow-through is the most common gap in otherwise
+    well-told failure stories.'
+  deep_dive: ''
+  key_points:
+  - Specific ownership of the decision, not a diffuse "the team" framing.
+  - No blame shifting onto teammates, tooling or circumstance as the primary cause.
+  - Concrete, missed signal named — not a vague "should have been more careful."
+  - Corrective and preventive action described specifically.
+  - Measured follow-through showing the change actually worked.
+  strong_signals:
+  - Names a specific, checkable signal that was missed, not a generic lesson.
+  - Describes the corrective action as a system/process change, not a personal resolution to "try harder."
+  - Reports a later measurement confirming the fix worked.
+  weak_signals:
+  - Story is vague enough that no one could learn a concrete lesson from it.
+  - No mention of verifying the fix afterward.
+  red_flags:
+  - Primary framing blames another team, a tool, or bad luck.
+  - Cannot identify anything they personally would do differently.
+  common_mistakes:
+  - Choosing a failure story with no real stakes, avoiding genuine accountability.
+  - Describing the fix as "communicate better" with no concrete mechanism.
+  - Confusing an incident retrospective for the team with personal ownership of the decision.
+  follow_ups:
+  - question: What would you do differently if the same conditions appeared tomorrow?
+    recommended_answer: Point to the specific control now in place — the checklist item, the required review gate, the added
+      monitoring — and describe how it would have caught the same gap earlier this time, ideally citing evidence from a subsequent,
+      similar situation where the control actually fired. If no such control exists yet, that itself is a useful, honest answer,
+      provided the candidate can articulate what the control should be rather than repeating that they would simply "be more
+      careful."
+  examples: []
+  code_examples: []
+  role_tracks:
+  - QA Manager
+  - Quality Engineering Manager
+  - Engineering Manager
+  - Quality Engineering Lead
+  - Senior SDET
+  - Lead SDET
+  - Test Automation Architect
+  years_range:
+  - 4
+  - 20
+  tags:
+  - behavioral
+  - ownership
+  - failure
+  - blameless-postmortem
+  - accountability
+  estimated_minutes: 6
+  references:
+  - source_id: gitlab-handbook
+    locator: GitLab Handbook — Incident Management, blameless postmortem practice and root-cause-focused review
+  - source_id: dora-dev
+    locator: DORA Capabilities catalog — Westrum organizational culture and psychological safety as a delivery-performance
+      capability
+  last_verified: '2026-07-16'
+  freshness_days: 365
+  status: published
+  quality_origin: researched
+  review_status: reviewed
+  reviewed_at: '2026-07-16'
+  review_notes:
+  - '2026-07-16: independent critic approved (scripts/critic_and_promote_gold.py).'
+  question_type: behavioral

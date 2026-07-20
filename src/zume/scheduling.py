@@ -269,10 +269,15 @@ def build_communication_drafts(record: ScheduleRecord) -> list[CommunicationDraf
     prefix = _unconfirmed_prefix(record)
     platform = record.platform or "the shared meeting link"
     confirm_word = "Proposing" if record.needs_confirmation else "Confirming"
+    join_subject = (
+        f"Proposed Interview Schedule – {name}"
+        if record.needs_confirmation
+        else f"Interview Confirmation – {name}"
+    )
     return [
         CommunicationDraft(
             kind="join",
-            subject=f"Interview Confirmation – {name}",
+            subject=join_subject,
             body=(f"{prefix}Hi Team,\n\n{confirm_word} the interview with {name} on {when}"
                   f" ({record.duration or 'duration TBC'}). I will join on time via "
                   f"{platform}.\n\nThanks."),

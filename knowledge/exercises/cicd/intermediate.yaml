@@ -1,0 +1,282 @@
+version: 1
+records:
+- id: cicd-exercise-i-01
+  domain: cicd
+  subdomain: stages
+  title: Stages evidence exercise
+  level: intermediate
+  priority: P1
+  task: Given a small CI/CD and quality pipelines scenario, propose and implement or describe a bounded
+    approach for stages. State assumptions, cover a failure path, and show the evidence you would collect.
+    Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for stages, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for stages.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the stages approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for stages passes locally but fails intermittently in CI. What do
+    you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the stages solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: github-actions
+    locator: stages
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Quality Engineering Lead
+  tags:
+  - cicd
+  - stages
+  - exercise
+  variant_family: cicd-stages
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cicd-exercise-i-02
+  domain: cicd
+  subdomain: trigger-strategy
+  title: Trigger Strategy evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small CI/CD and quality pipelines scenario, propose and implement or describe a bounded
+    approach for trigger strategy. State assumptions, cover a failure path, and show the evidence you
+    would collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for trigger strategy, choose a minimal approach, exercise
+    normal and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for trigger
+    strategy. It implements the smallest clear mechanism, validates representative normal and failure
+    cases, records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the trigger strategy approach if the input volume
+    or failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for trigger strategy passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the trigger strategy solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: github-actions
+    locator: trigger strategy
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Quality Engineering Lead
+  tags:
+  - cicd
+  - trigger-strategy
+  - exercise
+  variant_family: cicd-trigger-strategy
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cicd-exercise-i-03
+  domain: cicd
+  subdomain: github-actions
+  title: Github Actions evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small CI/CD and quality pipelines scenario, propose and implement or describe a bounded
+    approach for github actions. State assumptions, cover a failure path, and show the evidence you would
+    collect. Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for github actions, choose a minimal approach, exercise normal
+    and negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for github
+    actions. It implements the smallest clear mechanism, validates representative normal and failure cases,
+    records evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the github actions approach if the input volume or
+    failure rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for github actions passes locally but fails intermittently in CI.
+    What do you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the github actions solution is independently understood rather
+      than copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: github-actions
+    locator: github actions
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Quality Engineering Lead
+  tags:
+  - cicd
+  - github-actions
+  - exercise
+  variant_family: cicd-github-actions
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null
+- id: cicd-exercise-i-04
+  domain: cicd
+  subdomain: jenkins
+  title: Jenkins evidence exercise
+  level: intermediate
+  priority: P2
+  task: Given a small CI/CD and quality pipelines scenario, propose and implement or describe a bounded
+    approach for jenkins. State assumptions, cover a failure path, and show the evidence you would collect.
+    Do not include interviewer answers in your submission.
+  constraints:
+  - Keep the solution scoped to the stated scenario.
+  - Make failure handling observable.
+  - Explain a trade-off.
+  starter_files: {}
+  expected_reasoning: Identify the invariant for jenkins, choose a minimal approach, exercise normal and
+    negative paths, and explain evidence, limits, and next diagnostic steps.
+  reference_solution: A strong solution defines the intended outcome and a measurable invariant for jenkins.
+    It implements the smallest clear mechanism, validates representative normal and failure cases, records
+    evidence, and names a safe rollback or containment action.
+  test_cases:
+  - name: normal-path
+    expected: The stated invariant is satisfied with observable evidence.
+  - name: failure-path
+    expected: Failure is classified and reported without masking the cause.
+  scoring_rubric:
+  - Defines a relevant invariant (2)
+  - Covers normal and failure paths (3)
+  - Explains trade-offs and evidence (3)
+  - Keeps scope maintainable (2)
+  requirement_change_follow_up: How would you adapt the jenkins approach if the input volume or failure
+    rate doubles?
+  requirement_change_recommended_answer: Re-evaluate the stated invariant and bottleneck before scaling.
+    Add bounded capacity, observability, and prioritization; do not merely add retries or parallelism
+    without evidence that they address the limiting factor.
+  debugging_follow_up: The approach for jenkins passes locally but fails intermittently in CI. What do
+    you inspect first?
+  debugging_recommended_answer: Start with the exact CI artifact, error, environment difference, and timing
+    or shared-state evidence. Reproduce the smallest case under comparable conditions, classify the failure,
+    then fix the cause rather than masking it with a blanket retry.
+  independence_questions:
+  - question: What would demonstrate that the jenkins solution is independently understood rather than
+      copied?
+    recommended_answer: The candidate can explain its invariant, trade-offs, failure handling, and how
+      a changed requirement alters the design; they can make a small justified modification without prompting.
+  hints:
+  - Write down the invariant before selecting a tool.
+  - Consider one meaningful negative path.
+  runner_type: none
+  allowed_languages: []
+  runtime_limits:
+    minutes: 20
+  references:
+  - source_id: github-actions
+    locator: jenkins
+  last_verified: '2026-07-15'
+  freshness_days: 365
+  status: draft
+  role_tracks:
+  - Lead SDET
+  - Quality Platform Engineer
+  - DevOps/CI Quality Engineer
+  - Quality Engineering Lead
+  tags:
+  - cicd
+  - jenkins
+  - exercise
+  variant_family: cicd-jenkins
+  review_status: unreviewed
+  quality_origin: generated_proposal
+  reviewed_at: null

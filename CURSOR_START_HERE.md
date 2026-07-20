@@ -1,7 +1,26 @@
 # Start here — using Zume in Cursor
 
-Zume runs from Cursor. You do not need to remember commands. In almost every
-case you attach a file and send one short instruction.
+Zume is Cursor-first: use chat for the protected hiring workflow and the local
+workspace UI for preparation. Open the repository root, not a candidate folder.
+
+## Daily setup
+
+```powershell
+.\scripts\install-zume.ps1
+.\scripts\start-zume.ps1
+```
+
+The start script builds the UI when needed and opens `http://127.0.0.1:8787`.
+Alternatively run `zume serve`; it is localhost-only. Use `zume doctor` to
+check optional providers, Docker labs, Node, and configured secret sources
+without revealing values.
+
+## Use the preparation workspace
+
+At the local UI, browse the knowledge library, preview a 180-minute interview
+plan, use Ask Zume for non-candidate questions, and try the exercise lab.
+These tools support preparation; they do not replace the protected hiring flow.
+See `docs/PREPARATION_WORKSPACE.md` and `docs/KNOWLEDGE_LIBRARY.md`.
 
 ## Before an interview (create the pre-interview package)
 
@@ -46,4 +65,5 @@ communications.
 - Only `04_Candidate_Exercise_Sheet.docx` is safe to share with a candidate.
 
 See `docs/ZUME_DAILY_USE_GUIDE.md` for a fuller walkthrough and
-`docs/ZUME_TROUBLESHOOTING_GUIDE.md` if something looks wrong.
+`docs/ZUME_TROUBLESHOOTING_GUIDE.md` if something looks wrong. The legacy
+workflow notes remain separately in `docs/reference/legacy/`.
