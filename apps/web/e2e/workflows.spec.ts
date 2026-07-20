@@ -70,6 +70,8 @@ test('review mode banner is visible', async ({ page }) => {
   await failOnConsoleOrHttp(page)
   await page.goto('/')
   await expect(page.getByRole('status').filter({ hasText: /Review mode/i })).toBeVisible()
+  // Banner must span the top row — not steal the sidebar column and hide Overview.
+  await expect(page.getByRole('heading', { name: /good work starts/i })).toBeInViewport()
 })
 
 test('reviewed library loads records from facets-driven dropdowns', async ({ page }) => {
